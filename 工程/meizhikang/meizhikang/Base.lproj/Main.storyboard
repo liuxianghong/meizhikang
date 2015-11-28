@@ -229,7 +229,6 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="u4b-1B-ECU"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="BLUEDIAODIAO" id="nTH-Ap-CQp">
                         <barButtonItem key="leftBarButtonItem" image="菜单-白.png" id="O1e-4H-f8x">
@@ -249,6 +248,7 @@
             <objects>
                 <tabBarController hidesBottomBarWhenPushed="YES" id="XOn-ps-Bkq" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="HGr-6m-XTc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -272,7 +272,7 @@
         <scene sceneID="iKg-kB-eA3">
             <objects>
                 <navigationController hidesBottomBarWhenPushed="YES" id="rLi-hT-L0f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="snx-ed-r3w" userLabel="朋友"/>
+                    <tabBarItem key="tabBarItem" id="snx-ed-r3w" userLabel="朋友"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vOH-sE-PEn">
@@ -326,7 +326,7 @@
         <scene sceneID="tLB-r9-6Us">
             <objects>
                 <navigationController hidesBottomBarWhenPushed="YES" id="Rdl-Qs-hy8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="gXG-Om-97B" userLabel="朋友"/>
+                    <tabBarItem key="tabBarItem" id="gXG-Om-97B" userLabel="朋友"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="P73-Vu-W6f">
@@ -380,7 +380,7 @@
         <scene sceneID="0DK-dY-QBX">
             <objects>
                 <navigationController hidesBottomBarWhenPushed="YES" id="bxT-5f-LtY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="W4q-PZ-KiU" userLabel="朋友"/>
+                    <tabBarItem key="tabBarItem" id="W4q-PZ-KiU" userLabel="朋友"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oPz-4H-8KC">
@@ -434,7 +434,7 @@
         <scene sceneID="snr-gn-hoz">
             <objects>
                 <navigationController hidesBottomBarWhenPushed="YES" id="dBT-Td-3oK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="Bnw-tf-Rbs" userLabel="朋友"/>
+                    <tabBarItem key="tabBarItem" id="Bnw-tf-Rbs" userLabel="朋友"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vEg-Ug-QIB">
@@ -488,7 +488,7 @@
         <scene sceneID="y8C-21-OpQ">
             <objects>
                 <navigationController hidesBottomBarWhenPushed="YES" id="PeK-yW-hrC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="lAd-HP-iAp" userLabel="朋友"/>
+                    <tabBarItem key="tabBarItem" id="lAd-HP-iAp" userLabel="朋友"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aLX-wS-d5q">
@@ -511,38 +511,45 @@
             <point key="canvasLocation" x="3360" y="2892"/>
         </scene>
         <!--我的好友-->
-        <scene sceneID="dG4-mK-ZEX">
+        <scene sceneID="jTh-yc-Hy1">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="JwA-xY-37X" customClass="HealthFigureViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bAZ-su-Xih"/>
-                        <viewControllerLayoutGuide type="bottom" id="FXz-fX-Qwl"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LGJ-gi-kiX">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <tableViewController id="GnK-B4-EPk" customClass="FriendListTableViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aBv-CV-qxB">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="我的好友" id="abC-sd-Y0I">
-                        <barButtonItem key="leftBarButtonItem" image="菜单-白.png" id="b3C-A6-T8m">
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PWS-gs-meO">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PWS-gs-meO" id="ch8-Yy-OeO">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="GnK-B4-EPk" id="kzm-i4-Qoa"/>
+                            <outlet property="delegate" destination="GnK-B4-EPk" id="k5n-LV-jJc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="我的好友" id="xwO-xw-Wgc">
+                        <barButtonItem key="leftBarButtonItem" image="菜单-白.png" id="OJt-v7-cqc">
                             <connections>
-                                <action selector="menuAciton:" destination="JwA-xY-37X" id="dJz-XF-Upk"/>
+                                <action selector="menuAciton:" destination="GnK-B4-EPk" id="AwT-sl-Kvd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5OM-tM-Pks" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4RL-we-UUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4171.5" y="2064"/>
+            <point key="canvasLocation" x="4789.5" y="2067.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aAx-Yn-mQv">
             <objects>
                 <navigationController hidesBottomBarWhenPushed="YES" id="BC6-JV-cPc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="xWl-NF-H3f" userLabel="朋友"/>
+                    <tabBarItem key="tabBarItem" id="xWl-NF-H3f" userLabel="朋友"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Yg-fh-iA1">
@@ -557,7 +564,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="JwA-xY-37X" kind="relationship" relationship="rootViewController" id="k45-Sx-jnQ"/>
+                        <segue destination="GnK-B4-EPk" kind="relationship" relationship="rootViewController" id="EWa-Xg-Ocb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAm-3c-zuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
