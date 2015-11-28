@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A452E61FF7864438CDDB7CF3 /* libPods-meizhikang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61501C1B273F30AB09F34FF2 /* libPods-meizhikang.a */; };
 		D39B89921C087AC1009086B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B89911C087AC1009086B2 /* main.m */; };
 		D39B89951C087AC1009086B2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B89941C087AC1009086B2 /* AppDelegate.m */; };
 		D39B89981C087AC1009086B2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B89971C087AC1009086B2 /* ViewController.m */; };
@@ -17,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		433F7BDFE6ABF778B0529ED4 /* Pods-meizhikang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meizhikang.release.xcconfig"; path = "Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang.release.xcconfig"; sourceTree = "<group>"; };
+		61501C1B273F30AB09F34FF2 /* libPods-meizhikang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-meizhikang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCF8D03768A4DCFF61C567B8 /* Pods-meizhikang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meizhikang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang.debug.xcconfig"; sourceTree = "<group>"; };
 		D39B898D1C087AC1009086B2 /* meizhikang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meizhikang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39B89911C087AC1009086B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D39B89931C087AC1009086B2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -35,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A452E61FF7864438CDDB7CF3 /* libPods-meizhikang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		747715D9D8042B4E80338897 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61501C1B273F30AB09F34FF2 /* libPods-meizhikang.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A153DD77FB44808DB8989692 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BCF8D03768A4DCFF61C567B8 /* Pods-meizhikang.debug.xcconfig */,
+				433F7BDFE6ABF778B0529ED4 /* Pods-meizhikang.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D39B89841C087AC1009086B2 = {
 			isa = PBXGroup;
 			children = (
 				D39B898F1C087AC1009086B2 /* meizhikang */,
 				D39B898E1C087AC1009086B2 /* Products */,
+				A153DD77FB44808DB8989692 /* Pods */,
+				747715D9D8042B4E80338897 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,9 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D39B89A71C087AC1009086B2 /* Build configuration list for PBXNativeTarget "meizhikang" */;
 			buildPhases = (
+				D5242EC3725CA21A6737031E /* Check Pods Manifest.lock */,
 				D39B89891C087AC1009086B2 /* Sources */,
 				D39B898A1C087AC1009086B2 /* Frameworks */,
 				D39B898B1C087AC1009086B2 /* Resources */,
+				DBCA37D478FEF35EC6D845B3 /* Embed Pods Frameworks */,
+				03F6C3B578588A707D0BE283 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,6 +173,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03F6C3B578588A707D0BE283 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5242EC3725CA21A6737031E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DBCA37D478FEF35EC6D845B3 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D39B89891C087AC1009086B2 /* Sources */ = {
@@ -263,6 +338,7 @@
 		};
 		D39B89A81C087AC1009086B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCF8D03768A4DCFF61C567B8 /* Pods-meizhikang.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = meizhikang/Info.plist;
@@ -274,6 +350,7 @@
 		};
 		D39B89A91C087AC1009086B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 433F7BDFE6ABF778B0529ED4 /* Pods-meizhikang.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = meizhikang/Info.plist;
@@ -302,6 +379,7 @@
 				D39B89A91C087AC1009086B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
