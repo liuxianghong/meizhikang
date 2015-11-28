@@ -206,6 +206,10 @@ typedef NS_ENUM(NSInteger, SWRevealToggleAnimationType)
 @property (nonatomic) FrontViewPosition frontViewPosition;
 - (void)setFrontViewPosition:(FrontViewPosition)frontViewPosition animated:(BOOL)animated;
 
+@property (nonatomic,strong) NSMutableDictionary *frontViewControllersDic;
+
+@property (nonatomic,strong) NSArray *frontIdentfierArray;
+
 // The following methods are meant to be directly connected to the action method of a button
 // to perform user triggered postion change of the controller views. This is ussually added to a
 // button on top left or right of the frontViewController
@@ -320,6 +324,7 @@ typedef enum
     SWRevealControllerOperationReplaceRearController,
     SWRevealControllerOperationReplaceFrontController,
     SWRevealControllerOperationReplaceRightController,
+    SWRevealControllerOperationReplaceRightControllerWaite,
     
 } SWRevealControllerOperation;
 

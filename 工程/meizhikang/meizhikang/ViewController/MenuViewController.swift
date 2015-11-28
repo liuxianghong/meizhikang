@@ -13,10 +13,12 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet  weak var imageView:UIImageView!
     @IBOutlet  weak var tableView:UITableView!
     let tableViewArray = ["BLUEDIAODIAO","健康图","健康分析","蓝牙连接","我的好友","设置"]
+    let viewArray = ["sw_BLUEDIAODIAO","sw_front","sw_analysis","sw_ble","sw_friend","sw_setting"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.revealViewController().frontIdentfierArray = viewArray
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,8 +53,10 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.revealViewController() != nil{
-            let vc:UITabBarController = self.revealViewController().frontViewController as! UITabBarController
-            vc.selectedIndex = indexPath.row
+            let dic = self.revealViewController().frontViewControllersDic;
+            let vc:UIViewController = dic.objectForKey(viewArray[indexPath.row]) as! UIViewController;
+            self.revealViewController().setFrontViewController(vc, animated: true)
+            self.revealViewController().revealToggleAnimated(true)
         }
     }
 

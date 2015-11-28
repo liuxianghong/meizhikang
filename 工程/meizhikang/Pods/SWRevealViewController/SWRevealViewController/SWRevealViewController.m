@@ -648,6 +648,8 @@ const int FrontViewPositionNone = 0xff;
     _draggableBorderWidth = 0.0f;
     _clipsViewsToBounds = NO;
     _extendsPointInsideHit = NO;
+    
+    _frontViewControllersDic = [[NSMutableDictionary alloc] init];
 }
 
 
@@ -1428,6 +1430,13 @@ const int FrontViewPositionNone = 0xff;
 //- (void)_performTransitionToViewController:(UIViewController*)new operation:(SWRevealControllerOperation)operation animated:(BOOL)animated
 - (void)_performTransitionOperation:(SWRevealControllerOperation)operation withViewController:(UIViewController*)new animated:(BOOL)animated
 {
+    if (operation == SWRevealControllerOperationReplaceRightControllerWaite) {
+        if (self.frontViewController) {
+            return;
+        }
+        operation = SWRevealControllerOperationReplaceFrontController;
+    }
+    
     if ( [_delegate respondsToSelector:@selector(revealController:willAddViewController:forOperation:animated:)] )
         [_delegate revealController:self willAddViewController:new forOperation:operation animated:animated];
 
@@ -1649,6 +1658,22 @@ const int FrontViewPositionNone = 0xff;
     return completionBlock;
 }
 
+-(void)setFrontIdentfierArray:(NSArray *)frontIdentfierArray
+{
+    _frontIdentfierArray = frontIdentfierArray;
+    for (NSString *identfier in _frontIdentfierArray) {
+        if([identfier isEqualToString:SWSegueFrontIdentifier])
+        {
+            continue;
+        }
+        @try
+        {
+            [self performSegueWithIdentifier:identfier sender:nil];
+        }
+        @catch(NSException *exception) {}
+    }
+    
+}
 // Load any defined front/rear controllers from the storyboard
 // This method is intended to be overrided in case the default behavior will not meet your needs
 - (void)loadStoryboardControllers
@@ -1673,6 +1698,7 @@ const int FrontViewPositionNone = 0xff;
             [self performSegueWithIdentifier:SWSegueRightIdentifier sender:nil];
         }
         @catch(NSException *exception) {}
+        
     }
 }
 
@@ -1813,13 +1839,21 @@ NSString * const SWSegueRightIdentifier = @"sw_right";
     UIViewController *dvc = self.destinationViewController;
     
     if ( [identifier isEqualToString:SWSegueFrontIdentifier] )
+    {
         operation = SWRevealControllerOperationReplaceFrontController;
+        [rvc.frontViewControllersDic setObject:dvc forKey:identifier];
+    }
     
     else if ( [identifier isEqualToString:SWSegueRearIdentifier] )
         operation = SWRevealControllerOperationReplaceRearController;
     
     else if ( [identifier isEqualToString:SWSegueRightIdentifier] )
         operation = SWRevealControllerOperationReplaceRightController;
+    else if ( [identifier rangeOfString:@"sw_"].location != NSNotFound )
+    {
+        operation = SWRevealControllerOperationReplaceRightControllerWaite;
+        [rvc.frontViewControllersDic setObject:dvc forKey:identifier];
+    }
     
     if ( operation != SWRevealControllerOperationNone )
         [rvc _performTransitionOperation:operation withViewController:dvc animated:NO];
