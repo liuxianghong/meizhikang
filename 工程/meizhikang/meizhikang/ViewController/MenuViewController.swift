@@ -53,6 +53,7 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if self.revealViewController() != nil{
             let vc:UITabBarController = self.revealViewController().frontViewController as! UITabBarController
             vc.selectedIndex = indexPath.row
+            self.revealViewController().revealToggle(nil)
         }
     }
 
