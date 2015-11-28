@@ -23,6 +23,9 @@ PODS:
   - DZNEmptyDataSet (1.7.2)
   - IHKeyboardAvoiding (2.5)
   - JSONKit-NoWarning (1.2)
+  - JSQMessagesViewController (7.2.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - MBProgressHUD (0.9.1)
   - MJRefresh (3.0.5)
   - RBStoryboardLink (0.1.4)
@@ -36,27 +39,33 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - AFNetworking
   - DZNEmptyDataSet
   - IHKeyboardAvoiding
   - JSONKit-NoWarning
+  - JSQMessagesViewController
   - MBProgressHUD
   - MJRefresh
   - RBStoryboardLink
   - ReactiveCocoa (~> 2.5)
   - SDWebImage
+  - SWRevealViewController
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
   IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJRefresh: 809ed03f2014275056c3d65e2812aef1ba5b0f98
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
 COCOAPODS: 0.39.0

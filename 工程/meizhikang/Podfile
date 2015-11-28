@@ -12,5 +12,7 @@ pod 'JSONKit-NoWarning'
 pod 'MJRefresh'
 pod 'RBStoryboardLink'
 pod 'ReactiveCocoa', '~> 2.5'
+pod 'SWRevealViewController'
+pod 'JSQMessagesViewController'
 end
 
