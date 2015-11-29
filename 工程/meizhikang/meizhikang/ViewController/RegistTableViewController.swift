@@ -1,5 +1,5 @@
 //
-//  SettingTableViewController.swift
+//  RegistTableViewController.swift
 //  meizhikang
 //
 //  Created by 刘向宏 on 15/11/29.
@@ -8,9 +8,16 @@
 
 import UIKit
 
-class SettingTableViewController: UITableViewController {
+class RegistTableViewController: UITableViewController {
 
-    var tableViewArray : NSArray = [["个人","个人资料","修改手机号","修改密码"],["告警","告警设置","告警演示"],["系统","蓝牙连接","切换帐号","主题切换","关于","注销","退出"]]
+    @IBOutlet weak var userNameTextField : UITextField!
+    @IBOutlet weak var passWordTextField : UITextField!
+    @IBOutlet weak var nickNameTextField : UITextField!
+    @IBOutlet weak var wightTextField : UITextField!
+    @IBOutlet weak var heightTextField : UITextField!
+    @IBOutlet weak var ageTextField : UITextField!
+    @IBOutlet weak var sexManButton : UIButton!
+    @IBOutlet weak var sexWomanButton : UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,53 +33,43 @@ class SettingTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func registClick(sender : AnyObject) {
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            
+        }
+    }
+    
+    @IBAction func sexManClick(sender : UIButton) {
+        sender.selected = true;
+        self.sexWomanButton.selected = false;
+    }
+    
+    
+    @IBAction func sexWomenClick(sender : UIButton) {
+        sender.selected = true;
+        self.sexManButton.selected = false;
+    }
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return tableViewArray.count
-    }
+//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
+//
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return tableViewArray[section].count - 1
-    }
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if indexPath.section == 0 {
-            if indexPath.row == 0{
-                self.performSegueWithIdentifier("myinformationIdentifier", sender: nil)
-            }
-            else if indexPath.row == 1{
-                self.performSegueWithIdentifier("resetPhone", sender: nil)
-            }
-            else if indexPath.row == 2{
-                self.performSegueWithIdentifier("modifPWIdentifier", sender: nil)
-            }
-        }
-        
-    }
-    
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30;
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableViewArray[section][0] as? String
-    }
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:SettingTableViewCell = tableView.dequeueReusableCellWithIdentifier("settingIndentifer", forIndexPath: indexPath) as! SettingTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
         // Configure the cell...
-        let array:NSArray = tableViewArray[indexPath.section] as! NSArray
-        cell.titleLabel.text = array[indexPath.row+1] as? String
 
         return cell
     }
-    
-
+    */
 
     /*
     // Override to support conditional editing of the table view.

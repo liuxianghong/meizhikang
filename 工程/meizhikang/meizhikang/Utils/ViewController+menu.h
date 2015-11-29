@@ -11,3 +11,7 @@
 @interface UIViewController (menu)
 -(IBAction)menuAciton:(id)sender;
 @end
+
+@interface UINavigationController (Light)
+-(UIStatusBarStyle)preferredStatusBarStyle;
+@end
