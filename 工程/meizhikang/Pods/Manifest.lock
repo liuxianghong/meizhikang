@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - DZNEmptyDataSet (1.7.2)
+  - FSCalendar (1.7.0)
   - IHKeyboardAvoiding (2.5)
   - JSONKit-NoWarning (1.2)
   - JSQMessagesViewController (7.2.0):
@@ -44,6 +45,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - DZNEmptyDataSet
+  - FSCalendar
   - IHKeyboardAvoiding
   - JSONKit-NoWarning
   - JSQMessagesViewController
@@ -57,6 +59,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
+  FSCalendar: ee727a0db4e915a606813ba9e87522ba59920b25
   IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
