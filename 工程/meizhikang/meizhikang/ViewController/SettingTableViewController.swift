@@ -40,6 +40,9 @@ class SettingTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 0 && indexPath.row == 0{
+            self.performSegueWithIdentifier("myinformationIdentifier", sender: nil)
+        }
         
     }
     
@@ -60,6 +63,7 @@ class SettingTableViewController: UITableViewController {
 
         return cell
     }
+    
 
 
     /*

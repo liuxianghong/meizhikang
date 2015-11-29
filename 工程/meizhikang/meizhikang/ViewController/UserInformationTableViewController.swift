@@ -1,5 +1,5 @@
 //
-//  RegistTableViewController.swift
+//  UserInformationTableViewController.swift
 //  meizhikang
 //
 //  Created by 刘向宏 on 15/11/29.
@@ -8,10 +8,9 @@
 
 import UIKit
 
-class RegistTableViewController: UITableViewController {
+class UserInformationTableViewController: UITableViewController {
 
-    @IBOutlet weak var userNameTextField : UITextField!
-    @IBOutlet weak var passWordTextField : UITextField!
+    
     @IBOutlet weak var nickNameTextField : UITextField!
     @IBOutlet weak var wightTextField : UITextField!
     @IBOutlet weak var heightTextField : UITextField!
@@ -32,8 +31,8 @@ class RegistTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBAction func registClick(sender : AnyObject) {
+    
+    @IBAction func okClick(sender : AnyObject) {
         self.dismissViewControllerAnimated(true) { () -> Void in
             
         }
@@ -49,6 +48,7 @@ class RegistTableViewController: UITableViewController {
         sender.selected = true;
         self.sexManButton.selected = false;
     }
+
     // MARK: - Table view data source
 
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
