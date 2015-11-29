@@ -17,5 +17,21 @@
         [self.revealViewController revealToggle:sender];
     }
 }
+@end
 
+
+@implementation UINavigationController (Light)
+
+-(IBAction)menuAciton:(id)sender
+{
+    if (self.revealViewController){
+        [self.revealViewController revealToggle:sender];
+    }
+}
+
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 @end

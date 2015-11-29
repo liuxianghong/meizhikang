@@ -195,6 +195,11 @@
 		D311C5EF1C0A119500C80C05 /* 长边-绿@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5B01C0A119500C80C05 /* 长边-绿@2x.png */; };
 		D311C5F01C0A119500C80C05 /* 长边-绿@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5B11C0A119500C80C05 /* 长边-绿@3x.png */; };
 		D311C5F21C0A11E500C80C05 /* BleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311C5F11C0A11E500C80C05 /* BleTableViewController.swift */; };
+		D32D08091C0ACACC00E2C7EF /* HealthFigureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D08081C0ACACC00E2C7EF /* HealthFigureViewController.swift */; };
+		D32D080B1C0ACB9700E2C7EF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D080A1C0ACB9700E2C7EF /* LoginViewController.swift */; };
+		D32D080D1C0AD39500E2C7EF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D080C1C0AD39500E2C7EF /* MainViewController.swift */; };
+		D32D080F1C0ADA7400E2C7EF /* 灰线@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D080E1C0ADA7400E2C7EF /* 灰线@2x.png */; };
+		D32D08111C0ADC6500E2C7EF /* RegistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D08101C0ADC6500E2C7EF /* RegistTableViewController.swift */; };
 		D361575C1C09760B009ED19D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D36157541C09760B009ED19D /* README.md */; };
 		D36157641C0976E9009ED19D /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = D36157631C0976E9009ED19D /* 启动图.png */; };
 		D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */; };
@@ -202,7 +207,6 @@
 		D361576D1C097B1D009ED19D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361576C1C097B1D009ED19D /* SwiftyJSON.swift */; };
 		D3897DDC1C09915300D18BAC /* 导航栏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DDB1C09915300D18BAC /* 导航栏@2x.png */; };
 		D3897DDF1C09934100D18BAC /* ViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = D3897DDE1C09934100D18BAC /* ViewController+menu.m */; };
-		D3897DE21C09941B00D18BAC /* HealthFigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3897DE11C09941B00D18BAC /* HealthFigureViewController.m */; };
 		D3897DE41C09945A00D18BAC /* 菜单-白@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DE31C09945A00D18BAC /* 菜单-白@2x.png */; };
 		D3897DE61C09962800D18BAC /* 图1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DE51C09962800D18BAC /* 图1@2x.png */; };
 		D3897DE81C09963000D18BAC /* 图2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DE71C09963000D18BAC /* 图2@2x.png */; };
@@ -410,6 +414,11 @@
 		D311C5B01C0A119500C80C05 /* 长边-绿@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "长边-绿@2x.png"; sourceTree = "<group>"; };
 		D311C5B11C0A119500C80C05 /* 长边-绿@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "长边-绿@3x.png"; sourceTree = "<group>"; };
 		D311C5F11C0A11E500C80C05 /* BleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleTableViewController.swift; sourceTree = "<group>"; };
+		D32D08081C0ACACC00E2C7EF /* HealthFigureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthFigureViewController.swift; sourceTree = "<group>"; };
+		D32D080A1C0ACB9700E2C7EF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D32D080C1C0AD39500E2C7EF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D32D080E1C0ADA7400E2C7EF /* 灰线@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "灰线@2x.png"; sourceTree = "<group>"; };
+		D32D08101C0ADC6500E2C7EF /* RegistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistTableViewController.swift; sourceTree = "<group>"; };
 		D36157541C09760B009ED19D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D36157631C0976E9009ED19D /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
 		D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -421,8 +430,6 @@
 		D3897DDB1C09915300D18BAC /* 导航栏@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "导航栏@2x.png"; sourceTree = "<group>"; };
 		D3897DDD1C09934100D18BAC /* ViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+menu.h"; sourceTree = "<group>"; };
 		D3897DDE1C09934100D18BAC /* ViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+menu.m"; sourceTree = "<group>"; };
-		D3897DE01C09941B00D18BAC /* HealthFigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthFigureViewController.h; sourceTree = "<group>"; };
-		D3897DE11C09941B00D18BAC /* HealthFigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthFigureViewController.m; sourceTree = "<group>"; };
 		D3897DE31C09945A00D18BAC /* 菜单-白@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单-白@2x.png"; sourceTree = "<group>"; };
 		D3897DE51C09962800D18BAC /* 图1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "图1@2x.png"; sourceTree = "<group>"; };
 		D3897DE71C09963000D18BAC /* 图2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "图2@2x.png"; sourceTree = "<group>"; };
@@ -476,6 +483,7 @@
 		D311C4511C09A70C00C80C05 /* 功能侧边栏 */ = {
 			isa = PBXGroup;
 			children = (
+				D32D080E1C0ADA7400E2C7EF /* 灰线@2x.png */,
 				D311C4521C09A70C00C80C05 /* BLUEDIAODIAO-拷贝.png */,
 				D311C4531C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png */,
 				D311C4541C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png */,
@@ -729,12 +737,14 @@
 		D36157591C09760B009ED19D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D3897DE01C09941B00D18BAC /* HealthFigureViewController.h */,
-				D3897DE11C09941B00D18BAC /* HealthFigureViewController.m */,
+				D32D080C1C0AD39500E2C7EF /* MainViewController.swift */,
 				D3897E241C09A08400D18BAC /* MenuViewController.swift */,
+				D32D08081C0ACACC00E2C7EF /* HealthFigureViewController.swift */,
 				D3897E261C09A0E800D18BAC /* FriendListTableViewController.swift */,
 				D311C56E1C0A074600C80C05 /* SettingTableViewController.swift */,
 				D311C5F11C0A11E500C80C05 /* BleTableViewController.swift */,
+				D32D080A1C0ACB9700E2C7EF /* LoginViewController.swift */,
+				D32D08101C0ADC6500E2C7EF /* RegistTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -933,6 +943,7 @@
 				D311C5EF1C0A119500C80C05 /* 长边-绿@2x.png in Resources */,
 				D311C5D31C0A119500C80C05 /* 蓝对话框.png in Resources */,
 				D311C4931C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png in Resources */,
+				D32D080F1C0ADA7400E2C7EF /* 灰线@2x.png in Resources */,
 				D311C4CF1C09A70C00C80C05 /* 设置@3x.png in Resources */,
 				D311C5451C0A066F00C80C05 /* 小圆框-绿@2x.png in Resources */,
 				D311C54D1C0A066F00C80C05 /* 开关-蓝.png in Resources */,
@@ -1110,13 +1121,16 @@
 				D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */,
 				D361576A1C097937009ED19D /* NSString+scisky.m in Sources */,
 				D3897E231C09A04C00D18BAC /* MenuTableViewCell.swift in Sources */,
-				D3897DE21C09941B00D18BAC /* HealthFigureViewController.m in Sources */,
+				D32D08111C0ADC6500E2C7EF /* RegistTableViewController.swift in Sources */,
 				D361575C1C09760B009ED19D /* README.md in Sources */,
 				D311C5F21C0A11E500C80C05 /* BleTableViewController.swift in Sources */,
+				D32D080D1C0AD39500E2C7EF /* MainViewController.swift in Sources */,
+				D32D08091C0ACACC00E2C7EF /* HealthFigureViewController.swift in Sources */,
 				D3897DDF1C09934100D18BAC /* ViewController+menu.m in Sources */,
 				D3897E251C09A08400D18BAC /* MenuViewController.swift in Sources */,
 				D361576D1C097B1D009ED19D /* SwiftyJSON.swift in Sources */,
 				D39B89951C087AC1009086B2 /* AppDelegate.m in Sources */,
+				D32D080B1C0ACB9700E2C7EF /* LoginViewController.swift in Sources */,
 				D3897E271C09A0E800D18BAC /* FriendListTableViewController.swift in Sources */,
 				D39B899E1C087AC1009086B2 /* meizhikang.xcdatamodeld in Sources */,
 				D39B89921C087AC1009086B2 /* main.m in Sources */,
