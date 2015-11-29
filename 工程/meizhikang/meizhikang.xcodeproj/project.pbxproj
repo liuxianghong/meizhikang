@@ -194,6 +194,8 @@
 		D32D08131C0AE4CD00E2C7EF /* sex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08121C0AE4CD00E2C7EF /* sex@2x.png */; };
 		D32D08151C0AE55B00E2C7EF /* sex_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */; };
 		D32D08171C0AE87200E2C7EF /* UserInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D08161C0AE87200E2C7EF /* UserInformationTableViewController.swift */; };
+		D32D08191C0AF02C00E2C7EF /* ResetPhoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D08181C0AF02C00E2C7EF /* ResetPhoneTableViewController.swift */; };
+		D32D081B1C0AF98000E2C7EF /* ModifPWTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D081A1C0AF98000E2C7EF /* ModifPWTableViewController.swift */; };
 		D361575C1C09760B009ED19D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D36157541C09760B009ED19D /* README.md */; };
 		D36157641C0976E9009ED19D /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = D36157631C0976E9009ED19D /* 启动图.png */; };
 		D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */; };
@@ -407,6 +409,8 @@
 		D32D08121C0AE4CD00E2C7EF /* sex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex@2x.png"; sourceTree = "<group>"; };
 		D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex_select@2x.png"; sourceTree = "<group>"; };
 		D32D08161C0AE87200E2C7EF /* UserInformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInformationTableViewController.swift; sourceTree = "<group>"; };
+		D32D08181C0AF02C00E2C7EF /* ResetPhoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPhoneTableViewController.swift; sourceTree = "<group>"; };
+		D32D081A1C0AF98000E2C7EF /* ModifPWTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifPWTableViewController.swift; sourceTree = "<group>"; };
 		D36157541C09760B009ED19D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D36157631C0976E9009ED19D /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
 		D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -727,6 +731,8 @@
 				D32D080A1C0ACB9700E2C7EF /* LoginViewController.swift */,
 				D32D08101C0ADC6500E2C7EF /* RegistTableViewController.swift */,
 				D32D08161C0AE87200E2C7EF /* UserInformationTableViewController.swift */,
+				D32D08181C0AF02C00E2C7EF /* ResetPhoneTableViewController.swift */,
+				D32D081A1C0AF98000E2C7EF /* ModifPWTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1091,6 +1097,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D32D081B1C0AF98000E2C7EF /* ModifPWTableViewController.swift in Sources */,
 				D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */,
 				D311C56F1C0A074600C80C05 /* SettingTableViewController.swift in Sources */,
 				D32D08171C0AE87200E2C7EF /* UserInformationTableViewController.swift in Sources */,
@@ -1109,6 +1116,7 @@
 				D32D080B1C0ACB9700E2C7EF /* LoginViewController.swift in Sources */,
 				D3897E271C09A0E800D18BAC /* FriendListTableViewController.swift in Sources */,
 				D39B899E1C087AC1009086B2 /* meizhikang.xcdatamodeld in Sources */,
+				D32D08191C0AF02C00E2C7EF /* ResetPhoneTableViewController.swift in Sources */,
 				D39B89921C087AC1009086B2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
