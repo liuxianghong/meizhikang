@@ -867,7 +867,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="图1.png" translatesAutoresizingMaskIntoConstraints="NO" id="gKG-kd-uhY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="轮换图1.png" translatesAutoresizingMaskIntoConstraints="NO" id="gKG-kd-uhY">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
                                 <constraints>
@@ -1018,7 +1018,7 @@
         <!--BLUEDIAODIAO-->
         <scene sceneID="V3a-RW-r9B">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="0Ko-kS-ehW" customClass="HealthFigureViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="0Ko-kS-ehW" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AiR-3M-HF8"/>
                         <viewControllerLayoutGuide type="bottom" id="KXY-Ye-SI0"/>
@@ -1122,7 +1122,7 @@
         <!--健康分析-->
         <scene sceneID="2Wm-TA-Nnt">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="OYl-cd-wdN" customClass="HealthFigureViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="OYl-cd-wdN" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9yy-HZ-3jG"/>
                         <viewControllerLayoutGuide type="bottom" id="SVv-Zv-Q1m"/>
@@ -2898,7 +2898,6 @@
     <resources>
         <image name="sex.png" width="18" height="18"/>
         <image name="sex_select.png" width="18" height="18"/>
-        <image name="图1.png" width="226" height="162"/>
         <image name="圆-.png" width="28" height="28"/>
         <image name="导航栏.png" width="375" height="44"/>
         <image name="灰线.png" width="1" height="1"/>
@@ -2906,6 +2905,7 @@
         <image name="矩形-4.png" width="165" height="42"/>
         <image name="菜单-白.png" width="29" height="21"/>
         <image name="蓝牙连接-拷贝.png" width="21" height="21"/>
+        <image name="轮换图1.png" width="226" height="162"/>
         <image name="选择-.png" width="10" height="17"/>
     </resources>
 </document>
