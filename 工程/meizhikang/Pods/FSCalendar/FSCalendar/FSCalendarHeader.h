@@ -38,5 +38,7 @@
 
 @property (weak, nonatomic) FSCalendar *calendar;
 @property (weak, nonatomic) FSCalendarHeader *header;
+@property (strong, nonatomic) UIButton *nextMonth;
+@property (strong, nonatomic) UIButton *prevMonth;
 
 @end

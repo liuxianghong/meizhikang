@@ -294,14 +294,44 @@
 
 @implementation FSCalendarHeaderTouchDeliver
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    UIView *hitView = [super hitTest:point withEvent:event];
-    if (hitView == self) {
-        return _calendar.collectionView ?: hitView;
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self){
+        self.nextMonth = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_nextMonth setImage:[UIImage imageNamed:@"右.png"] forState:UIControlStateNormal];
+        [_nextMonth sizeToFit];
+        [self addSubview:_nextMonth];
+        self.prevMonth = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_prevMonth setImage:[UIImage imageNamed:@"左.png"] forState:UIControlStateNormal];
+        [_prevMonth sizeToFit];
+        [self addSubview:_prevMonth];
+        [_nextMonth addTarget:self action:@selector(changeMonth:) forControlEvents:UIControlEventTouchUpInside];
+        [_prevMonth addTarget:self action:@selector(changeMonth:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return hitView;
+    return self;
 }
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    _nextMonth.frame = CGRectMake(CGRectGetWidth(self.bounds) - 16 - CGRectGetWidth(_nextMonth.bounds), 14, CGRectGetWidth(_nextMonth.bounds), CGRectGetHeight(_nextMonth.bounds));
+    _prevMonth.frame = CGRectMake(16, 14, CGRectGetWidth(_prevMonth.bounds), CGRectGetHeight(_prevMonth.bounds));
+}
+
+- (void)changeMonth:(UIButton *)sender{
+    if (sender == _nextMonth){
+        [self.calendar setCurrentPage:[self.calendar dateByAddingMonths:1 toDate:self.calendar.currentPage] animated:YES];
+    }else{
+        [self.calendar setCurrentPage:[self.calendar dateBySubstractingMonths:1 fromDate:self.calendar.currentPage] animated:YES];
+    }
+}
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+//{
+//    UIView *hitView = [super hitTest:point withEvent:event];
+//    if (hitView == self) {
+//        return _calendar.collectionView ?: hitView;
+//    }
+//    return hitView;
+//}
 
 @end
 
