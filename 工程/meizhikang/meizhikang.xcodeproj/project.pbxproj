@@ -1103,11 +1103,8 @@
 				B99A8E181C0BF43D0097E9B3 /* 绿-圆小@2x.png in Resources */,
 				D311C4B41C09A70C00C80C05 /* 轮换图3@3x.png in Resources */,
 				D311C4C71C09A70C00C80C05 /* 设置-拷贝.png in Resources */,
-<<<<<<< HEAD
 				D3F8E2E01C0C3A6700263B4E /* 导航栏@2x.png in Resources */,
-=======
 				B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */,
->>>>>>> 57b857b099d091b575b3b42207b2b5d0c6221218
 				D311C5D81C0A119500C80C05 /* 表情@3x.png in Resources */,
 				D311C5CA1C0A119500C80C05 /* 白框.png in Resources */,
 				B99A8E151C0BF43D0097E9B3 /* 绿-圆@2x.png in Resources */,
@@ -1268,11 +1265,8 @@
 				D311C5E71C0A119500C80C05 /* 返回@3x.png in Resources */,
 				D311C4B21C09A70C00C80C05 /* 轮换图3.png in Resources */,
 				D311C4941C09A70C00C80C05 /* BLUEDIAODIAO-绿.png in Resources */,
-<<<<<<< HEAD
 				D3F8E2DC1C0C3A5500263B4E /* 导航栏.png in Resources */,
-=======
 				B99A8E191C0BF43D0097E9B3 /* 绿-圆小@3x.png in Resources */,
->>>>>>> 57b857b099d091b575b3b42207b2b5d0c6221218
 				D311C4AB1C09A70C00C80C05 /* 健康图@3x.png in Resources */,
 				D311C4A01C09A70C00C80C05 /* 健康分析.png in Resources */,
 				B99A8E121C0BF43D0097E9B3 /* 灰框-@2x.png in Resources */,
