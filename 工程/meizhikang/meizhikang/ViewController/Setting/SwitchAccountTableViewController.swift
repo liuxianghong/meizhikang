@@ -1,16 +1,16 @@
 //
-//  SettingTableViewController.swift
+//  SwitchAccountTableViewController.swift
 //  meizhikang
 //
-//  Created by 刘向宏 on 15/11/29.
+//  Created by 刘向宏 on 15/11/30.
 //  Copyright © 2015年 刘向宏. All rights reserved.
 //
 
 import UIKit
 
-class SettingTableViewController: UITableViewController {
+class SwitchAccountTableViewController: UITableViewController {
 
-    var tableViewArray : NSArray = [["个人","个人资料","修改手机号","修改密码"],["告警","告警设置","告警演示"],["系统","蓝牙连接","切换帐号","主题切换","关于","注销","退出"]]
+    var tableViewArray = ["123","2222"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,27 +30,16 @@ class SettingTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return tableViewArray.count
+        return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tableViewArray[section].count - 1
+        return tableViewArray.count
     }
-
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if indexPath.section == 0 {
-            if indexPath.row == 0{
-                self.performSegueWithIdentifier("myinformationIdentifier", sender: nil)
-            }
-            else if indexPath.row == 1{
-                self.performSegueWithIdentifier("resetPhone", sender: nil)
-            }
-            else if indexPath.row == 2{
-                self.performSegueWithIdentifier("modifPWIdentifier", sender: nil)
-            }
-        }
         
     }
     
@@ -59,20 +48,27 @@ class SettingTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableViewArray[section][0] as? String
+        return ""
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:SettingTableViewCell = tableView.dequeueReusableCellWithIdentifier("settingIndentifer", forIndexPath: indexPath) as! SettingTableViewCell
+        
+        // Configure the cell...
+        cell.titleLabel.text = tableViewArray[indexPath.row]
+        
+        return cell
+    }
+
+    /*
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
         // Configure the cell...
-        let array:NSArray = tableViewArray[indexPath.section] as! NSArray
-        cell.titleLabel.text = array[indexPath.row+1] as? String
 
         return cell
     }
-    
-
+    */
 
     /*
     // Override to support conditional editing of the table view.

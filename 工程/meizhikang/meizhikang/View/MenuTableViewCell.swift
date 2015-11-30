@@ -16,9 +16,9 @@ class MenuTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.backgroundColor = UIColor .clearColor()
-        //self.selected = false
-        self.setSelected(true, animated: false)
-        self.setSelected(false, animated: false)
+        let view = UIView(frame: self.bounds)
+        view.backgroundColor = UINavigationBar.appearance().barTintColor
+        self.selectedBackgroundView = view
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
