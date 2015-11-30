@@ -28,7 +28,7 @@ PODS:
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - MBProgressHUD (0.9.1)
-  - MJRefresh (3.0.5)
+  - MJRefresh (3.0.7)
   - RBStoryboardLink (0.1.4)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -45,7 +45,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - DZNEmptyDataSet
-  - FSCalendar
+  - FSCalendar (from `https://github.com/hxx0215/FSCalendar`, tag `1.7.0`)
   - IHKeyboardAvoiding
   - JSONKit-NoWarning
   - JSQMessagesViewController
@@ -56,6 +56,16 @@ DEPENDENCIES:
   - SDWebImage
   - SWRevealViewController
 
+EXTERNAL SOURCES:
+  FSCalendar:
+    :git: https://github.com/hxx0215/FSCalendar
+    :tag: 1.7.0
+
+CHECKOUT OPTIONS:
+  FSCalendar:
+    :git: https://github.com/hxx0215/FSCalendar
+    :tag: 1.7.0
+
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
@@ -65,7 +75,7 @@ SPEC CHECKSUMS:
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MJRefresh: 809ed03f2014275056c3d65e2812aef1ba5b0f98
+  MJRefresh: f3e1228ec3d38c7ba5208d58032631a52f39f495
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84

@@ -14,6 +14,6 @@ pod 'RBStoryboardLink'
 pod 'ReactiveCocoa', '~> 2.5'
 pod 'SWRevealViewController'
 pod 'JSQMessagesViewController'
-pod 'FSCalendar'
+pod 'FSCalendar', :git => 'https://github.com/hxx0215/FSCalendar', :tag =>'1.7.0'
 end
 
