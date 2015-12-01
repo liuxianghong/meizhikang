@@ -51,8 +51,17 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
                 self.performSegueWithIdentifier("modifPWIdentifier", sender: nil)
             }
         }
+        else if indexPath.section == 1{
+            if indexPath.row == 0{
+                self.performSegueWithIdentifier("alarmIdentifier", sender: nil)
+            }
+            else if indexPath.row == 1{
+                self.performSegueWithIdentifier("alarm2Identifier", sender: nil)
+            }
+        }
         else if indexPath.section == 2{
             if indexPath.row == 0{
+                self.performSegueWithIdentifier("bleIdentifier", sender: nil)
             }
             else if indexPath.row == 1{
                 self.performSegueWithIdentifier("SwitchAccountIdentifier", sender: nil)
@@ -78,7 +87,8 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableViewArray[section][0] as? String
+        let array:NSArray = tableViewArray[section] as! NSArray
+        return array[0] as? String
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
