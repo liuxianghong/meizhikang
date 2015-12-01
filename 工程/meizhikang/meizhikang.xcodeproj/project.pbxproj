@@ -175,9 +175,6 @@
 		D311C5681C0A066F00C80C05 /* 选择-.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C52F1C0A066F00C80C05 /* 选择-.png */; };
 		D311C5691C0A066F00C80C05 /* 选择-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5301C0A066F00C80C05 /* 选择-@2x.png */; };
 		D311C56A1C0A066F00C80C05 /* 选择-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5311C0A066F00C80C05 /* 选择-@3x.png */; };
-		D311C56B1C0A066F00C80C05 /* 透明灰.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5321C0A066F00C80C05 /* 透明灰.png */; };
-		D311C56C1C0A066F00C80C05 /* 透明灰@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5331C0A066F00C80C05 /* 透明灰@2x.png */; };
-		D311C56D1C0A066F00C80C05 /* 透明灰@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5341C0A066F00C80C05 /* 透明灰@3x.png */; };
 		D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311C5701C0A075A00C80C05 /* SettingTableViewCell.swift */; };
 		D311C5B21C0A119500C80C05 /* 圆-.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5731C0A119500C80C05 /* 圆-.png */; };
 		D311C5B31C0A119500C80C05 /* 圆-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C5741C0A119500C80C05 /* 圆-@2x.png */; };
@@ -280,6 +277,10 @@
 		D3F8E2DC1C0C3A5500263B4E /* 导航栏.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2D91C0C3A5500263B4E /* 导航栏.png */; };
 		D3F8E2DE1C0C3A5500263B4E /* 导航栏@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2DB1C0C3A5500263B4E /* 导航栏@3x.png */; };
 		D3F8E2E01C0C3A6700263B4E /* 导航栏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2DF1C0C3A6700263B4E /* 导航栏@2x.png */; };
+		D3F8E2E21C0D77D500263B4E /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8E2E11C0D77D500263B4E /* AlarmViewController.swift */; };
+		D3F8E2E51C0D82DD00263B4E /* 圆-绿@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2E31C0D82DD00263B4E /* 圆-绿@3x.png */; };
+		D3F8E2E61C0D82DD00263B4E /* 圆-绿@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2E41C0D82DD00263B4E /* 圆-绿@2x.png */; };
+		D3F8E2E81C0D86C900263B4E /* AlarmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8E2E71C0D86C900263B4E /* AlarmsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -453,9 +454,6 @@
 		D311C52F1C0A066F00C80C05 /* 选择-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择-.png"; sourceTree = "<group>"; };
 		D311C5301C0A066F00C80C05 /* 选择-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择-@2x.png"; sourceTree = "<group>"; };
 		D311C5311C0A066F00C80C05 /* 选择-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择-@3x.png"; sourceTree = "<group>"; };
-		D311C5321C0A066F00C80C05 /* 透明灰.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "透明灰.png"; sourceTree = "<group>"; };
-		D311C5331C0A066F00C80C05 /* 透明灰@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "透明灰@2x.png"; sourceTree = "<group>"; };
-		D311C5341C0A066F00C80C05 /* 透明灰@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "透明灰@3x.png"; sourceTree = "<group>"; };
 		D311C5701C0A075A00C80C05 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		D311C5731C0A119500C80C05 /* 圆-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆-.png"; sourceTree = "<group>"; };
 		D311C5741C0A119500C80C05 /* 圆-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆-@2x.png"; sourceTree = "<group>"; };
@@ -565,6 +563,10 @@
 		D3F8E2D91C0C3A5500263B4E /* 导航栏.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "导航栏.png"; sourceTree = "<group>"; };
 		D3F8E2DB1C0C3A5500263B4E /* 导航栏@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "导航栏@3x.png"; sourceTree = "<group>"; };
 		D3F8E2DF1C0C3A6700263B4E /* 导航栏@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "导航栏@2x.png"; sourceTree = "<group>"; };
+		D3F8E2E11C0D77D500263B4E /* AlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		D3F8E2E31C0D82DD00263B4E /* 圆-绿@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆-绿@3x.png"; sourceTree = "<group>"; };
+		D3F8E2E41C0D82DD00263B4E /* 圆-绿@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆-绿@2x.png"; sourceTree = "<group>"; };
+		D3F8E2E71C0D86C900263B4E /* AlarmsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -754,6 +756,8 @@
 				D311C4FF1C0A066F00C80C05 /* 圆-白.png */,
 				D311C5001C0A066F00C80C05 /* 圆-白@2x.png */,
 				D311C5011C0A066F00C80C05 /* 圆-白@3x.png */,
+				D3F8E2E31C0D82DD00263B4E /* 圆-绿@3x.png */,
+				D3F8E2E41C0D82DD00263B4E /* 圆-绿@2x.png */,
 				D311C5051C0A066F00C80C05 /* 小圆-白.png */,
 				D311C5061C0A066F00C80C05 /* 小圆-白@2x.png */,
 				D311C5071C0A066F00C80C05 /* 小圆-白@3x.png */,
@@ -793,9 +797,6 @@
 				D311C52F1C0A066F00C80C05 /* 选择-.png */,
 				D311C5301C0A066F00C80C05 /* 选择-@2x.png */,
 				D311C5311C0A066F00C80C05 /* 选择-@3x.png */,
-				D311C5321C0A066F00C80C05 /* 透明灰.png */,
-				D311C5331C0A066F00C80C05 /* 透明灰@2x.png */,
-				D311C5341C0A066F00C80C05 /* 透明灰@3x.png */,
 			);
 			path = "设置";
 			sourceTree = "<group>";
@@ -999,6 +1000,8 @@
 				D3F8E2BF1C0C384300263B4E /* SwitchAccountTableViewController.swift */,
 				D3F8E2C01C0C384300263B4E /* SwitchoverViewController.swift */,
 				D3F8E2C11C0C384300263B4E /* UserInformationTableViewController.swift */,
+				D3F8E2E11C0D77D500263B4E /* AlarmViewController.swift */,
+				D3F8E2E71C0D86C900263B4E /* AlarmsViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1110,7 +1113,6 @@
 				B99A8E151C0BF43D0097E9B3 /* 绿-圆@2x.png in Resources */,
 				D311C5E01C0A119500C80C05 /* 语音@2x.png in Resources */,
 				D311C53E1C0A066F00C80C05 /* 小圆-白.png in Resources */,
-				D311C56B1C0A066F00C80C05 /* 透明灰.png in Resources */,
 				D311C4C11C09A70C00C80C05 /* 蓝牙连接-绿.png in Resources */,
 				B99A8E101C0BF43D0097E9B3 /* 灰@3x.png in Resources */,
 				D311C5C41C0A119500C80C05 /* 灰边.png in Resources */,
@@ -1162,6 +1164,7 @@
 				B99A8E141C0BF43D0097E9B3 /* 绿-圆.png in Resources */,
 				D311C5561C0A066F00C80C05 /* 灰边.png in Resources */,
 				B99A8E2A1C0BF43D0097E9B3 /* 黑@2x.png in Resources */,
+				D3F8E2E51C0D82DD00263B4E /* 圆-绿@3x.png in Resources */,
 				B99A8E131C0BF43D0097E9B3 /* 灰框-@3x.png in Resources */,
 				B99A8E1B1C0BF43D0097E9B3 /* 绿-框圆@2x.png in Resources */,
 				D311C4BB1C09A70C00C80C05 /* 我的好友.png in Resources */,
@@ -1204,7 +1207,6 @@
 				D311C5CC1C0A119500C80C05 /* 白框@3x.png in Resources */,
 				D311C4CE1C09A70C00C80C05 /* 设置@2x.png in Resources */,
 				D3897DEC1C09995800D18BAC /* 矩形.png in Resources */,
-				D311C56D1C0A066F00C80C05 /* 透明灰@3x.png in Resources */,
 				D3F8E2B51C0C316600263B4E /* chover2.png in Resources */,
 				D39B899B1C087AC1009086B2 /* Main.storyboard in Resources */,
 				B99A8E041C0BF43D0097E9B3 /* 框-蓝@3x.png in Resources */,
@@ -1242,7 +1244,6 @@
 				D311C5B51C0A119500C80C05 /* 深灰框-.png in Resources */,
 				D311C5541C0A066F00C80C05 /* 灰线-长@2x.png in Resources */,
 				D311C5691C0A066F00C80C05 /* 选择-@2x.png in Resources */,
-				D311C56C1C0A066F00C80C05 /* 透明灰@2x.png in Resources */,
 				D311C4BE1C09A70C00C80C05 /* 蓝牙连接-拷贝.png in Resources */,
 				D311C5651C0A066F00C80C05 /* 蓝框-.png in Resources */,
 				D311C5EA1C0A119500C80C05 /* 通讯2@2x.png in Resources */,
@@ -1268,6 +1269,7 @@
 				D3F8E2DC1C0C3A5500263B4E /* 导航栏.png in Resources */,
 				B99A8E191C0BF43D0097E9B3 /* 绿-圆小@3x.png in Resources */,
 				D311C4AB1C09A70C00C80C05 /* 健康图@3x.png in Resources */,
+				D3F8E2E61C0D82DD00263B4E /* 圆-绿@2x.png in Resources */,
 				D311C4A01C09A70C00C80C05 /* 健康分析.png in Resources */,
 				B99A8E121C0BF43D0097E9B3 /* 灰框-@2x.png in Resources */,
 				D311C5B31C0A119500C80C05 /* 圆-@2x.png in Resources */,
@@ -1397,6 +1399,7 @@
 				D3F8E2C91C0C384300263B4E /* UserInformationTableViewController.swift in Sources */,
 				D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */,
 				D361576A1C097937009ED19D /* NSString+scisky.m in Sources */,
+				D3F8E2E21C0D77D500263B4E /* AlarmViewController.swift in Sources */,
 				D3897E231C09A04C00D18BAC /* MenuTableViewCell.swift in Sources */,
 				B90B930B1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift in Sources */,
 				D3F8E2D81C0C387A00263B4E /* HealthFigureViewController.swift in Sources */,
@@ -1415,6 +1418,7 @@
 				D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */,
 				D39B89951C087AC1009086B2 /* AppDelegate.m in Sources */,
 				D39B899E1C087AC1009086B2 /* meizhikang.xcdatamodeld in Sources */,
+				D3F8E2E81C0D86C900263B4E /* AlarmsViewController.swift in Sources */,
 				D3F8E2C31C0C384300263B4E /* AlertViewController.swift in Sources */,
 				D39B89921C087AC1009086B2 /* main.m in Sources */,
 				D3F8E2D11C0C384B00263B4E /* RegistTableViewController.swift in Sources */,
