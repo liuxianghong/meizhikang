@@ -247,7 +247,6 @@
 		D32D08131C0AE4CD00E2C7EF /* sex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08121C0AE4CD00E2C7EF /* sex@2x.png */; };
 		D32D08151C0AE55B00E2C7EF /* sex_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */; };
 		D361575C1C09760B009ED19D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D36157541C09760B009ED19D /* README.md */; };
-		D36157641C0976E9009ED19D /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = D36157631C0976E9009ED19D /* 启动图.png */; };
 		D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */; };
 		D361576A1C097937009ED19D /* NSString+scisky.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157691C097937009ED19D /* NSString+scisky.m */; };
 		D361576D1C097B1D009ED19D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361576C1C097B1D009ED19D /* SwiftyJSON.swift */; };
@@ -525,7 +524,6 @@
 		D32D08121C0AE4CD00E2C7EF /* sex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex@2x.png"; sourceTree = "<group>"; };
 		D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex_select@2x.png"; sourceTree = "<group>"; };
 		D36157541C09760B009ED19D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D36157631C0976E9009ED19D /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
 		D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		D36157681C097937009ED19D /* NSString+scisky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+scisky.h"; sourceTree = "<group>"; };
@@ -891,7 +889,6 @@
 				D3F8E2D91C0C3A5500263B4E /* 导航栏.png */,
 				D3F8E2DF1C0C3A6700263B4E /* 导航栏@2x.png */,
 				D3F8E2DB1C0C3A5500263B4E /* 导航栏@3x.png */,
-				D36157631C0976E9009ED19D /* 启动图.png */,
 				D36157541C09760B009ED19D /* README.md */,
 			);
 			name = Resource;
@@ -1319,7 +1316,6 @@
 				B99A8E231C0BF43D0097E9B3 /* 黑-圆.png in Resources */,
 				D311C4B61C09A70C00C80C05 /* 我的好友-拷贝@2x.png in Resources */,
 				D311C5D71C0A119500C80C05 /* 表情@2x.png in Resources */,
-				D36157641C0976E9009ED19D /* 启动图.png in Resources */,
 				D311C49B1C09A70C00C80C05 /* 健康分析-拷贝@2x.png in Resources */,
 				D311C4C41C09A70C00C80C05 /* 蓝牙连接.png in Resources */,
 				D311C5E41C0A119500C80C05 /* 输入框@3x.png in Resources */,

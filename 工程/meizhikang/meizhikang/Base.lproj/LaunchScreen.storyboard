@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="启动图.png" translatesAutoresizingMaskIntoConstraints="NO" id="XQk-au-hz9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="启动图" translatesAutoresizingMaskIntoConstraints="NO" id="XQk-au-hz9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="启动图.png" width="750" height="1334"/>
+        <image name="启动图" width="375" height="667"/>
     </resources>
 </document>
