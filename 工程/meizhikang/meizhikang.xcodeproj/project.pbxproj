@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A452E61FF7864438CDDB7CF3 /* libPods-meizhikang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61501C1B273F30AB09F34FF2 /* libPods-meizhikang.a */; };
+		22EE546F87E48B53AFB7E456 /* Pods_meizhikang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CE11CF07C487EAA7143BB0 /* Pods_meizhikang.framework */; };
 		B90B930B1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90B930A1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift */; };
 		B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBA1C0BF43D0097E9B3 /* 右.png */; };
 		B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */; };
@@ -285,7 +285,7 @@
 
 /* Begin PBXFileReference section */
 		433F7BDFE6ABF778B0529ED4 /* Pods-meizhikang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meizhikang.release.xcconfig"; path = "Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang.release.xcconfig"; sourceTree = "<group>"; };
-		61501C1B273F30AB09F34FF2 /* libPods-meizhikang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-meizhikang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63CE11CF07C487EAA7143BB0 /* Pods_meizhikang.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_meizhikang.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B90B930A1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthAnalysisViewController.swift; sourceTree = "<group>"; };
 		B99A8DBA1C0BF43D0097E9B3 /* 右.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右.png"; sourceTree = "<group>"; };
 		B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@2x.png"; sourceTree = "<group>"; };
@@ -575,7 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D311C4FA1C09CB4300C80C05 /* CoreFoundation.framework in Frameworks */,
-				A452E61FF7864438CDDB7CF3 /* libPods-meizhikang.a in Frameworks */,
+				22EE546F87E48B53AFB7E456 /* Pods_meizhikang.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				D311C4F91C09CB4300C80C05 /* CoreFoundation.framework */,
-				61501C1B273F30AB09F34FF2 /* libPods-meizhikang.a */,
+				63CE11CF07C487EAA7143BB0 /* Pods_meizhikang.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -82,3 +82,34 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-meizhikang/AFNetworking.framework"
+  install_framework "Pods-meizhikang/DZNEmptyDataSet.framework"
+  install_framework "Pods-meizhikang/FSCalendar.framework"
+  install_framework "Pods-meizhikang/IHKeyboardAvoiding.framework"
+  install_framework "Pods-meizhikang/JSONKit_NoWarning.framework"
+  install_framework "Pods-meizhikang/JSQMessagesViewController.framework"
+  install_framework "Pods-meizhikang/JSQSystemSoundPlayer.framework"
+  install_framework "Pods-meizhikang/MBProgressHUD.framework"
+  install_framework "Pods-meizhikang/MJRefresh.framework"
+  install_framework "Pods-meizhikang/RBStoryboardLink.framework"
+  install_framework "Pods-meizhikang/ReactiveCocoa.framework"
+  install_framework "Pods-meizhikang/SDWebImage.framework"
+  install_framework "Pods-meizhikang/SWRevealViewController.framework"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-meizhikang/AFNetworking.framework"
+  install_framework "Pods-meizhikang/DZNEmptyDataSet.framework"
+  install_framework "Pods-meizhikang/FSCalendar.framework"
+  install_framework "Pods-meizhikang/IHKeyboardAvoiding.framework"
+  install_framework "Pods-meizhikang/JSONKit_NoWarning.framework"
+  install_framework "Pods-meizhikang/JSQMessagesViewController.framework"
+  install_framework "Pods-meizhikang/JSQSystemSoundPlayer.framework"
+  install_framework "Pods-meizhikang/MBProgressHUD.framework"
+  install_framework "Pods-meizhikang/MJRefresh.framework"
+  install_framework "Pods-meizhikang/RBStoryboardLink.framework"
+  install_framework "Pods-meizhikang/ReactiveCocoa.framework"
+  install_framework "Pods-meizhikang/SDWebImage.framework"
+  install_framework "Pods-meizhikang/SWRevealViewController.framework"
+fi
