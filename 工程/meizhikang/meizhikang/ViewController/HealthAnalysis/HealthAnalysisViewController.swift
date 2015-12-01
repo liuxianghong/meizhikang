@@ -31,9 +31,11 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        calendarView.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), 300)
     }
     
+    func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
+        
+    }
     /*
     // MARK: - Navigation
 

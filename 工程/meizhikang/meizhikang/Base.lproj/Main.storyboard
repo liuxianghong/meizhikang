@@ -1188,19 +1188,30 @@
                                     <outlet property="delegate" destination="OYl-cd-wdN" id="VMI-EN-MEL"/>
                                 </connections>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择日期查看" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJW-xI-29q">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.10980392160000001" green="0.87058823529999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SCc-2B-jIZ" firstAttribute="top" secondItem="9yy-HZ-3jG" secondAttribute="bottom" id="LYo-se-13y"/>
+                            <constraint firstItem="SCc-2B-jIZ" firstAttribute="top" secondItem="9yy-HZ-3jG" secondAttribute="bottom" constant="30" id="LYo-se-13y"/>
                             <constraint firstAttribute="trailing" secondItem="SCc-2B-jIZ" secondAttribute="trailing" id="Zwb-jj-QZn"/>
                             <constraint firstItem="SCc-2B-jIZ" firstAttribute="leading" secondItem="5YB-5F-Wrp" secondAttribute="leading" id="d7X-nc-HHd"/>
+                            <constraint firstItem="wJW-xI-29q" firstAttribute="top" secondItem="9yy-HZ-3jG" secondAttribute="bottom" constant="8" id="dBH-P9-lU7"/>
+                            <constraint firstItem="wJW-xI-29q" firstAttribute="leading" secondItem="5YB-5F-Wrp" secondAttribute="leading" constant="8" id="ldm-pI-qRB"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="SCc-2B-jIZ"/>
+                                <exclude reference="wJW-xI-29q"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="dBH-P9-lU7"/>
+                                <exclude reference="ldm-pI-qRB"/>
                                 <exclude reference="LYo-se-13y"/>
                                 <exclude reference="Zwb-jj-QZn"/>
                                 <exclude reference="d7X-nc-HHd"/>
@@ -1209,8 +1220,11 @@
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="SCc-2B-jIZ"/>
+                                <include reference="wJW-xI-29q"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="dBH-P9-lU7"/>
+                                <include reference="ldm-pI-qRB"/>
                                 <include reference="LYo-se-13y"/>
                                 <include reference="Zwb-jj-QZn"/>
                                 <include reference="d7X-nc-HHd"/>
