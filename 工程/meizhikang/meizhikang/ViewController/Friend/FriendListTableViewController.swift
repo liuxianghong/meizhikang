@@ -10,6 +10,10 @@ import UIKit
 
 class FriendListTableViewController: UITableViewController {
 
+    @IBOutlet weak var typeImageView1 : UIImageView!
+    @IBOutlet weak var typeImageView2 : UIImageView!
+    @IBOutlet weak var typeImageView3 : UIImageView!
+    var type = 1
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +22,12 @@ class FriendListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        typeImageView2.hidden = true;
+        typeImageView3.hidden = true;
+        
+        var frame = self.tableView.tableHeaderView?.frame
+        frame?.size.height = 50.0
+        self.tableView.tableHeaderView?.frame = frame!
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,28 +35,86 @@ class FriendListTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func typeButtonClick(sender : UIButton){
+        if type != sender.tag{
+            type = sender.tag
+            tableView.reloadData()
+            typeImageView1.hidden = type != 1
+            typeImageView2.hidden = type != 2
+            typeImageView3.hidden = type != 3
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return type+1
     }
 
-    /*
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if type==1 && (indexPath.section==0 && indexPath.row == 0){
+            return 45
+        }
+        return 60
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        if type==1 && (indexPath.section==0 && indexPath.row == 0){
+            let cell = tableView.dequeueReusableCellWithIdentifier("addCellIdentifier", forIndexPath: indexPath)
+            
+            // Configure the cell...
+            
+            return cell
+        }
+        
+        let cell:FriendTableViewCell = tableView.dequeueReusableCellWithIdentifier("friendCellIdentifier", forIndexPath: indexPath) as! FriendTableViewCell
 
         // Configure the cell...
+        if type == 1{
+            cell.typeImageView.image = UIImage(named: "通讯2")
+        }
+        else if type == 2{
+            cell.typeImageView.image = UIImage(named: "联系人-蓝")
+        }
+        else if type == 3{
+            cell.typeImageView.image = UIImage(named: "记录-蓝")
+        }
+        cell.numberLabel.hidden = type != 1
 
         return cell
     }
-    */
 
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if type==1 && (indexPath.section==0 && indexPath.row == 0){
+            let actionVC = UIAlertController(title: "", message: "加入或创建一个群", preferredStyle: .ActionSheet)
+            let actionNew = UIAlertAction(title: "创建群", style: .Default, handler: { (UIAlertAction) -> Void in
+                
+            })
+            
+            let actionAdd = UIAlertAction(title: "加入群", style: .Default, handler: { (UIAlertAction) -> Void in
+                
+            })
+            
+            let actionCancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+                
+            })
+            
+            actionVC.addAction(actionNew)
+            actionVC.addAction(actionAdd)
+            actionVC.addAction(actionCancel)
+            
+            self.presentViewController(actionVC, animated: true, completion: { () -> Void in
+                
+            })
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
