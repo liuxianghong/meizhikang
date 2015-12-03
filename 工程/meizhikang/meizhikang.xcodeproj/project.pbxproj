@@ -10,6 +10,7 @@
 		22EE546F87E48B53AFB7E456 /* Pods_meizhikang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CE11CF07C487EAA7143BB0 /* Pods_meizhikang.framework */; };
 		B90B930B1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90B930A1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift */; };
 		B96C98B61C0EC7CB00228D21 /* HealthReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98B51C0EC7CB00228D21 /* HealthReportViewController.swift */; };
+		B96C98B81C10350200228D21 /* HealthDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98B71C10350200228D21 /* HealthDailyView.swift */; };
 		B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBA1C0BF43D0097E9B3 /* 右.png */; };
 		B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */; };
 		B99A8DF51C0BF43D0097E9B3 /* 右@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */; };
@@ -286,6 +287,7 @@
 		63CE11CF07C487EAA7143BB0 /* Pods_meizhikang.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_meizhikang.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B90B930A1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthAnalysisViewController.swift; sourceTree = "<group>"; };
 		B96C98B51C0EC7CB00228D21 /* HealthReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthReportViewController.swift; sourceTree = "<group>"; };
+		B96C98B71C10350200228D21 /* HealthDailyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDailyView.swift; sourceTree = "<group>"; };
 		B99A8DBA1C0BF43D0097E9B3 /* 右.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右.png"; sourceTree = "<group>"; };
 		B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@2x.png"; sourceTree = "<group>"; };
 		B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@3x.png"; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 				D3897E221C09A04C00D18BAC /* MenuTableViewCell.swift */,
 				D311C5701C0A075A00C80C05 /* SettingTableViewCell.swift */,
 				D335B7BE1C0EC41E00975549 /* FriendTableViewCell.swift */,
+				B96C98B71C10350200228D21 /* HealthDailyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1391,6 +1394,7 @@
 				D361576A1C097937009ED19D /* NSString+scisky.m in Sources */,
 				D3F8E2E21C0D77D500263B4E /* AlarmViewController.swift in Sources */,
 				D3897E231C09A04C00D18BAC /* MenuTableViewCell.swift in Sources */,
+				B96C98B81C10350200228D21 /* HealthDailyView.swift in Sources */,
 				B90B930B1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift in Sources */,
 				D3F8E2D81C0C387A00263B4E /* HealthFigureViewController.swift in Sources */,
 				D3F8E2C61C0C384300263B4E /* SettingTableViewController.swift in Sources */,
