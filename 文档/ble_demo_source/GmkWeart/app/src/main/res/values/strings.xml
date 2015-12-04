@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GmkWeart</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="sensor_buttion_str">close/open sensor</string>
+
+</resources>
