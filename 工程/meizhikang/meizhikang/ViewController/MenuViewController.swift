@@ -11,10 +11,7 @@ import UIKit
 class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet  weak var imageView:UIImageView!
-    @IBOutlet  weak var imageView2:UIImageView!
     @IBOutlet  weak var tableView:UITableView!
-    let imageViewArray = ["轮换图1","轮换图2","轮换图3"]
-    var imageViewTag = 1
     let tableViewArray = ["BLUEDIAODIAO","健康图","健康分析","蓝牙连接","我的好友","设置"]
     let viewArray = ["sw_BLUEDIAODIAO","sw_front","sw_analysis","sw_ble","sw_friend","sw_setting"]
     override func viewDidLoad() {
@@ -22,7 +19,6 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
         // Do any additional setup after loading the view.
         self.revealViewController().frontIdentfierArray = viewArray
-        self.doHideImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,34 +26,6 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
-    func doHideImage(){
-        UIView.animateWithDuration(4.0, animations: { () -> Void in
-            self.imageView.alpha = 0.0
-            self.imageView2.alpha = 1.0
-            }) { (Bool) -> Void in
-                self.imageViewTag++
-                self.imageViewTag = self.imageViewTag % 3
-                self.imageView.image = UIImage(named: self.imageViewArray[self.imageViewTag])
-                self.doShowImage()
-        }
-    }
-    
-    func doShowImage(){
-        UIView.animateWithDuration(4.0, animations: { () -> Void in
-            self.imageView2.alpha = 0.0
-            self.imageView.alpha = 1.0
-            }) { (Bool) -> Void in
-                self.imageViewTag++
-                self.imageViewTag = self.imageViewTag % 3
-                self.imageView2.image = UIImage(named: self.imageViewArray[self.imageViewTag])
-                self.doHideImage()
-        }
-    }
 
     // MARK: - Table view data source
     
