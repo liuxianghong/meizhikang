@@ -11,6 +11,10 @@
 		B90B930B1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90B930A1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift */; };
 		B96C98B61C0EC7CB00228D21 /* HealthReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98B51C0EC7CB00228D21 /* HealthReportViewController.swift */; };
 		B96C98B81C10350200228D21 /* HealthDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98B71C10350200228D21 /* HealthDailyView.swift */; };
+		B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98BB1C11C33900228D21 /* HealthReportContainerViewController.swift */; };
+		B96C98BE1C11C9DE00228D21 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98BD1C11C9DE00228D21 /* EmptySegue.swift */; };
+		B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98BF1C11D2E000228D21 /* HealthDailyViewController.swift */; };
+		B96C98C41C11D45000228D21 /* HealthWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98C31C11D45000228D21 /* HealthWeeklyViewController.swift */; };
 		B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBA1C0BF43D0097E9B3 /* 右.png */; };
 		B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */; };
 		B99A8DF51C0BF43D0097E9B3 /* 右@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */; };
@@ -288,6 +292,10 @@
 		B90B930A1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthAnalysisViewController.swift; sourceTree = "<group>"; };
 		B96C98B51C0EC7CB00228D21 /* HealthReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthReportViewController.swift; sourceTree = "<group>"; };
 		B96C98B71C10350200228D21 /* HealthDailyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDailyView.swift; sourceTree = "<group>"; };
+		B96C98BB1C11C33900228D21 /* HealthReportContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthReportContainerViewController.swift; sourceTree = "<group>"; };
+		B96C98BD1C11C9DE00228D21 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
+		B96C98BF1C11D2E000228D21 /* HealthDailyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDailyViewController.swift; sourceTree = "<group>"; };
+		B96C98C31C11D45000228D21 /* HealthWeeklyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthWeeklyViewController.swift; sourceTree = "<group>"; };
 		B99A8DBA1C0BF43D0097E9B3 /* 右.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右.png"; sourceTree = "<group>"; };
 		B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@2x.png"; sourceTree = "<group>"; };
 		B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@3x.png"; sourceTree = "<group>"; };
@@ -603,6 +611,10 @@
 			children = (
 				B90B930A1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift */,
 				B96C98B51C0EC7CB00228D21 /* HealthReportViewController.swift */,
+				B96C98BB1C11C33900228D21 /* HealthReportContainerViewController.swift */,
+				B96C98BF1C11D2E000228D21 /* HealthDailyViewController.swift */,
+				B96C98C31C11D45000228D21 /* HealthWeeklyViewController.swift */,
+				B96C98BD1C11C9DE00228D21 /* EmptySegue.swift */,
 			);
 			path = HealthAnalysis;
 			sourceTree = "<group>";
@@ -1404,13 +1416,17 @@
 				D32D080D1C0AD39500E2C7EF /* MainViewController.swift in Sources */,
 				D3897DDF1C09934100D18BAC /* ViewController+menu.m in Sources */,
 				B96C98B61C0EC7CB00228D21 /* HealthReportViewController.swift in Sources */,
+				B96C98BE1C11C9DE00228D21 /* EmptySegue.swift in Sources */,
 				D3897E251C09A08400D18BAC /* MenuViewController.swift in Sources */,
 				D361576D1C097B1D009ED19D /* SwiftyJSON.swift in Sources */,
+				B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */,
 				D3F8E2C71C0C384300263B4E /* SwitchAccountTableViewController.swift in Sources */,
 				D3F8E2D51C0C385200263B4E /* FriendListTableViewController.swift in Sources */,
 				D3F8E2D01C0C384B00263B4E /* ModifPWTableViewController.swift in Sources */,
 				D3F8E2C81C0C384300263B4E /* SwitchoverViewController.swift in Sources */,
 				D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */,
+				B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */,
+				B96C98C41C11D45000228D21 /* HealthWeeklyViewController.swift in Sources */,
 				D39B89951C087AC1009086B2 /* AppDelegate.m in Sources */,
 				D39B899E1C087AC1009086B2 /* meizhikang.xcdatamodeld in Sources */,
 				D3F8E2E81C0D86C900263B4E /* AlarmsViewController.swift in Sources */,
