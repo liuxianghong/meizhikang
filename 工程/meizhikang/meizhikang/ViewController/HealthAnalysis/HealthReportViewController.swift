@@ -7,6 +7,11 @@
 //
 
 import UIKit
+
+struct HealthReportConstant{
+    static let EmbededSegueIdentifier = "EmbededIdentifier"
+}
+
 class HealthReportViewModel: NSObject{
     var date : NSDate
     init(date: NSDate){
@@ -17,6 +22,7 @@ class HealthReportViewModel: NSObject{
 class HealthReportViewController: UIViewController {
     
 
+    weak var containerViewController : HealthReportContainerViewController?
     let viewModel = HealthReportViewModel(date: NSDate())
     var date : NSDate? {
         willSet{
@@ -38,14 +44,15 @@ class HealthReportViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == HealthReportConstant.EmbededSegueIdentifier){
+            self.containerViewController = segue.destinationViewController as? HealthReportContainerViewController
+        }
     }
-    */
 
 }
