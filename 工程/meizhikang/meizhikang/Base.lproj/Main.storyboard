@@ -1092,7 +1092,7 @@
             </objects>
             <point key="canvasLocation" x="3072" y="-1260"/>
         </scene>
-        <!--健康图-->
+        <!--Health Figure View Controller-->
         <scene sceneID="UGH-HP-UDd">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="okC-uE-OQA" customClass="HealthFigureViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
@@ -1103,16 +1103,61 @@
                     <view key="view" contentMode="scaleToFill" id="u0c-Sa-22G">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGz-tk-JW7">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="179" y="89" width="42" height="21"/>
+                                </variation>
+                            </label>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hGz-tk-JW7" firstAttribute="centerX" secondItem="u0c-Sa-22G" secondAttribute="centerX" id="Brq-7h-5z3"/>
+                            <constraint firstItem="hGz-tk-JW7" firstAttribute="top" secondItem="qfn-gV-JEb" secondAttribute="bottom" constant="25" id="lBM-Oc-jXL"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="hGz-tk-JW7"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Brq-7h-5z3"/>
+                                <exclude reference="lBM-Oc-jXL"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="hGz-tk-JW7"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Brq-7h-5z3"/>
+                                <include reference="lBM-Oc-jXL"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="健康图" id="Gcw-rf-dxM">
+                    <navigationItem key="navigationItem" id="Gcw-rf-dxM">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="菜单-白.png" id="Fxi-xN-0Xh">
                             <connections>
                                 <action selector="menuAciton:" destination="okC-uE-OQA" id="4L3-dR-vRC"/>
                             </connections>
                         </barButtonItem>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BgX-oe-SCj">
+                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <inset key="titleEdgeInsets" minX="-13" minY="0.0" maxX="13" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="92" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="30分钟模式" image="上拉">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BaL-xF-bZD" userLabel="First Responder" sceneMemberID="firstResponder"/>

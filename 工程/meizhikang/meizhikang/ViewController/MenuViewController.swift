@@ -88,7 +88,7 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let dic = self.revealViewController().frontViewControllersDic;
             let vc:UIViewController = dic.objectForKey(viewArray[indexPath.row]) as! UIViewController;
             if !vc.isEqual(self.revealViewController().frontViewController){
-                self.revealViewController().pushFrontViewController(vc, animated: true)
+                self.revealViewController().pushFrontViewController(vc, animated: false)
             }
             self.revealViewController().revealToggleAnimated(true)
         }
