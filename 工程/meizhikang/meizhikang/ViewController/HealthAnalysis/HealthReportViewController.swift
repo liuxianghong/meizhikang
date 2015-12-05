@@ -43,6 +43,9 @@ class HealthReportViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func titleClicked(sender: UIButton) {
+        self.containerViewController?.performSegueWithIdentifier(HealthReportContainerConstant.WeeklySegueIdentifier, sender: nil)
+    }
 
     // MARK: - Navigation
 

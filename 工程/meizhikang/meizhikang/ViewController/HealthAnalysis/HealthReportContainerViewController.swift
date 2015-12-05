@@ -63,10 +63,28 @@ class HealthReportContainerViewController: UIViewController {
                 self.view.addConstraints(vConstraint)
             }
         }
+        if segue.identifier == HealthReportContainerConstant.WeeklySegueIdentifier{
+            guard let weeklyViewController = self.weeklyViewController else{
+                return
+            }
+            swapViewContoller(self.childViewControllers[0], toViewController: weeklyViewController)
+        }
     }
     
     func swapViewContoller(fromViewController: UIViewController,toViewController: UIViewController){
-        
+        fromViewController.willMoveToParentViewController(nil)
+        self.addChildViewController(toViewController)
+        self.transitionFromViewController(fromViewController, toViewController: toViewController, duration: 1.0, options: .TransitionCrossDissolve, animations: {
+            let v = toViewController.view
+            v.translatesAutoresizingMaskIntoConstraints = false
+            let constraint = NSLayoutConstraint.constraintsWithVisualFormat("|-[v]-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["v":v])
+            let vConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v]-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["v":v])
+            self.view.addConstraints(constraint)
+            self.view.addConstraints(vConstraint)
+            }) { (finished) -> Void in
+                fromViewController.removeFromParentViewController()
+                toViewController.didMoveToParentViewController(self)
+        }
     }
 
 }

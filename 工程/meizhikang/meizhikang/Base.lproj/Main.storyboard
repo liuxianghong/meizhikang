@@ -1337,10 +1337,10 @@
                                 <exclude reference="fov-wc-OY1"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="a4X-uj-MH1"/>
                                 <exclude reference="Uz9-08-tdH"/>
                                 <exclude reference="rqo-wl-rU1"/>
                                 <exclude reference="tcW-tO-c3e"/>
-                                <exclude reference="a4X-uj-MH1"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1348,10 +1348,10 @@
                                 <include reference="fov-wc-OY1"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="a4X-uj-MH1"/>
                                 <include reference="Uz9-08-tdH"/>
                                 <include reference="rqo-wl-rU1"/>
                                 <include reference="tcW-tO-c3e"/>
-                                <include reference="a4X-uj-MH1"/>
                             </mask>
                         </variation>
                     </view>
@@ -1366,6 +1366,9 @@
                             <state key="normal" title="健康日报" image="上拉">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="titleClicked:" destination="kzE-gC-bz3" eventType="touchUpInside" id="71I-uh-S1O"/>
+                            </connections>
                         </button>
                     </navigationItem>
                 </viewController>
