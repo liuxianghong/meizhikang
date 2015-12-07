@@ -17,12 +17,13 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var imageViewTag = 1
     let tableViewArray = ["BLUEDIAODIAO","健康图","健康分析","蓝牙连接","我的好友","设置"]
     let viewArray = ["sw_BLUEDIAODIAO","sw_front","sw_analysis","sw_ble","sw_friend","sw_setting"]
+    var stopAnimation = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.revealViewController().frontIdentfierArray = viewArray
-        self.doHideImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,32 +31,45 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.stopAnimation = false
+        self.doHideImage()
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
     }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.stopAnimation = true
+    }
     
     func doHideImage(){
-        UIView.animateWithDuration(4.0, animations: { () -> Void in
-            self.imageView.alpha = 0.0
-            self.imageView2.alpha = 1.0
-            }) { (Bool) -> Void in
-                self.imageViewTag++
-                self.imageViewTag = self.imageViewTag % 3
-                self.imageView.image = UIImage(named: self.imageViewArray[self.imageViewTag])
-                self.doShowImage()
+        if !self.stopAnimation{
+            UIView.animateWithDuration(4.0, animations: { () -> Void in
+                self.imageView.alpha = 0.0
+                self.imageView2.alpha = 1.0
+                }) { (Bool) -> Void in
+                    self.imageViewTag++
+                    self.imageViewTag = self.imageViewTag % 3
+                    self.imageView.image = UIImage(named: self.imageViewArray[self.imageViewTag])
+                    self.doShowImage()
+            }
         }
     }
     
     func doShowImage(){
-        UIView.animateWithDuration(4.0, animations: { () -> Void in
-            self.imageView2.alpha = 0.0
-            self.imageView.alpha = 1.0
-            }) { (Bool) -> Void in
-                self.imageViewTag++
-                self.imageViewTag = self.imageViewTag % 3
-                self.imageView2.image = UIImage(named: self.imageViewArray[self.imageViewTag])
-                self.doHideImage()
+        if !self.stopAnimation{
+            UIView.animateWithDuration(4.0, animations: { () -> Void in
+                self.imageView2.alpha = 0.0
+                self.imageView.alpha = 1.0
+                }) { (Bool) -> Void in
+                    self.imageViewTag++
+                    self.imageViewTag = self.imageViewTag % 3
+                    self.imageView2.image = UIImage(named: self.imageViewArray[self.imageViewTag])
+                    self.doHideImage()
+            }
         }
     }
 
