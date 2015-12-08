@@ -74,6 +74,7 @@
 		B99A8E291C0BF43D0097E9B3 /* 黑.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DF01C0BF43D0097E9B3 /* 黑.png */; };
 		B99A8E2A1C0BF43D0097E9B3 /* 黑@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DF11C0BF43D0097E9B3 /* 黑@2x.png */; };
 		B99A8E2B1C0BF43D0097E9B3 /* 黑@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DF21C0BF43D0097E9B3 /* 黑@3x.png */; };
+		B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */; };
 		D311C4911C09A70C00C80C05 /* BLUEDIAODIAO-拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C4521C09A70C00C80C05 /* BLUEDIAODIAO-拷贝.png */; };
 		D311C4921C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C4531C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png */; };
 		D311C4931C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C4541C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png */; };
@@ -357,6 +358,7 @@
 		B99A8DF01C0BF43D0097E9B3 /* 黑.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑.png"; sourceTree = "<group>"; };
 		B99A8DF11C0BF43D0097E9B3 /* 黑@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑@2x.png"; sourceTree = "<group>"; };
 		B99A8DF21C0BF43D0097E9B3 /* 黑@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑@3x.png"; sourceTree = "<group>"; };
+		B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthPercentView.swift; sourceTree = "<group>"; };
 		BCF8D03768A4DCFF61C567B8 /* Pods-meizhikang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meizhikang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang.debug.xcconfig"; sourceTree = "<group>"; };
 		D311C4521C09A70C00C80C05 /* BLUEDIAODIAO-拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLUEDIAODIAO-拷贝.png"; sourceTree = "<group>"; };
 		D311C4531C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLUEDIAODIAO-拷贝@2x.png"; sourceTree = "<group>"; };
@@ -931,6 +933,7 @@
 				D311C5701C0A075A00C80C05 /* SettingTableViewCell.swift */,
 				D335B7BE1C0EC41E00975549 /* FriendTableViewCell.swift */,
 				B930DEE51C1438C4003576F6 /* HealthReportHeaderTableViewCell.swift */,
+				B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1407,6 +1410,7 @@
 			files = (
 				D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */,
 				D3F8E2C41C0C384300263B4E /* BleTableViewController.swift in Sources */,
+				B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */,
 				B930DEE81C1457E1003576F6 /* EasyOptionalUnwrapping.swift in Sources */,
 				D3F8E2C91C0C384300263B4E /* UserInformationTableViewController.swift in Sources */,
 				D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */,
