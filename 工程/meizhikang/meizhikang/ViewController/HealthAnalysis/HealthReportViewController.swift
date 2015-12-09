@@ -17,6 +17,7 @@ class HealthReportViewModel: NSObject{
     var date : NSDate
     var headerTitles : [String]
     var currenTitle : String?
+    var containerIdentifier = HealthReportContainerConstant.DailySegueIdentifier
     init(date: NSDate){
         self.date = date
         self.headerTitles = ["健康日报","健康周报","健康月报"]
@@ -26,6 +27,11 @@ class HealthReportViewModel: NSObject{
         self.headerTitles.removeObject(nextTitle)
         defer {
             currenTitle = nextTitle
+            if nextTitle == "健康日报"{
+                self.containerIdentifier = HealthReportContainerConstant.DailySegueIdentifier
+            }else{
+                self.containerIdentifier = HealthReportContainerConstant.WeeklySegueIdentifier
+            }
         }
         guard let t = currenTitle else{
             return
@@ -80,6 +86,7 @@ class HealthReportViewController: UIViewController,UITableViewDelegate,UITableVi
         self.viewModel.processTitles(self.viewModel.headerTitles[indexPath.row])
         self.headerButton.setTitle(self.viewModel.currenTitle, forState: .Normal)
         headerShow(false)
+        self.containerViewController?.performSegueWithIdentifier(self.viewModel.containerIdentifier, sender: nil)
     }
     
     @IBAction func titleClicked(sender: UIButton) {
