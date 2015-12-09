@@ -315,6 +315,7 @@
 		D3EFFA2A1C182B8F0047E2B0 /* 黑-.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EFF9FA1C182B8F0047E2B0 /* 黑-.png */; };
 		D3EFFA2B1C182B8F0047E2B0 /* 黑-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EFF9FB1C182B8F0047E2B0 /* 黑-@2x.png */; };
 		D3EFFA2C1C182B8F0047E2B0 /* 黑-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EFF9FC1C182B8F0047E2B0 /* 黑-@3x.png */; };
+		D3EFFA2E1C1843330047E2B0 /* HealthFigureChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EFFA2D1C1843330047E2B0 /* HealthFigureChartView.swift */; };
 		D3F8E2B41C0C316600263B4E /* chover1.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2B21C0C316600263B4E /* chover1.png */; };
 		D3F8E2B51C0C316600263B4E /* chover2.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2B31C0C316600263B4E /* chover2.png */; };
 		D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8E2BA1C0C384300263B4E /* AboutViewController.swift */; };
@@ -658,6 +659,7 @@
 		D3EFF9FA1C182B8F0047E2B0 /* 黑-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑-.png"; sourceTree = "<group>"; };
 		D3EFF9FB1C182B8F0047E2B0 /* 黑-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑-@2x.png"; sourceTree = "<group>"; };
 		D3EFF9FC1C182B8F0047E2B0 /* 黑-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑-@3x.png"; sourceTree = "<group>"; };
+		D3EFFA2D1C1843330047E2B0 /* HealthFigureChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthFigureChartView.swift; sourceTree = "<group>"; };
 		D3F8E2B21C0C316600263B4E /* chover1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chover1.png; sourceTree = "<group>"; };
 		D3F8E2B31C0C316600263B4E /* chover2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chover2.png; sourceTree = "<group>"; };
 		D3F8E2BA1C0C384300263B4E /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -1038,6 +1040,7 @@
 				D335B7BE1C0EC41E00975549 /* FriendTableViewCell.swift */,
 				B930DEE51C1438C4003576F6 /* HealthReportHeaderTableViewCell.swift */,
 				B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */,
+				D3EFFA2D1C1843330047E2B0 /* HealthFigureChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1623,6 +1626,7 @@
 				D3F8E2C91C0C384300263B4E /* UserInformationTableViewController.swift in Sources */,
 				D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */,
 				D361576A1C097937009ED19D /* NSString+scisky.m in Sources */,
+				D3EFFA2E1C1843330047E2B0 /* HealthFigureChartView.swift in Sources */,
 				B930DEE61C1438C4003576F6 /* HealthReportHeaderTableViewCell.swift in Sources */,
 				D3F8E2E21C0D77D500263B4E /* AlarmViewController.swift in Sources */,
 				D3897E231C09A04C00D18BAC /* MenuTableViewCell.swift in Sources */,

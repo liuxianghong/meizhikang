@@ -32,6 +32,15 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     @IBOutlet weak var headTableView: UITableView!
     @IBOutlet weak var headTableConstraint: NSLayoutConstraint!
     @IBOutlet weak var headerButton: UIButton!
+    @IBOutlet weak var imageView1 : UIImageView!
+    @IBOutlet weak var imageView2 : UIImageView!
+    @IBOutlet weak var imageView3 : UIImageView!
+    @IBOutlet weak var imageView4 : UIImageView!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var queryButton: UIButton!
+    @IBOutlet weak var chatView : HealthFigureChartView!
+    @IBOutlet weak var scoreLabel : UILabel!
+    @IBOutlet weak var heartRateLabel : UILabel!
     let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer()
     let viewModel = HealthFigureViewModel()
     let tapView = UIView()
