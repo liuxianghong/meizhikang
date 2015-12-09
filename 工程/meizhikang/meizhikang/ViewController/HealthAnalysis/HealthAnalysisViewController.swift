@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FSCalendar
 
 struct HealthAnalysisConstant{
     static let HealthAnalysisSegueIdentifier = "HealthReportSegueIdentifier"
