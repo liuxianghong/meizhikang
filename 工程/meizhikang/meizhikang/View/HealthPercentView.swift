@@ -10,4 +10,9 @@ import UIKit
 
 class HealthPercentView: UIView {
 
+    
+    @IBOutlet var healthPercent : UILabel!
+    @IBOutlet var semiHealthPercent : UILabel!
+    @IBOutlet var weakPercent: UILabel!
+    @IBOutlet var unHealthPercent : UILabel!
 }
