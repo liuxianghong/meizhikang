@@ -10,10 +10,18 @@ import UIKit
 
 class HealthDailyViewController: UIViewController {
 
+    @IBOutlet weak var todayPercent: HealthPercentView!
+    @IBOutlet weak var yesterdayPercent: HealthPercentView!
+    @IBOutlet weak var lastweekPercent: HealthPercentView!
+    @IBOutlet weak var lastmonthPercent: HealthPercentView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.todayPercent.healthPercent.text = "a"
+        self.yesterdayPercent.healthPercent.text = "a"
+        self.lastweekPercent.healthPercent.text = "a"
+        self.lastmonthPercent.healthPercent.text = "a"
     }
 
     override func didReceiveMemoryWarning() {

@@ -1366,17 +1366,17 @@
                                         <exclude reference="MYO-h5-Umr"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="D4j-0s-7Kl"/>
-                                        <exclude reference="RPc-ii-kKZ"/>
-                                        <exclude reference="T9E-gt-ToD"/>
-                                        <exclude reference="WiG-E9-hld"/>
-                                        <exclude reference="7Rl-8P-WAF"/>
-                                        <exclude reference="U37-2T-zk2"/>
-                                        <exclude reference="vqu-nm-FSY"/>
                                         <exclude reference="n9n-Gm-dJE"/>
                                         <exclude reference="x7n-t3-cz3"/>
                                         <exclude reference="U2Z-9c-7ij"/>
                                         <exclude reference="lE4-gh-htD"/>
+                                        <exclude reference="7Rl-8P-WAF"/>
+                                        <exclude reference="U37-2T-zk2"/>
+                                        <exclude reference="vqu-nm-FSY"/>
+                                        <exclude reference="D4j-0s-7Kl"/>
+                                        <exclude reference="RPc-ii-kKZ"/>
+                                        <exclude reference="T9E-gt-ToD"/>
+                                        <exclude reference="WiG-E9-hld"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -1387,17 +1387,17 @@
                                         <include reference="MYO-h5-Umr"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="D4j-0s-7Kl"/>
-                                        <include reference="RPc-ii-kKZ"/>
-                                        <include reference="T9E-gt-ToD"/>
-                                        <include reference="WiG-E9-hld"/>
-                                        <include reference="7Rl-8P-WAF"/>
-                                        <include reference="U37-2T-zk2"/>
-                                        <include reference="vqu-nm-FSY"/>
                                         <include reference="n9n-Gm-dJE"/>
                                         <include reference="x7n-t3-cz3"/>
                                         <include reference="U2Z-9c-7ij"/>
                                         <include reference="lE4-gh-htD"/>
+                                        <include reference="7Rl-8P-WAF"/>
+                                        <include reference="U37-2T-zk2"/>
+                                        <include reference="vqu-nm-FSY"/>
+                                        <include reference="D4j-0s-7Kl"/>
+                                        <include reference="RPc-ii-kKZ"/>
+                                        <include reference="T9E-gt-ToD"/>
+                                        <include reference="WiG-E9-hld"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2137,6 +2137,12 @@
                                                 <include reference="v3a-rY-HA7"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="healthPercent" destination="WMl-M0-ZqG" id="SRZ-YZ-2dx"/>
+                                            <outlet property="semiHealthPercent" destination="vhH-Fq-bLN" id="9AW-q3-rg7"/>
+                                            <outlet property="unHealthPercent" destination="xcP-iB-Izl" id="6wb-ab-FKL"/>
+                                            <outlet property="weakPercent" destination="vOZ-UF-Jto" id="xb9-1f-24l"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2265,6 +2271,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="lastPercent" destination="jPj-9X-tXd" id="w7C-n5-jdK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvk-DO-CcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -5919,6 +5928,12 @@
                                                 <include reference="2YK-a2-H0q"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="healthPercent" destination="8pg-nf-uIo" id="4zn-Ib-CtS"/>
+                                            <outlet property="semiHealthPercent" destination="eFm-6f-PvW" id="qJH-YN-ycq"/>
+                                            <outlet property="unHealthPercent" destination="Qhn-Wi-bGl" id="mO7-L7-IPp"/>
+                                            <outlet property="weakPercent" destination="Mpl-DR-bXn" id="Jo2-bw-u2K"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6134,6 +6149,12 @@
                                                 <include reference="SOy-E7-Qfj"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="healthPercent" destination="Wsk-Cd-B8p" id="jL1-4M-8jw"/>
+                                            <outlet property="semiHealthPercent" destination="Ntg-Ob-n74" id="oZS-aW-sRT"/>
+                                            <outlet property="unHealthPercent" destination="bJm-Vl-ohb" id="u7H-cx-t1P"/>
+                                            <outlet property="weakPercent" destination="Q6H-UG-i2L" id="Y5p-gT-7Kq"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6349,6 +6370,12 @@
                                                 <include reference="fqI-N4-X6V"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="healthPercent" destination="LpJ-hp-yRm" id="cgs-8E-LSj"/>
+                                            <outlet property="semiHealthPercent" destination="tsW-TO-anQ" id="XJ7-jD-qfm"/>
+                                            <outlet property="unHealthPercent" destination="HeP-gC-tj8" id="fWc-NE-WMY"/>
+                                            <outlet property="weakPercent" destination="H9j-Lr-xv9" id="JiB-im-zHX"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6564,6 +6591,12 @@
                                                 <include reference="e52-yN-jQJ"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="healthPercent" destination="wDm-HU-HNp" id="FM9-zh-6sL"/>
+                                            <outlet property="semiHealthPercent" destination="uLC-10-8C7" id="Hlr-8c-gbF"/>
+                                            <outlet property="unHealthPercent" destination="smd-K6-shV" id="LM8-4z-214"/>
+                                            <outlet property="weakPercent" destination="8fi-gG-v4o" id="Ehx-eB-dIT"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6814,6 +6847,12 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="lastmonthPercent" destination="xf7-Xd-dIn" id="qj9-8c-a91"/>
+                        <outlet property="lastweekPercent" destination="OAj-PL-Umn" id="uys-GV-uT8"/>
+                        <outlet property="todayPercent" destination="0Ez-EH-Qub" id="wFe-xQ-wTH"/>
+                        <outlet property="yesterdayPercent" destination="VuD-VU-KkS" id="3NK-XT-f8O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVO-4p-bKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,6 +10,7 @@ import UIKit
 
 class HealthWeeklyViewController: UIViewController {
 
+    @IBOutlet weak var lastPercent: HealthPercentView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
