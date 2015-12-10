@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-meizhikang/AFNetworking.framework"
+  install_framework "Pods-meizhikang/CocoaAsyncSocket.framework"
   install_framework "Pods-meizhikang/DZNEmptyDataSet.framework"
   install_framework "Pods-meizhikang/FSCalendar.framework"
   install_framework "Pods-meizhikang/IHKeyboardAvoiding.framework"
@@ -100,6 +101,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-meizhikang/AFNetworking.framework"
+  install_framework "Pods-meizhikang/CocoaAsyncSocket.framework"
   install_framework "Pods-meizhikang/DZNEmptyDataSet.framework"
   install_framework "Pods-meizhikang/FSCalendar.framework"
   install_framework "Pods-meizhikang/IHKeyboardAvoiding.framework"

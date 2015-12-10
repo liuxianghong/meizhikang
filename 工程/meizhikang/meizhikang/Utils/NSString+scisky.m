@@ -10,7 +10,10 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonKeyDerivation.h>
 #import "NSString+scisky.h"
-#define KeyStr @"@UTALIFE"
+#define KeyStr @"@1111111111111111"
+
+Byte aesKey[] = {0x37, 0x68, 0x99, 0x76, 0x13, 0x1b, 0x3c, 0xdd,0x19, 0x88, 0x7d, 0x1f,0xf3, 0xad, 0xde, 0x01,0x00};
+Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0xb3, 0x8c, 0x2b, 0xe1, 0x1f, 0xe9, 0xa3, 0x32, 0x4f, 0xe7, 0x66, 0x0a, 0x8b, 0x78, 0xc6, 0x75, 0x48, 0x35, 0x19, 0x9d, 0xfe};
 
 @implementation NSString (scisky)
 
@@ -57,43 +60,71 @@
     return ret;
 }
 
--(NSString *)AESEncrypt{
-    
-    NSString *encodeString = [NSString encodeToPercentEscapeString:self];
-    return [encodeString encryptWithDES];
+-(NSData *)AESEncrypt{
+    return [self encryptWithAES];
 }
 
-- (NSString *)encryptWithDES{
++(NSData *)AESDecrypt:(NSData *)data{
+    return [self decryptWithAES:data];
+}
+
+- (NSData *)encryptWithAES{
     
-    //NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    //NSData *data=[self dataUsingEncoding:enc];
-    size_t plainTextBufferSize = [data length];
-    CCCryptorStatus ccStatus;
-    uint8_t *bufferPtr = NULL;
-    size_t bufferPtrSize = 0;
-    size_t movedBytes = 0;
-    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
-    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
-    memset((void *)bufferPtr, 0x0, bufferPtrSize);
-    const void *vinitVec = (const void *) [KeyStr UTF8String];
     
-    ccStatus = CCCrypt(kCCEncrypt,
-                       kCCAlgorithmDES,
-                       kCCOptionPKCS7Padding ,
-                       [KeyStr UTF8String],
-                       kCCKeySizeDES,
-                       vinitVec,
-                       [data bytes],
-                       plainTextBufferSize,
-                       (void *)bufferPtr,
-                       bufferPtrSize,
-                       &movedBytes);
+    NSUInteger dataLength = [data length];
+    NSUInteger hexLength = 16 - dataLength%16;
+    dataLength = dataLength + hexLength;
+    char *context = malloc(dataLength);
+    bzero(context, dataLength);
+    memcpy(context, [data bytes], [data length]);
     
-    NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
-    free(bufferPtr);
-    //NSLog(@"%@",[[[myData description] formatData] decryptWithDES]);
-    return [[myData description] formatData];
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    
+    size_t numBytesCrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
+                                          kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding,
+                                          aesKey,
+                                          kCCBlockSizeAES128,
+                                          nil,
+                                          context,//[data bytes],
+                                          dataLength,
+                                          buffer,
+                                          bufferSize,
+                                          &numBytesCrypted);
+    if (cryptStatus == kCCSuccess) {
+        //return [NSData dataWithBytes:dd length:32];
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
+    }
+    free(buffer);
+    return nil;
+    
+}
+
++ (NSData *)decryptWithAES:(NSData *)data//解密
+{
+    char keyPtr[kCCKeySizeAES128+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    memcpy(keyPtr, KeyStr, 16);
+    NSUInteger dataLength = [data length];
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    size_t numBytesDecrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding ,
+                                          aesKey, kCCBlockSizeAES128,
+                                          nil,
+                                          [data bytes], dataLength,
+                                          buffer, bufferSize,
+                                          &numBytesDecrypted);
+    if (cryptStatus == kCCSuccess) {
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+        
+    }
+    free(buffer);
+    return nil;
 }
 
 - (NSString *)formatData{

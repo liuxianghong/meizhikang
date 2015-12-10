@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 
 @interface NSString (scisky)
--(NSString *)AESEncrypt;
+-(NSData *)AESEncrypt;
++(NSData *)AESDecrypt:(NSData *)data;
 - (BOOL)checkTel;
 + (BOOL)validateIDCardNumber:(NSString *)value;
 - (BOOL)isValidateEmail;

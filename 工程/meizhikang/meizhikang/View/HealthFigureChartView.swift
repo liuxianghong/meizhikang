@@ -72,6 +72,6 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         currentPoint = CGPoint(x: f-ff, y: 0)
         let tag = Int(currentPoint.x/30)
         print("\(tag)")
-        self .setContentOffset(currentPoint, animated: true)
+        self.setContentOffset(currentPoint, animated: true)
     }
 }

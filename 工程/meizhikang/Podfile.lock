@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - CocoaAsyncSocket (7.4.2)
   - DZNEmptyDataSet (1.7.2)
   - FSCalendar (1.7.0)
   - IHKeyboardAvoiding (2.5)
@@ -44,6 +45,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - CocoaAsyncSocket
   - DZNEmptyDataSet
   - FSCalendar (from `https://github.com/hxx0215/FSCalendar`, tag `1.7.0`)
   - IHKeyboardAvoiding
@@ -68,6 +70,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
   FSCalendar: ee727a0db4e915a606813ba9e87522ba59920b25
   IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c

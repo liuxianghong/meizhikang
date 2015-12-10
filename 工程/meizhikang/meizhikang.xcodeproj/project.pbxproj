@@ -316,6 +316,7 @@
 		D3EFFA2B1C182B8F0047E2B0 /* 黑-@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EFF9FB1C182B8F0047E2B0 /* 黑-@2x.png */; };
 		D3EFFA2C1C182B8F0047E2B0 /* 黑-@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EFF9FC1C182B8F0047E2B0 /* 黑-@3x.png */; };
 		D3EFFA2E1C1843330047E2B0 /* HealthFigureChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EFFA2D1C1843330047E2B0 /* HealthFigureChartView.swift */; };
+		D3EFFA371C186D7B0047E2B0 /* IMConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFFA361C186D7B0047E2B0 /* IMConnect.m */; };
 		D3F8E2B41C0C316600263B4E /* chover1.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2B21C0C316600263B4E /* chover1.png */; };
 		D3F8E2B51C0C316600263B4E /* chover2.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2B31C0C316600263B4E /* chover2.png */; };
 		D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8E2BA1C0C384300263B4E /* AboutViewController.swift */; };
@@ -660,6 +661,8 @@
 		D3EFF9FB1C182B8F0047E2B0 /* 黑-@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑-@2x.png"; sourceTree = "<group>"; };
 		D3EFF9FC1C182B8F0047E2B0 /* 黑-@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑-@3x.png"; sourceTree = "<group>"; };
 		D3EFFA2D1C1843330047E2B0 /* HealthFigureChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthFigureChartView.swift; sourceTree = "<group>"; };
+		D3EFFA351C186D7B0047E2B0 /* IMConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMConnect.h; sourceTree = "<group>"; };
+		D3EFFA361C186D7B0047E2B0 /* IMConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMConnect.m; sourceTree = "<group>"; };
 		D3F8E2B21C0C316600263B4E /* chover1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chover1.png; sourceTree = "<group>"; };
 		D3F8E2B31C0C316600263B4E /* chover2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chover2.png; sourceTree = "<group>"; };
 		D3F8E2BA1C0C384300263B4E /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -993,6 +996,8 @@
 			children = (
 				D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */,
 				D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */,
+				D3EFFA351C186D7B0047E2B0 /* IMConnect.h */,
+				D3EFFA361C186D7B0047E2B0 /* IMConnect.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1651,6 +1656,7 @@
 				D3F8E2C81C0C384300263B4E /* SwitchoverViewController.swift in Sources */,
 				D3EFF9C81C1820E30047E2B0 /* UIColor+greenbaby.m in Sources */,
 				D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */,
+				D3EFFA371C186D7B0047E2B0 /* IMConnect.m in Sources */,
 				B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */,
 				B96C98C41C11D45000228D21 /* HealthWeeklyViewController.swift in Sources */,
 				D39B89951C087AC1009086B2 /* AppDelegate.m in Sources */,

@@ -15,6 +15,7 @@ class MainViewController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        IMConnect.Instance().test()
     }
     
     override func viewDidAppear(animated: Bool) {

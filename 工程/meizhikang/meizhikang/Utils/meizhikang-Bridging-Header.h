@@ -5,3 +5,5 @@
 #import <FSCalendar/FSCalendar.h>
 #import <SWRevealViewController/SWRevealViewController.h>
 #import "UIColor+greenbaby.h"
+#import "NSString+scisky.h"
+#import "IMConnect.h"
