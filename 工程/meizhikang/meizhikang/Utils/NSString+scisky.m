@@ -13,7 +13,16 @@
 #define KeyStr @"@1111111111111111"
 
 Byte aesKey[] = {0x37, 0x68, 0x99, 0x76, 0x13, 0x1b, 0x3c, 0xdd,0x19, 0x88, 0x7d, 0x1f,0xf3, 0xad, 0xde, 0x01,0x00};
-Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0xb3, 0x8c, 0x2b, 0xe1, 0x1f, 0xe9, 0xa3, 0x32, 0x4f, 0xe7, 0x66, 0x0a, 0x8b, 0x78, 0xc6, 0x75, 0x48, 0x35, 0x19, 0x9d, 0xfe};
+//Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0xb3, 0x8c, 0x2b, 0xe1, 0x1f, 0xe9, 0xa3, 0x32, 0x4f, 0xe7, 0x66, 0x0a, 0x8b, 0x78, 0xc6, 0x75, 0x48, 0x35, 0x19, 0x9d, 0xfe};
+
+void oxr(Byte *d,Byte *s){
+    for (int i = 0; i<16; i++) {
+        int j = i % 4;
+        Byte n = s[j];
+        Byte m = aesKey[i];
+        d[i] = n^m;
+    }
+}
 
 @implementation NSString (scisky)
 
@@ -60,21 +69,30 @@ Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0
     return ret;
 }
 
+-(NSData *)AESAndXOREncrypt:(NSData *)token{
+    Byte key[16];
+    oxr(key, [token bytes]+4);
+    return [self encryptWithAESkey:key type:0];
+}
+
 -(NSData *)AESEncrypt{
-    return [self encryptWithAES];
+    return [self encryptWithAESkey:aesKey type:0];
 }
 
 +(NSData *)AESDecrypt:(NSData *)data{
     return [self decryptWithAES:data];
 }
 
-- (NSData *)encryptWithAES{
+- (NSData *)encryptWithAESkey:(Byte *)key type:(NSInteger)type{
     
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     
     NSUInteger dataLength = [data length];
-    NSUInteger hexLength = 16 - dataLength%16;
-    dataLength = dataLength + hexLength;
+    if (type == 0) {
+        NSUInteger hexLength = 16 - dataLength%16;
+        dataLength = dataLength + hexLength;
+    }
+    
     char *context = malloc(dataLength);
     bzero(context, dataLength);
     memcpy(context, [data bytes], [data length]);
@@ -86,7 +104,7 @@ Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0
     CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
                                           kCCAlgorithmAES128,
                                           kCCOptionPKCS7Padding,
-                                          aesKey,
+                                          key,
                                           kCCBlockSizeAES128,
                                           nil,
                                           context,//[data bytes],

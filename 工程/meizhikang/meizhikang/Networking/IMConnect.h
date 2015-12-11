@@ -7,8 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IMObject.h"
+
+@protocol IMConnectDelegate <NSObject>
+
+@end
 
 @interface IMConnect : NSObject
 +(instancetype)Instance;
+-(void)getToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
+
+-(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure;
+
 -(void)test;
 @end

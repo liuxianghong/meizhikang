@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -16,6 +17,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.userNameTextField.text = "12345671"
+        self.passWordTextField.text = "111111"
+        
+        IMConnect.Instance().test()
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +36,42 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginClick(sender : AnyObject) {
+        
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        if self.userNameTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入用户名"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        if self.passWordTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入密码"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        IMConnect.Instance().getToken(self.userNameTextField.text, completion: { (token : NSData!, time : Int32) -> Void in
+            print(token)
+            print(time)
+            IMConnect.Instance().login(self.passWordTextField.text, withToken: token, completion: { (ip : UInt32,port : UInt16) -> Void in
+                print(ip,port)
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+            
+            }) { (error : NSError!) -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain;
+                hud.hide(true, afterDelay: 1.5)
+                print(error)
+        }
+        
+    
+        
+        
         self.dismissViewControllerAnimated(true) { () -> Void in
             
         }

@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+void oxr(Byte *d,Byte *s);
+
 @interface NSString (scisky)
+-(NSData *)AESAndXOREncrypt:(NSData *)token;
 -(NSData *)AESEncrypt;
 +(NSData *)AESDecrypt:(NSData *)data;
 - (BOOL)checkTel;
