@@ -29,7 +29,11 @@ class HealthDailyViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func weeklyReportClicked(sender: UIButton) {
+    }
 
+    @IBAction func monthlyReportClicked(sender: UIButton) {
+    }
     /*
     // MARK: - Navigation
 
