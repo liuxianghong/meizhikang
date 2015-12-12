@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class RegistTableViewController: UITableViewController {
 
@@ -34,9 +35,113 @@ class RegistTableViewController: UITableViewController {
     }
 
     @IBAction func registClick(sender : AnyObject) {
-        self.dismissViewControllerAnimated(true) { () -> Void in
-            
+        
+        let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+        if !self.userNameTextField.text!.checkTel(){
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入正确的手机号"
+            hud.hide(true, afterDelay: 1.5)
+            return;
         }
+        if self.passWordTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入密码"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.passWordTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)>16{
+            hud.mode = .Text
+            hud.detailsLabelText = "密码长度最大16个字符"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.nickNameTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入昵称"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.nickNameTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)>16{
+            hud.mode = .Text
+            hud.detailsLabelText = "昵称长度最大16个字符"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.wightTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入体重"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let wight = UInt16(self.wightTextField.text!)
+        if wight<30 || wight>200{
+            hud.mode = .Text
+            hud.detailsLabelText = "体重应该在30kg-200kg"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        
+        if self.heightTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入身高"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let height = UInt8(self.heightTextField.text!)
+        if height<70 || height>250{
+            hud.mode = .Text
+            hud.detailsLabelText = "身高应该在70cm-250cm"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.ageTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入年龄"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let age = UInt8(self.ageTextField.text!)
+        if age<5 || age>100{
+            hud.mode = .Text
+            hud.detailsLabelText = "年龄应该在5岁-100岁"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let sex : UInt8 = self.sexManButton.selected ? 1 : 0
+        
+        IMConnect.Instance().getRegistToken(self.userNameTextField.text, completion: { (token : NSData!, time : Int32) -> Void in
+            print(token)
+            print(time)
+            IMConnect.Instance().registWithToken(token, withCode: "1234", withNickName: self.nickNameTextField.text, withPW: "123456", withSex: sex, withAge: age!, withHeiht: height!, withWight: wight!, completion: { () -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = "注册成功！";
+                hud.hide(true, afterDelay: 1.5)
+                self.dismissViewControllerAnimated(true) { () -> Void in
+                }
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+            
+            }) { (error : NSError!) -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain;
+                hud.hide(true, afterDelay: 1.5)
+                print(error)
+        }
+        
     }
     
     @IBAction func sexManClick(sender : UIButton) {

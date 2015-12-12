@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
+#define IMTIMEOUT 10
+
 @interface NetWorkingContents : NSObject
 +(NSString *)getReturnDescription:(NSInteger)code;
 @end

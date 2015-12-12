@@ -100,14 +100,42 @@
     } failure:^(NSError *error) {
         failure(error);
     }];
+    free(CommandStructure);
 }
 
 -(void)test{
-//    [self login:@"123456" withToken:nil completion:^(UInt32 ip, UInt16 port) {
-//        ;
-//    } failure:^(NSError *error) {
-//        ;
-//    }];
+    NSString *body = @"{\"type\":\"account\"}";
+    NSData *dat = [body dataUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger length = [dat length];
+    NSData *dd = [body AESEncrypt];
+    //NSUInteger length2 = [NSString AESDecrypt:dat];
+    UInt16 size = 12 + length;
+    char *CommandStructure = malloc(size);
+    UInt32 magic = 0xbebaedfe;
+    memcpy(CommandStructure, &magic, 4);
+    CommandStructure[0] = 0x1;
+    CommandStructure[1] = 0x0;
+    CommandStructure[6] = 0x1;
+    CommandStructure[7] = 0x1;
+    long tag = ++connectTag;
+    
+    memcpy(CommandStructure+8, &length, 4);
+    memcpy(CommandStructure+12, [dat bytes], length);
+    
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    NSLog(@"test: %@",data);
+    
+    
+    [self writeData:data tag:tag readHead:^long(long lenth) {
+        return 10;
+    } completion:^(NSData *data) {
+        UInt32 ip = 0;
+        UInt16 port = 0;
+        memcpy(&ip, [data bytes]+10, 4);
+        memcpy(&port, [data bytes]+14, 2);
+    } failure:^(NSError *error) {
+    }];
+    [asyncSocket writeData:dd withTimeout:-1 tag:4];
 }
 
 -(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure
@@ -148,6 +176,87 @@
     } failure:^(NSError *error) {
         failure(error);
     }];
+    free(CommandStructure);
+}
+
+
+-(void)getRegistToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
+    NSData *data2 = [userName AESEncrypt];
+    
+    UInt16 size = 14+[data2 length];
+    char *CommandStructure = malloc(size);
+    UInt32 magic = 0xbebaedfe;
+    memcpy(CommandStructure, &magic, 4);
+    CommandStructure[4] = 0x86;
+    CommandStructure[5] = 0x3;
+    long tag = ++connectTag;
+    memcpy(CommandStructure+6, &tag, 4);
+    NSUInteger length = 16;//0x10;
+    memcpy(CommandStructure+10, &length, 4);
+    memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
+    
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    [self writeData:data tag:tag readHead:^long(long lenth_) {
+        long ll = ((lenth_-8)/16+1)*16+8;
+        NSLog(@"长度 ：%ld,我的长度: %ld",lenth_,ll);
+        return ll;
+    } completion:^(NSData *data) {
+        NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
+        UInt16 time = 0;
+//        memcpy(&time, [data bytes]+18, 2);
+        completion(token,time);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    free(CommandStructure);
+}
+
+-(void)registWithToken:(NSData *)token withCode:(NSString *)code withNickName:(NSString *)nickName withPW:(NSString *)pw withSex:(UInt8)sex withAge:(UInt8)age withHeiht:(UInt8)height withWight:(UInt16)wight completion:(void (^)())completion failure:(IMObjectFailureHandler)failure{
+    
+    Byte body[8+16+16+1+1+2];
+    bzero(body, sizeof(body));
+    
+    NSData *codeData = [code dataUsingEncoding:NSUTF8StringEncoding];
+    memcpy(body, [codeData bytes], [codeData length]);
+    
+    NSData *nickNameData = [nickName dataUsingEncoding:NSUTF8StringEncoding];
+    memcpy(body+8, [nickNameData bytes], [nickNameData length]);
+    
+    NSData *pwData = [pw dataUsingEncoding:NSUTF8StringEncoding];
+    memcpy(body+8+16, [pwData bytes], [pwData length]);
+    
+    UInt8 sexAndAhe = (sex<<7) + age;
+    memcpy(body+8+16+16, &sexAndAhe, 1);
+    memcpy(body+8+16+16+1, &height, 1);
+    
+    memcpy(body+8+16+16+2, &wight, 2);
+    
+    NSData *bodyData = [NSData dataWithBytes:body length:sizeof(body)];
+    NSData *dataBody = [NSString AESAndXOREncrypt:token data:bodyData];
+    
+    UInt16 size = 14+[token length]+[dataBody length];
+    char *CommandStructure = malloc(size);
+    UInt32 magic = 0xbebaedfe;
+    memcpy(CommandStructure, &magic, 4);
+    CommandStructure[4] = 0x86;
+    CommandStructure[5] = 0x4;
+    long tag = ++connectTag;
+    memcpy(CommandStructure+6, &tag, 4);
+    NSUInteger length = sizeof(body) + 8;//0x10;
+    memcpy(CommandStructure+10, &length, 4);
+    memcpy(CommandStructure+14, [token bytes], [token length]);
+    memcpy(CommandStructure+14+8, [dataBody bytes], [dataBody length]);
+    
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    [self writeData:data tag:tag readHead:^long(long lenth) {
+        return 0;
+    } completion:^(NSData *data) {
+        completion();
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    free(CommandStructure);
+    
 }
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
@@ -156,19 +265,18 @@
     currentIM.readHead = readHead;
     currentIM.completion = completion;
     currentIM.failure = failure;
-    [asyncSocket writeData:data withTimeout:-1 tag:tag];
+    [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
     
 }
 
 -(void)listenHeadDataWithIMObject:(IMObject *)im{
     im.lenth = 10;
-    [asyncSocket readDataToLength:10 withTimeout:10 tag:im.tag];
+    [asyncSocket readDataToLength:10 withTimeout:IMTIMEOUT tag:im.tag];
 }
 
 -(void)listenData:(NSInteger)length WithIMObject:(IMObject *)im{
     im.lenth = length;
-    [asyncSocket readDataToLength:length withTimeout:10 tag:im.tag];
-    //[asyncSocket readDataToData:[NSData dataWithBytes:"\n" length:1] withTimeout:-1 tag:1];
+    [asyncSocket readDataToLength:length withTimeout:IMTIMEOUT tag:im.tag];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
