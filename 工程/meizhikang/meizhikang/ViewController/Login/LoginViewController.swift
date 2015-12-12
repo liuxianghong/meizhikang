@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.userNameTextField.text = "12345671"
-        self.passWordTextField.text = "111111"
+        self.passWordTextField.text = "123456"
         
         IMConnect.Instance().test()
     }
@@ -55,6 +55,9 @@ class LoginViewController: UIViewController {
             print(time)
             IMConnect.Instance().login(self.passWordTextField.text, withToken: token, completion: { (ip : UInt32,port : UInt16) -> Void in
                 print(ip,port)
+                self.dismissViewControllerAnimated(true) { () -> Void in
+                    
+                }
                 }, failure: { (error : NSError!) -> Void in
                     hud.mode = .Text
                     hud.detailsLabelText = error.domain;
@@ -69,12 +72,6 @@ class LoginViewController: UIViewController {
                 print(error)
         }
         
-    
-        
-        
-        self.dismissViewControllerAnimated(true) { () -> Void in
-            
-        }
     }
     
     @IBAction func pinGesClick(sender : AnyObject) {

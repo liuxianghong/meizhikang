@@ -255,6 +255,7 @@
 		D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */; };
 		D361576A1C097937009ED19D /* NSString+scisky.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157691C097937009ED19D /* NSString+scisky.m */; };
 		D361576D1C097B1D009ED19D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361576C1C097B1D009ED19D /* SwiftyJSON.swift */; };
+		D36978BF1C1C407A0094921B /* NetWorkingContents.m in Sources */ = {isa = PBXBuildFile; fileRef = D36978BE1C1C407A0094921B /* NetWorkingContents.m */; };
 		D3897DDF1C09934100D18BAC /* ViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = D3897DDE1C09934100D18BAC /* ViewController+menu.m */; };
 		D3897DE41C09945A00D18BAC /* 菜单-白@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DE31C09945A00D18BAC /* 菜单-白@2x.png */; };
 		D3897DEC1C09995800D18BAC /* 矩形.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DEB1C09995800D18BAC /* 矩形.png */; };
@@ -596,6 +597,8 @@
 		D36157681C097937009ED19D /* NSString+scisky.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+scisky.h"; sourceTree = "<group>"; };
 		D36157691C097937009ED19D /* NSString+scisky.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+scisky.m"; sourceTree = "<group>"; };
 		D361576C1C097B1D009ED19D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		D36978BD1C1C407A0094921B /* NetWorkingContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkingContents.h; sourceTree = "<group>"; };
+		D36978BE1C1C407A0094921B /* NetWorkingContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkingContents.m; sourceTree = "<group>"; };
 		D3897DDD1C09934100D18BAC /* ViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+menu.h"; sourceTree = "<group>"; };
 		D3897DDE1C09934100D18BAC /* ViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+menu.m"; sourceTree = "<group>"; };
 		D3897DE31C09945A00D18BAC /* 菜单-白@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单-白@2x.png"; sourceTree = "<group>"; };
@@ -1003,6 +1006,8 @@
 				D3EFFA361C186D7B0047E2B0 /* IMConnect.m */,
 				D3364BE61C1AE42E0055C75C /* IMObject.h */,
 				D3364BE71C1AE42E0055C75C /* IMObject.m */,
+				D36978BD1C1C407A0094921B /* NetWorkingContents.h */,
+				D36978BE1C1C407A0094921B /* NetWorkingContents.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1663,6 +1668,7 @@
 				D3F8E2C81C0C384300263B4E /* SwitchoverViewController.swift in Sources */,
 				D3EFF9C81C1820E30047E2B0 /* UIColor+greenbaby.m in Sources */,
 				D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */,
+				D36978BF1C1C407A0094921B /* NetWorkingContents.m in Sources */,
 				D3EFFA371C186D7B0047E2B0 /* IMConnect.m in Sources */,
 				B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */,
 				B96C98C41C11D45000228D21 /* HealthWeeklyViewController.swift in Sources */,

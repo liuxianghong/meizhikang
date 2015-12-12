@@ -15,10 +15,18 @@
 Byte aesKey[] = {0x37, 0x68, 0x99, 0x76, 0x13, 0x1b, 0x3c, 0xdd,0x19, 0x88, 0x7d, 0x1f,0xf3, 0xad, 0xde, 0x01,0x00};
 //Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0xb3, 0x8c, 0x2b, 0xe1, 0x1f, 0xe9, 0xa3, 0x32, 0x4f, 0xe7, 0x66, 0x0a, 0x8b, 0x78, 0xc6, 0x75, 0x48, 0x35, 0x19, 0x9d, 0xfe};
 
-void oxr(Byte *d,Byte *s){
+void oxr(Byte *d,const Byte *s){
     for (int i = 0; i<16; i++) {
         int j = i % 4;
         Byte n = s[j];
+        Byte m = aesKey[i];
+        d[i] = n^m;
+    }
+}
+
+void oxrMD5(Byte *d,const Byte *s){
+    for (int i = 0; i<16; i++) {
+        Byte n = s[i];
         Byte m = aesKey[i];
         d[i] = n^m;
     }
@@ -69,23 +77,23 @@ void oxr(Byte *d,Byte *s){
     return ret;
 }
 
--(NSData *)AESAndXOREncrypt:(NSData *)token{
++(NSData *)AESAndXOREncrypt:(NSData *)token data:(NSData *)data{
     Byte key[16];
     oxr(key, [token bytes]+4);
-    return [self encryptWithAESkey:key type:0];
+//    NSData *data = [NSData dataWithBytes:key length:16];
+//    NSLog(@"新key %@",data);
+    return [NSString encryptWithAESkey:key type:1 data:data];
 }
 
 -(NSData *)AESEncrypt{
-    return [self encryptWithAESkey:aesKey type:0];
+    return [NSString encryptWithAESkey:aesKey type:0 data:[self dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 +(NSData *)AESDecrypt:(NSData *)data{
     return [self decryptWithAES:data];
 }
 
-- (NSData *)encryptWithAESkey:(Byte *)key type:(NSInteger)type{
-    
-    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
++ (NSData *)encryptWithAESkey:(Byte *)key type:(NSInteger)type data:(NSData *)data{
     
     NSUInteger dataLength = [data length];
     if (type == 0) {
@@ -143,6 +151,25 @@ void oxr(Byte *d,Byte *s){
     }
     free(buffer);
     return nil;
+}
+
+- (NSData *) dataFromMD5{
+    
+    if(self == nil || [self length] == 0)
+        return nil;
+    
+    const char *value = [self UTF8String];
+    
+    unsigned char outputBuffer[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(value, (CC_LONG)strlen(value), outputBuffer);
+    
+    return [NSData dataWithBytes:outputBuffer length:CC_MD5_DIGEST_LENGTH];
+//    NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+//    for(NSInteger count = 0; count < CC_MD5_DIGEST_LENGTH; count++){
+//        [outputString appendFormat:@"%02x",outputBuffer[count]];
+//    }
+//    
+//    return outputString;
 }
 
 - (NSString *)formatData{

@@ -46,7 +46,7 @@
     self = [super init];
 //    udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     //connectDic = [[NSMutableDictionary alloc] init];
-    //[self setudpSocket];
+    [self setudpSocket];
     return self;
 }
 
@@ -58,7 +58,7 @@
     }
     else
     {
-        [asyncSocket disconnect];
+        //[asyncSocket disconnect];
     }
     
     NSString *host = IMIP;
@@ -85,19 +85,14 @@
     CommandStructure[5] = 0x1;
     long tag = ++connectTag;
     memcpy(CommandStructure+6, &tag, 4);
-    NSUInteger length = [data2 length];//0x10;
+    NSUInteger length = 16;//0x10;
     memcpy(CommandStructure+10, &length, 4);
     memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
     
-    
-//    data2 = [NSString AESDecrypt:data2];
-//    NSLog(@"%@",data2.description);
-//    NSString *ss = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
-//    NSLog(@"%@",ss);
-    
-    
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    [self writeData:data tag:tag completion:^(NSData *data) {
+    [self writeData:data tag:tag readHead:^long(long lenth) {
+        return 8+16;
+    } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
         UInt16 time = 0;
         memcpy(&time, [data bytes]+18, 2);
@@ -105,35 +100,28 @@
     } failure:^(NSError *error) {
         failure(error);
     }];
-    free(CommandStructure);
 }
 
 -(void)test{
-    [self login:@"111111" withToken:nil completion:^(UInt32 ip, UInt16 port) {
-        ;
-    } failure:^(NSError *error) {
-        ;
-    }];
+//    [self login:@"123456" withToken:nil completion:^(UInt32 ip, UInt16 port) {
+//        ;
+//    } failure:^(NSError *error) {
+//        ;
+//    }];
 }
 
 -(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure
 {
-    Byte BB[] = {0xeb, 0xea, 0xa7, 0x96, 0x98, 0x79, 0x1a, 0xa9, 0xaa, 0x17, 0xed, 0x96, 0x44,0xce, 0x5f, 0x0e, 0x06, 0xc0, 0xef, 0xd2, 0x32, 0x92, 0x82, 0xe8, 0xc9, 0x3a, 0xcb, 0x28, 0xdc, 0x15, 0xfe, 0xaa};
-    Byte dd[] = {0x1f, 0x00, 0x00, 0x00, 0xf9, 0x71, 0x19, 0x0f};
+    NSLog(@"token %@",token);
+    NSData *pwData = [pw dataFromMD5];
+    Byte md5pw[16];
+    oxrMD5(md5pw, [pwData bytes]);
+    NSData *pwDataf = [NSData dataWithBytes:md5pw length:16];
+    NSData *data2 = [NSString AESAndXOREncrypt:token data:pwDataf];
+    NSLog(@"密码 %@",pwDataf);
+    NSLog(@"密码加密 %@",data2);
     
-    
-    Byte i = 0x37^0xf9;
-    Byte j = 0x68^0x71;
-    Byte k = 0x99^0x19;
-    Byte n = 0x76^0x0f;
-    Byte m = 0x13^0x1f;
-    
-    token = [NSData dataWithBytes:dd length:8];
-    NSData *data2 = [pw AESAndXOREncrypt:token];
-    NSLog(@"data2 %@",data2);
-    
-    
-    UInt16 size = 14+8+[data2 length];
+    UInt16 size = 14+8+16;
     char *CommandStructure = malloc(size);
     UInt32 magic = 0xbebaedfe;
     memcpy(CommandStructure, &magic, 4);
@@ -141,15 +129,17 @@
     CommandStructure[5] = 0x2;
     long tag = ++connectTag;
     memcpy(CommandStructure+6, &tag, 4);
-    NSUInteger length = 8+16;//0x10;
+    NSUInteger length = 8+[pw length];
     memcpy(CommandStructure+10, &length, 4);
     memcpy(CommandStructure+14, [token bytes], [token length]);
     memcpy(CommandStructure+14 + [token length], [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    NSLog(@"data %@",data);
+    NSLog(@"密码鉴权请求总体 %@",data);
     
-    [self writeData:data tag:tag completion:^(NSData *data) {
+    [self writeData:data tag:tag readHead:^long(long lenth) {
+        return 0;
+    } completion:^(NSData *data) {
         UInt32 ip = 0;
         UInt16 port = 0;
         memcpy(&ip, [data bytes]+10, 4);
@@ -158,12 +148,12 @@
     } failure:^(NSError *error) {
         failure(error);
     }];
-    free(CommandStructure);
 }
 
--(void)writeData:(NSData *)data tag:(long)tag completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
-    [self setudpSocket];
+-(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
+    //[self setudpSocket];
     currentIM = [[IMObject alloc]initWithTag:tag];
+    currentIM.readHead = readHead;
     currentIM.completion = completion;
     currentIM.failure = failure;
     [asyncSocket writeData:data withTimeout:-1 tag:tag];
@@ -217,15 +207,20 @@
         memcpy(&code, [data bytes]+1, 1);
         if (code != 200) {
             currentIM.finished = YES;
-            im.failure([NSError errorWithDomain:@"return code error" code:code userInfo:nil]);
+            im.failure([NSError errorWithDomain:[NetWorkingContents getReturnDescription:code] code:code userInfo:nil]);
             return;
+        }
+        else{
+            length = currentIM.readHead(length);
         }
         if (length == 0) {
             currentIM.finished = YES;
             im.completion(im.data);
         }
         else
+        {
             [self listenData:length WithIMObject:im];
+        }
     }
     else
     {

@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NetWorkingContents.h"
 
 typedef void (^IMObjectTokenCompletionHandler)(NSData *token,int time);
 typedef void (^IMObjectCompletionHandler)(NSData *data);
+typedef long (^IMObjectReadHeadHandler)(long lenth);
 typedef void (^IMObjectFailureHandler)(NSError *error);
 typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 
@@ -18,6 +20,7 @@ typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 @property (nonatomic,assign) BOOL finished;
 @property (nonatomic,assign) long tag;
 @property (nonatomic,assign) long lenth;
+@property (nonatomic,copy) IMObjectReadHeadHandler readHead;
 @property (nonatomic,copy) IMObjectCompletionHandler completion;
 @property (nonatomic,copy) IMObjectFailureHandler failure;
 -(instancetype)initWithTag:(long) tag;
