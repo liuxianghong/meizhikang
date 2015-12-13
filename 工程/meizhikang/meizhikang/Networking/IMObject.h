@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "NetWorkingContents.h"
 
-typedef void (^IMObjectTokenCompletionHandler)(NSData *token,int time);
+
 typedef void (^IMObjectCompletionHandler)(NSData *data);
 typedef long (^IMObjectReadHeadHandler)(long lenth);
 typedef void (^IMObjectFailureHandler)(NSError *error);
-typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
+
 
 @interface IMObject : NSObject
 @property (nonatomic,strong) NSMutableData *data;

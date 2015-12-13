@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
         self.userNameTextField.text = "12345671"
         self.passWordTextField.text = "123456"
         
+        //IMConnect.Instance().test()
     }
 
     override func didReceiveMemoryWarning() {
