@@ -20,4 +20,5 @@
 -(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure;
 
 -(void)test;
+- (void)portTest;
 @end
