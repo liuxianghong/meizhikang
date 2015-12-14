@@ -3481,11 +3481,29 @@
                         <outlet property="typeImageView1" destination="cpi-nZ-kN4" id="sQB-bt-EgW"/>
                         <outlet property="typeImageView2" destination="V9t-06-jKn" id="kEi-qt-vbC"/>
                         <outlet property="typeImageView3" destination="vMS-ow-VRu" id="TxZ-xs-gkR"/>
+                        <segue destination="X2g-fz-UnX" kind="show" identifier="ChatSegueIdentifier" id="rry-aH-0KC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4RL-we-UUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4789.5" y="2067.75"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="ycM-Bk-wdJ">
+            <objects>
+                <viewController id="X2g-fz-UnX" customClass="ChatViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SOM-d3-JiD"/>
+                        <viewControllerLayoutGuide type="bottom" id="7EH-eM-emc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dSy-ij-xCf">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jb1-N9-weM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5511" y="2084.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aAx-Yn-mQv">
