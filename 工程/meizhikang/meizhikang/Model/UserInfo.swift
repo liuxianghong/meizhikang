@@ -10,18 +10,19 @@ import UIKit
 
 class UserInfo: NSObject {
     static func uid()->String?{
-        guard let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as? [String : AnyObject],
-            let uid = userInfo["uid"] as? Int
+        if let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as? [String : AnyObject],let uid = userInfo["uid"] as? Int{
+            return String(uid)
+        }
         else{
             return nil
         }
-        return String(uid)
     }
     static func nickname()->String?{
-        guard let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as? [String : AnyObject] else{
+        if let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as? [String : AnyObject] {
+            return userInfo["nickname"] as? String
+        }else{
             return nil
         }
-        return userInfo["nickname"] as? String
     }
 
 }
