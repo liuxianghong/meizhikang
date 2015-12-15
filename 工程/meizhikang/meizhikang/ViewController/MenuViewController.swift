@@ -19,6 +19,8 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     let viewArray = ["sw_BLUEDIAODIAO","sw_front","sw_analysis","sw_ble","sw_friend","sw_setting"]
     var stopAnimation = false
     
+    var userName = "BLUEDIAODIAO"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +37,10 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.viewWillAppear(animated)
         self.stopAnimation = false
         self.doHideImage()
+        let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as! NSDictionary
+        if userInfo.count>0{
+            userName = userInfo["nickname"] as! String
+        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -92,7 +98,12 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let title = tableViewArray[indexPath.row] 
         cell.iconImage.image = UIImage(named: "\(title)-绿")
         cell.iconImage.highlightedImage = UIImage(named: "\(title)")
-        cell.titleLabel.text = title
+        if indexPath.row == 0{
+            cell.titleLabel.text = userName
+        }
+        else{
+            cell.titleLabel.text = title
+        }
     
         return cell
     }

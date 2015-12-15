@@ -50,13 +50,29 @@ class LoginViewController: UIViewController {
             hud.hide(true, afterDelay: 1.5)
             return;
         }
+        
+        hud.detailsLabelText = "正在登录";
         IMConnect.Instance().getToken(self.userNameTextField.text, completion: { (token : NSData!, time : Int32) -> Void in
             print(token)
             print(time)
             IMConnect.Instance().login(self.passWordTextField.text, withToken: token, completion: { (ip : UInt32,port : UInt16) -> Void in
                 print(ip,port)
-                self.dismissViewControllerAnimated(true) { () -> Void in
-                }
+                hud.detailsLabelText = "登录成功，正在获取用户信息";
+                let dic : NSDictionary = ["type": "account"]
+                IMConnect.Instance().getUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
+                    print(object)
+                    NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                    self.dismissViewControllerAnimated(true) { () -> Void in
+                    }
+                    hud.hide(true)
+                    
+                    }, failure: { (error : NSError!) -> Void in
+                        hud.mode = .Text
+                        hud.detailsLabelText = error.domain;
+                        hud.hide(true, afterDelay: 1.5)
+                        print(error)
+                })
+                
                 }, failure: { (error : NSError!) -> Void in
                     hud.mode = .Text
                     hud.detailsLabelText = error.domain;

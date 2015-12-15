@@ -10,14 +10,16 @@
 #import <UIKit/UIKit.h>
 
 void oxr(Byte *d,const Byte *s);
-
 void oxrMD5(Byte *d,const Byte *s);
+void oxrPWToken(Byte *d,const Byte *p,const Byte *t);
 
 @interface NSString (scisky)
 +(NSData *)AESAndXOREncrypt:(NSData *)token data:(NSData *)data;
 -(NSData *) dataFromMD5;
 -(NSData *)AESEncrypt;
 +(NSData *)AESDecrypt:(NSData *)data;
++(NSData *)encryptWithAESkey:(Byte *)key type:(NSInteger)type data:(NSData *)data;
++ (NSData *)decryptWithAES:(NSData *)data withKey:(const void *)key;
 - (BOOL)checkTel;
 + (BOOL)validateIDCardNumber:(NSString *)value;
 - (BOOL)isValidateEmail;

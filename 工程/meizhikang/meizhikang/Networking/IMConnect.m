@@ -11,6 +11,7 @@
 #import "NSString+scisky.h"
 #import "GCDAsyncSocket.h"
 #import "IMObject.h"
+#import "JSONKit.h"
 
 //IM系统地址182.150.44.21，端口9527
 //数据上传系统鉴权地址182.150.44.21，端口9529
@@ -29,6 +30,11 @@
     long connectTag;
     
     IMObject *currentIM;
+    
+    NSData *tokenIMConnect;
+    NSData *passWordIMConnect;
+    
+    Byte key[16];
 }
 
 +(instancetype)Instance
@@ -103,51 +109,53 @@
     free(CommandStructure);
 }
 
--(void)test{
-    NSString *body = @"{\"type\":\"account\"}";
+-(NSData *)getTextBody:(NSString *)body{
     NSData *dat = [body dataUsingEncoding:NSUTF8StringEncoding];
     NSUInteger length = [dat length];
-    NSData *dd = [body AESEncrypt];
-    //NSUInteger length2 = [NSString AESDecrypt:dat];
     UInt16 size = 12 + length;
     char *CommandStructure = malloc(size);
-    UInt32 magic = 0xbebaedfe;
-    memcpy(CommandStructure, &magic, 4);
+    bzero(CommandStructure, size);
     CommandStructure[0] = 0x1;
     CommandStructure[1] = 0x0;
     CommandStructure[6] = 0x1;
     CommandStructure[7] = 0x1;
-    long tag = ++connectTag;
-    
     memcpy(CommandStructure+8, &length, 4);
     memcpy(CommandStructure+12, [dat bytes], length);
-    
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    NSLog(@"test: %@",data);
+    return data;
+}
+
++ (NSData *)dataFromHexString:(NSString *)hexString { //
     
+    char *myBuffer = (char *)malloc((int)[hexString length] / 2 + 1);
+    bzero(myBuffer, [hexString length] / 2 + 1);
+    for (int i = 0; i < [hexString length] - 1; i += 2) {
+        unsigned int anInt;
+        NSString * hexCharStr = [hexString substringWithRange:NSMakeRange(i, 2)];
+        NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
+        [scanner scanHexInt:&anInt];
+        myBuffer[i / 2] = (char)anInt;
+    }
+    NSData *unicodeString = [NSData dataWithBytes:myBuffer length:[hexString length] / 2 + 1];
+    return unicodeString;
+}
+
+-(void)test:(NSData *)token{
     
-    [self writeData:data tag:tag readHead:^long(long lenth) {
-        return 10;
-    } completion:^(NSData *data) {
-        UInt32 ip = 0;
-        UInt16 port = 0;
-        memcpy(&ip, [data bytes]+10, 4);
-        memcpy(&port, [data bytes]+14, 2);
-    } failure:^(NSError *error) {
-    }];
-    [asyncSocket writeData:dd withTimeout:-1 tag:4];
+    long tag = ++connectTag;
+    
+   
 }
 
 -(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure
 {
-    NSLog(@"token %@",token);
     NSData *pwData = [pw dataFromMD5];
     Byte md5pw[16];
     oxrMD5(md5pw, [pwData bytes]);
     NSData *pwDataf = [NSData dataWithBytes:md5pw length:16];
-    NSData *data2 = [NSString AESAndXOREncrypt:token data:pwDataf];
-    NSLog(@"密码 %@",pwDataf);
-    NSLog(@"密码加密 %@",data2);
+    tokenIMConnect = token;
+    passWordIMConnect = pwDataf;
+    NSData *data2 = [NSString AESAndXOREncrypt:token data:passWordIMConnect];
     
     UInt16 size = 14+8+16;
     char *CommandStructure = malloc(size);
@@ -163,7 +171,6 @@
     memcpy(CommandStructure+14 + [token length], [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    NSLog(@"密码鉴权请求总体 %@",data);
     
     [self writeData:data tag:tag readHead:^long(long lenth) {
         return 0;
@@ -172,7 +179,9 @@
         UInt16 port = 0;
         memcpy(&ip, [data bytes]+10, 4);
         memcpy(&port, [data bytes]+14, 2);
+        
         completion(ip,port);
+        
     } failure:^(NSError *error) {
         failure(error);
     }];
@@ -222,8 +231,14 @@
     NSData *nickNameData = [nickName dataUsingEncoding:NSUTF8StringEncoding];
     memcpy(body+8, [nickNameData bytes], [nickNameData length]);
     
-    NSData *pwData = [pw dataUsingEncoding:NSUTF8StringEncoding];
-    memcpy(body+8+16, [pwData bytes], [pwData length]);
+    NSData *pwData = [pw dataFromMD5];
+    Byte md5pw[16];
+    oxrMD5(md5pw, [pwData bytes]);
+    NSData *pwDataf = [NSData dataWithBytes:md5pw length:16];
+    tokenIMConnect = token;
+    passWordIMConnect = pwDataf;
+    NSLog(@"密码 %@",passWordIMConnect);
+    memcpy(body+8+16, [passWordIMConnect bytes], [passWordIMConnect length]);
     
     UInt8 sexAndAhe = (sex<<7) + age;
     memcpy(body+8+16+16, &sexAndAhe, 1);
@@ -251,12 +266,52 @@
     [self writeData:data tag:tag readHead:^long(long lenth) {
         return 0;
     } completion:^(NSData *data) {
+        
         completion();
     } failure:^(NSError *error) {
         failure(error);
     }];
     free(CommandStructure);
     
+}
+
+-(void)getUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    
+    long tag = ++connectTag;
+    
+    NSData *body = [self getTextBody:[dic JSONString]];
+    NSUInteger length = [body length];
+    
+    
+    oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);
+    
+    NSData *eBady = [NSString encryptWithAESkey:key type:1 data:body];
+    UInt16 size = 14+8+[eBady length];
+    char *CommandStructure = malloc(size);
+    UInt32 magic = 0xbebaedfe;
+    memcpy(CommandStructure, &magic, 4);
+    CommandStructure[4] = 0x87;
+    CommandStructure[5] = 0x1;
+    memcpy(CommandStructure+6, &tag, 4);
+    memcpy(CommandStructure+10, [tokenIMConnect bytes], 8);
+    memcpy(CommandStructure+10+8, &length, 4);
+    memcpy(CommandStructure+14 + 8, [eBady bytes], [eBady length]);
+    
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    
+    
+    [self writeData:data tag:tag readHead:^long(long _lenth) {
+        return (_lenth/16+1)*16;
+    } completion:^(NSData *data) {
+        NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
+        NSData *data2 = [NSString decryptWithAES:dddd withKey:key];
+        NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
+        id object = [dddd2 objectFromJSONData];
+        completion(object);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    free(CommandStructure);
 }
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{

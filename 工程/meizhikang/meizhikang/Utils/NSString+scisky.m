@@ -16,18 +16,22 @@ Byte aesKey[] = {0x37, 0x68, 0x99, 0x76, 0x13, 0x1b, 0x3c, 0xdd,0x19, 0x88, 0x7d
 //Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0xb3, 0x8c, 0x2b, 0xe1, 0x1f, 0xe9, 0xa3, 0x32, 0x4f, 0xe7, 0x66, 0x0a, 0x8b, 0x78, 0xc6, 0x75, 0x48, 0x35, 0x19, 0x9d, 0xfe};
 
 void oxr(Byte *d,const Byte *s){
-    for (int i = 0; i<16; i++) {
-        int j = i % 4;
-        Byte n = s[j];
-        Byte m = aesKey[i];
-        d[i] = n^m;
-    }
+    oxrPWToken(d,s,aesKey);
 }
 
 void oxrMD5(Byte *d,const Byte *s){
     for (int i = 0; i<16; i++) {
         Byte n = s[i];
         Byte m = aesKey[i];
+        d[i] = n^m;
+    }
+}
+
+void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
+    for (int i = 0; i<16; i++) {
+        int j = i % 4;
+        Byte n = t[j];
+        Byte m = p[i];
         d[i] = n^m;
     }
 }
@@ -90,7 +94,7 @@ void oxrMD5(Byte *d,const Byte *s){
 }
 
 +(NSData *)AESDecrypt:(NSData *)data{
-    return [self decryptWithAES:data];
+    return [self decryptWithAES:data withKey:aesKey];
 }
 
 + (NSData *)encryptWithAESkey:(Byte *)key type:(NSInteger)type data:(NSData *)data{
@@ -129,18 +133,18 @@ void oxrMD5(Byte *d,const Byte *s){
     
 }
 
-+ (NSData *)decryptWithAES:(NSData *)data//解密
++ (NSData *)decryptWithAES:(NSData *)data withKey:(const void *)key//解密
 {
     char keyPtr[kCCKeySizeAES128+1];
     bzero(keyPtr, sizeof(keyPtr));
-    memcpy(keyPtr, KeyStr, 16);
+    memcpy(keyPtr, key, 16);
     NSUInteger dataLength = [data length];
     size_t bufferSize = dataLength + kCCBlockSizeAES128;
     void *buffer = malloc(bufferSize);
     size_t numBytesDecrypted = 0;
     CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
                                           kCCOptionPKCS7Padding ,
-                                          aesKey, kCCBlockSizeAES128,
+                                          keyPtr, kCCBlockSizeAES128,
                                           nil,
                                           [data bytes], dataLength,
                                           buffer, bufferSize,
