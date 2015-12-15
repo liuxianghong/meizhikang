@@ -60,12 +60,11 @@ class LoginViewController: UIViewController {
                 hud.detailsLabelText = "登录成功，正在获取用户信息";
                 let dic : NSDictionary = ["type": "account"]
                 IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
+                    hud.hide(true)
                     print(object)
                     NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
                     self.dismissViewControllerAnimated(true) { () -> Void in
                     }
-                    hud.hide(true)
-                    
                     }, failure: { (error : NSError!) -> Void in
                         hud.mode = .Text
                         hud.detailsLabelText = error.domain;
