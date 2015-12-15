@@ -162,7 +162,18 @@ class FriendListTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == FriendListTableViewControllerConstant.chatSegueIdentifier{
+            guard let vc = segue.destinationViewController as? ChatViewController,
+                let sendId = UserInfo.uid(),
+                let nickname = UserInfo.nickname()
+            else{
+                return
+            }
+            vc.senderId = sendId
+            vc.senderDisplayName = nickname
+            vc.currentAvatar = UIImage(named: "联系人-蓝.png")
             // TODO: pass the friend or group to me
+            vc.receiverId = "00000000"
+            vc.receiverName = "请使用数据源的名字"
         }
     }
 
