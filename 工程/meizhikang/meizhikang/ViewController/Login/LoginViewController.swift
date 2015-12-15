@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
                 print(ip,port)
                 hud.detailsLabelText = "登录成功，正在获取用户信息";
                 let dic : NSDictionary = ["type": "account"]
-                IMConnect.Instance().getUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
+                IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
                     print(object)
                     NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
                     self.dismissViewControllerAnimated(true) { () -> Void in

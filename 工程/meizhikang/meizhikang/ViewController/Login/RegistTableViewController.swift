@@ -124,10 +124,22 @@ class RegistTableViewController: UITableViewController {
             print(time)
             IMConnect.Instance().registWithToken(token, withCode: "1234", withNickName: self.nickNameTextField.text, withPW: "123456", withSex: sex, withAge: age!, withHeiht: height!, withWight: wight!, completion: { () -> Void in
                 hud.mode = .Text
-                hud.detailsLabelText = "注册成功！";
-                hud.hide(true, afterDelay: 1.5)
-                self.dismissViewControllerAnimated(true) { () -> Void in
-                }
+                hud.detailsLabelText = "注册成功，正在获取用户信息";
+                let dic : NSDictionary = ["type": "account"]
+                IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
+                    print(object)
+                    NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                    self.dismissViewControllerAnimated(true) { () -> Void in
+                    }
+                    hud.hide(true)
+                    
+                    }, failure: { (error : NSError!) -> Void in
+                        hud.mode = .Text
+                        hud.detailsLabelText = error.domain;
+                        hud.hide(true, afterDelay: 1.5)
+                        print(error)
+                })
+                
                 }, failure: { (error : NSError!) -> Void in
                     hud.mode = .Text
                     hud.detailsLabelText = error.domain;

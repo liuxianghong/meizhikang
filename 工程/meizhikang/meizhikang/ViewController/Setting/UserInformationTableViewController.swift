@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class UserInformationTableViewController: UITableViewController {
 
@@ -44,9 +45,93 @@ class UserInformationTableViewController: UITableViewController {
     }
     
     @IBAction func okClick(sender : AnyObject) {
-        self.dismissViewControllerAnimated(true) { () -> Void in
-            
+        let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+        
+        if self.nickNameTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入昵称"
+            hud.hide(true, afterDelay: 1.5)
+            return;
         }
+        
+        if self.nickNameTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)>16{
+            hud.mode = .Text
+            hud.detailsLabelText = "昵称长度最大16个字符"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.wightTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入体重"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let wight = UInt16(self.wightTextField.text!)
+        if wight<30 || wight>200{
+            hud.mode = .Text
+            hud.detailsLabelText = "体重应该在30kg-200kg"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        
+        if self.heightTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入身高"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let height = UInt8(self.heightTextField.text!)
+        if height<70 || height>250{
+            hud.mode = .Text
+            hud.detailsLabelText = "身高应该在70cm-250cm"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.ageTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入年龄"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let age = UInt8(self.ageTextField.text!)
+        if age<5 || age>100{
+            hud.mode = .Text
+            hud.detailsLabelText = "年龄应该在5岁-100岁"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as! NSDictionary
+        
+        //let dic : NSDictionary = ["type":"modify_account","uid ":userInfo["uid"]!,"nickname":"234","height":175,"weight":650.5,"old":19,"sex":1]
+        let dic : NSDictionary = ["type":"modify_account","uid ":userInfo["uid"]!,"nickname":self.nickNameTextField.text!,"height": Int(self.heightTextField.text!)!,"weight":Int(self.wightTextField.text!)!,"old":Int(self.ageTextField.text!)!,"sex": self.sexManButton.selected ? 0 : 1]
+        
+        IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
+            print(object)
+            let flag = object["flag"] as! Int
+            if flag == 1{
+                hud.detailsLabelText = "修改成功"
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+            else{
+                hud.detailsLabelText = "修改失败"
+            }
+            hud.mode = .Text
+            hud.hide(true, afterDelay: 1.5)
+            
+            }, failure: { (error : NSError!) -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain;
+                hud.hide(true, afterDelay: 1.5)
+                print(error)
+        })
+        
     }
     
     @IBAction func sexManClick(sender : UIButton) {

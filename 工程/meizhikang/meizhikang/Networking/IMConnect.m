@@ -77,6 +77,24 @@
 
 }
 
+-(void)setsenderHead:(Byte *)CommandStructure cmd:(Byte)cmd type:(Byte)type length:(NSUInteger)length tag:(long)tag{
+    UInt32 magic = 0xbebaedfe;
+    memcpy(CommandStructure, &magic, 4);
+    CommandStructure[4] = cmd;
+    CommandStructure[5] = type;
+    memcpy(CommandStructure+6, &tag, 4);
+    memcpy(CommandStructure+10, &length, 4);
+}
+
+-(void)setsenderHead:(Byte *)CommandStructure cmd:(Byte)cmd type:(Byte)type length:(NSUInteger)length tag:(long)tag token:(NSData *)token{
+    UInt32 magic = 0xbebaedfe;
+    memcpy(CommandStructure, &magic, 4);
+    CommandStructure[4] = cmd;
+    CommandStructure[5] = type;
+    memcpy(CommandStructure+6, &tag, 4);
+    memcpy(CommandStructure+10, [token bytes], 8);
+    memcpy(CommandStructure+10+8, &length, 4);
+}
 
 
 -(void)getToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure
@@ -84,15 +102,12 @@
     NSData *data2 = [userName AESEncrypt];
     
     UInt16 size = 14+[data2 length];
-    char *CommandStructure = malloc(size);
-    UInt32 magic = 0xbebaedfe;
-    memcpy(CommandStructure, &magic, 4);
-    CommandStructure[4] = 0x86;
-    CommandStructure[5] = 0x1;
     long tag = ++connectTag;
-    memcpy(CommandStructure+6, &tag, 4);
-    NSUInteger length = 16;//0x10;
-    memcpy(CommandStructure+10, &length, 4);
+    NSUInteger length = 16;
+    
+    Byte *CommandStructure = malloc(size);
+    [self setsenderHead:CommandStructure cmd:0x86 type:0x1 length:length tag:tag];
+
     memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
@@ -110,6 +125,7 @@
 }
 
 -(NSData *)getTextBody:(NSString *)body{
+    NSLog(@"%@",body);
     NSData *dat = [body dataUsingEncoding:NSUTF8StringEncoding];
     NSUInteger length = [dat length];
     UInt16 size = 12 + length;
@@ -180,15 +196,11 @@
     NSData *data2 = [NSString AESAndXOREncrypt:token data:passWordIMConnect];
     
     UInt16 size = 14+8+16;
-    char *CommandStructure = malloc(size);
-    UInt32 magic = 0xbebaedfe;
-    memcpy(CommandStructure, &magic, 4);
-    CommandStructure[4] = 0x86;
-    CommandStructure[5] = 0x2;
     long tag = ++connectTag;
-    memcpy(CommandStructure+6, &tag, 4);
     NSUInteger length = 8+[pw length];
-    memcpy(CommandStructure+10, &length, 4);
+    Byte *CommandStructure = malloc(size);
+    
+    [self setsenderHead:CommandStructure cmd:0x86 type:0x2 length:length tag:tag];
     memcpy(CommandStructure+14, [token bytes], [token length]);
     memcpy(CommandStructure+14 + [token length], [data2 bytes], [data2 length]);
     
@@ -215,15 +227,11 @@
     NSData *data2 = [userName AESEncrypt];
     
     UInt16 size = 14+[data2 length];
-    char *CommandStructure = malloc(size);
-    UInt32 magic = 0xbebaedfe;
-    memcpy(CommandStructure, &magic, 4);
-    CommandStructure[4] = 0x86;
-    CommandStructure[5] = 0x3;
     long tag = ++connectTag;
-    memcpy(CommandStructure+6, &tag, 4);
     NSUInteger length = 16;//0x10;
-    memcpy(CommandStructure+10, &length, 4);
+    Byte *CommandStructure = malloc(size);
+    [self setsenderHead:CommandStructure cmd:0x86 type:0x3 length:length tag:tag];
+    
     memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
@@ -272,15 +280,11 @@
     NSData *dataBody = [NSString AESAndXOREncrypt:token data:bodyData];
     
     UInt16 size = 14+[token length]+[dataBody length];
-    char *CommandStructure = malloc(size);
-    UInt32 magic = 0xbebaedfe;
-    memcpy(CommandStructure, &magic, 4);
-    CommandStructure[4] = 0x86;
-    CommandStructure[5] = 0x4;
     long tag = ++connectTag;
-    memcpy(CommandStructure+6, &tag, 4);
     NSUInteger length = sizeof(body) + 8;//0x10;
-    memcpy(CommandStructure+10, &length, 4);
+    Byte *CommandStructure = malloc(size);
+    [self setsenderHead:CommandStructure cmd:0x86 type:0x4 length:length tag:tag];
+   
     memcpy(CommandStructure+14, [token bytes], [token length]);
     memcpy(CommandStructure+14+8, [dataBody bytes], [dataBody length]);
     
@@ -297,7 +301,8 @@
     
 }
 
--(void)getUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+
+-(void)RequstUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
     
     long tag = ++connectTag;
     
@@ -309,14 +314,8 @@
     
     NSData *eBady = [NSString encryptWithAESkey:key type:1 data:body];
     UInt16 size = 14+8+[eBady length];
-    char *CommandStructure = malloc(size);
-    UInt32 magic = 0xbebaedfe;
-    memcpy(CommandStructure, &magic, 4);
-    CommandStructure[4] = 0x87;
-    CommandStructure[5] = 0x1;
-    memcpy(CommandStructure+6, &tag, 4);
-    memcpy(CommandStructure+10, [tokenIMConnect bytes], 8);
-    memcpy(CommandStructure+10+8, &length, 4);
+    Byte *CommandStructure = malloc(size);
+    [self setsenderHead:CommandStructure cmd:0x87 type:0x1 length:length tag:tag token:tokenIMConnect];
     memcpy(CommandStructure+14 + 8, [eBady bytes], [eBady length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
@@ -335,6 +334,7 @@
     }];
     free(CommandStructure);
 }
+
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
     //[self setudpSocket];
