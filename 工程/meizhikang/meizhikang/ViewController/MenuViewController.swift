@@ -110,6 +110,9 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.revealViewController() != nil{
+            if indexPath.row == 0{
+                return;
+            }
             let dic = self.revealViewController().frontViewControllersDic;
             let vc:UIViewController = dic.objectForKey(viewArray[indexPath.row]) as! UIViewController;
             if !vc.isEqual(self.revealViewController().frontViewController){
