@@ -73,6 +73,9 @@ class LoginViewController: UIViewController {
                         print(error)
                 })
                 
+                self.dismissViewControllerAnimated(true) { () -> Void in
+                    IMConnect.Instance().portTest()
+                }
                 }, failure: { (error : NSError!) -> Void in
                     hud.mode = .Text
                     hud.detailsLabelText = error.domain;

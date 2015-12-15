@@ -147,6 +147,28 @@
    
 }
 
+- (void)portTest{
+    NSString *data = [@{@"type" :@"gropus"} JSONString];
+    size_t size = 2+4+1+1+4+[data length];
+    char *send = calloc(size, sizeof(char));
+    send[1] = 1;
+    send[6] = 0x1;
+    send[7] = 0x1;
+    UInt16 length = (UInt16)[data length];
+    memcpy(send + 8, &length, sizeof(UInt16));
+    memcpy(send + 12, [data cStringUsingEncoding:NSUTF8StringEncoding], length);
+    NSData *sendData = [NSData dataWithBytes:send length:length];
+    NSLog(@"%@",sendData);
+    long tag = ++connectTag;
+    [self writeData:sendData tag:tag readHead:^long(long lenth) {
+        return 0;
+    } completion:^(NSData *data) {
+        NSLog(@"comp");
+    } failure:^(NSError *error) {
+        NSLog(@"error");
+    }];
+}
+
 -(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure
 {
     NSData *pwData = [pw dataFromMD5];

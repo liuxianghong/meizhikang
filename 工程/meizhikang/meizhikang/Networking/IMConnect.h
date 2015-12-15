@@ -29,4 +29,6 @@ typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 -(void)getUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 -(void)test:(NSData *)token;
+-(void)test;
+- (void)portTest;
 @end
