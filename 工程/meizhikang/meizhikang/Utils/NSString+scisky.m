@@ -84,9 +84,13 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
 +(NSData *)AESAndXOREncrypt:(NSData *)token data:(NSData *)data{
     Byte key[16];
     oxr(key, [token bytes]+4);
-//    NSData *data = [NSData dataWithBytes:key length:16];
-//    NSLog(@"新key %@",data);
     return [NSString encryptWithAESkey:key type:1 data:data];
+}
+
++(NSData *)AESAndXORDecrypt:(NSData *)token data:(NSData *)data{
+    Byte key[16];
+    oxr(key, [token bytes]+4);
+    return [NSString decryptWithAES:data withKey:key];
 }
 
 -(NSData *)AESEncrypt{

@@ -115,9 +115,7 @@
         return 8+16;
     } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
-        UInt16 time = 0;
-        memcpy(&time, [data bytes]+18, 2);
-        completion(token,time);
+        completion(token,nil);
     } failure:^(NSError *error) {
         failure(error);
     }];
@@ -241,9 +239,67 @@
         return ll;
     } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
-        UInt16 time = 0;
-//        memcpy(&time, [data bytes]+18, 2);
-        completion(token,time);
+        completion(token,nil);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    free(CommandStructure);
+}
+
+-(void)getResetPWToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
+    NSData *data2 = [userName AESEncrypt];
+    
+    UInt16 size = 14+[data2 length];
+    long tag = ++connectTag;
+    NSUInteger length = 16;//0x10;
+    Byte *CommandStructure = malloc(size);
+    [self setsenderHead:CommandStructure cmd:0x86 type:0x7 length:length tag:tag];
+    
+    memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
+    
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    [self writeData:data tag:tag readHead:^long(long lenth_) {
+        long ll = ((lenth_-8)/16+1)*16+8;
+        return ll;
+    } completion:^(NSData *data) {
+        tokenIMConnect = [NSData dataWithBytes:[data bytes]+10 length:8];
+        NSData *imageData = [NSData dataWithBytes:[data bytes]+18 length:([data length]-18)];
+        NSLog(@"imageData : %@",imageData);
+        imageData = [NSString AESAndXORDecrypt:tokenIMConnect data:imageData];
+        completion(tokenIMConnect,imageData);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    free(CommandStructure);
+}
+
+-(void)getCode:(NSString *)phoenName code:(NSString *)code completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
+    Byte body[24] = {0};
+    NSData *phoneData = [phoenName dataUsingEncoding:NSASCIIStringEncoding];
+    memcpy(body,[phoneData bytes],[phoneData length]);
+    NSData *codeData = [code dataUsingEncoding:NSASCIIStringEncoding];
+    memcpy(body+16,[codeData bytes],[codeData length]);
+    
+    NSData *ddd = [NSData dataWithBytes:body length:24];
+    NSLog(@"%@",ddd);
+    
+    NSData *data2 = [NSString AESAndXOREncrypt:tokenIMConnect data:ddd];
+    long tag = ++connectTag;
+    NSUInteger length = 8+16+8;
+    UInt16 size = 14+8+[data2 length];
+    Byte *CommandStructure = malloc(size);
+    [self setsenderHead:CommandStructure cmd:0x86 type:0x8 length:length tag:tag];
+    
+    memcpy(CommandStructure+14, [tokenIMConnect bytes], [tokenIMConnect length]);
+    memcpy(CommandStructure+14+8, [data2 bytes], [data2 length]);
+    
+    
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    NSLog(@"%@",data);
+    [self writeData:data tag:tag readHead:^long(long lenth_) {
+        return 0;
+    } completion:^(NSData *data) {
+        completion(nil,0);
     } failure:^(NSError *error) {
         failure(error);
     }];

@@ -119,9 +119,8 @@ class RegistTableViewController: UITableViewController {
         
         let sex : UInt8 = self.sexManButton.selected ? 1 : 0
         
-        IMConnect.Instance().getRegistToken(self.userNameTextField.text, completion: { (token : NSData!, time : Int32) -> Void in
+        IMConnect.Instance().getRegistToken(self.userNameTextField.text, completion: { (token : NSData!, data : NSData!) -> Void in
             print(token)
-            print(time)
             IMConnect.Instance().registWithToken(token, withCode: "1234", withNickName: self.nickNameTextField.text, withPW: "123456", withSex: sex, withAge: age!, withHeiht: height!, withWight: wight!, completion: { () -> Void in
                 //hud.mode = .Text
                 hud.detailsLabelText = "注册成功，正在获取用户信息";

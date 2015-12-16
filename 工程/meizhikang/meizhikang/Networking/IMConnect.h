@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IMObject.h"
 
-typedef void (^IMObjectTokenCompletionHandler)(NSData *token,int time);
+typedef void (^IMObjectTokenCompletionHandler)(NSData *token,NSData *data);
 typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 
 @protocol IMConnectDelegate <NSObject>
@@ -25,6 +25,10 @@ typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 -(void)getRegistToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
 
 -(void)registWithToken:(NSData *)token withCode:(NSString *)code withNickName:(NSString *)nickName withPW:(NSString *)pw withSex:(UInt8)sex withAge:(UInt8)age withHeiht:(UInt8)height withWight:(UInt16)wight completion:(void (^)())completion failure:(IMObjectFailureHandler)failure;
+
+-(void)getResetPWToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
+
+-(void)getCode:(NSString *)phoenName code:(NSString *)code completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
 
 -(void)RequstUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
