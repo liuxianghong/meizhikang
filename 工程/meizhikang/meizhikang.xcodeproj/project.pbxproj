@@ -258,6 +258,7 @@
 		D361576A1C097937009ED19D /* NSString+scisky.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157691C097937009ED19D /* NSString+scisky.m */; };
 		D361576D1C097B1D009ED19D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361576C1C097B1D009ED19D /* SwiftyJSON.swift */; };
 		D36978BF1C1C407A0094921B /* NetWorkingContents.m in Sources */ = {isa = PBXBuildFile; fileRef = D36978BE1C1C407A0094921B /* NetWorkingContents.m */; };
+		D378AD5A1C20716C004C161A /* ResetPWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D378AD591C20716C004C161A /* ResetPWViewController.swift */; };
 		D3897DDF1C09934100D18BAC /* ViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = D3897DDE1C09934100D18BAC /* ViewController+menu.m */; };
 		D3897DE41C09945A00D18BAC /* 菜单-白@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DE31C09945A00D18BAC /* 菜单-白@2x.png */; };
 		D3897DEC1C09995800D18BAC /* 矩形.png in Resources */ = {isa = PBXBuildFile; fileRef = D3897DEB1C09995800D18BAC /* 矩形.png */; };
@@ -603,6 +604,7 @@
 		D361576C1C097B1D009ED19D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		D36978BD1C1C407A0094921B /* NetWorkingContents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkingContents.h; sourceTree = "<group>"; };
 		D36978BE1C1C407A0094921B /* NetWorkingContents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkingContents.m; sourceTree = "<group>"; };
+		D378AD591C20716C004C161A /* ResetPWViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPWViewController.swift; sourceTree = "<group>"; };
 		D3897DDD1C09934100D18BAC /* ViewController+menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+menu.h"; sourceTree = "<group>"; };
 		D3897DDE1C09934100D18BAC /* ViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+menu.m"; sourceTree = "<group>"; };
 		D3897DE31C09945A00D18BAC /* 菜单-白@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单-白@2x.png"; sourceTree = "<group>"; };
@@ -684,7 +686,7 @@
 		D3F8E2C01C0C384300263B4E /* SwitchoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchoverViewController.swift; sourceTree = "<group>"; };
 		D3F8E2C11C0C384300263B4E /* UserInformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInformationTableViewController.swift; sourceTree = "<group>"; };
 		D3F8E2CC1C0C384B00263B4E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D3F8E2CD1C0C384B00263B4E /* ModifPWTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifPWTableViewController.swift; sourceTree = "<group>"; };
+		D3F8E2CD1C0C384B00263B4E /* ModifPWTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModifPWTableViewController.swift; path = ../Login/ModifPWTableViewController.swift; sourceTree = "<group>"; };
 		D3F8E2CE1C0C384B00263B4E /* RegistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistTableViewController.swift; sourceTree = "<group>"; };
 		D3F8E2D31C0C385200263B4E /* FriendListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewController.swift; sourceTree = "<group>"; };
 		D3F8E2D71C0C387A00263B4E /* HealthFigureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthFigureViewController.swift; sourceTree = "<group>"; };
@@ -1200,6 +1202,7 @@
 		D3F8E2B91C0C384300263B4E /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				D3F8E2CD1C0C384B00263B4E /* ModifPWTableViewController.swift */,
 				D3F8E2BA1C0C384300263B4E /* AboutViewController.swift */,
 				D3F8E2BB1C0C384300263B4E /* AlertViewController.swift */,
 				D3F8E2BC1C0C384300263B4E /* BleTableViewController.swift */,
@@ -1227,8 +1230,8 @@
 			isa = PBXGroup;
 			children = (
 				D3F8E2CC1C0C384B00263B4E /* LoginViewController.swift */,
-				D3F8E2CD1C0C384B00263B4E /* ModifPWTableViewController.swift */,
 				D3F8E2CE1C0C384B00263B4E /* RegistTableViewController.swift */,
+				D378AD591C20716C004C161A /* ResetPWViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1654,6 +1657,7 @@
 				D3F8E2C41C0C384300263B4E /* BleTableViewController.swift in Sources */,
 				B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */,
 				B930DEE81C1457E1003576F6 /* EasyOptionalUnwrapping.swift in Sources */,
+				D378AD5A1C20716C004C161A /* ResetPWViewController.swift in Sources */,
 				D3F8E2C91C0C384300263B4E /* UserInformationTableViewController.swift in Sources */,
 				B92C90411C204123005F551F /* UserInfo.swift in Sources */,
 				D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */,

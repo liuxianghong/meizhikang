@@ -52,9 +52,8 @@ class LoginViewController: UIViewController {
         }
         
         hud.detailsLabelText = "正在登录";
-        IMConnect.Instance().getToken(self.userNameTextField.text, completion: { (token : NSData!, time : Int32) -> Void in
+        IMConnect.Instance().getToken(self.userNameTextField.text, completion: { (token : NSData!, data : NSData!) -> Void in
             print(token)
-            print(time)
             IMConnect.Instance().login(self.passWordTextField.text, withToken: token, completion: { (ip : UInt32,port : UInt16) -> Void in
                 print(ip,port)
                 hud.detailsLabelText = "登录成功，正在获取用户信息";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sYf-Bt-cUg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sYf-Bt-cUg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -218,6 +218,9 @@
                                 <state key="normal" title="忘记密码">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="pYh-Dz-kan" kind="show" id="2Rf-S4-Cvr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU3-dB-KnR">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -375,6 +378,154 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-705" y="1220.25"/>
+        </scene>
+        <!--重置密码-->
+        <scene sceneID="9bW-b4-hMy">
+            <objects>
+                <viewController title="重置密码" id="pYh-Dz-kan" customClass="ResetPWViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qEH-dX-oiM"/>
+                        <viewControllerLayoutGuide type="bottom" id="gLL-y0-wgo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5ce-ML-1wE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="重置密码共三步，当前为第一步" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPs-iG-otc">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H91-71-jOW">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="20" y="104" width="0.0" height="0.0"/>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xO4-eh-iw0">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="I7W-Nh-u9i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="刷新">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="I7W-Nh-u9i"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="334" y="104" width="46" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="I7W-Nh-u9i"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="reflushButtonClick" destination="pYh-Dz-kan" eventType="touchUpInside" id="Uur-v9-Sn5"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yc2-NW-OFI">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="20" y="182" width="360" height="21"/>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请再次输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EcC-PN-wZJ">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="20" y="211" width="360" height="21"/>
+                                </variation>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xO4-eh-iw0" secondAttribute="trailing" constant="20" id="0au-VY-EAU"/>
+                            <constraint firstItem="H91-71-jOW" firstAttribute="leading" secondItem="5ce-ML-1wE" secondAttribute="leading" constant="20" id="2gC-nK-LVO"/>
+                            <constraint firstItem="bPs-iG-otc" firstAttribute="leading" secondItem="5ce-ML-1wE" secondAttribute="leading" constant="20" id="3St-n5-u1f"/>
+                            <constraint firstItem="Yc2-NW-OFI" firstAttribute="top" secondItem="H91-71-jOW" secondAttribute="bottom" constant="8" id="71F-I9-dzi"/>
+                            <constraint firstAttribute="trailing" secondItem="EcC-PN-wZJ" secondAttribute="trailing" constant="20" id="9h1-Wj-FGH"/>
+                            <constraint firstAttribute="trailing" secondItem="Yc2-NW-OFI" secondAttribute="trailing" constant="20" id="gKg-sB-Cxc"/>
+                            <constraint firstItem="EcC-PN-wZJ" firstAttribute="leading" secondItem="5ce-ML-1wE" secondAttribute="leading" constant="20" id="iYx-Xr-bel"/>
+                            <constraint firstItem="Yc2-NW-OFI" firstAttribute="leading" secondItem="5ce-ML-1wE" secondAttribute="leading" constant="20" id="m1a-Ax-ffC"/>
+                            <constraint firstItem="bPs-iG-otc" firstAttribute="top" secondItem="qEH-dX-oiM" secondAttribute="bottom" constant="15" id="pN3-Dn-gHu"/>
+                            <constraint firstItem="EcC-PN-wZJ" firstAttribute="top" secondItem="Yc2-NW-OFI" secondAttribute="bottom" constant="8" id="sWl-Lv-IDV"/>
+                            <constraint firstItem="H91-71-jOW" firstAttribute="top" secondItem="bPs-iG-otc" secondAttribute="bottom" constant="8" id="u3E-By-DJQ"/>
+                            <constraint firstItem="xO4-eh-iw0" firstAttribute="top" secondItem="qEH-dX-oiM" secondAttribute="bottom" constant="40" id="yfs-sS-z15"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="bPs-iG-otc"/>
+                                <exclude reference="H91-71-jOW"/>
+                                <exclude reference="xO4-eh-iw0"/>
+                                <exclude reference="Yc2-NW-OFI"/>
+                                <exclude reference="EcC-PN-wZJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3St-n5-u1f"/>
+                                <exclude reference="pN3-Dn-gHu"/>
+                                <exclude reference="2gC-nK-LVO"/>
+                                <exclude reference="u3E-By-DJQ"/>
+                                <exclude reference="71F-I9-dzi"/>
+                                <exclude reference="gKg-sB-Cxc"/>
+                                <exclude reference="m1a-Ax-ffC"/>
+                                <exclude reference="9h1-Wj-FGH"/>
+                                <exclude reference="iYx-Xr-bel"/>
+                                <exclude reference="sWl-Lv-IDV"/>
+                                <exclude reference="0au-VY-EAU"/>
+                                <exclude reference="yfs-sS-z15"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="bPs-iG-otc"/>
+                                <include reference="H91-71-jOW"/>
+                                <include reference="xO4-eh-iw0"/>
+                                <include reference="Yc2-NW-OFI"/>
+                                <include reference="EcC-PN-wZJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="3St-n5-u1f"/>
+                                <include reference="pN3-Dn-gHu"/>
+                                <include reference="2gC-nK-LVO"/>
+                                <include reference="u3E-By-DJQ"/>
+                                <include reference="71F-I9-dzi"/>
+                                <include reference="gKg-sB-Cxc"/>
+                                <include reference="m1a-Ax-ffC"/>
+                                <include reference="9h1-Wj-FGH"/>
+                                <include reference="iYx-Xr-bel"/>
+                                <include reference="sWl-Lv-IDV"/>
+                                <include reference="0au-VY-EAU"/>
+                                <include reference="yfs-sS-z15"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="重置密码" id="Yf6-qg-6g4">
+                        <barButtonItem key="rightBarButtonItem" title="下一步" id="EOk-Xm-gV2">
+                            <connections>
+                                <action selector="stepClick" destination="pYh-Dz-kan" id="8xf-Lq-ERc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="H91-71-jOW" id="SqX-cP-zUU"/>
+                        <outlet property="itemButton" destination="EOk-Xm-gV2" id="bCd-uG-K4N"/>
+                        <outlet property="reflushButton" destination="xO4-eh-iw0" id="5ge-J5-KOO"/>
+                        <outlet property="stepLabel" destination="bPs-iG-otc" id="nCO-tP-bst"/>
+                        <outlet property="textField1" destination="Yc2-NW-OFI" id="b27-63-db8"/>
+                        <outlet property="textField2" destination="EcC-PN-wZJ" id="jaN-0a-Ccs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2eo-Cv-e8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-736.5" y="1964.25"/>
         </scene>
         <!--注册-->
         <scene sceneID="S9z-Sv-7mg">
