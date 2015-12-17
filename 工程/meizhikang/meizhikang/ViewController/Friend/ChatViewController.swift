@@ -81,7 +81,7 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar?.contentView?.leftBarButtonItem = nil
         self.inputToolbar?.contentView?.textView?.returnKeyType = .Send
         self.inputToolbar?.contentView?.textView?.enablesReturnKeyAutomatically = true
-        self.inputToolbar?.contentView?.rightBarButtonItem = buttonWith(UIImage(named: "添加-灰色.png"), selector: nil)
+        self.inputToolbar?.contentView?.rightBarButtonItem = buttonWith(UIImage(named: "添加-灰色.png"), selector: "addPhoto:")
         self.inputToolbar?.contentView?.rightBarButtonItem?.enabled = true
         layoutInputToolbarLeft()
     }
@@ -120,6 +120,16 @@ class ChatViewController: JSQMessagesViewController {
     func mediaClicked(sender: UIButton){
         print("media")
     }
+    func addPhoto(sender: UIButton){
+        print("addPhoto")
+    }
+    func sendMessage(text: String, sendId: String, senderDisplayName: String, date: NSDate){
+        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
+        viewModel.messages?.append(message)
+        let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
+        viewModel.messages?.append(message2)
+        self.finishSendingMessageAnimated(true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -129,13 +139,13 @@ class ChatViewController: JSQMessagesViewController {
 
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        let message = JSQMessage(senderId: senderId,
-            displayName: senderDisplayName,
-            text: text)
-        viewModel.messages?.append(message)
-        let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
-        viewModel.messages?.append(message2)
-        self.finishSendingMessageAnimated(true)
+//        let message = JSQMessage(senderId: senderId,
+//            displayName: senderDisplayName,
+//            text: text)
+//        viewModel.messages?.append(message)
+//        let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
+//        viewModel.messages?.append(message2)
+//        self.finishSendingMessageAnimated(true)
     }
     
     override func didPressAccessoryButton(sender: UIButton!) {
@@ -149,6 +159,7 @@ class ChatViewController: JSQMessagesViewController {
             return true
         }
         if text == "\n"{
+            self.sendMessage(textView.text, sendId: self.senderId, senderDisplayName: self.senderDisplayName, date: NSDate())
             return false
         }
         return true
