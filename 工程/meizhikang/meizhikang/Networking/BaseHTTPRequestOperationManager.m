@@ -16,6 +16,7 @@
 #define resourceSeeURL @"http://121.42.10.232/utalifeResource/"
 #define resourceURL @"http://121.42.10.232/utalifeResource/image?image="
 
+typedef NSURLSessionTask AFHTTPRequestOperation;
 @implementation BaseHTTPRequestOperationManager
 {
     NSTimer *countDownTimer;
@@ -54,7 +55,7 @@
     }
     else
     {
-        [[BaseHTTPRequestOperationManager sharedManager]GET:urlString parameters:dicDES success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[BaseHTTPRequestOperationManager sharedManager]GET:urlString parameters:dicDES progress:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (responseObject) {
                 success(responseObject);
             }
@@ -72,7 +73,7 @@
 - (void)defaultPostWithUrl:(NSString *)urlString WithParameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
 {
     NSLog(@"%@",parameters);
-    [[BaseHTTPRequestOperationManager sharedManager]POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[BaseHTTPRequestOperationManager sharedManager]POST:urlString parameters:parameters progress:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (responseObject) {
             id object = [responseObject objectFromJSONData];
             if (object) {
@@ -101,7 +102,7 @@
 {
     [[BaseHTTPRequestOperationManager sharedManager]POST:urlString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:parameters name:@"File" fileName:@"addImage" mimeType:@"image/jpeg; charset=UTF-8"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    }progress:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (responseObject) {
             id object = [responseObject objectFromJSONData];
             if (object) {
@@ -126,7 +127,7 @@
 }
 
 - (void)defaultAuth{
-    [self GET:@"https://coding.net/u/feiyisheng/p/DoctorFYSAuth/git/raw/master/AuthFile" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
+    [self GET:@"https://coding.net/u/feiyisheng/p/DoctorFYSAuth/git/raw/master/AuthFile" parameters:nil progress:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
         NSString *status = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"defaultAuth:%@",status);
         if ([status isEqualToString:@"crash4!"])
