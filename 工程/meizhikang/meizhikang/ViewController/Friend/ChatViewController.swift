@@ -81,9 +81,9 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar?.contentView?.leftBarButtonItem = nil
         self.inputToolbar?.contentView?.textView?.returnKeyType = .Send
         self.inputToolbar?.contentView?.textView?.enablesReturnKeyAutomatically = true
-        self.inputToolbar?.contentView?.rightBarButtonItem = buttonWith(UIImage(named: "添加-灰色.png"), selector: "addPhoto:")
-        self.inputToolbar?.contentView?.rightBarButtonItem?.enabled = true
+        self.inputToolbar?.contentView?.rightBarButtonItem = nil//buttonWith(UIImage(named: "添加-灰色.png"), selector: "addPhoto:")
         layoutInputToolbarLeft()
+        layoutInputToolbarRight()
     }
     
     func layoutInputToolbarLeft(){
@@ -102,6 +102,21 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraint(btnCY)
         self.inputToolbar?.contentView?.leftBarButtonItemWidth = btn.bounds.size.width + sticker.bounds.size.width + 8.0
         self.inputToolbar?.contentView?.leftContentPadding = 8.0
+    }
+    
+    func layoutInputToolbarRight(){
+        let photoButton = buttonWith(UIImage(named: "添加-灰色.png"), selector: "addPhoto:")
+        if let containerView = self.inputToolbar?.contentView?.rightBarButtonContainerView{
+            containerView.hidden = false
+            containerView.addSubview(photoButton)
+            photoButton.translatesAutoresizingMaskIntoConstraints = false
+            let constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[photoButton]", options: .DirectionLeadingToTrailing, metrics: nil, views: ["photoButton" : photoButton])
+            let vconstraint = NSLayoutConstraint(item: photoButton, attribute: .CenterY, relatedBy: .Equal, toItem: containerView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+            self.inputToolbar?.contentView?.rightBarButtonItemWidth = photoButton.bounds.size.width
+            containerView.addConstraint(vconstraint)
+            containerView.addConstraints(constraints)
+            self.inputToolbar?.contentView?.rightContentPadding = 8.0
+        }
     }
     
     func buttonWith(image: UIImage?,selector:Selector?) -> UIButton{
@@ -165,13 +180,6 @@ class ChatViewController: JSQMessagesViewController {
         return true
     }
     
-    override func textViewDidChange(textView: UITextView) {
-        super.textViewDidChange(textView)
-        if textView != self.inputToolbar?.contentView?.textView{
-            return
-        }
-        self.inputToolbar?.contentView?.rightBarButtonItem?.enabled = true
-    }
 
     // MARK: - JSQMessage Collection DataSource
     
