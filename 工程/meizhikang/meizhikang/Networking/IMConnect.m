@@ -35,6 +35,8 @@
     NSData *passWordIMConnect;
     
     Byte key[16];
+    
+    NSTimer *countDownTimer;
 }
 
 +(instancetype)Instance
@@ -53,7 +55,27 @@
 //    udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     //connectDic = [[NSMutableDictionary alloc] init];
     [self setudpSocket];
+    countDownTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
     return self;
+}
+
+-(void)countDown
+{
+    if(asyncSocket.isConnected && tokenIMConnect && passWordIMConnect){
+        UInt16 size = 14+8;
+        long tag = ++connectTag;
+        Byte *CommandStructure = malloc(size);
+        [self setsenderHead:CommandStructure cmd:0x87 type:0x0 length:0 tag:tag token:tokenIMConnect];
+        NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+        
+        [self writeData:data tag:tag readHead:^long(long lenth) {
+            return 0;
+        } completion:^(NSData *data) {
+            
+        } failure:^(NSError *error) {
+        }];
+        free(CommandStructure);
+    }
 }
 
 - (void)setudpSocket
