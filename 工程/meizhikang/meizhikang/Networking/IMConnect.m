@@ -141,9 +141,7 @@
     } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
         completion(token,nil);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    } failure:failure];
     free(CommandStructure);
 }
 
@@ -183,31 +181,10 @@
 
 -(void)test:(NSData *)token{
     
-    long tag = ++connectTag;
+    __unused long tag = ++connectTag;
    
 }
 
-- (void)portTest{
-    NSString *data = [@{@"type" :@"gropus"} JSONString];
-    size_t size = 2+4+1+1+4+[data length];
-    char *send = calloc(size, sizeof(char));
-    send[1] = 1;
-    send[6] = 0x1;
-    send[7] = 0x1;
-    UInt16 length = (UInt16)[data length];
-    memcpy(send + 8, &length, sizeof(UInt16));
-    memcpy(send + 12, [data cStringUsingEncoding:NSUTF8StringEncoding], length);
-    NSData *sendData = [NSData dataWithBytes:send length:length];
-    NSLog(@"%@",sendData);
-    long tag = ++connectTag;
-    [self writeData:sendData tag:tag readHead:^long(long lenth) {
-        return 0;
-    } completion:^(NSData *data) {
-        NSLog(@"comp");
-    } failure:^(NSError *error) {
-        NSLog(@"error");
-    }];
-}
 
 -(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure
 {
@@ -237,9 +214,7 @@
         
         completion(ip,port);
         
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    } failure:failure];
     free(CommandStructure);
 }
 
@@ -263,9 +238,7 @@
     } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
         completion(token,nil);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    } failure:failure];
     free(CommandStructure);
 }
 
@@ -290,9 +263,7 @@
         NSLog(@"imageData : %@",imageData);
         imageData = [NSString AESAndXORDecrypt:tokenIMConnect data:imageData];
         completion(tokenIMConnect,imageData);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    } failure:failure];
     free(CommandStructure);
 }
 
@@ -323,9 +294,7 @@
         return 0;
     } completion:^(NSData *data) {
         completion(nil,0);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    } failure:failure];
     free(CommandStructure);
 }
 
@@ -367,12 +336,7 @@
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     [self writeData:data tag:tag readHead:^long(long lenth) {
         return 0;
-    } completion:^(NSData *data) {
-        
-        completion();
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    } completion:completion failure:failure];
     free(CommandStructure);
     
 }
@@ -405,9 +369,7 @@
         NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
         id object = [dddd2 objectFromJSONData];
         completion(object);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+    } failure:failure];
     free(CommandStructure);
 }
 
