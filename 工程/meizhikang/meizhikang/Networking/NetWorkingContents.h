@@ -10,6 +10,7 @@
 
 
 #define IMTIMEOUT 10
+#define IM_MAGIC 0xbebaedfe
 
 @interface NetWorkingContents : NSObject
 +(NSString *)getReturnDescription:(NSInteger)code;

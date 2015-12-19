@@ -68,6 +68,7 @@ class ChatViewController: JSQMessagesViewController {
     var receiverId: String!
     var receiverName: String!
     var viewModel: ChatViewModel!
+    var group : Group!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
@@ -75,6 +76,8 @@ class ChatViewController: JSQMessagesViewController {
         // Do any additional setup after loading the view.
         viewModel = ChatViewModel(senderId: senderId, senderName: senderDisplayName, displayAvatar: nil, receiverId: receiverId, receiverName: receiverName, receiverAvatar: currentAvatar)
         configInputToolbar()
+        
+        
     }
     
     func configInputToolbar(){
@@ -149,7 +152,29 @@ class ChatViewController: JSQMessagesViewController {
         viewModel.messages?.append(message)
         let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
         viewModel.messages?.append(message2)
-        self.finishSendingMessageAnimated(true)
+        
+        if group != nil{
+            
+            let dic = ["type" : "send_msg" ,"uuid" : 1089 ,"fromtype" :1 ,"toid" : group.gid! ,"content" : "[text]\(text)[/text]"]
+            
+            IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+                print(object)
+                let json = JSON(object)
+                let flag = json["flag"].intValue
+                if flag == 1{
+                    print("发送成功")
+                }
+                else
+                {
+                    print("发送失败")
+                }
+                self.finishSendingMessageAnimated(true)
+                }, failure: { (error : NSError!) -> Void in
+                    self.finishSendingMessageAnimated(true)
+            })
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -15,6 +15,8 @@ class MainViewController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "login:", name: "loginOutNotification", object: nil)
+        
         
     }
     
@@ -22,7 +24,7 @@ class MainViewController: UINavigationController {
         super.viewDidAppear(animated)
         if first{
             first = false
-            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+            self.login(nil)
         }
     }
 
@@ -36,7 +38,11 @@ class MainViewController: UINavigationController {
         return .LightContent
     }
     
-    
+    func login(object : AnyObject?){
+        print(object)
+        self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+        
+    }
 
     /*
     // MARK: - Navigation

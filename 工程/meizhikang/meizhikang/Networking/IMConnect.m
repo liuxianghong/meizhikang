@@ -30,6 +30,7 @@
     long connectTag;
     
     IMObject *currentIM;
+    IMObject *reciveIM;
     
     NSData *tokenIMConnect;
     NSData *passWordIMConnect;
@@ -37,6 +38,8 @@
     Byte key[16];
     
     NSTimer *countDownTimer;
+    
+    BOOL isListen;
 }
 
 +(instancetype)Instance
@@ -55,6 +58,7 @@
 //    udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     //connectDic = [[NSMutableDictionary alloc] init];
     [self setudpSocket];
+    isListen = false;
     countDownTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
     return self;
 }
@@ -68,7 +72,7 @@
         [self setsenderHead:CommandStructure cmd:0x87 type:0x0 length:0 tag:tag token:tokenIMConnect];
         NSData *data = [NSData dataWithBytes:CommandStructure length:size];
         
-        [self writeData:data tag:tag readHead:^long(long lenth) {
+        [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
             return 0;
         } completion:^(NSData *data) {
             
@@ -103,7 +107,7 @@
 
 
 -(void)setsenderHead:(Byte *)CommandStructure cmd:(Byte)cmd type:(Byte)type length:(NSUInteger)length tag:(long)tag{
-    UInt32 magic = 0xbebaedfe;
+    UInt32 magic = IM_MAGIC;
     memcpy(CommandStructure, &magic, 4);
     CommandStructure[4] = cmd;
     CommandStructure[5] = type;
@@ -112,7 +116,7 @@
 }
 
 -(void)setsenderHead:(Byte *)CommandStructure cmd:(Byte)cmd type:(Byte)type length:(NSUInteger)length tag:(long)tag token:(NSData *)token{
-    UInt32 magic = 0xbebaedfe;
+    UInt32 magic = IM_MAGIC;
     memcpy(CommandStructure, &magic, 4);
     CommandStructure[4] = cmd;
     CommandStructure[5] = type;
@@ -136,7 +140,7 @@
     memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    [self writeData:data tag:tag readHead:^long(long lenth) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
         return 8+16;
     } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
@@ -204,13 +208,13 @@
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     
-    [self writeData:data tag:tag readHead:^long(long lenth) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
         return 0;
     } completion:^(NSData *data) {
         UInt32 ip = 0;
         UInt16 port = 0;
-        memcpy(&ip, [data bytes]+10, 4);
-        memcpy(&port, [data bytes]+14, 2);
+        //memcpy(&ip, [data bytes]+10, 4);
+        //memcpy(&port, [data bytes]+14, 2);
         
         completion(ip,port);
         
@@ -231,9 +235,9 @@
     memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    [self writeData:data tag:tag readHead:^long(long lenth_) {
-        long ll = ((lenth_-8)/16+1)*16+8;
-        NSLog(@"长度 ：%ld,我的长度: %ld",lenth_,ll);
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
+        UInt32 ll = ((lenth_-8)/16+1)*16+8;
+        NSLog(@"长度 ：%d,我的长度: %d",lenth_,ll);
         return ll;
     } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
@@ -254,8 +258,8 @@
     memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    [self writeData:data tag:tag readHead:^long(long lenth_) {
-        long ll = ((lenth_-8)/16+1)*16+8;
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
+        UInt32 ll = ((lenth_-8)/16+1)*16+8;
         return ll;
     } completion:^(NSData *data) {
         tokenIMConnect = [NSData dataWithBytes:[data bytes]+10 length:8];
@@ -290,7 +294,7 @@
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     NSLog(@"%@",data);
-    [self writeData:data tag:tag readHead:^long(long lenth_) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
         return 0;
     } completion:^(NSData *data) {
         completion(nil,0);
@@ -334,7 +338,7 @@
     memcpy(CommandStructure+14+8, [dataBody bytes], [dataBody length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    [self writeData:data tag:tag readHead:^long(long lenth) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
         return 0;
     } completion:completion failure:failure];
     free(CommandStructure);
@@ -361,7 +365,7 @@
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     
     
-    [self writeData:data tag:tag readHead:^long(long _lenth) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 _lenth) {
         return (_lenth/16+1)*16;
     } completion:^(NSData *data) {
         NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
@@ -380,18 +384,36 @@
     currentIM.readHead = readHead;
     currentIM.completion = completion;
     currentIM.failure = failure;
+    currentIM.lenth = 10;
     [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
     
 }
 
 -(void)listenHeadDataWithIMObject:(IMObject *)im{
-    im.lenth = 10;
-    [asyncSocket readDataToLength:10 withTimeout:IMTIMEOUT tag:im.tag];
+    
+    [self listenData:10 Withtag:im.tag];
 }
 
 -(void)listenData:(NSInteger)length WithIMObject:(IMObject *)im{
     im.lenth = length;
-    [asyncSocket readDataToLength:length withTimeout:IMTIMEOUT tag:im.tag];
+    [self listenData:length Withtag:im.tag];
+}
+
+-(void)listenData:(NSInteger)length Withtag:(long)tag{
+    [asyncSocket readDataToLength:length withTimeout:IMTIMEOUT tag:tag];
+}
+
+-(void)listenRecive{
+    if (currentIM && !currentIM.finished)
+    {
+        return;
+    }
+    if (reciveIM) {
+        reciveIM.finished = YES;
+        reciveIM = nil;
+    }
+    isListen = YES;
+    [asyncSocket readDataToLength:10 withTimeout:-1 tag:0];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
@@ -408,41 +430,105 @@
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
     NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
-    IMObject *im = currentIM;
-    [self listenHeadDataWithIMObject:im];
+    if (!isListen) {
+        [self listenHeadDataWithIMObject:currentIM];
+    }
     //[self listenData];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     NSLog(@"didReadData%@",data);
+    
+    if (tag == 0) {
+        isListen = false;
+    }
+    
+    if(data.length==10){
+        UInt32 magic = 0;
+        memcpy(&magic, [data bytes], sizeof(magic));
+        if (magic == IM_MAGIC) {
+            UInt8 cmd = 0;
+            UInt8 subcmd = 0;
+            memcpy(&cmd, [data bytes]+4, sizeof(cmd));
+            memcpy(&subcmd, [data bytes]+5, sizeof(subcmd));
+            if (cmd == 0x88) {
+                reciveIM = [[IMObject alloc]initWithTag:tag];
+                reciveIM.cmd = cmd;
+                reciveIM.subCmd = subcmd;
+                [reciveIM.data appendData:data];
+                [self listenData:12 Withtag:tag];
+            }
+            return;
+        }
+    }
+    
+    if ((reciveIM && !reciveIM.finished)) {
+        if(reciveIM.cmd == 0x88){
+            [reciveIM.data appendData:data];
+            if (reciveIM.data.length == 22) {
+                UInt32 length = 0;
+                memcpy(&length, [data bytes]+8, sizeof(length));
+                if(length == 0){
+                    [self listenRecive];
+                }
+                else{
+                    length = (length/16+1)*16;
+                    [self listenData:length Withtag:reciveIM.tag];
+                }
+            }
+            else{
+                Byte token[8];
+                memcpy(token, [reciveIM.data bytes]+10, 8);
+                Byte newKey[16];
+                oxrPWToken(newKey,token+4,[passWordIMConnect bytes]);
+                if (reciveIM.subCmd == 0xfe) {
+                    NSData *dddd = [NSData dataWithBytes:[reciveIM.data bytes]+22 length:([reciveIM.data length]-22)];
+                    NSData *data2 = [NSString decryptWithAES:dddd withKey:newKey];
+                    NSString *str = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"loginOutNotification" object:str];
+                }
+                
+                
+                [self listenRecive];
+            }
+        }
+        return;
+    }
+    
+    
+    
     IMObject *im = currentIM;
     if (im.lenth != [data length]) {
         currentIM.finished = YES;
         im.failure([NSError errorWithDomain:@"Read data error" code:0 userInfo:nil]);
+        [self listenRecive];
         return;
     }
     if ([im.data length] == 0) {
         [im.data appendData:data];
-        long length = 0;
-        memcpy(&length, [data bytes]+6, 4);
+        UInt32 length = 0;
+        memcpy(&length, [data bytes]+6, sizeof(length));
         UInt8 code = 0;
-        memcpy(&code, [data bytes]+1, 1);
+        memcpy(&code, [data bytes]+1, sizeof(code));
         if (code != 200) {
             currentIM.finished = YES;
             im.failure([NSError errorWithDomain:[NetWorkingContents getReturnDescription:code] code:code userInfo:nil]);
-            return;
+            [self listenRecive];
         }
         else{
             length = currentIM.readHead(length);
-        }
-        if (length == 0) {
-            currentIM.finished = YES;
-            im.completion(im.data);
-        }
-        else
-        {
-            [self listenData:length WithIMObject:im];
+            if (length == 0) {
+                currentIM.finished = YES;
+                im.completion(im.data);
+                [self listenRecive];
+            }
+            else
+            {
+                [self listenData:length WithIMObject:im];
+                return;
+            }
         }
     }
     else
@@ -450,14 +536,17 @@
         currentIM.finished = YES;
         [im.data appendData:data];
         im.completion(im.data);
+        [self listenRecive];
     }
+    
     
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
+    isListen = false;
     NSLog(@"socket: DidDisconnect:%p withError: %@", sock, err);
-    if (currentIM && err) {
+    if (currentIM && err && !currentIM.finished) {
         currentIM.finished = YES;
         currentIM.failure(err);
     }
