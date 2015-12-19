@@ -78,30 +78,36 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     func configInputToolbar(){
-        self.inputToolbar?.contentView?.leftBarButtonItem = nil
-        self.inputToolbar?.contentView?.textView?.returnKeyType = .Send
-        self.inputToolbar?.contentView?.textView?.enablesReturnKeyAutomatically = true
-        self.inputToolbar?.contentView?.rightBarButtonItem = nil//buttonWith(UIImage(named: "添加-灰色.png"), selector: "addPhoto:")
-        layoutInputToolbarLeft()
-        layoutInputToolbarRight()
+        if let contentView = self.inputToolbar?.contentView{
+            contentView.leftBarButtonItem = nil
+            contentView.textView?.returnKeyType = .Send
+            contentView.textView?.enablesReturnKeyAutomatically = true
+            contentView.rightBarButtonItem = nil
+            layoutInputToolbarLeft()
+            layoutInputToolbarRight()
+        }
     }
     
     func layoutInputToolbarLeft(){
+        guard let contentView = self.inputToolbar?.contentView,
+            let containerView = contentView.leftBarButtonContainerView else{
+               return
+        }
         let btn = buttonWith(UIImage(named: "语音.png"), selector: "mediaClicked:")
         let sticker = buttonWith(UIImage(named: "表情.png"), selector: "stickerClicked:")
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.hidden = false
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addSubview(sticker)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addSubview(btn)
+        containerView.hidden = false
+        containerView.addSubview(sticker)
+        containerView.addSubview(btn)
         sticker.translatesAutoresizingMaskIntoConstraints = false
         btn.translatesAutoresizingMaskIntoConstraints = false
         let constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[sticker]-[btn]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["sticker" : sticker,"btn": btn])
         let vconstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[sticker]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["sticker" : sticker])
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraints(constraints)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraints(vconstraints)
+        containerView.addConstraints(constraints)
+        containerView.addConstraints(vconstraints)
         let btnCY = NSLayoutConstraint(item: sticker, attribute: .CenterY, relatedBy: .Equal, toItem: btn, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraint(btnCY)
-        self.inputToolbar?.contentView?.leftBarButtonItemWidth = btn.bounds.size.width + sticker.bounds.size.width + 8.0
-        self.inputToolbar?.contentView?.leftContentPadding = 8.0
+        containerView.addConstraint(btnCY)
+        contentView.leftBarButtonItemWidth = btn.bounds.size.width + sticker.bounds.size.width + 8.0
+        contentView.leftContentPadding = 8.0
     }
     
     func layoutInputToolbarRight(){
