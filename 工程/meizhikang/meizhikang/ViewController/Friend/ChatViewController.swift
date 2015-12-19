@@ -78,25 +78,51 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     func configInputToolbar(){
-        let sticker = buttonWith(UIImage(named: "表情.png"), selector: nil)
-        self.inputToolbar?.contentView?.leftBarButtonItem = sticker
-        self.inputToolbar?.contentView?.textView?.returnKeyType = .Send
-        self.inputToolbar?.contentView?.textView?.enablesReturnKeyAutomatically = true
-        self.inputToolbar?.contentView?.rightBarButtonItem = buttonWith(UIImage(named: "添加-灰色.png"), selector: nil)
-        self.inputToolbar?.contentView?.rightBarButtonItem?.enabled = true
-        let btn = buttonWith(UIImage(named: "语音.png"), selector: nil)
-        sticker.removeFromSuperview()
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addSubview(sticker)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addSubview(btn)
-        let constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[sticker][btn]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["sticker" : sticker,"btn": btn])
+        if let contentView = self.inputToolbar?.contentView{
+            contentView.leftBarButtonItem = nil
+            contentView.textView?.returnKeyType = .Send
+            contentView.textView?.enablesReturnKeyAutomatically = true
+            contentView.rightBarButtonItem = nil
+            layoutInputToolbarLeft()
+            layoutInputToolbarRight()
+        }
+    }
+    
+    func layoutInputToolbarLeft(){
+        guard let contentView = self.inputToolbar?.contentView,
+            let containerView = contentView.leftBarButtonContainerView else{
+               return
+        }
+        let btn = buttonWith(UIImage(named: "语音.png"), selector: "mediaClicked:")
+        let sticker = buttonWith(UIImage(named: "表情.png"), selector: "stickerClicked:")
+        containerView.hidden = false
+        containerView.addSubview(sticker)
+        containerView.addSubview(btn)
+        sticker.translatesAutoresizingMaskIntoConstraints = false
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[sticker]-[btn]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["sticker" : sticker,"btn": btn])
         let vconstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[sticker]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["sticker" : sticker])
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraints(constraints)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraints(vconstraints)
+        containerView.addConstraints(constraints)
+        containerView.addConstraints(vconstraints)
         let btnCY = NSLayoutConstraint(item: sticker, attribute: .CenterY, relatedBy: .Equal, toItem: btn, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraint(btnCY)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView
-//        self.inputToolbar?.contentView?.leftBarButtonContainerView?.removeConstraint(self.inputToolbar?.contentView?.leftBarButtonItemWidth)
-//        self.inputToolbar?.contentView?.leftBarButtonItemWidth = btn.bounds.size.width + sticker.bounds.size.width
+        containerView.addConstraint(btnCY)
+        contentView.leftBarButtonItemWidth = btn.bounds.size.width + sticker.bounds.size.width + 8.0
+        contentView.leftContentPadding = 8.0
+    }
+    
+    func layoutInputToolbarRight(){
+        let photoButton = buttonWith(UIImage(named: "添加-灰色.png"), selector: "addPhoto:")
+        if let containerView = self.inputToolbar?.contentView?.rightBarButtonContainerView{
+            containerView.hidden = false
+            containerView.addSubview(photoButton)
+            photoButton.translatesAutoresizingMaskIntoConstraints = false
+            let constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[photoButton]", options: .DirectionLeadingToTrailing, metrics: nil, views: ["photoButton" : photoButton])
+            let vconstraint = NSLayoutConstraint(item: photoButton, attribute: .CenterY, relatedBy: .Equal, toItem: containerView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+            self.inputToolbar?.contentView?.rightBarButtonItemWidth = photoButton.bounds.size.width
+            containerView.addConstraint(vconstraint)
+            containerView.addConstraints(constraints)
+            self.inputToolbar?.contentView?.rightContentPadding = 8.0
+        }
     }
     
     func buttonWith(image: UIImage?,selector:Selector?) -> UIButton{
@@ -108,6 +134,23 @@ class ChatViewController: JSQMessagesViewController {
         button.sizeToFit()
         return button
     }
+    
+    func stickerClicked(sender: UIButton){
+        print("showSticker")
+    }
+    func mediaClicked(sender: UIButton){
+        print("media")
+    }
+    func addPhoto(sender: UIButton){
+        print("addPhoto")
+    }
+    func sendMessage(text: String, sendId: String, senderDisplayName: String, date: NSDate){
+        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
+        viewModel.messages?.append(message)
+        let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
+        viewModel.messages?.append(message2)
+        self.finishSendingMessageAnimated(true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -117,13 +160,13 @@ class ChatViewController: JSQMessagesViewController {
 
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        let message = JSQMessage(senderId: senderId,
-            displayName: senderDisplayName,
-            text: text)
-        viewModel.messages?.append(message)
-        let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
-        viewModel.messages?.append(message2)
-        self.finishSendingMessageAnimated(true)
+//        let message = JSQMessage(senderId: senderId,
+//            displayName: senderDisplayName,
+//            text: text)
+//        viewModel.messages?.append(message)
+//        let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
+//        viewModel.messages?.append(message2)
+//        self.finishSendingMessageAnimated(true)
     }
     
     override func didPressAccessoryButton(sender: UIButton!) {
@@ -137,18 +180,12 @@ class ChatViewController: JSQMessagesViewController {
             return true
         }
         if text == "\n"{
+            self.sendMessage(textView.text, sendId: self.senderId, senderDisplayName: self.senderDisplayName, date: NSDate())
             return false
         }
         return true
     }
     
-    override func textViewDidChange(textView: UITextView) {
-        super.textViewDidChange(textView)
-        if textView != self.inputToolbar?.contentView?.textView{
-            return
-        }
-        self.inputToolbar?.contentView?.rightBarButtonItem?.enabled = true
-    }
 
     // MARK: - JSQMessage Collection DataSource
     

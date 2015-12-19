@@ -1525,7 +1525,7 @@
         
         if (_scrollEnabled) {
             if (!_deliver) {
-                FSCalendarHeaderTouchDeliver *deliver = [[FSCalendarHeaderTouchDeliver alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+                FSCalendarHeaderTouchDeliver *deliver = [[FSCalendarHeaderTouchDeliver alloc] initWithFrame:CGRectZero];
                 deliver.header = _header;
                 deliver.calendar = self;
                 [_contentView addSubview:deliver];

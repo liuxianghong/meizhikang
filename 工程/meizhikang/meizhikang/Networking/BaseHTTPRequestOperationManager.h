@@ -6,9 +6,10 @@
 //
 //
 
-#import "AFHTTPRequestOperationManager.h"
+//#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 
-@interface BaseHTTPRequestOperationManager : AFHTTPRequestOperationManager
+@interface BaseHTTPRequestOperationManager : AFHTTPSessionManager
 + (BaseHTTPRequestOperationManager *)sharedManager;
 - (void)defaultHTTPWithMethod:(NSString *)method WithParameters:(id)parameters  post:(BOOL)bo success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
