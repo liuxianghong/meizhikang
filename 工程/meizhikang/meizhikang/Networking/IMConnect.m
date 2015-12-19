@@ -482,14 +482,21 @@
                 memcpy(token, [reciveIM.data bytes]+10, 8);
                 Byte newKey[16];
                 oxrPWToken(newKey,token+4,[passWordIMConnect bytes]);
+                NSData *dddd = [NSData dataWithBytes:[reciveIM.data bytes]+22 length:([reciveIM.data length]-22)];
+                NSData *data2 = [NSString decryptWithAES:dddd withKey:newKey];
                 if (reciveIM.subCmd == 0xfe) {
-                    NSData *dddd = [NSData dataWithBytes:[reciveIM.data bytes]+22 length:([reciveIM.data length]-22)];
-                    NSData *data2 = [NSString decryptWithAES:dddd withKey:newKey];
+                    
                     NSString *str = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
                     [[NSNotificationCenter defaultCenter]
                      postNotificationName:@"loginOutNotification" object:str];
                 }
-                
+                else if (reciveIM.subCmd == 0x1){
+                    
+                    NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
+                    id object = [dddd2 objectFromJSONData];
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"reciveMessageNotification" object:object];
+                }
                 
                 [self listenRecive];
             }
