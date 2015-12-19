@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ModifPWTableViewController: UITableViewController {
 
@@ -29,6 +30,62 @@ class ModifPWTableViewController: UITableViewController {
     }
 
     @IBAction func okClick(sender : AnyObject) {
+        
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        if self.odlpwTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入旧密码"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        if self.newpwTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入新密码"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.renewpwTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请确认新密码"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.renewpwTextField.text != self.newpwTextField.text{
+            hud.mode = .Text
+            hud.detailsLabelText = "新密码错误"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        let dic = ["type":"modify_psd","oldpsd": odlpwTextField.text!.getBCDPassWord() ,"newpsd":newpwTextField.text!.getBCDPassWord()]
+        
+        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            print(object)
+            let flag = object["flag"] as! Int
+            if flag == 1{
+                hud.detailsLabelText = "修改成功"
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+            else if flag == -1{
+                hud.detailsLabelText = "原密码不正确"
+            }
+            else if flag == -2{
+                hud.detailsLabelText = "修改过于频繁"
+            }
+            else{
+                hud.detailsLabelText = "失败，其他错误"
+            }
+            hud.mode = .Text
+            hud.hide(true, afterDelay: 1.5)
+            
+            }, failure: { (error : NSError!) -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain;
+                hud.hide(true, afterDelay: 1.5)
+                print(error)
+        })
+    
     }
     
     // MARK: - Table view data source

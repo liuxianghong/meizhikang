@@ -128,6 +128,7 @@ class RegistTableViewController: UITableViewController {
                 IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
                     print(object)
                     NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                    NSUserDefaults.standardUserDefaults().synchronize()
                     self.dismissViewControllerAnimated(true) { () -> Void in
                     }
                     hud.hide(true)

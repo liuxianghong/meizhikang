@@ -24,6 +24,8 @@ void oxrPWToken(Byte *d,const Byte *p,const Byte *t);
 - (BOOL)checkTel;
 + (BOOL)validateIDCardNumber:(NSString *)value;
 - (BOOL)isValidateEmail;
+-(NSData *)getPassWord;
+-(NSString *)getBCDPassWord;
 @end
 
 @interface UIFont (wb)

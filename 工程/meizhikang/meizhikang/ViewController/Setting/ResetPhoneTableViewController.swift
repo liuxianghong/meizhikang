@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ResetPhoneTableViewController: UITableViewController {
 
@@ -32,13 +33,89 @@ class ResetPhoneTableViewController: UITableViewController {
 
     @IBAction func okClick(sender : AnyObject) {
         if step == 1{
-            step = 2
-            self.tableView.reloadData()
-            okButton.setTitle("确定", forState: .Normal)
-            stepLabel.text = "第二步"
-            nickNameTextField.placeholder = "请输入收到的验证码"
-            nickNameTextField.text = ""
-            nickNameTextField.keyboardType = .NumberPad
+            
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            if !self.nickNameTextField.text!.checkTel(){
+                hud.mode = .Text
+                hud.detailsLabelText = "请输入正确的手机号码"
+                hud.hide(true, afterDelay: 1.5)
+                return;
+            }
+            
+            if self.pwTextField.text!.isEmpty{
+                hud.mode = .Text
+                hud.detailsLabelText = "请输入密码"
+                hud.hide(true, afterDelay: 1.5)
+                return;
+            }
+            
+            let dic = ["type":"modify_tele","psd": pwTextField.text!.getBCDPassWord(),"phone":self.nickNameTextField.text!]
+            
+            IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+                print(object)
+                let flag = object["flag"] as! Int
+                if flag == 1{
+                    self.step = 2
+                    self.tableView.reloadData()
+                    self.okButton.setTitle("确定", forState: .Normal)
+                    self.stepLabel.text = "第二步"
+                    self.nickNameTextField.placeholder = "请输入收到的验证码"
+                    self.nickNameTextField.text = ""
+                    self.nickNameTextField.keyboardType = .NumberPad
+                    hud.hide(true)
+                }
+                else{
+                    hud.detailsLabelText = "密码错误"
+                    hud.mode = .Text
+                    hud.hide(true, afterDelay: 1.5)
+                }
+                
+                
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+            
+            
+        }
+        else if step == 2{
+            
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            
+            if self.nickNameTextField.text!.isEmpty{
+                hud.mode = .Text
+                hud.detailsLabelText = "请输入验证码"
+                hud.hide(true, afterDelay: 1.5)
+                return;
+            }
+            
+            let dic = ["type":"modify_phone","code": nickNameTextField.text!]
+            
+            IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+                print(object)
+                let flag = object["flag"] as! Int
+                if flag == 1{
+                    
+                    hud.detailsLabelText = "修改成功"
+                    self.navigationController?.popViewControllerAnimated(true)
+                    hud.mode = .Text
+                    hud.hide(true, afterDelay: 1.5)
+                }
+                else{
+                    hud.detailsLabelText = "验证码错误"
+                    hud.mode = .Text
+                    hud.hide(true, afterDelay: 1.5)
+                }
+                
+                
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
         }
     }
     // MARK: - Table view data source

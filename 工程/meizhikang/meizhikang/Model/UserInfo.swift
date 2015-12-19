@@ -25,4 +25,12 @@ class UserInfo: NSObject {
         }
     }
 
+    static func CurrentUser()->User?{
+        if let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as? [String : AnyObject],let uid = userInfo["uid"] as? Int{
+            return User.userByUid(uid)
+        }
+        else{
+            return nil
+        }
+    }
 }

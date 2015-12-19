@@ -37,9 +37,9 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.viewWillAppear(animated)
         self.stopAnimation = false
         self.doHideImage()
-        let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as! NSDictionary
-        if userInfo.count>0{
-            userName = userInfo["nickname"] as! String
+        let nickname = UserInfo.nickname()
+        if nickname != nil{
+            userName = nickname!
         }
     }
     override func viewDidAppear(animated: Bool) {

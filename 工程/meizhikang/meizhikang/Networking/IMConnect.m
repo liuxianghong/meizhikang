@@ -67,15 +67,18 @@
         //[asyncSocket disconnect];
     }
     
-    NSString *host = IMIP;
-    uint16_t port = IMPORT;
-    NSError *error = nil;
-    if (![asyncSocket connectToHost:host onPort:port error:&error])
-    {
-        NSLog(@"无法建立连接");
+    if (![asyncSocket isConnected]) {
+        NSString *host = IMIP;
+        uint16_t port = IMPORT;
+        NSError *error = nil;
+        if (![asyncSocket connectToHost:host onPort:port error:&error])
+        {
+            NSLog(@"无法建立连接");
+        }
     }
-
 }
+
+
 
 -(void)setsenderHead:(Byte *)CommandStructure cmd:(Byte)cmd type:(Byte)type length:(NSUInteger)length tag:(long)tag{
     UInt32 magic = 0xbebaedfe;
@@ -136,6 +139,7 @@
     memcpy(CommandStructure+8, &length, 4);
     memcpy(CommandStructure+12, [dat bytes], length);
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    free(CommandStructure);
     return data;
 }
 
@@ -151,13 +155,13 @@
         myBuffer[i / 2] = (char)anInt;
     }
     NSData *unicodeString = [NSData dataWithBytes:myBuffer length:[hexString length] / 2 + 1];
+    free(myBuffer);
     return unicodeString;
 }
 
 -(void)test:(NSData *)token{
     
     long tag = ++connectTag;
-    
    
 }
 
@@ -185,10 +189,7 @@
 
 -(void)login:(NSString *)pw withToken:(NSData *)token completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure
 {
-    NSData *pwData = [pw dataFromMD5];
-    Byte md5pw[16];
-    oxrMD5(md5pw, [pwData bytes]);
-    NSData *pwDataf = [NSData dataWithBytes:md5pw length:16];
+    NSData *pwDataf = [pw getPassWord];
     tokenIMConnect = token;
     passWordIMConnect = pwDataf;
     NSData *data2 = [NSString AESAndXOREncrypt:token data:passWordIMConnect];
@@ -317,10 +318,7 @@
     NSData *nickNameData = [nickName dataUsingEncoding:NSUTF8StringEncoding];
     memcpy(body+8, [nickNameData bytes], [nickNameData length]);
     
-    NSData *pwData = [pw dataFromMD5];
-    Byte md5pw[16];
-    oxrMD5(md5pw, [pwData bytes]);
-    NSData *pwDataf = [NSData dataWithBytes:md5pw length:16];
+    NSData *pwDataf = [pw getPassWord];
     tokenIMConnect = token;
     passWordIMConnect = pwDataf;
     NSLog(@"密码 %@",passWordIMConnect);
@@ -393,7 +391,7 @@
 
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
-    //[self setudpSocket];
+    [self setudpSocket];
     currentIM = [[IMObject alloc]initWithTag:tag];
     currentIM.readHead = readHead;
     currentIM.completion = completion;

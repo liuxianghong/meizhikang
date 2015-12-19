@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MagicalRecord
+
 struct FriendListTableViewControllerConstant{
     static let chatSegueIdentifier = "ChatSegueIdentifier"
 }
@@ -16,6 +18,7 @@ class FriendListTableViewController: UITableViewController {
     @IBOutlet weak var typeImageView1 : UIImageView!
     @IBOutlet weak var typeImageView2 : UIImageView!
     @IBOutlet weak var typeImageView3 : UIImageView!
+    var groupArray :Array<Group> = []
     var type = 1
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,35 @@ class FriendListTableViewController: UITableViewController {
         self.tableView.tableHeaderView?.frame = frame!
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let dic = ["type":"groups"]
+        
+        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            print(object)
+            let json = JSON(object)
+            let groups = json["groups"].arrayValue
+            self.groupArray.removeAll()
+            for groupDic in groups{
+                let dd = groupDic.dictionaryValue
+                let group = Group.GroupByGid((dd["gid"]?.object)!)
+                group?.upDateGroupInfo(groupDic.dictionaryObject!)
+                let user = UserInfo.CurrentUser()
+                if !(group!.user?.containsObject(user!))!{
+                    let users = group!.mutableSetValueForKey("user")
+                    users.addObject(user!)
+                }
+                self.groupArray.append(group!)
+            }
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            self.tableView.reloadData()
+            
+            }, failure: { (error : NSError!) -> Void in
+        })
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,6 +88,9 @@ class FriendListTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if type == 1{
+            return self.groupArray.count + 1
+        }
         return type+1
     }
 
@@ -80,6 +115,8 @@ class FriendListTableViewController: UITableViewController {
         // Configure the cell...
         if type == 1{
             cell.typeImageView.image = UIImage(named: "通讯2")
+            let group = self.groupArray[indexPath.row-1]
+            cell.nameLabel.text = group.gname
         }
         else if type == 2{
             cell.typeImageView.image = UIImage(named: "联系人-蓝")

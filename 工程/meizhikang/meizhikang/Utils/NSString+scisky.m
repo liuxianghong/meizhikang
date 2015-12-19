@@ -404,6 +404,21 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
     return [emailTest evaluateWithObject:self];
 }
 
+
+-(NSData *)getPassWord{
+    NSData *pwData = [self dataFromMD5];
+    Byte md5pw[16];
+    oxrMD5(md5pw, [pwData bytes]);
+    NSData *pwDataf = [NSData dataWithBytes:md5pw length:16];
+    return pwDataf;
+}
+
+-(NSString *)getBCDPassWord{
+    NSData *data = [self getPassWord];
+    NSString *bcdString = [data.description formatData];
+    return bcdString;
+}
+
 @end
 
 

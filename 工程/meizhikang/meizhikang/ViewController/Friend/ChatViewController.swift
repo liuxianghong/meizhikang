@@ -94,7 +94,7 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraints(vconstraints)
         let btnCY = NSLayoutConstraint(item: sticker, attribute: .CenterY, relatedBy: .Equal, toItem: btn, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
         self.inputToolbar?.contentView?.leftBarButtonContainerView?.addConstraint(btnCY)
-        self.inputToolbar?.contentView?.leftBarButtonContainerView?
+        self.inputToolbar?.contentView?.leftBarButtonContainerView
 //        self.inputToolbar?.contentView?.leftBarButtonContainerView?.removeConstraint(self.inputToolbar?.contentView?.leftBarButtonItemWidth)
 //        self.inputToolbar?.contentView?.leftBarButtonItemWidth = btn.bounds.size.width + sticker.bounds.size.width
     }

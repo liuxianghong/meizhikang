@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import MagicalRecord
 
 class LoginViewController: UIViewController {
 
@@ -62,6 +63,13 @@ class LoginViewController: UIViewController {
                     hud.hide(true)
                     print(object)
                     NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    let user = User.userByUid(object["uid"]!!)
+                    user!.upDateUserInfo(object as! [String : AnyObject])
+                    user!.userName = self.userNameTextField.text
+                    user!.passWord = self.passWordTextField.text
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                    
                     self.dismissViewControllerAnimated(true) { () -> Void in
                     }
                     }, failure: { (error : NSError!) -> Void in
