@@ -35,6 +35,15 @@ class FriendListTableViewController: UITableViewController {
         var frame = self.tableView.tableHeaderView?.frame
         frame?.size.height = 50.0
         self.tableView.tableHeaderView?.frame = frame!
+        
+        let dic = ["type":"get_email","page":1 ,"number":20]
+        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            print(object)
+
+            }) { (error : NSError!) -> Void in
+                
+        }
+
     }
 
     override func viewWillAppear(animated: Bool) {
