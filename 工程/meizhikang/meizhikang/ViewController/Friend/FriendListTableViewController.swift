@@ -208,6 +208,12 @@ class FriendListTableViewController: UITableViewController {
             else{
                 return
             }
+            if type==1{
+                let indexPath = sender as! NSIndexPath
+                let group = self.groupArray[indexPath.row-1]
+                vc.group = group
+            }
+            
             vc.senderId = sendId
             vc.senderDisplayName = nickname
             vc.currentAvatar = UIImage(named: "联系人-蓝.png")

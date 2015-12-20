@@ -11,7 +11,7 @@
 
 
 typedef void (^IMObjectCompletionHandler)(NSData *data);
-typedef long (^IMObjectReadHeadHandler)(long lenth);
+typedef UInt32 (^IMObjectReadHeadHandler)(UInt32 lenth);
 typedef void (^IMObjectFailureHandler)(NSError *error);
 
 
@@ -20,6 +20,8 @@ typedef void (^IMObjectFailureHandler)(NSError *error);
 @property (nonatomic,assign) BOOL finished;
 @property (nonatomic,assign) long tag;
 @property (nonatomic,assign) long lenth;
+@property (nonatomic,assign) UInt8 cmd;
+@property (nonatomic,assign) UInt8 subCmd;
 @property (nonatomic,copy) IMObjectReadHeadHandler readHead;
 @property (nonatomic,copy) IMObjectCompletionHandler completion;
 @property (nonatomic,copy) IMObjectFailureHandler failure;

@@ -132,6 +132,7 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
         //return [NSData dataWithBytes:dd length:32];
         return [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
     }
+    free(context);
     free(buffer);
     return nil;
     
