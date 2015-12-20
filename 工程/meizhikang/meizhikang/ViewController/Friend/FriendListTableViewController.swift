@@ -201,7 +201,10 @@ class FriendListTableViewController: UITableViewController {
         if segue.identifier == FriendListTableViewControllerConstant.chatSegueIdentifier{
             guard let vc = segue.destinationViewController as? ChatViewController,
                 let sendId = UserInfo.uid(),
-                let nickname = UserInfo.nickname()
+                let nickname = UserInfo.nickname(),
+                let indexPath = sender as? NSIndexPath where indexPath.row > 0,
+                let gid = groupArray[indexPath.row - 1].gid,
+                let gname = groupArray[indexPath.row - 1].gname
             else{
                 return
             }
@@ -215,8 +218,8 @@ class FriendListTableViewController: UITableViewController {
             vc.senderDisplayName = nickname
             vc.currentAvatar = UIImage(named: "联系人-蓝.png")
             // TODO: pass the friend or group to me
-            vc.receiverId = "00000000"
-            vc.receiverName = "请使用数据源的名字"
+            vc.receiverId = String(gid)
+            vc.receiverName = gname
         }
     }
 
