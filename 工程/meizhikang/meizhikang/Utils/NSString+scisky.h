@@ -26,6 +26,7 @@ void oxrPWToken(Byte *d,const Byte *p,const Byte *t);
 - (BOOL)isValidateEmail;
 -(NSData *)getPassWord;
 -(NSString *)getBCDPassWord;
+- (NSData *)dataFromHexString;
 @end
 
 @interface UIFont (wb)

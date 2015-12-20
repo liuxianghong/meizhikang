@@ -585,8 +585,15 @@
                     NSLog(@"%@",object);
                     if (object){
                         if ([object[@"pushtype"] isEqualToString:@"meet"] ) {
-                            [[NSNotificationCenter defaultCenter]
-                             postNotificationName:@"reciveMessageNotification" object:object];
+                            Message *message = [Message MR_createEntity];
+                            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                                [message upDateMessageInfo:object];
+                                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                                [[NSNotificationCenter defaultCenter]
+                                 postNotificationName:@"reciveMessageNotification" object:message];
+                            });
+                            
+                            
                         }
                         else if ([object[@"pushtype"] isEqualToString:@"email"] ) {
                             Email *email = [Email EmailByUuid:object[@"uuid"]];

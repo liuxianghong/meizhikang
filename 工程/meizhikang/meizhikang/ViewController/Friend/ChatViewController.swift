@@ -77,6 +77,19 @@ class ChatViewController: JSQMessagesViewController {
         viewModel = ChatViewModel(senderId: senderId, senderName: senderDisplayName, displayAvatar: nil, receiverId: receiverId, receiverName: receiverName, receiverAvatar: currentAvatar)
         configInputToolbar()
         
+        NSNotificationCenter.defaultCenter().addObserverForName("reciveMessageNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
+            let message = notification.object as! Message
+            if message.messageType() == .Text{
+                let message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, text: message.text())
+                self.viewModel.messages?.append(message2)
+            }
+            else if message.messageType() == .Image{
+                let message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, media: JSQPhotoMediaItem(image: message.image()))
+                self.viewModel.messages?.append(message2)
+            }
+            self.finishSendingMessageAnimated(true)
+        }
+        
         
     }
     

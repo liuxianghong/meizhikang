@@ -420,6 +420,20 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
     return bcdString;
 }
 
+- (NSData *)dataFromHexString { //
+    
+    char *myBuffer = (char *)malloc((int)[self length] / 2 + 1);
+    bzero(myBuffer, [self length] / 2 + 1);
+    for (int i = 0; i < [self length] - 1; i += 2) {
+        unsigned int anInt;
+        NSString * hexCharStr = [self substringWithRange:NSMakeRange(i, 2)];
+        NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
+        [scanner scanHexInt:&anInt];
+        myBuffer[i / 2] = (char)anInt;
+    }
+    return [NSData dataWithBytes:myBuffer length:((int)[self length] / 2 + 1)];
+}
+
 @end
 
 
