@@ -19,6 +19,8 @@
 		B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98BF1C11D2E000228D21 /* HealthDailyViewController.swift */; };
 		B96C98C41C11D45000228D21 /* HealthWeeklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98C31C11D45000228D21 /* HealthWeeklyViewController.swift */; };
 		B96DE00C1C1EEF4000B9BF85 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96DE00B1C1EEF4000B9BF85 /* ChatViewController.swift */; };
+		B9709B011C26F5ED004DCD50 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9709AFF1C26F5ED004DCD50 /* Message+CoreDataProperties.swift */; };
+		B9709B021C26F5ED004DCD50 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9709B001C26F5ED004DCD50 /* Message.swift */; };
 		B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBA1C0BF43D0097E9B3 /* 右.png */; };
 		B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */; };
 		B99A8DF51C0BF43D0097E9B3 /* 右@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */; };
@@ -366,6 +368,8 @@
 		B96C98BF1C11D2E000228D21 /* HealthDailyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDailyViewController.swift; sourceTree = "<group>"; };
 		B96C98C31C11D45000228D21 /* HealthWeeklyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthWeeklyViewController.swift; sourceTree = "<group>"; };
 		B96DE00B1C1EEF4000B9BF85 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		B9709AFF1C26F5ED004DCD50 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B9709B001C26F5ED004DCD50 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B99A8DBA1C0BF43D0097E9B3 /* 右.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右.png"; sourceTree = "<group>"; };
 		B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@2x.png"; sourceTree = "<group>"; };
 		B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@3x.png"; sourceTree = "<group>"; };
@@ -758,6 +762,8 @@
 		B92C903F1C2040E7005F551F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B9709AFF1C26F5ED004DCD50 /* Message+CoreDataProperties.swift */,
+				B9709B001C26F5ED004DCD50 /* Message.swift */,
 				D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */,
 				D33984711C26EA9D00A78D33 /* Email.swift */,
 				D336C9271C25868B00E967EB /* Group+CoreDataProperties.swift */,
@@ -1701,6 +1707,7 @@
 				D3897E231C09A04C00D18BAC /* MenuTableViewCell.swift in Sources */,
 				B90B930B1C0B38D8005BC1E1 /* HealthAnalysisViewController.swift in Sources */,
 				D3F8E2D81C0C387A00263B4E /* HealthFigureViewController.swift in Sources */,
+				B9709B021C26F5ED004DCD50 /* Message.swift in Sources */,
 				D3F8E2C61C0C384300263B4E /* SettingTableViewController.swift in Sources */,
 				D361575C1C09760B009ED19D /* README.md in Sources */,
 				D3F8E2C51C0C384300263B4E /* ResetPhoneTableViewController.swift in Sources */,
@@ -1716,6 +1723,7 @@
 				D3897E251C09A08400D18BAC /* MenuViewController.swift in Sources */,
 				D336C92E1C25868B00E967EB /* User.swift in Sources */,
 				B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */,
+				B9709B011C26F5ED004DCD50 /* Message+CoreDataProperties.swift in Sources */,
 				B930DEEA1C145822003576F6 /* Array+Extenstion.swift in Sources */,
 				D3F8E2C71C0C384300263B4E /* SwitchAccountTableViewController.swift in Sources */,
 				D3F8E2D51C0C385200263B4E /* FriendListTableViewController.swift in Sources */,
