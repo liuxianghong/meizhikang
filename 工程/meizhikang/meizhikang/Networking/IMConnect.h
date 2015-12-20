@@ -6,7 +6,6 @@
 //  Copyright © 2015年 刘向宏. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "IMObject.h"
 
