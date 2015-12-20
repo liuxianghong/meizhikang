@@ -258,6 +258,8 @@
 		D336C92D1C25868B00E967EB /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D336C9291C25868B00E967EB /* User+CoreDataProperties.swift */; };
 		D336C92E1C25868B00E967EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D336C92A1C25868B00E967EB /* User.swift */; };
 		D336C9301C2586C600E967EB /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D336C92F1C2586C600E967EB /* UserInfo.swift */; };
+		D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */; };
+		D33984731C26EA9D00A78D33 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984711C26EA9D00A78D33 /* Email.swift */; };
 		D361575C1C09760B009ED19D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D36157541C09760B009ED19D /* README.md */; };
 		D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */; };
 		D361576A1C097937009ED19D /* NSString+scisky.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157691C097937009ED19D /* NSString+scisky.m */; };
@@ -605,6 +607,8 @@
 		D336C9291C25868B00E967EB /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D336C92A1C25868B00E967EB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D336C92F1C2586C600E967EB /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Email+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D33984711C26EA9D00A78D33 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		D36157541C09760B009ED19D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHTTPRequestOperationManager.m; sourceTree = "<group>"; };
@@ -754,6 +758,8 @@
 		B92C903F1C2040E7005F551F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */,
+				D33984711C26EA9D00A78D33 /* Email.swift */,
 				D336C9271C25868B00E967EB /* Group+CoreDataProperties.swift */,
 				D336C9281C25868B00E967EB /* Group.swift */,
 				D336C9291C25868B00E967EB /* User+CoreDataProperties.swift */,
@@ -1698,6 +1704,7 @@
 				D3F8E2C61C0C384300263B4E /* SettingTableViewController.swift in Sources */,
 				D361575C1C09760B009ED19D /* README.md in Sources */,
 				D3F8E2C51C0C384300263B4E /* ResetPhoneTableViewController.swift in Sources */,
+				D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */,
 				D3EFF9C51C181D720047E2B0 /* ThemeViewController.swift in Sources */,
 				D3F8E2CF1C0C384B00263B4E /* LoginViewController.swift in Sources */,
 				D32D080D1C0AD39500E2C7EF /* MainViewController.swift in Sources */,
@@ -1707,12 +1714,12 @@
 				D336C92C1C25868B00E967EB /* Group.swift in Sources */,
 				B96C98BE1C11C9DE00228D21 /* EmptySegue.swift in Sources */,
 				D3897E251C09A08400D18BAC /* MenuViewController.swift in Sources */,
-				D361576D1C097B1D009ED19D /* SwiftyJSON.swift in Sources */,
 				D336C92E1C25868B00E967EB /* User.swift in Sources */,
 				B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */,
 				B930DEEA1C145822003576F6 /* Array+Extenstion.swift in Sources */,
 				D3F8E2C71C0C384300263B4E /* SwitchAccountTableViewController.swift in Sources */,
 				D3F8E2D51C0C385200263B4E /* FriendListTableViewController.swift in Sources */,
+				D33984731C26EA9D00A78D33 /* Email.swift in Sources */,
 				D3F8E2D01C0C384B00263B4E /* ModifPWTableViewController.swift in Sources */,
 				D336C92B1C25868B00E967EB /* Group+CoreDataProperties.swift in Sources */,
 				D3F8E2C81C0C384300263B4E /* SwitchoverViewController.swift in Sources */,
