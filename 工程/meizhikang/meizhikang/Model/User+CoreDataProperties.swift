@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  meizhikang
 //
-//  Created by 刘向宏 on 15/12/19.
+//  Created by 刘向宏 on 15/12/20.
 //  Copyright © 2015年 刘向宏. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -28,5 +28,6 @@ extension User {
     @NSManaged var userName: String?
     @NSManaged var weight: NSNumber?
     @NSManaged var groups: NSSet?
+    @NSManaged var emails: NSSet?
 
 }

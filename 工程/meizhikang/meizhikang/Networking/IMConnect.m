@@ -12,6 +12,8 @@
 #import "GCDAsyncSocket.h"
 #import "IMObject.h"
 #import "JSONKit.h"
+#import "meizhikang-Swift.h"
+#import <MagicalRecord/MagicalRecord.h>
 
 //IM系统地址182.150.44.21，端口9527
 //数据上传系统鉴权地址182.150.44.21，端口9529
@@ -580,8 +582,19 @@
                     
                     NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
                     id object = [dddd2 objectFromJSONData];
-                    [[NSNotificationCenter defaultCenter]
-                     postNotificationName:@"reciveMessageNotification" object:object];
+                    NSLog(@"%@",object);
+                    if (object){
+                        if ([object[@"pushtype"] isEqualToString:@"meet"] ) {
+                            [[NSNotificationCenter defaultCenter]
+                             postNotificationName:@"reciveMessageNotification" object:object];
+                        }
+                        else if ([object[@"pushtype"] isEqualToString:@"email"] ) {
+                            Email *email = [Email EmailByUuid:object[@"uuid"]];
+                            [email upDateEmailInfo:object];
+                            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                        }
+                    }
+                    
                 }
                 
                 [self listenRecive];
@@ -642,7 +655,6 @@
     if (currentIM && err && !currentIM.finished) {
         currentIM.finished = YES;
         currentIM.failure(err);
-        currentIM = nil;
     }
     for (IMObject *im in IMQueue) {
         im.failure(err);

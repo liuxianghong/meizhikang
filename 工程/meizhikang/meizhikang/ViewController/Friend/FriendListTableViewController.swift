@@ -19,6 +19,7 @@ class FriendListTableViewController: UITableViewController {
     @IBOutlet weak var typeImageView2 : UIImageView!
     @IBOutlet weak var typeImageView3 : UIImageView!
     var groupArray :Array<Group> = []
+    var emailArray = [Email]()
     var type = 1
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,8 @@ class FriendListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         let dic = ["type":"groups"]
+        
+        emailArray = Email.MR_findAll() as! [Email]
         
         IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
             print(object)
@@ -63,6 +66,7 @@ class FriendListTableViewController: UITableViewController {
             }, failure: { (error : NSError!) -> Void in
         })
         
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -90,6 +94,9 @@ class FriendListTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         if type == 1{
             return self.groupArray.count + 1
+        }
+        else if type == 3{
+            return emailArray.count
         }
         return type+1
     }
@@ -122,7 +129,9 @@ class FriendListTableViewController: UITableViewController {
             cell.typeImageView.image = UIImage(named: "联系人-蓝")
         }
         else if type == 3{
+            let email = emailArray[indexPath.row]
             cell.typeImageView.image = UIImage(named: "记录-蓝")
+            cell.nameLabel.text = email.title
         }
         cell.numberLabel.hidden = type != 1
 
