@@ -17,6 +17,7 @@ typedef void (^IMObjectFailureHandler)(NSError *error);
 
 @interface IMObject : NSObject
 @property (nonatomic,strong) NSMutableData *data;
+@property (nonatomic,strong) NSData *sendData;
 @property (nonatomic,assign) BOOL finished;
 @property (nonatomic,assign) long tag;
 @property (nonatomic,assign) long lenth;

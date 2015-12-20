@@ -6,6 +6,7 @@
 //  Copyright © 2015年 刘向宏. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "IMObject.h"
 
@@ -31,6 +32,9 @@ typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 -(void)getCode:(NSString *)phoenName code:(NSString *)code completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
 
 -(void)RequstUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
+//发送图片。语音
+-(void)UploadFileRequst:(NSData *)file fileType:(IMMsgSendFileType)fieType fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 -(void)test:(NSData *)token;
 @end

@@ -40,6 +40,8 @@
     NSTimer *countDownTimer;
     
     BOOL isListen;
+    
+    NSMutableArray *IMQueue;
 }
 
 +(instancetype)Instance
@@ -57,6 +59,7 @@
     self = [super init];
 //    udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     //connectDic = [[NSMutableDictionary alloc] init];
+    IMQueue = [[NSMutableArray alloc]init];
     [self setudpSocket];
     isListen = false;
     countDownTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
@@ -150,7 +153,7 @@
 }
 
 -(NSData *)getTextBody:(NSString *)body{
-    NSLog(@"%@",body);
+    //NSLog(@"%@",body);
     NSData *dat = [body dataUsingEncoding:NSUTF8StringEncoding];
     NSUInteger length = [dat length];
     UInt16 size = 12 + length;
@@ -162,6 +165,24 @@
     CommandStructure[7] = 0x1;
     memcpy(CommandStructure+8, &length, 4);
     memcpy(CommandStructure+12, [dat bytes], length);
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    free(CommandStructure);
+    return data;
+}
+
+-(NSData *)getFileBody:(NSData *)file uuid:(UInt32)uuid fileTye:(NSInteger)fileTye {
+    //NSLog(@"%@",file);
+    NSUInteger length = sizeof(uuid) + [file length];
+    UInt16 size = 12 + length;
+    char *CommandStructure = malloc(size);
+    bzero(CommandStructure, size);
+    CommandStructure[0] = 0x1;
+    CommandStructure[1] = 0x0;
+    CommandStructure[6] = 0x2;
+    CommandStructure[7] = fileTye;
+    memcpy(CommandStructure+8, &length, 4);
+    memcpy(CommandStructure+12, &uuid, sizeof(uuid));
+    memcpy(CommandStructure+12+sizeof(uuid), [file bytes], [file length]);
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     free(CommandStructure);
     return data;
@@ -377,15 +398,73 @@
     free(CommandStructure);
 }
 
+-(void)UpLoadFileRequst:(NSData *)fileData fileType:(NSInteger)fileType uuid:(UInt32)uuid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    
+    long tag = ++connectTag;
+    
+    NSData *body = [self getFileBody:fileData uuid:uuid fileTye:fileType];
+    NSUInteger length = [body length];
+    
+    oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);
+    
+    NSData *eBady = [NSString encryptWithAESkey:key type:1 data:body];
+    UInt16 size = 14+8+[eBady length];
+    Byte *CommandStructure = malloc(size);
+    [self setsenderHead:CommandStructure cmd:0x87 type:0x1 length:length tag:tag token:tokenIMConnect];
+    memcpy(CommandStructure+14 + 8, [eBady bytes], [eBady length]);
+    
+    NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+    
+    
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 _lenth) {
+        return (_lenth/16+1)*16;
+    } completion:^(NSData *data) {
+        NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
+        NSData *data2 = [NSString decryptWithAES:dddd withKey:key];
+        NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
+        id object = [dddd2 objectFromJSONData];
+        completion(object);
+    } failure:failure];
+    free(CommandStructure);
+}
+
+-(void)UploadFileRequst:(NSData *)file fileType:(IMMsgSendFileType)fieType fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    
+    UInt32 uuid = [NSDate date].timeIntervalSince1970;
+    NSDictionary *dic = @{@"type" : @"authorize" ,
+                          @"uuid" : @(uuid) ,
+                          @"fromtype" : @(fromtype) ,
+                          @"toid" : toid
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:^(id info) {
+        if ([info[@"flag"] integerValue] == 1) {
+            [self UpLoadFileRequst:file fileType:fieType uuid:uuid completion:completion failure:failure];
+        }
+        else
+        {
+            failure([NSError errorWithDomain:@"授权失败" code:0 userInfo:nil]);
+        }
+        
+    } failure:failure];
+    
+}
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
     [self setudpSocket];
-    currentIM = [[IMObject alloc]initWithTag:tag];
-    currentIM.readHead = readHead;
-    currentIM.completion = completion;
-    currentIM.failure = failure;
-    currentIM.lenth = 10;
-    [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
+    IMObject *im = [[IMObject alloc]initWithTag:tag];
+    im.readHead = readHead;
+    im.completion = completion;
+    im.failure = failure;
+    im.lenth = 10;
+    if (currentIM && !currentIM.finished) {
+        im.sendData = data;
+        [IMQueue addObject:im];
+    }
+    else
+    {
+        currentIM = im;
+        [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
+    }
     
 }
 
@@ -412,8 +491,15 @@
         reciveIM.finished = YES;
         reciveIM = nil;
     }
-    isListen = YES;
-    [asyncSocket readDataToLength:10 withTimeout:-1 tag:0];
+    if (IMQueue.count==0) {
+        isListen = YES;
+        [asyncSocket readDataToLength:10 withTimeout:-1 tag:0];
+    }
+    else{
+        currentIM = [IMQueue firstObject];
+        [IMQueue removeObjectAtIndex:0];
+        [asyncSocket writeData:currentIM.sendData withTimeout:IMTIMEOUT tag:currentIM.tag];
+    }
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
@@ -556,6 +642,11 @@
     if (currentIM && err && !currentIM.finished) {
         currentIM.finished = YES;
         currentIM.failure(err);
+        currentIM = nil;
     }
+    for (IMObject *im in IMQueue) {
+        im.failure(err);
+    }
+    [IMQueue removeAllObjects];
 }
 @end
