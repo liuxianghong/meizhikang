@@ -39,8 +39,11 @@ class Message: NSManagedObject {
             let imagedata = NSData(contentsOfURL: NSURL(string: imageUrl)!)
             let dataKey = keyString.dataFromHexString()
             print(dataKey)
-            data = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
-            //data = NSData(bytes: ddata.bytes+4, length: ddata.length-4)
+            let ddata = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
+            if ddata.length > 16{
+                data = NSData(bytes: ddata.bytes+16, length: ddata.length-16)
+            }
+            
         }
     }
     
@@ -51,12 +54,12 @@ class Message: NSManagedObject {
     }
     
     func image() -> UIImage?{
-        return UIImage(named: "圆-白");
-        //return UIImage(data: data!)
+        //return UIImage(named: "圆-白");
+        return UIImage(data: data!)
     }
     
-    func Data() -> NSData{
-        return data!
+    func Data() -> NSData?{
+        return data
     }
     
     

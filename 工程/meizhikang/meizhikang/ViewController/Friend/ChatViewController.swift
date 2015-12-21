@@ -90,6 +90,12 @@ class ChatViewController: JSQMessagesViewController {
             self.finishSendingMessageAnimated(true)
         }
         
+        let dic = ["type" : "messages" ,"page" : 1 ,"number" :20 ]
+        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            print(object)
+            let json = JSON(object)
+            }, failure: { (error : NSError!) -> Void in
+        })
         
     }
     
@@ -171,7 +177,8 @@ class ChatViewController: JSQMessagesViewController {
             
             
             //发送语音
-            IMConnect.Instance().UploadFileRequst(UIImageJPEGRepresentation(UIImage(named: "圆-灰")!, 0.8), fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
+            let data = UIImageJPEGRepresentation(UIImage(named: "圆-灰")!, 0.8)
+            IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
                 print(object)
                 }, failure: { (error : NSError!) -> Void in
                     print(error)
