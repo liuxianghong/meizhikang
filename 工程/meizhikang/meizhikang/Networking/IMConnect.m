@@ -148,8 +148,14 @@
     [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
         return 8+16;
     } completion:^(NSData *data) {
-        NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
-        completion(token,nil);
+        if ([data length]<18) {
+            failure([NSError errorWithDomain:@"服务器返回失败" code:0 userInfo:nil]);
+        }
+        else
+        {
+            NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
+            completion(token,nil);
+        }
     } failure:failure];
     free(CommandStructure);
 }
@@ -220,9 +226,9 @@
     passWordIMConnect = pwDataf;
     NSData *data2 = [NSString AESAndXOREncrypt:token data:passWordIMConnect];
     
-    UInt16 size = 14+8+16;
+    UInt16 size = 14+[token length]+[data2 length];
     long tag = ++connectTag;
-    NSUInteger length = 8+[pw length];
+    NSUInteger length = 8+16;
     Byte *CommandStructure = malloc(size);
     
     [self setsenderHead:CommandStructure cmd:0x86 type:0x2 length:length tag:tag];
@@ -236,9 +242,6 @@
     } completion:^(NSData *data) {
         UInt32 ip = 0;
         UInt16 port = 0;
-        //memcpy(&ip, [data bytes]+10, 4);
-        //memcpy(&port, [data bytes]+14, 2);
-        
         completion(ip,port);
         
     } failure:failure];
@@ -379,7 +382,7 @@
     
     oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);
     
-    NSData *eBady = [NSString encryptWithAESkey:key type:1 data:body];
+    NSData *eBady = [NSString encryptWithAESkey:key data:body];
     UInt16 size = 14+8+[eBady length];
     Byte *CommandStructure = malloc(size);
     [self setsenderHead:CommandStructure cmd:0x87 type:0x1 length:length tag:tag token:tokenIMConnect];
@@ -391,11 +394,23 @@
     [self writeData:data tag:tag readHead:^UInt32(UInt32 _lenth) {
         return (_lenth/16+1)*16;
     } completion:^(NSData *data) {
-        NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
-        NSData *data2 = [NSString decryptWithAES:dddd withKey:key];
-        NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
-        id object = [dddd2 objectFromJSONData];
-        completion(object);
+        if ([data length]<10) {
+            failure([NSError errorWithDomain:@"服务器返回失败" code:0 userInfo:nil]);
+        }
+        else{
+            NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
+            NSData *data2 = [NSString decryptWithAES:dddd withKey:key];
+            if (data2.length <12) {
+                failure([NSError errorWithDomain:@"服务器返回失败" code:0 userInfo:nil]);
+            }
+            else
+            {
+                NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
+                id object = [dddd2 objectFromJSONData];
+                completion(object);
+            }
+        }
+        
     } failure:failure];
     free(CommandStructure);
 }
@@ -409,7 +424,7 @@
     
     oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);
     
-    NSData *eBady = [NSString encryptWithAESkey:key type:1 data:body];
+    NSData *eBady = [NSString encryptWithAESkey:key data:body];
     UInt16 size = 14+8+[eBady length];
     Byte *CommandStructure = malloc(size);
     [self setsenderHead:CommandStructure cmd:0x87 type:0x1 length:length tag:tag token:tokenIMConnect];

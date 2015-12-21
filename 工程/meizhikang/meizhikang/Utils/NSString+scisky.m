@@ -10,7 +10,6 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonKeyDerivation.h>
 #import "NSString+scisky.h"
-#define KeyStr @"@1111111111111111"
 
 Byte aesKey[] = {0x37, 0x68, 0x99, 0x76, 0x13, 0x1b, 0x3c, 0xdd,0x19, 0x88, 0x7d, 0x1f,0xf3, 0xad, 0xde, 0x01,0x00};
 //Byte dd[] = {0xa9, 0x5d, 0xc7, 0x1a, 0x4f, 0xdd, 0xd3, 0x18, 0x42, 0x4f, 0x99, 0xb3, 0x8c, 0x2b, 0xe1, 0x1f, 0xe9, 0xa3, 0x32, 0x4f, 0xe7, 0x66, 0x0a, 0x8b, 0x78, 0xc6, 0x75, 0x48, 0x35, 0x19, 0x9d, 0xfe};
@@ -84,7 +83,7 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
 +(NSData *)AESAndXOREncrypt:(NSData *)token data:(NSData *)data{
     Byte key[16];
     oxr(key, [token bytes]+4);
-    return [NSString encryptWithAESkey:key type:1 data:data];
+    return [NSString encryptWithAESkey:key data:data];
 }
 
 +(NSData *)AESAndXORDecrypt:(NSData *)token data:(NSData *)data{
@@ -94,24 +93,30 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
 }
 
 -(NSData *)AESEncrypt{
-    return [NSString encryptWithAESkey:aesKey type:0 data:[self dataUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger dataLength = [data length];
+    NSUInteger hexLength = 16 - dataLength%16;
+    dataLength = dataLength + hexLength;
+    char *context = malloc(dataLength);
+    bzero(context, dataLength);
+    memcpy(context, [data bytes], [data length]);
+    NSData *contextData = [NSData dataWithBytes:context length:dataLength];
+    free(context);
+    return [NSString encryptWithAESkey:aesKey data:contextData];
 }
 
 +(NSData *)AESDecrypt:(NSData *)data{
     return [self decryptWithAES:data withKey:aesKey];
 }
 
-+ (NSData *)encryptWithAESkey:(Byte *)key type:(NSInteger)type data:(NSData *)data{
++ (NSData *)encryptWithAESkey:(Byte *)key data:(NSData *)data{
     
     NSUInteger dataLength = [data length];
-    if (type == 0) {
-        NSUInteger hexLength = 16 - dataLength%16;
-        dataLength = dataLength + hexLength;
-    }
+   
+    char keyPtr[kCCKeySizeAES128+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    memcpy(keyPtr, key, 16);
     
-    char *context = malloc(dataLength);
-    bzero(context, dataLength);
-    memcpy(context, [data bytes], [data length]);
     
     size_t bufferSize = dataLength + kCCBlockSizeAES128;
     void *buffer = malloc(bufferSize);
@@ -120,19 +125,17 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
     CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
                                           kCCAlgorithmAES128,
                                           kCCOptionPKCS7Padding,
-                                          key,
+                                          keyPtr,
                                           kCCBlockSizeAES128,
                                           nil,
-                                          context,//[data bytes],
+                                          [data bytes],
                                           dataLength,
                                           buffer,
                                           bufferSize,
                                           &numBytesCrypted);
     if (cryptStatus == kCCSuccess) {
-        //return [NSData dataWithBytes:dd length:32];
         return [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
     }
-    free(context);
     free(buffer);
     return nil;
     
@@ -198,53 +201,6 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
     return [str uppercaseString];
 }
 
-- (NSString *)decryptWithDES{
-    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    char *vplainText = strdup([self UTF8String]);//calloc([self length] * sizeof(char) + 1);
-    //    strcpy(vplainText, [self UTF8String]);
-    char *plain = malloc([self length] / 2 *sizeof(char));
-    for (int i=0;i<[self length] / 2;i++)
-    {
-        int a=0;
-        if (vplainText[i * 2]>='A' && vplainText[i * 2]<='Z')
-            a = vplainText[i * 2] - 'A' + 10;
-        if (vplainText[i * 2]>='0' && vplainText[i * 2]<='9')
-            a = vplainText[i * 2] - '0';
-        int b=0;
-        if (vplainText[i * 2 + 1]>='A' && vplainText[i * 2 + 1]<='Z')
-            b = vplainText[i * 2 + 1] - 'A' + 10;
-        if (vplainText[i * 2 + 1]>='0' && vplainText[i * 2 + 1]<='9')
-            b = vplainText[i * 2 + 1] - '0';
-        plain[i] = a * 16 + b;
-    }
-    free(vplainText);
-    CCCryptorStatus ccStatus;
-    const void *vinitVec = (const void *) [KeyStr UTF8String];
-    size_t plainTextBufferSize = [data length];
-    size_t bufferPtrSize = 0;
-    uint8_t *bufferPtr = NULL;
-    size_t movedBytes = 0;
-    bufferPtrSize = (plainTextBufferSize + kCCBlockSize3DES) & ~(kCCBlockSize3DES - 1);
-    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
-    memset((void *)bufferPtr, 0x0, bufferPtrSize);
-    
-    ccStatus = CCCrypt(kCCDecrypt,
-                       kCCAlgorithmDES,
-                       kCCOptionPKCS7Padding,
-                       [KeyStr UTF8String],
-                       kCCKeySizeDES,
-                       vinitVec,
-                       plain,
-                       [self length] / 2,
-                       (void *)bufferPtr,
-                       bufferPtrSize,
-                       &movedBytes);
-    free(plain);
-    NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
-    free(bufferPtr);
-    NSString *ret = [[NSString alloc] initWithData:myData encoding:NSUTF8StringEncoding];
-    return ret;
-}
 
 - (BOOL)checkTel
 {
@@ -431,7 +387,7 @@ void oxrPWToken(Byte *d,const Byte *t,const Byte *p){
         [scanner scanHexInt:&anInt];
         myBuffer[i / 2] = (char)anInt;
     }
-    return [NSData dataWithBytes:myBuffer length:((int)[self length] / 2 + 1)];
+    return [NSData dataWithBytesNoCopy:myBuffer length:((int)[self length] / 2 + 1)];
 }
 
 @end
