@@ -278,6 +278,9 @@
 		D39B899E1C087AC1009086B2 /* meizhikang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D39B899C1C087AC1009086B2 /* meizhikang.xcdatamodeld */; };
 		D39B89A01C087AC1009086B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D39B899F1C087AC1009086B2 /* Assets.xcassets */; };
 		D39B89A31C087AC1009086B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D39B89A11C087AC1009086B2 /* LaunchScreen.storyboard */; };
+		D3C263CD1C27FBAB0098BEAE /* IMRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C263CC1C27FBAB0098BEAE /* IMRequst.m */; };
+		D3C263D01C2806290098BEAE /* GroupMember+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C263CE1C2806290098BEAE /* GroupMember+CoreDataProperties.swift */; };
+		D3C263D11C2806290098BEAE /* GroupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C263CF1C2806290098BEAE /* GroupMember.swift */; };
 		D3EFF9C51C181D720047E2B0 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EFF9C41C181D720047E2B0 /* ThemeViewController.swift */; };
 		D3EFF9C81C1820E30047E2B0 /* UIColor+greenbaby.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFF9C71C1820E30047E2B0 /* UIColor+greenbaby.m */; };
 		D3EFF9FD1C182B8F0047E2B0 /* 图标1-紫.png in Resources */ = {isa = PBXBuildFile; fileRef = D3EFF9CD1C182B8F0047E2B0 /* 图标1-紫.png */; };
@@ -636,6 +639,10 @@
 		D39B899F1C087AC1009086B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D39B89A21C087AC1009086B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D39B89A41C087AC1009086B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3C263CB1C27FBAB0098BEAE /* IMRequst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRequst.h; sourceTree = "<group>"; };
+		D3C263CC1C27FBAB0098BEAE /* IMRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMRequst.m; sourceTree = "<group>"; };
+		D3C263CE1C2806290098BEAE /* GroupMember+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GroupMember+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D3C263CF1C2806290098BEAE /* GroupMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMember.swift; sourceTree = "<group>"; };
 		D3EFF9C41C181D720047E2B0 /* ThemeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		D3EFF9C61C1820E30047E2B0 /* UIColor+greenbaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+greenbaby.h"; sourceTree = "<group>"; };
 		D3EFF9C71C1820E30047E2B0 /* UIColor+greenbaby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+greenbaby.m"; sourceTree = "<group>"; };
@@ -762,6 +769,8 @@
 		B92C903F1C2040E7005F551F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D3C263CE1C2806290098BEAE /* GroupMember+CoreDataProperties.swift */,
+				D3C263CF1C2806290098BEAE /* GroupMember.swift */,
 				B9709AFF1C26F5ED004DCD50 /* Message+CoreDataProperties.swift */,
 				B9709B001C26F5ED004DCD50 /* Message.swift */,
 				D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */,
@@ -1047,6 +1056,8 @@
 				D3364BE71C1AE42E0055C75C /* IMObject.m */,
 				D36978BD1C1C407A0094921B /* NetWorkingContents.h */,
 				D36978BE1C1C407A0094921B /* NetWorkingContents.m */,
+				D3C263CB1C27FBAB0098BEAE /* IMRequst.h */,
+				D3C263CC1C27FBAB0098BEAE /* IMRequst.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1716,10 +1727,12 @@
 				D3F8E2CF1C0C384B00263B4E /* LoginViewController.swift in Sources */,
 				D32D080D1C0AD39500E2C7EF /* MainViewController.swift in Sources */,
 				D336C9301C2586C600E967EB /* UserInfo.swift in Sources */,
+				D3C263D01C2806290098BEAE /* GroupMember+CoreDataProperties.swift in Sources */,
 				D3897DDF1C09934100D18BAC /* ViewController+menu.m in Sources */,
 				B96C98B61C0EC7CB00228D21 /* HealthReportViewController.swift in Sources */,
 				D336C92C1C25868B00E967EB /* Group.swift in Sources */,
 				B96C98BE1C11C9DE00228D21 /* EmptySegue.swift in Sources */,
+				D3C263D11C2806290098BEAE /* GroupMember.swift in Sources */,
 				D3897E251C09A08400D18BAC /* MenuViewController.swift in Sources */,
 				D336C92E1C25868B00E967EB /* User.swift in Sources */,
 				B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */,
@@ -1729,6 +1742,7 @@
 				D3F8E2D51C0C385200263B4E /* FriendListTableViewController.swift in Sources */,
 				D33984731C26EA9D00A78D33 /* Email.swift in Sources */,
 				D3F8E2D01C0C384B00263B4E /* ModifPWTableViewController.swift in Sources */,
+				D3C263CD1C27FBAB0098BEAE /* IMRequst.m in Sources */,
 				D336C92B1C25868B00E967EB /* Group+CoreDataProperties.swift in Sources */,
 				D3F8E2C81C0C384300263B4E /* SwitchoverViewController.swift in Sources */,
 				D3EFF9C81C1820E30047E2B0 /* UIColor+greenbaby.m in Sources */,

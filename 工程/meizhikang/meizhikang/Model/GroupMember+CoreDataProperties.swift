@@ -1,5 +1,5 @@
 //
-//  Email+CoreDataProperties.swift
+//  GroupMember+CoreDataProperties.swift
 //  meizhikang
 //
 //  Created by 刘向宏 on 15/12/21.
@@ -12,13 +12,11 @@
 import Foundation
 import CoreData
 
-extension Email {
+extension GroupMember {
 
-    @NSManaged var content: String?
-    @NSManaged var fromid: NSNumber?
-    @NSManaged var sendtime: NSNumber?
-    @NSManaged var title: String?
-    @NSManaged var uuid: NSNumber?
-    @NSManaged var user: User?
+    @NSManaged var uid: NSNumber?
+    @NSManaged var nickname: String?
+    @NSManaged var createtime: NSNumber?
+    @NSManaged var groups: NSSet?
 
 }

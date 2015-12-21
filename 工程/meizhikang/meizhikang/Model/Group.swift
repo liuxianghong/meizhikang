@@ -26,10 +26,42 @@ class Group: NSManagedObject {
     }
     
     func upDateGroupInfo(dic : [String : AnyObject]){
-        createtime = dic["createtime"] as? NSNumber
+        
+        if members?.count == 0{
+            updateMembersChanges()
+        }
+        else if etag != nil{
+            if !etag!.isEqualToNumber(dic["etag"] as! NSNumber){
+                updateMembersChanges()
+            }
+        }
         etag = dic["etag"] as? NSNumber
+        createtime = dic["createtime"] as? NSNumber
         gname = dic["gname"] as? String
         owner = dic["owner"] as? NSNumber
+        
+    }
+    
+    func updateMembersChanges(){
+        IMRequst.GetMembersGroupByGid(gid, completion: { (object) -> Void in
+            print(object)
+            let json = JSON(object)
+            if !json["gid"].number!.isEqualToNumber(self.gid!){
+                return
+            }
+            let array = json["members"].arrayValue
+            for dic:JSON in array{
+                let member = GroupMember.GroupMemberByUid(dic["uid"].numberValue)
+                member?.upDateGroupInfo(dic.dictionaryObject!)
+                if !member!.groups!.containsObject(self){
+                    let ms = member?.groups as! NSMutableSet
+                    ms.addObject(self)
+                }
+            }
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreWithCompletion(nil)
+            }) { (error : NSError!) -> Void in
+                
+        }
     }
 
 }

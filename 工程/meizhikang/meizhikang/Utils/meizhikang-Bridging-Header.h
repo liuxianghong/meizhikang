@@ -6,7 +6,7 @@
 #import <SWRevealViewController/SWRevealViewController.h>
 #import "UIColor+greenbaby.h"
 #import "NSString+scisky.h"
-#import "IMConnect.h"
+#import "IMRequst.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <MagicalRecord/MagicalRecord.h>

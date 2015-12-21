@@ -2,7 +2,7 @@
 //  Group+CoreDataProperties.swift
 //  meizhikang
 //
-//  Created by 刘向宏 on 15/12/20.
+//  Created by 刘向宏 on 15/12/21.
 //  Copyright © 2015年 刘向宏. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,6 +20,7 @@ extension Group {
     @NSManaged var gname: String?
     @NSManaged var owner: NSNumber?
     @NSManaged var messages: NSSet?
+    @NSManaged var members: NSSet?
     @NSManaged var user: NSSet?
 
 }

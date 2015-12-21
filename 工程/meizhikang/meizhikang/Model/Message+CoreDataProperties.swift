@@ -15,12 +15,12 @@ import CoreData
 extension Message {
 
     @NSManaged var content: String?
+    @NSManaged var data: NSData?
     @NSManaged var fromid: NSNumber?
     @NSManaged var gid: NSNumber?
     @NSManaged var pushtype: String?
     @NSManaged var sendtime: NSNumber?
     @NSManaged var uuid: NSNumber?
-    @NSManaged var data: NSData?
     @NSManaged var group: Group?
 
 }

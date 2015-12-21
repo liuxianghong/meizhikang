@@ -174,8 +174,6 @@ class ChatViewController: JSQMessagesViewController {
         
         if group != nil{
             
-            
-            
             //发送语音
             let data = UIImageJPEGRepresentation(UIImage(named: "圆-灰")!, 0.8)
             IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
@@ -185,8 +183,7 @@ class ChatViewController: JSQMessagesViewController {
             })
             
             //发送文字
-            let dic = ["type" : "send_msg" ,"uuid" : 1089 ,"fromtype" :1 ,"toid" : group.gid! ,"content" : "[text]\(text)[/text]"]
-            IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            IMRequst.SendMessage(text, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
                 print(object)
                 let json = JSON(object)
                 let flag = json["flag"].intValue

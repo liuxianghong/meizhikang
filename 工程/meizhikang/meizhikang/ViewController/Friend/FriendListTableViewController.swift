@@ -8,6 +8,7 @@
 
 import UIKit
 import MagicalRecord
+import MBProgressHUD
 
 struct FriendListTableViewControllerConstant{
     static let chatSegueIdentifier = "ChatSegueIdentifier"
@@ -49,10 +50,20 @@ class FriendListTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let dic = ["type":"groups"]
-        
         emailArray = Email.MR_findAll() as! [Email]
+        self.tableView.reloadData()
         
+        self.loadGrous()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func loadGrous(){
+        let dic = ["type":"groups"]
         IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
             print(object)
             let json = JSON(object)
@@ -74,13 +85,6 @@ class FriendListTableViewController: UITableViewController {
             
             }, failure: { (error : NSError!) -> Void in
         })
-        
-        self.tableView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func typeButtonClick(sender : UIButton){
@@ -107,7 +111,7 @@ class FriendListTableViewController: UITableViewController {
         else if type == 3{
             return emailArray.count
         }
-        return type+1
+        return 0
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -133,6 +137,7 @@ class FriendListTableViewController: UITableViewController {
             cell.typeImageView.image = UIImage(named: "通讯2")
             let group = self.groupArray[indexPath.row-1]
             cell.nameLabel.text = group.gname
+            cell.numberLabel.text = "\((group.members?.count)! as Int)"
         }
         else if type == 2{
             cell.typeImageView.image = UIImage(named: "联系人-蓝")
@@ -152,7 +157,49 @@ class FriendListTableViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if type==1 && (indexPath.section==0 && indexPath.row == 0){
             let actionVC = UIAlertController(title: "", message: "加入或创建一个群", preferredStyle: .ActionSheet)
-            let actionNew = UIAlertAction(title: "创建群", style: .Default, handler: { (UIAlertAction) -> Void in
+            let actionNew = UIAlertAction(title: "创建群", style: .Default, handler: { (ac :UIAlertAction) -> Void in
+                let actionGroup = UIAlertController(title: "", message: "组名称", preferredStyle: .Alert)
+                let actionA = UIAlertAction(title: "创建", style: .Default, handler: { (UIAlertAction) -> Void in
+                    let tf = actionGroup.textFields![0]
+                    let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                    IMRequst.CreateGroupByGid(tf.text, completion: { (object) -> Void in
+                        print(object)
+                        let joson = JSON(object)
+                        let flag = joson["flag"].intValue
+                        if flag == 1{
+                            hud.detailsLabelText = "创建组成功";
+                             self.loadGrous()
+                        }
+                        else if flag == -1{
+                            hud.detailsLabelText = "已经创建1个组";
+                        }
+                        else
+                        {
+                            hud.detailsLabelText = "创建组失败";
+                        }
+                        hud.mode = .Text
+                        
+                        hud.hide(true, afterDelay: 1.5)
+                        
+                        }, failure: { (error : NSError!) -> Void in
+                            hud.mode = .Text
+                            hud.detailsLabelText = error.domain;
+                            hud.hide(true, afterDelay: 1.5)
+                            print(error)
+                    })
+                })
+                
+                let actionC = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+                    
+                })
+                actionGroup.addTextFieldWithConfigurationHandler({ (UITextField) -> Void in
+                    
+                })
+                actionGroup.addAction(actionA)
+                actionGroup.addAction(actionC)
+                self.presentViewController(actionGroup, animated: true, completion: { () -> Void in
+                    
+                })
                 
             })
             
