@@ -27,9 +27,10 @@ class ChatViewModel: NSObject{
             receiverId: JSQMessagesAvatarImageFactory.avatarImageWithImage(receiverAvatar, diameter: 30)]
         users = [senderId : senderName,
             receiverId: receiverName]
-        let factory = JSQMessagesBubbleImageFactory(bubbleImage: UIImage(named: "白对话框.png"), capInsets: UIEdgeInsetsMake(12, 16, 12, 16))
-        outgoingBubbleImage = factory.outgoingMessagesBubbleImageWithColor(UIColor.whiteColor())
-        incomingBubbleImage = factory.incomingMessagesBubbleImageWithColor(UIColor(red: 35.0/255.0, green: 222.0/255.0, blue: 191.0/255.0, alpha: 1.0))
+        let outImage = UIImage(named: "白对话框.png")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 12, 25, 12), resizingMode: .Stretch)
+        let inImage = UIImage(named: "蓝对话框.png")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 12, 25, 12), resizingMode: .Stretch)
+        outgoingBubbleImage = JSQMessagesBubbleImage(messageBubbleImage: outImage, highlightedImage: outImage)
+        incomingBubbleImage = JSQMessagesBubbleImage(messageBubbleImage: inImage, highlightedImage: inImage)
     }
     
     func bubbleImage(senderId :String,index :Int)->JSQMessageBubbleImageDataSource!{
@@ -167,10 +168,8 @@ class ChatViewController: JSQMessagesViewController {
         print("addPhoto")
     }
     func sendMessage(text: String, sendId: String, senderDisplayName: String, date: NSDate){
-        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
-        viewModel.messages?.append(message)
-        let message2 = JSQMessage(senderId: receiverId, displayName: receiverName, text: text)
-        viewModel.messages?.append(message2)
+//        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
+//        viewModel.messages?.append(message)
         
         if group != nil{
             
@@ -181,6 +180,8 @@ class ChatViewController: JSQMessagesViewController {
                 }, failure: { (error : NSError!) -> Void in
                     print(error)
             })
+            let mess = JSQMessage(senderId: sendId, displayName: senderDisplayName, media: JSQPhotoMediaItem(image: UIImage(named: "轮换图1.png")))
+            viewModel.messages?.append(mess)
             
             //发送文字
             IMRequst.SendMessage(text, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
@@ -281,6 +282,26 @@ class ChatViewController: JSQMessagesViewController {
             cell?.textView?.textColor = UIColor.whiteColor()
         }else{
             cell?.textView?.textColor = UIColor.blackColor()
+        }
+        let mediaMessage = message.isMediaMessage
+        if (mediaMessage){
+            if let photoItem = message.media as? JSQPhotoMediaItem{
+                let size = CGSizeMake(210, 150)
+                let imageView = UIImageView(image: photoItem.image)
+                imageView.frame = CGRectMake(0.0, 0.0, size.width, size.height)
+                imageView.contentMode = .ScaleAspectFill
+                imageView.clipsToBounds = true
+                var image : UIImage?
+                if message.senderId == self.senderId{
+                    image = UIImage(named: "蓝对话框.png")
+                }else{
+                    image = UIImage(named: "白对话框.png")
+                }
+                let factory = JSQMessagesBubbleImageFactory(bubbleImage: image, capInsets: UIEdgeInsetsMake(7, 12, 25, 12))
+                let mask = JSQMessagesMediaViewBubbleImageMasker(bubbleImageFactory: factory)
+                mask.applyOutgoingBubbleImageMaskToMediaView(imageView)
+                cell?.mediaView = imageView
+            }
         }
         return cell!
     }
