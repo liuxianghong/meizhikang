@@ -468,19 +468,25 @@
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
     [self setudpSocket];
-    IMObject *im = [[IMObject alloc]initWithTag:tag];
-    im.readHead = readHead;
-    im.completion = completion;
-    im.failure = failure;
-    im.lenth = 10;
-    if (currentIM && !currentIM.finished) {
-        im.sendData = data;
-        [IMQueue addObject:im];
+    if (tag==-1) {
+        [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
     }
     else
     {
-        currentIM = im;
-        [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
+        IMObject *im = [[IMObject alloc]initWithTag:tag];
+        im.readHead = readHead;
+        im.completion = completion;
+        im.failure = failure;
+        im.lenth = 10;
+        if (currentIM && !currentIM.finished) {
+            im.sendData = data;
+            [IMQueue addObject:im];
+        }
+        else
+        {
+            currentIM = im;
+            [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
+        }
     }
     
 }
@@ -533,7 +539,7 @@
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
     NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
-    if (!isListen) {
+    if (!isListen && tag != -1) {
         [self listenHeadDataWithIMObject:currentIM];
     }
     //[self listenData];
@@ -553,74 +559,33 @@
         if (magic == IM_MAGIC) {
             UInt8 cmd = 0;
             UInt8 subcmd = 0;
+            UInt32 reciveTag = 0;
             memcpy(&cmd, [data bytes]+4, sizeof(cmd));
             memcpy(&subcmd, [data bytes]+5, sizeof(subcmd));
+            memcpy(&reciveTag, [data bytes]+6, sizeof(reciveTag));
             if (cmd == 0x88) {
                 reciveIM = [[IMObject alloc]initWithTag:tag];
                 reciveIM.cmd = cmd;
                 reciveIM.subCmd = subcmd;
+                reciveIM.tag = reciveTag;
                 [reciveIM.data appendData:data];
                 [self listenData:12 Withtag:tag];
+            }
+            else
+            {
+                [self doSocketError];
             }
             return;
         }
     }
     
     if ((reciveIM && !reciveIM.finished)) {
-        if(reciveIM.cmd == 0x88){
-            [reciveIM.data appendData:data];
-            if (reciveIM.data.length == 22) {
-                UInt32 length = 0;
-                memcpy(&length, [data bytes]+8, sizeof(length));
-                if(length == 0){
-                    [self listenRecive];
-                }
-                else{
-                    length = (length/16+1)*16;
-                    [self listenData:length Withtag:reciveIM.tag];
-                }
-            }
-            else{
-                Byte token[8];
-                memcpy(token, [reciveIM.data bytes]+10, 8);
-                Byte newKey[16];
-                oxrPWToken(newKey,token+4,[passWordIMConnect bytes]);
-                NSData *dddd = [NSData dataWithBytes:[reciveIM.data bytes]+22 length:([reciveIM.data length]-22)];
-                NSData *data2 = [NSString decryptWithAES:dddd withKey:newKey];
-                if (reciveIM.subCmd == 0xfe) {
-                    
-                    NSString *str = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
-                    [[NSNotificationCenter defaultCenter]
-                     postNotificationName:@"loginOutNotification" object:str];
-                }
-                else if (reciveIM.subCmd == 0x1){
-                    
-                    NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
-                    id object = [dddd2 objectFromJSONData];
-                    NSLog(@"%@",object);
-                    if (object){
-                        if ([object[@"pushtype"] isEqualToString:@"meet"] ) {
-                            Message *message = [Message MR_createEntity];
-                            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                                [message upDateMessageInfo:object];
-                                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-                                [[NSNotificationCenter defaultCenter]
-                                 postNotificationName:@"reciveMessageNotification" object:message];
-                            });
-                            
-                            
-                        }
-                        else if ([object[@"pushtype"] isEqualToString:@"email"] ) {
-                            Email *email = [Email EmailByUuid:object[@"uuid"]];
-                            [email upDateEmailInfo:object];
-                            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-                        }
-                    }
-                    
-                }
-                
-                [self listenRecive];
-            }
+        if(reciveIM.cmd == 0x88)
+        {
+            [self imRecivePostMessage:data];
+        }
+        else{
+            [self doSocketError];
         }
         return;
     }
@@ -628,6 +593,10 @@
     
     
     IMObject *im = currentIM;
+    if (!im || im.finished) {//不是0x88推送 也不是发送返回
+        [self doSocketError];
+        return;
+    }
     if (im.lenth != [data length]) {
         currentIM.finished = YES;
         im.failure([NSError errorWithDomain:@"Read data error" code:0 userInfo:nil]);
@@ -635,28 +604,38 @@
         return;
     }
     if ([im.data length] == 0) {
-        [im.data appendData:data];
-        UInt32 length = 0;
-        memcpy(&length, [data bytes]+6, sizeof(length));
+        if ([data length]<10) {
+            [self doSocketError];
+            return;
+        }
         UInt8 code = 0;
+        UInt32 length = 0;
+        UInt32 seq = 0;
         memcpy(&code, [data bytes]+1, sizeof(code));
-        if (code != 200) {
+        memcpy(&seq, [data bytes]+2, sizeof(seq));
+        memcpy(&length, [data bytes]+6, sizeof(length));
+        if ((long)seq != im.tag) {
+            im.failure([NSError errorWithDomain:@"服务器出错" code:0 userInfo:nil]);
+            im.finished = YES;
+            [self doSocketError];
+            return;
+        }
+        [im.data appendData:data];
+        length = currentIM.readHead(length);
+        if (length == 0) {
             currentIM.finished = YES;
-            im.failure([NSError errorWithDomain:[NetWorkingContents getReturnDescription:code] code:code userInfo:nil]);
+            if (code != 200) {
+                im.failure([NSError errorWithDomain:[NetWorkingContents getReturnDescription:code] code:code userInfo:nil]);
+            }
+            else{
+                im.completion(im.data);
+            }
             [self listenRecive];
         }
-        else{
-            length = currentIM.readHead(length);
-            if (length == 0) {
-                currentIM.finished = YES;
-                im.completion(im.data);
-                [self listenRecive];
-            }
-            else
-            {
-                [self listenData:length WithIMObject:im];
-                return;
-            }
+        else
+        {
+            [self listenData:length WithIMObject:im];
+            return;
         }
     }
     else
@@ -683,4 +662,91 @@
     }
     [IMQueue removeAllObjects];
 }
+
+-(void)imRecivePostMessage:(NSData *)data{
+    [reciveIM.data appendData:data];
+    if (reciveIM.data.length<22) {
+        [self doSocketError];
+        return;
+    }
+    else if (reciveIM.data.length == 22) {
+        UInt32 length = 0;
+        memcpy(&length, [data bytes]+8, sizeof(length));
+        if(length == 0){
+            [self listenRecive];
+        }
+        else{
+            length = (length/16+1)*16;
+            [self listenData:length Withtag:reciveIM.tag];
+        }
+    }
+    else{
+        Byte token[8];
+        memcpy(token, [reciveIM.data bytes]+10, 8);
+        Byte newKey[16];
+        oxrPWToken(newKey,token+4,[passWordIMConnect bytes]);
+        NSData *dddd = [NSData dataWithBytes:[reciveIM.data bytes]+22 length:([reciveIM.data length]-22)];
+        NSData *data2 = [NSString decryptWithAES:dddd withKey:newKey];
+        if (reciveIM.subCmd == 0xfe) {
+            
+            NSString *str = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"loginOutNotification" object:str];
+        }
+        else if (reciveIM.subCmd == 0x1){
+            
+            if ([data2 length]<12) {
+                [self doSocketError];
+                return;
+            }
+            NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
+            id object = [dddd2 objectFromJSONData];
+            NSLog(@"%@",object);
+            if (object){
+                if ([object[@"pushtype"] isEqualToString:@"meet"] ) {
+                    Message *message = [Message MR_createEntity];
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        [message upDateMessageInfo:object];
+                        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                        [[NSNotificationCenter defaultCenter]
+                         postNotificationName:@"reciveMessageNotification" object:message];
+                    });
+                    
+                    
+                }
+                else if ([object[@"pushtype"] isEqualToString:@"email"] ) {
+                    Email *email = [Email EmailByUuid:object[@"uuid"]];
+                    [email upDateEmailInfo:object];
+                    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                }
+                else if ([object[@"pushtype"] isEqualToString:@"group_change"]){
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"groupChangeNotification" object:object];
+                }
+                else{
+                    NSLog(@"unknow pushtype");
+                }
+            }
+            
+            UInt16 size = 14;
+            Byte *CommandStructure = malloc(size);
+            [self setsenderHead:CommandStructure cmd:0x98 type:reciveIM.subCmd length:0 tag:reciveIM.tag];
+            NSData *data = [NSData dataWithBytes:CommandStructure length:size];
+            
+            [self writeData:data tag:-1 readHead:nil completion:nil failure:nil];
+            free(CommandStructure);
+            
+        }
+        
+        
+        
+        [self listenRecive];
+    }
+}
+
+-(void)doSocketError{
+    [asyncSocket disconnect];
+    NSLog(@"####################### doSocketError ############################");
+}
+
 @end
