@@ -11,9 +11,17 @@
 
 @interface IMRequst : NSObject
 
++(void)LoginWithUserName:(NSString *)userName PassWord:(NSString *)pw  completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure;
+
++(void)registWithUserName:(NSString *)userName withCode:(NSString *)code withNickName:(NSString *)nickName withPW:(NSString *)pw withSex:(UInt8)sex withAge:(UInt8)age withHeiht:(UInt8)height withWight:(UInt16)wight completion:(void (^)())completion failure:(IMObjectFailureHandler)failure;
+
++(void)GetUserInfoCompletion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
 +(void)SendMessage:(NSString *)text fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 +(void)GetMembersGroupByGid:(NSNumber *)gid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 +(void)CreateGroupByGid:(NSString *)groupName completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
++(void)LoginOut;
 @end

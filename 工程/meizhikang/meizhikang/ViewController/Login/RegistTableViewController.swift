@@ -119,41 +119,30 @@ class RegistTableViewController: UITableViewController {
         
         let sex : UInt8 = self.sexManButton.selected ? 1 : 0
         
-        IMConnect.Instance().getRegistToken(self.userNameTextField.text, completion: { (token : NSData!, data : NSData!) -> Void in
-            print(token)
-            IMConnect.Instance().registWithToken(token, withCode: "1234", withNickName: self.nickNameTextField.text, withPW: "123456", withSex: sex, withAge: age!, withHeiht: height!, withWight: wight!, completion: { () -> Void in
-                //hud.mode = .Text
-                hud.detailsLabelText = "注册成功，正在获取用户信息";
-                let dic : NSDictionary = ["type": "account"]
-                IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
-                    print(object)
-                    NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                    self.dismissViewControllerAnimated(true) { () -> Void in
-                    }
-                    hud.hide(true)
-                    
-                    }, failure: { (error : NSError!) -> Void in
-                        hud.mode = .Text
-                        hud.detailsLabelText = error.domain;
-                        hud.hide(true, afterDelay: 1.5)
-                        print(error)
-                })
-                
-                }, failure: { (error : NSError!) -> Void in
-                    hud.mode = .Text
-                    hud.detailsLabelText = error.domain;
-                    hud.hide(true, afterDelay: 1.5)
-                    print(error)
-            })
-            
+        IMRequst.registWithUserName(self.userNameTextField.text, withCode: "1234", withNickName: self.nickNameTextField.text, withPW: self.passWordTextField.text, withSex: sex, withAge: age!, withHeiht: height!, withWight: wight!, completion: { () -> Void in
+            hud.mode = .Text
+            hud.detailsLabelText = "注册成功，请登录"
+            hud.hide(true, afterDelay: 1.5)
+            self.navigationController?.popViewControllerAnimated(true)
+//            print(object)
+//            NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+//            NSUserDefaults.standardUserDefaults().synchronize()
+//            let user = User.userByUid(object["uid"]!!)
+//            user!.upDateUserInfo(object as! [String : AnyObject])
+//            user!.userName = self.userNameTextField.text
+//            user!.passWord = self.passWordTextField.text
+//            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+//            self.dismissViewControllerAnimated(true) { () -> Void in
+//            }
+
+            //hud.hide(true)
             }) { (error : NSError!) -> Void in
                 hud.mode = .Text
                 hud.detailsLabelText = error.domain;
                 hud.hide(true, afterDelay: 1.5)
-                print(error)
+                IMRequst.LoginOut()
         }
-        
+    
     }
     
     @IBAction func sexManClick(sender : UIButton) {

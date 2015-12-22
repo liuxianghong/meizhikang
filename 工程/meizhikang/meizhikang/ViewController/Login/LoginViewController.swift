@@ -23,6 +23,11 @@ class LoginViewController: UIViewController {
         
         //IMConnect.Instance().test()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        IMRequst.LoginOut()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -53,40 +58,31 @@ class LoginViewController: UIViewController {
         }
         
         hud.detailsLabelText = "正在登录";
-        IMConnect.Instance().getToken(self.userNameTextField.text, completion: { (token : NSData!, data : NSData!) -> Void in
-            print(token)
-            IMConnect.Instance().login(self.passWordTextField.text, withToken: token, completion: { (ip : UInt32,port : UInt16) -> Void in
-                print(ip,port)
-                hud.detailsLabelText = "登录成功，正在获取用户信息";
-                let dic : NSDictionary = ["type": "account"]
-                IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
-                    hud.hide(true)
-                    print(object)
-                    NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                    let user = User.userByUid(object["uid"]!!)
-                    user!.upDateUserInfo(object as! [String : AnyObject])
-                    user!.userName = self.userNameTextField.text
-                    user!.passWord = self.passWordTextField.text
-                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-                    
-                    self.dismissViewControllerAnimated(true) { () -> Void in
-                    }
-                    }, failure: { (error : NSError!) -> Void in
-                        hud.mode = .Text
-                        hud.detailsLabelText = error.domain;
-                        hud.hide(true, afterDelay: 1.5)
-                        print(error)
-                })
+        IMRequst.LoginWithUserName(self.userNameTextField.text, passWord: self.passWordTextField.text, completion: { (ip : UInt32,port : UInt16) -> Void in
+            print(ip,port)
+            hud.detailsLabelText = "登录成功，正在获取用户信息";
+            IMRequst.GetUserInfoCompletion({ (object) -> Void in
+                hud.hide(true)
+                print(object)
+                NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                let user = User.userByUid(object["uid"]!!)
+                user!.upDateUserInfo(object as! [String : AnyObject])
+                user!.userName = self.userNameTextField.text
+                user!.passWord = self.passWordTextField.text
+                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                 
+                self.dismissViewControllerAnimated(true) { () -> Void in
+                }
                 }, failure: { (error : NSError!) -> Void in
                     hud.mode = .Text
                     hud.detailsLabelText = error.domain;
                     hud.hide(true, afterDelay: 1.5)
+                    IMRequst.LoginOut()
                     print(error)
             })
-            
             }) { (error : NSError!) -> Void in
+                IMRequst.LoginOut()
                 hud.mode = .Text
                 hud.detailsLabelText = error.domain;
                 hud.hide(true, afterDelay: 1.5)

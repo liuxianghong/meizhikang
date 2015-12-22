@@ -1050,14 +1050,14 @@
 			children = (
 				D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */,
 				D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */,
+				D3C263CB1C27FBAB0098BEAE /* IMRequst.h */,
+				D3C263CC1C27FBAB0098BEAE /* IMRequst.m */,
 				D3EFFA351C186D7B0047E2B0 /* IMConnect.h */,
 				D3EFFA361C186D7B0047E2B0 /* IMConnect.m */,
 				D3364BE61C1AE42E0055C75C /* IMObject.h */,
 				D3364BE71C1AE42E0055C75C /* IMObject.m */,
 				D36978BD1C1C407A0094921B /* NetWorkingContents.h */,
 				D36978BE1C1C407A0094921B /* NetWorkingContents.m */,
-				D3C263CB1C27FBAB0098BEAE /* IMRequst.h */,
-				D3C263CC1C27FBAB0098BEAE /* IMRequst.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";

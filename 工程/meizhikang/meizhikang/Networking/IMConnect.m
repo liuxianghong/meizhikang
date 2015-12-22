@@ -70,7 +70,7 @@
 
 -(void)countDown
 {
-    if(asyncSocket.isConnected && tokenIMConnect && passWordIMConnect){
+    if(asyncSocket.isConnected && tokenIMConnect && passWordIMConnect && !(currentIM && currentIM.sendingType == IMObjectSending)){
         UInt16 size = 14+8;
         long tag = ++connectTag;
         Byte *CommandStructure = malloc(size);
@@ -109,6 +109,9 @@
     }
 }
 
+-(void)LoginOut{
+    [asyncSocket disconnect];
+}
 
 
 -(void)setsenderHead:(Byte *)CommandStructure cmd:(Byte)cmd type:(Byte)type length:(NSUInteger)length tag:(long)tag{
@@ -146,6 +149,9 @@
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
+        if (length == 0) {
+            return 0;
+        }
         return 8+16;
     } completion:^(NSData *data) {
         if ([data length]<18) {
@@ -262,9 +268,15 @@
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
-        UInt32 ll = ((lenth_-8)/16+1)*16+8;
-        NSLog(@"长度 ：%d,我的长度: %d",lenth_,ll);
-        return ll;
+        if (lenth_ == 0) {
+            return 0;
+        }
+        else
+        {
+            UInt32 ll = ((lenth_-8)/16+1)*16+8;
+            NSLog(@"长度 ：%d,我的长度: %d",lenth_,ll);
+            return ll;
+        }
     } completion:^(NSData *data) {
         NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
         completion(token,nil);
@@ -285,8 +297,14 @@
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
-        UInt32 ll = ((lenth_-8)/16+1)*16+8;
-        return ll;
+        if (lenth_ == 0) {
+            return 0;
+        }
+        else
+        {
+            UInt32 ll = ((lenth_-8)/16+1)*16+8;
+            return ll;
+        }
     } completion:^(NSData *data) {
         tokenIMConnect = [NSData dataWithBytes:[data bytes]+10 length:8];
         NSData *imageData = [NSData dataWithBytes:[data bytes]+18 length:([data length]-18)];
@@ -392,6 +410,9 @@
     
     
     [self writeData:data tag:tag readHead:^UInt32(UInt32 _lenth) {
+        if (_lenth == 0) {
+            return 0;
+        }
         return (_lenth/16+1)*16;
     } completion:^(NSData *data) {
         if ([data length]<10) {
@@ -434,6 +455,9 @@
     
     
     [self writeData:data tag:tag readHead:^UInt32(UInt32 _lenth) {
+        if (_lenth == 0) {
+            return 0;
+        }
         return (_lenth/16+1)*16;
     } completion:^(NSData *data) {
         NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
@@ -478,13 +502,14 @@
         im.completion = completion;
         im.failure = failure;
         im.lenth = 10;
-        if (currentIM && !currentIM.finished) {
+        if (currentIM && currentIM.sendingType != IMObjectSendFinished) {
             im.sendData = data;
             [IMQueue addObject:im];
         }
         else
         {
             currentIM = im;
+            currentIM.sendingType = IMObjectSending;
             [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
         }
     }
@@ -506,12 +531,12 @@
 }
 
 -(void)listenRecive{
-    if (currentIM && !currentIM.finished)
+    if (currentIM && currentIM.sendingType != IMObjectSendFinished)
     {
         return;
     }
     if (reciveIM) {
-        reciveIM.finished = YES;
+        currentIM.sendingType = IMObjectSendFinished;
         reciveIM = nil;
     }
     if (IMQueue.count==0) {
@@ -519,9 +544,19 @@
         [asyncSocket readDataToLength:10 withTimeout:-1 tag:0];
     }
     else{
-        currentIM = [IMQueue firstObject];
-        [IMQueue removeObjectAtIndex:0];
-        [asyncSocket writeData:currentIM.sendData withTimeout:IMTIMEOUT tag:currentIM.tag];
+        for (IMObject *im in IMQueue) {
+            if (im.sendingType != IMObjectSendFinished) {
+                currentIM = im;
+                im.sendingType = IMObjectSending;
+                [IMQueue removeObject:im];
+                [asyncSocket writeData:currentIM.sendData withTimeout:IMTIMEOUT tag:currentIM.tag];
+                break;
+            }
+            else{
+                [IMQueue removeObject:im];
+            }
+        }
+        
     }
 }
 
@@ -568,6 +603,7 @@
                 reciveIM.cmd = cmd;
                 reciveIM.subCmd = subcmd;
                 reciveIM.tag = reciveTag;
+                reciveIM.sendingType = IMObjectSending;
                 [reciveIM.data appendData:data];
                 [self listenData:12 Withtag:tag];
             }
@@ -579,7 +615,7 @@
         }
     }
     
-    if ((reciveIM && !reciveIM.finished)) {
+    if ((reciveIM && reciveIM.sendingType != IMObjectSendFinished)) {
         if(reciveIM.cmd == 0x88)
         {
             [self imRecivePostMessage:data];
@@ -593,12 +629,12 @@
     
     
     IMObject *im = currentIM;
-    if (!im || im.finished) {//不是0x88推送 也不是发送返回
+    if (!im || im.sendingType != IMObjectSending) {//不是0x88推送 也不是发送返回
         [self doSocketError];
         return;
     }
     if (im.lenth != [data length]) {
-        currentIM.finished = YES;
+        currentIM.sendingType = IMObjectSendFinished;
         im.failure([NSError errorWithDomain:@"Read data error" code:0 userInfo:nil]);
         [self listenRecive];
         return;
@@ -616,14 +652,14 @@
         memcpy(&length, [data bytes]+6, sizeof(length));
         if ((long)seq != im.tag) {
             im.failure([NSError errorWithDomain:@"服务器出错" code:0 userInfo:nil]);
-            im.finished = YES;
+            currentIM.sendingType = IMObjectSendFinished;
             [self doSocketError];
             return;
         }
         [im.data appendData:data];
         length = currentIM.readHead(length);
         if (length == 0) {
-            currentIM.finished = YES;
+            currentIM.sendingType = IMObjectSendFinished;
             if (code != 200) {
                 im.failure([NSError errorWithDomain:[NetWorkingContents getReturnDescription:code] code:code userInfo:nil]);
             }
@@ -640,7 +676,7 @@
     }
     else
     {
-        currentIM.finished = YES;
+        currentIM.sendingType = IMObjectSendFinished;
         [im.data appendData:data];
         im.completion(im.data);
         [self listenRecive];
@@ -651,14 +687,21 @@
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
-    isListen = false;
+    
     NSLog(@"socket: DidDisconnect:%p withError: %@", sock, err);
-    if (currentIM && err && !currentIM.finished) {
-        currentIM.finished = YES;
-        currentIM.failure(err);
+    isListen = false;
+    if (currentIM && err && currentIM.sendingType != IMObjectSendFinished) {
+        currentIM.sendingType = IMObjectSendFinished;
+        currentIM.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
     }
     for (IMObject *im in IMQueue) {
-        im.failure(err);
+        if (im.sendingType != IMObjectSendFinished) {
+            im.sendingType = IMObjectSendFinished;
+            im.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
+        }
+    }
+    if (reciveIM) {
+        reciveIM = nil;
     }
     [IMQueue removeAllObjects];
 }

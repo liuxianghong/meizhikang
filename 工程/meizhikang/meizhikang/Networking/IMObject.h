@@ -9,16 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "NetWorkingContents.h"
 
-
-typedef void (^IMObjectCompletionHandler)(NSData *data);
-typedef UInt32 (^IMObjectReadHeadHandler)(UInt32 lenth);
-typedef void (^IMObjectFailureHandler)(NSError *error);
-
+typedef NSUInteger IMObjectSendingType;
+NS_ENUM(IMMsgSendFromType) {
+    IMObjectSendInit = 0,
+    IMObjectSending  = 1,
+    IMObjectSendFinished = 2,
+};
 
 @interface IMObject : NSObject
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSData *sendData;
-@property (nonatomic,assign) BOOL finished;
+@property (nonatomic,assign) IMObjectSendingType sendingType;
 @property (nonatomic,assign) long tag;
 @property (nonatomic,assign) long lenth;
 @property (nonatomic,assign) UInt8 cmd;

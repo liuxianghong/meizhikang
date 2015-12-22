@@ -8,12 +8,40 @@
 
 #import "IMObject.h"
 
-@implementation IMObject 
+@implementation IMObject
+{
+    NSTimer *countDownTimer;
+}
+
 -(instancetype)initWithTag:(long) tag{
     self = [super init];
     self.data = [[NSMutableData alloc]init];
     self.tag = tag;
-    self.finished = NO;
+    self.sendingType = IMObjectSendInit;
+    countDownTimer = [NSTimer scheduledTimerWithTimeInterval:IMTIMEOUT target:self selector:@selector(countDown) userInfo:nil repeats:NO];
     return self;
+}
+
+-(void)setSendingType:(IMObjectSendingType)sendingType
+{
+    _sendingType = sendingType;
+    if (sendingType != IMObjectSendInit) {
+        if (countDownTimer) {
+            [countDownTimer invalidate];
+            countDownTimer = nil;
+        }
+    }
+    if (sendingType == IMObjectSending){
+        countDownTimer = [NSTimer scheduledTimerWithTimeInterval:(IMTIMEOUT+10) target:self selector:@selector(countDown) userInfo:nil repeats:NO];
+    }
+}
+
+-(void)countDown{
+    if (countDownTimer) {
+        [countDownTimer invalidate];
+        countDownTimer = nil;
+    }
+    _sendingType = IMObjectSendFinished;
+    self.failure([NSError errorWithDomain:@"超时" code:0 userInfo:nil]);
 }
 @end

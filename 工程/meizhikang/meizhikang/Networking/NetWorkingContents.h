@@ -12,6 +12,11 @@
 #define IMTIMEOUT 10
 #define IM_MAGIC 0xbebaedfe
 
+typedef void (^IMObjectCompletionHandler)(NSData *data);
+typedef UInt32 (^IMObjectReadHeadHandler)(UInt32 lenth);
+typedef void (^IMObjectFailureHandler)(NSError *error);
+typedef void (^IMObjectTokenCompletionHandler)(NSData *token,NSData *data);
+typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 
 typedef NSUInteger IMMsgSendFromType;
 NS_ENUM(IMMsgSendFromType) {

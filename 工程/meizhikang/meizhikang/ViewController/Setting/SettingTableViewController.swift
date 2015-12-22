@@ -109,6 +109,7 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
             else
             {
                 if self.revealViewController() != nil{
+                    IMRequst.LoginOut()
                     self.revealViewController().navigationController!.performSegueWithIdentifier("loginIdentifier", sender: nil)
                 }
             }

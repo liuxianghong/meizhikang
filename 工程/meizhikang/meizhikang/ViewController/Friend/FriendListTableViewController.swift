@@ -71,14 +71,17 @@ class FriendListTableViewController: UITableViewController {
             self.groupArray.removeAll()
             for groupDic in groups{
                 let dd = groupDic.dictionaryValue
-                let group = Group.GroupByGid((dd["gid"]?.object)!)
-                group?.upDateGroupInfo(groupDic.dictionaryObject!)
-                let user = UserInfo.CurrentUser()
-                if !(group!.user?.containsObject(user!))!{
-                    let users = group!.mutableSetValueForKey("user")
-                    users.addObject(user!)
+                if dd.count != 0{
+                    let group = Group.GroupByGid((dd["gid"]?.object)!)
+                    group?.upDateGroupInfo(groupDic.dictionaryObject!)
+                    let user = UserInfo.CurrentUser()
+                    if !(group!.user?.containsObject(user!))!{
+                        let users = group!.mutableSetValueForKey("user")
+                        users.addObject(user!)
+                    }
+                    self.groupArray.append(group!)
                 }
-                self.groupArray.append(group!)
+                
             }
             NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
             self.tableView.reloadData()

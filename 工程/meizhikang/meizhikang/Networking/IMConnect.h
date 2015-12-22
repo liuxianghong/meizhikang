@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "IMObject.h"
 
-typedef void (^IMObjectTokenCompletionHandler)(NSData *token,NSData *data);
-typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
-
 @protocol IMConnectDelegate <NSObject>
 
 @end
@@ -36,4 +33,5 @@ typedef void (^IMObjectLoginHandler)(UInt32 ip,UInt16 port);
 -(void)UploadFileRequst:(NSData *)file fileType:(IMMsgSendFileType)fieType fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 -(void)test:(NSData *)token;
+-(void)LoginOut;
 @end
