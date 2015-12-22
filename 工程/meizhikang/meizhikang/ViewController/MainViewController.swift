@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class MainViewController: UINavigationController {
 
@@ -24,7 +25,7 @@ class MainViewController: UINavigationController {
         super.viewDidAppear(animated)
         if first{
             first = false
-            self.login(nil)
+            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
         }
     }
 
@@ -40,7 +41,40 @@ class MainViewController: UINavigationController {
     
     func login(object : AnyObject?){
         print(object)
-        self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+        if let notification = object as? NSNotification{
+            if let message = notification.object as? String{
+                
+                let actionVC = UIAlertController(title: "提示", message: message, preferredStyle: .Alert)
+                let actionlogin = UIAlertAction(title: "重新登录", style: .Default, handler: { (ac :UIAlertAction) -> Void in
+                    
+                    let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+                    hud.detailsLabelText = "正在重新登录";
+                    IMRequst.LoginWithUserName(UserInfo.CurrentUser()?.userName, passWord: UserInfo.CurrentUser()?.passWord, completion: { (ip : UInt32,port : UInt16) -> Void in
+                        print(ip,port)
+                        hud.hide(true)
+                        }) { (error : NSError!) -> Void in
+                            IMRequst.LoginOut()
+                            hud.mode = .Text
+                            hud.detailsLabelText = error.domain;
+                            hud.hide(true, afterDelay: 1.5)
+                            print(error)
+                            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                    }
+                    
+                
+                })
+                let actionCancel = UIAlertAction(title: "退出", style: .Cancel, handler: { (UIAlertAction) -> Void in
+                    self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                })
+                
+                actionVC.addAction(actionlogin)
+                actionVC.addAction(actionCancel)
+                
+                self.presentViewController(actionVC, animated: true, completion: { () -> Void in
+                    
+                })
+            }
+        }
         
     }
 
