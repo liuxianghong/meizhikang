@@ -9,12 +9,18 @@
 import UIKit
 import JSQMessagesViewController
 
-class ChatViewModel: NSObject{
+class ChatViewModel: NSObject,RecordAudioDelegate{
     var messages: [JSQMessage]?
     var avatars: [String: JSQMessagesAvatarImage]?
     var outgoingBubbleImage: JSQMessagesBubbleImage!
     var incomingBubbleImage: JSQMessagesBubbleImage!
     var users: [String: String]?
+    lazy var recordAudio: RecordAudio = {
+        [weak self] in
+        let rec = RecordAudio()
+        rec.delegate = self
+        return rec
+    }()
     init(senderId: String!,senderName: String!,displayAvatar : UIImage?,receiverId: String!,receiverName: String!,receiverAvatar: UIImage!){
         messages = []
         var avatarImage: JSQMessagesAvatarImage!
@@ -61,6 +67,9 @@ class ChatViewModel: NSObject{
         return NSAttributedString(string: message.senderDisplayName)
     }
     
+    func RecordStatus(status: Int32) {
+        NSLog("%d", status)
+    }
 }
 
 class ChatViewController: JSQMessagesViewController {
@@ -140,6 +149,7 @@ class ChatViewController: JSQMessagesViewController {
         contentView.addConstraint(bottomConstaint)
         contentView.addConstraint(leadingConstaint)
         contentView.addConstraint(trailingConstaint)
+//        sendVoice.hidden = true
     }
     
     func layoutInputToolbarLeft(){
@@ -199,16 +209,26 @@ class ChatViewController: JSQMessagesViewController {
         print("addPhoto")
     }
     func sendVoiceButtonDown(sender: UIButton){
-        
+        viewModel.recordAudio.stopPlay()
+        viewModel.recordAudio.startRecord()
     }
     
     func sendVoicButtonUpInside(sender: UIButton){
-        
+        let url = viewModel.recordAudio.stopRecord()
+        let data = EncodeWAVEToAMR(NSData(contentsOfURL: url), 1, 16)
+        IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { object in
+            print(object)
+            }) { error in
+                print(error)
+        }
+        let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, media: JSQAudioMediaItem(fileURL: url, isReadyToPlay: true))
+        viewModel.messages?.append(message)
+        finishSendingMessageAnimated(true)
     }
     
     func sendMessage(text: String, sendId: String, senderDisplayName: String, date: NSDate){
-//        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
-//        viewModel.messages?.append(message)
+        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
+        viewModel.messages?.append(message)
         
         if group != nil{
             
@@ -341,6 +361,7 @@ class ChatViewController: JSQMessagesViewController {
                 mask.applyOutgoingBubbleImageMaskToMediaView(imageView)
                 cell?.mediaView = imageView
             }
+            
         }
         return cell!
     }

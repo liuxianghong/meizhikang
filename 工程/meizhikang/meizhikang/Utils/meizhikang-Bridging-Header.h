@@ -9,5 +9,6 @@
 #import "IMRequst.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <JSQMessagesViewController/JSQMessages.h>
+#import "JSQAudioMediaItem.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import "RecordAudio.h"

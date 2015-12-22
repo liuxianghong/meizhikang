@@ -25,6 +25,13 @@
 		B9709B271C298678004DCD50 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9709B221C298678004DCD50 /* libopencore-amrnb.a */; };
 		B9709B281C298678004DCD50 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9709B231C298678004DCD50 /* libopencore-amrwb.a */; };
 		B9709B291C298678004DCD50 /* RecordAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = B9709B251C298678004DCD50 /* RecordAudio.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B9709B2E1C29962C004DCD50 /* JSQAudioMediaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B9709B2D1C29962C004DCD50 /* JSQAudioMediaItem.m */; };
+		B9709B351C299663004DCD50 /* chat_animation_white1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B2F1C299663004DCD50 /* chat_animation_white1.png */; };
+		B9709B361C299663004DCD50 /* chat_animation_white2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B301C299663004DCD50 /* chat_animation_white2.png */; };
+		B9709B371C299663004DCD50 /* chat_animation_white3.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B311C299663004DCD50 /* chat_animation_white3.png */; };
+		B9709B381C299663004DCD50 /* chat_animation1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B321C299663004DCD50 /* chat_animation1.png */; };
+		B9709B391C299663004DCD50 /* chat_animation2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B331C299663004DCD50 /* chat_animation2.png */; };
+		B9709B3A1C299663004DCD50 /* chat_animation3.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B341C299663004DCD50 /* chat_animation3.png */; };
 		B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBA1C0BF43D0097E9B3 /* 右.png */; };
 		B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */; };
 		B99A8DF51C0BF43D0097E9B3 /* 右@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */; };
@@ -387,6 +394,14 @@
 		B9709B231C298678004DCD50 /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
 		B9709B241C298678004DCD50 /* RecordAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordAudio.h; sourceTree = "<group>"; };
 		B9709B251C298678004DCD50 /* RecordAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordAudio.m; sourceTree = "<group>"; };
+		B9709B2C1C29962C004DCD50 /* JSQAudioMediaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQAudioMediaItem.h; sourceTree = "<group>"; };
+		B9709B2D1C29962C004DCD50 /* JSQAudioMediaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQAudioMediaItem.m; sourceTree = "<group>"; };
+		B9709B2F1C299663004DCD50 /* chat_animation_white1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation_white1.png; sourceTree = "<group>"; };
+		B9709B301C299663004DCD50 /* chat_animation_white2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation_white2.png; sourceTree = "<group>"; };
+		B9709B311C299663004DCD50 /* chat_animation_white3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation_white3.png; sourceTree = "<group>"; };
+		B9709B321C299663004DCD50 /* chat_animation1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation1.png; sourceTree = "<group>"; };
+		B9709B331C299663004DCD50 /* chat_animation2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation2.png; sourceTree = "<group>"; };
+		B9709B341C299663004DCD50 /* chat_animation3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation3.png; sourceTree = "<group>"; };
 		B99A8DBA1C0BF43D0097E9B3 /* 右.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右.png"; sourceTree = "<group>"; };
 		B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@2x.png"; sourceTree = "<group>"; };
 		B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@3x.png"; sourceTree = "<group>"; };
@@ -1054,6 +1069,12 @@
 		D311C5721C0A119500C80C05 /* 我的好友 */ = {
 			isa = PBXGroup;
 			children = (
+				B9709B2F1C299663004DCD50 /* chat_animation_white1.png */,
+				B9709B301C299663004DCD50 /* chat_animation_white2.png */,
+				B9709B311C299663004DCD50 /* chat_animation_white3.png */,
+				B9709B321C299663004DCD50 /* chat_animation1.png */,
+				B9709B331C299663004DCD50 /* chat_animation2.png */,
+				B9709B341C299663004DCD50 /* chat_animation3.png */,
 				D311C5731C0A119500C80C05 /* 圆-.png */,
 				D311C5741C0A119500C80C05 /* 圆-@2x.png */,
 				D311C5751C0A119500C80C05 /* 圆-@3x.png */,
@@ -1166,6 +1187,8 @@
 				D3897DDD1C09934100D18BAC /* ViewController+menu.h */,
 				D3897DDE1C09934100D18BAC /* ViewController+menu.m */,
 				B930DEE91C145822003576F6 /* Array+Extenstion.swift */,
+				B9709B2C1C29962C004DCD50 /* JSQAudioMediaItem.h */,
+				B9709B2D1C29962C004DCD50 /* JSQAudioMediaItem.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1408,6 +1431,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9709B391C299663004DCD50 /* chat_animation2.png in Resources */,
 				D311C5C31C0A119500C80C05 /* 灰色框@3x.png in Resources */,
 				D311C5BB1C0A119500C80C05 /* 添加.png in Resources */,
 				B99A8E021C0BF43D0097E9B3 /* 框-蓝.png in Resources */,
@@ -1420,6 +1444,7 @@
 				D311C4C51C09A70C00C80C05 /* 蓝牙连接@2x.png in Resources */,
 				D3EFFA231C182B8F0047E2B0 /* 绿色@3x.png in Resources */,
 				D311C5B81C0A119500C80C05 /* 添加-灰色.png in Resources */,
+				B9709B351C299663004DCD50 /* chat_animation_white1.png in Resources */,
 				D311C5E91C0A119500C80C05 /* 通讯2.png in Resources */,
 				B99A8E181C0BF43D0097E9B3 /* 绿-圆小@2x.png in Resources */,
 				D3EFFA211C182B8F0047E2B0 /* 绿色.png in Resources */,
@@ -1485,6 +1510,7 @@
 				D311C4A51C09A70C00C80C05 /* 健康图-拷贝@3x.png in Resources */,
 				D3EFFA161C182B8F0047E2B0 /* 框@2x.png in Resources */,
 				D311C5D11C0A119500C80C05 /* 联系人@2x.png in Resources */,
+				B9709B381C299663004DCD50 /* chat_animation1.png in Resources */,
 				D3897DE41C09945A00D18BAC /* 菜单-白@2x.png in Resources */,
 				D311C5CD1C0A119500C80C05 /* 联系人-蓝.png in Resources */,
 				D311C4921C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png in Resources */,
@@ -1516,12 +1542,14 @@
 				D3EFFA1D1C182B8F0047E2B0 /* 粉@3x.png in Resources */,
 				D311C54B1C0A066F00C80C05 /* 开关-绿@2x.png in Resources */,
 				D311C49A1C09A70C00C80C05 /* 健康分析-拷贝.png in Resources */,
+				B9709B371C299663004DCD50 /* chat_animation_white3.png in Resources */,
 				D3EFFA191C182B8F0047E2B0 /* 灰-@2x.png in Resources */,
 				D311C5EF1C0A119500C80C05 /* 长边-绿@2x.png in Resources */,
 				B99A8E1F1C0BF43D0097E9B3 /* 蓝-圆@3x.png in Resources */,
 				D311C5D31C0A119500C80C05 /* 蓝对话框.png in Resources */,
 				D311C4931C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png in Resources */,
 				B99A8E001C0BF43D0097E9B3 /* 左@2x.png in Resources */,
+				B9709B361C299663004DCD50 /* chat_animation_white2.png in Resources */,
 				B99A8E111C0BF43D0097E9B3 /* 灰框-.png in Resources */,
 				D3EFFA281C182B8F0047E2B0 /* 边框@2x.png in Resources */,
 				B99A8E1D1C0BF43D0097E9B3 /* 蓝-圆.png in Resources */,
@@ -1687,6 +1715,7 @@
 				D311C4BC1C09A70C00C80C05 /* 我的好友@2x.png in Resources */,
 				B99A8DFC1C0BF43D0097E9B3 /* 圆.png in Resources */,
 				D311C49C1C09A70C00C80C05 /* 健康分析-拷贝@3x.png in Resources */,
+				B9709B3A1C299663004DCD50 /* chat_animation3.png in Resources */,
 				D311C55F1C0A066F00C80C05 /* 白框.png in Resources */,
 				D311C4A11C09A70C00C80C05 /* 健康分析@2x.png in Resources */,
 				D3EFFA181C182B8F0047E2B0 /* 灰-.png in Resources */,
@@ -1772,6 +1801,7 @@
 				D3F8E2C41C0C384300263B4E /* BleTableViewController.swift in Sources */,
 				D336C92D1C25868B00E967EB /* User+CoreDataProperties.swift in Sources */,
 				B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */,
+				B9709B2E1C29962C004DCD50 /* JSQAudioMediaItem.m in Sources */,
 				B95CA5141C239EED002CF05B /* SwiftyJSON.swift in Sources */,
 				B930DEE81C1457E1003576F6 /* EasyOptionalUnwrapping.swift in Sources */,
 				D378AD5A1C20716C004C161A /* ResetPWViewController.swift in Sources */,
