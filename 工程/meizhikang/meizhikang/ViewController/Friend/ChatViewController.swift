@@ -70,6 +70,7 @@ class ChatViewController: JSQMessagesViewController {
     var receiverName: String!
     var viewModel: ChatViewModel!
     var group : Group!
+    var sendVoice: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
@@ -94,10 +95,14 @@ class ChatViewController: JSQMessagesViewController {
         let dic = ["type" : "messages" ,"page" : 1 ,"number" :20 ]
         IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
             print(object)
-            let json = JSON(object)
+//            let json = JSON(object)
             }, failure: { (error : NSError!) -> Void in
         })
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func configInputToolbar(){
@@ -108,7 +113,33 @@ class ChatViewController: JSQMessagesViewController {
             contentView.rightBarButtonItem = nil
             layoutInputToolbarLeft()
             layoutInputToolbarRight()
+            initSendVoiceButton()
         }
+    }
+    
+    func initSendVoiceButton(){
+        guard let contentView = self.inputToolbar?.contentView else{
+            return
+        }
+        sendVoice = UIButton(type: .Custom)
+        sendVoice.setTitle("按住说话", forState: .Normal)
+        sendVoice.backgroundColor = UIColor.whiteColor()
+        sendVoice.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        sendVoice.layer.borderColor = UIColor.blackColor().CGColor
+        sendVoice.layer.cornerRadius = 5.0
+        sendVoice.layer.borderWidth = 1.0
+        sendVoice.addTarget(self, action: "sendVoiceButtonDown:", forControlEvents: .TouchDown)
+        sendVoice.addTarget(self, action: "sendVoicButtonUpInside:", forControlEvents: .TouchUpInside)
+        contentView.addSubview(sendVoice)
+        sendVoice.translatesAutoresizingMaskIntoConstraints = false
+        let topConstaint = NSLayoutConstraint(item: sendVoice, attribute: .Top, relatedBy: .Equal, toItem: contentView.textView, attribute: .Top, multiplier: 1.0, constant: 0.0)
+        let bottomConstaint = NSLayoutConstraint(item: sendVoice, attribute: .Bottom, relatedBy: .Equal, toItem: contentView.textView, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        let leadingConstaint = NSLayoutConstraint(item: sendVoice, attribute: .Leading, relatedBy: .Equal, toItem: contentView.textView, attribute: .Leading, multiplier: 1.0, constant: 0.0)
+        let trailingConstaint = NSLayoutConstraint(item: sendVoice, attribute: .Trailing, relatedBy: .Equal, toItem: contentView.textView, attribute: .Trailing, multiplier: 1.0, constant: 0.0)
+        contentView.addConstraint(topConstaint)
+        contentView.addConstraint(bottomConstaint)
+        contentView.addConstraint(leadingConstaint)
+        contentView.addConstraint(trailingConstaint)
     }
     
     func layoutInputToolbarLeft(){
@@ -167,6 +198,14 @@ class ChatViewController: JSQMessagesViewController {
     func addPhoto(sender: UIButton){
         print("addPhoto")
     }
+    func sendVoiceButtonDown(sender: UIButton){
+        
+    }
+    
+    func sendVoicButtonUpInside(sender: UIButton){
+        
+    }
+    
     func sendMessage(text: String, sendId: String, senderDisplayName: String, date: NSDate){
 //        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
 //        viewModel.messages?.append(message)

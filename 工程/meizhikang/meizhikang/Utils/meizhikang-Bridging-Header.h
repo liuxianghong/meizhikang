@@ -10,3 +10,4 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <MagicalRecord/MagicalRecord.h>
+#import "RecordAudio.h"
