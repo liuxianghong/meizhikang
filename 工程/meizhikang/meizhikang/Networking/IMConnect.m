@@ -77,7 +77,7 @@
         [self setsenderHead:CommandStructure cmd:0x87 type:0x0 length:0 tag:tag token:tokenIMConnect];
         NSData *data = [NSData dataWithBytes:CommandStructure length:size];
         
-        [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
+        [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
             return 0;
         } completion:^(NSData *data) {
             
@@ -148,8 +148,8 @@
     memcpy(CommandStructure+14, [data2 bytes], [data2 length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
-        if (length == 0) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
+        if (lenth_ == 0) {
             return 0;
         }
         return 8+16;
@@ -243,7 +243,7 @@
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     
-    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
         return 0;
     } completion:^(NSData *data) {
         UInt32 ip = 0;
@@ -382,7 +382,7 @@
     memcpy(CommandStructure+14+8, [dataBody bytes], [dataBody length]);
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth) {
+    [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
         return 0;
     } completion:completion failure:failure];
     free(CommandStructure);
@@ -539,24 +539,21 @@
         currentIM.sendingType = IMObjectSendFinished;
         reciveIM = nil;
     }
+    for (int i=0; i<IMQueue.count; i++) {
+        IMObject *im = IMQueue.firstObject;
+        if (im.sendingType == IMObjectSendFinished){
+            [IMQueue removeObject:im];
+        }
+    }
     if (IMQueue.count==0) {
         isListen = YES;
         [asyncSocket readDataToLength:10 withTimeout:-1 tag:0];
     }
     else{
-        for (IMObject *im in IMQueue) {
-            if (im.sendingType != IMObjectSendFinished) {
-                currentIM = im;
-                im.sendingType = IMObjectSending;
-                [IMQueue removeObject:im];
-                [asyncSocket writeData:currentIM.sendData withTimeout:IMTIMEOUT tag:currentIM.tag];
-                break;
-            }
-            else{
-                [IMQueue removeObject:im];
-            }
-        }
-        
+        currentIM = IMQueue.firstObject;
+        currentIM.sendingType = IMObjectSending;
+        [IMQueue removeObject:currentIM];
+        [asyncSocket writeData:currentIM.sendData withTimeout:IMTIMEOUT tag:currentIM.tag];
     }
 }
 
@@ -690,7 +687,10 @@
     
     NSLog(@"socket: DidDisconnect:%p withError: %@", sock, err);
     isListen = false;
-    if (currentIM && err && currentIM.sendingType != IMObjectSendFinished) {
+    if (!err) {
+        err = [NSError errorWithDomain:@"已和服务器断开连接" code:0 userInfo:nil];
+    }
+    if (currentIM && currentIM.sendingType != IMObjectSendFinished) {// err &&
         currentIM.sendingType = IMObjectSendFinished;
         currentIM.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
     }

@@ -42,6 +42,9 @@
         countDownTimer = nil;
     }
     _sendingType = IMObjectSendFinished;
-    self.failure([NSError errorWithDomain:@"超时" code:0 userInfo:nil]);
+    if (self.failure) {
+        self.failure([NSError errorWithDomain:@"超时" code:0 userInfo:nil]);
+    }
+    
 }
 @end

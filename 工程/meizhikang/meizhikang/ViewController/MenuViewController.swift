@@ -19,7 +19,8 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     let viewArray = ["sw_BLUEDIAODIAO","sw_front","sw_analysis","sw_ble","sw_friend","sw_setting"]
     var stopAnimation = false
     
-    var userName = "BLUEDIAODIAO"
+    var userName = "未登录"
+    var nameLabel : UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,13 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if nickname != nil{
             userName = nickname!
         }
+        else{
+            userName = "未登录"
+        }
+        if nameLabel != nil{
+            nameLabel.text = userName
+        }
+        
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -100,6 +108,7 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.iconImage.highlightedImage = UIImage(named: "\(title)")
         if indexPath.row == 0{
             cell.titleLabel.text = userName
+            nameLabel = cell.titleLabel
         }
         else{
             cell.titleLabel.text = title

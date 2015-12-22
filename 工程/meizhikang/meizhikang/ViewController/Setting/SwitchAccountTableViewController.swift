@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class SwitchAccountTableViewController: UITableViewController {
 
-    var tableViewArray = ["123","2222"]
+    var tableViewArray = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,11 +20,44 @@ class SwitchAccountTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        tableViewArray = User.MR_findAll() as! [User]
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func login(user : User){
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
+        hud.detailsLabelText = "正在登录";
+        IMRequst.LoginWithUserName(user.userName, passWord: user.passWord, completion: { (ip : UInt32,port : UInt16) -> Void in
+            print(ip,port)
+            hud.detailsLabelText = "登录成功，正在获取用户信息";
+            IMRequst.GetUserInfoCompletion({ (object) -> Void in
+                print(object)
+                NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                let user = User.userByUid(object["uid"]!!)
+                user!.upDateUserInfo(object as! [String : AnyObject])
+                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                hud.hide(true)
+                self.tableView.reloadData()
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    IMRequst.LoginOut()
+                    print(error)
+            })
+            }) { (error : NSError!) -> Void in
+                IMRequst.LoginOut()
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain;
+                hud.hide(true, afterDelay: 1.5)
+                print(error)
+        }
     }
 
     // MARK: - Table view data source
@@ -40,7 +74,9 @@ class SwitchAccountTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        if UserInfo.CurrentUser()?.uid != tableViewArray[indexPath.row].uid{
+            login(tableViewArray[indexPath.row])
+        }
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -55,8 +91,8 @@ class SwitchAccountTableViewController: UITableViewController {
         let cell:SettingTableViewCell = tableView.dequeueReusableCellWithIdentifier("settingIndentifer", forIndexPath: indexPath) as! SettingTableViewCell
         
         // Configure the cell...
-        cell.titleLabel.text = tableViewArray[indexPath.row]
-        
+        cell.titleLabel.text = tableViewArray[indexPath.row].userName
+        cell.stateImageView.hidden = !(UserInfo.CurrentUser()?.uid == tableViewArray[indexPath.row].uid)
         return cell
     }
 
