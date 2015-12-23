@@ -45,6 +45,23 @@ class Message: NSManagedObject {
             }
             
         }
+        else if messageType() == .Voice{
+            
+            let string = content! as NSString
+            let array = string.componentsSeparatedByString("[/url][key]")
+            var imageUrl = array[0]
+            var keyString = array[1]
+            imageUrl = imageUrl.stringByReplacingOccurrencesOfString("[url]", withString: "")
+            keyString = keyString.stringByReplacingOccurrencesOfString("[/key]", withString: "")
+            let imagedata = NSData(contentsOfURL: NSURL(string: imageUrl)!)
+            let dataKey = keyString.dataFromHexString()
+            print(dataKey)
+            let ddata = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
+            if ddata.length > 16{
+                data = NSData(bytes: ddata.bytes+16, length: ddata.length-16)
+            }
+            
+        }
     }
     
     func text() -> String{
