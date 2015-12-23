@@ -32,6 +32,17 @@
     return self;
 }
 
+- (instancetype)initWithData:(NSData *)data{
+    self = [super init];
+    if (self){
+        _fileURL = nil;
+        _voiceData = data;
+        _isReadyToPlay = YES;
+        _cachedAudioImageView = nil;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     _fileURL = nil;
@@ -61,7 +72,7 @@
 
 - (UIView *)mediaView
 {
-    if (self.fileURL == nil || !self.isReadyToPlay) {
+    if ((self.fileURL == nil && self.voiceData == nil)|| !self.isReadyToPlay) {
         return nil;
     }
     

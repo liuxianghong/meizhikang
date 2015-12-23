@@ -14,13 +14,9 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
     var avatars: [String: JSQMessagesAvatarImage]?
     var outgoingBubbleImage: JSQMessagesBubbleImage!
     var incomingBubbleImage: JSQMessagesBubbleImage!
+    var currentAudioItem: JSQAudioMediaItem?
     var users: [String: String]?
-    lazy var recordAudio: RecordAudio = {
-        [weak self] in
-        let rec = RecordAudio()
-        rec.delegate = self
-        return rec
-    }()
+    let recordAudio: RecordAudio
     init(senderId: String!,senderName: String!,displayAvatar : UIImage?,receiverId: String!,receiverName: String!,receiverAvatar: UIImage!){
         messages = []
         var avatarImage: JSQMessagesAvatarImage!
@@ -37,6 +33,9 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
         let inImage = UIImage(named: "蓝对话框.png")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 12, 25, 12), resizingMode: .Stretch)
         outgoingBubbleImage = JSQMessagesBubbleImage(messageBubbleImage: outImage, highlightedImage: outImage)
         incomingBubbleImage = JSQMessagesBubbleImage(messageBubbleImage: inImage, highlightedImage: inImage)
+        recordAudio = RecordAudio()
+        super.init()
+        recordAudio.delegate = self
     }
     
     func bubbleImage(senderId :String,index :Int)->JSQMessageBubbleImageDataSource!{
@@ -67,8 +66,40 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
         return NSAttributedString(string: message.senderDisplayName)
     }
     
+    func playItemAt(index :Int){
+        let message = self.messages![index];
+        if message.isMediaMessage{
+            if let media = message.media as? JSQAudioMediaItem{
+                self.recordAudio.stopPlay()
+                guard media != self.currentAudioItem else{
+                    media.endPlaySound()
+                    return
+                }
+                self.currentAudioItem = media
+                media.startPlaySound()
+                var data : NSData?
+                if let path = media.fileURL {
+                    data = EncodeWAVEToAMR(NSData(contentsOfURL: path), 1, 16)
+                }else{
+                    data = media.voiceData
+                }
+                guard let d = data else{
+                    return
+                }
+                self.recordAudio.play(d)
+            }
+        }
+    }
+    
+    //MARK: RecordDelegate
     func RecordStatus(status: Int32) {
-        NSLog("%d", status)
+        NSLog("status: %d", status)
+        if status == 1{
+            if let item = self.currentAudioItem {
+                item.endPlaySound()
+                self.currentAudioItem = nil
+            }
+        }
     }
 }
 
@@ -90,14 +121,20 @@ class ChatViewController: JSQMessagesViewController {
         
         NSNotificationCenter.defaultCenter().addObserverForName("reciveMessageNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
             let message = notification.object as! Message
+            var message2: JSQMessage?
             if message.messageType() == .Text{
-                let message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, text: message.text())
-                self.viewModel.messages?.append(message2)
+                message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, text: message.text())
             }
             else if message.messageType() == .Image{
-                let message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, media: JSQPhotoMediaItem(image: message.image()))
-                self.viewModel.messages?.append(message2)
+                message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, media: JSQPhotoMediaItem(image: message.image()))
+            }else if message.messageType() == .Voice{
+                let item = JSQAudioMediaItem(data: message.Data()!)
+                item.appliesMediaViewMaskAsOutgoing = false
+                message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, media: item)
+            }else{
+                return
             }
+            self.viewModel.messages?.append(message2!)
             self.finishSendingMessageAnimated(true)
         }
         
@@ -133,12 +170,13 @@ class ChatViewController: JSQMessagesViewController {
         sendVoice = UIButton(type: .Custom)
         sendVoice.setTitle("按住说话", forState: .Normal)
         sendVoice.backgroundColor = UIColor.whiteColor()
-        sendVoice.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        sendVoice.setTitleColor(UIColor.blackColor(), forState: .Normal)
         sendVoice.layer.borderColor = UIColor.blackColor().CGColor
         sendVoice.layer.cornerRadius = 5.0
         sendVoice.layer.borderWidth = 1.0
         sendVoice.addTarget(self, action: "sendVoiceButtonDown:", forControlEvents: .TouchDown)
         sendVoice.addTarget(self, action: "sendVoicButtonUpInside:", forControlEvents: .TouchUpInside)
+        sendVoice.addTarget(self, action: "sendVoiceButtonUpOutside:", forControlEvents: .TouchUpOutside)
         contentView.addSubview(sendVoice)
         sendVoice.translatesAutoresizingMaskIntoConstraints = false
         let topConstaint = NSLayoutConstraint(item: sendVoice, attribute: .Top, relatedBy: .Equal, toItem: contentView.textView, attribute: .Top, multiplier: 1.0, constant: 0.0)
@@ -216,12 +254,31 @@ class ChatViewController: JSQMessagesViewController {
     func addPhoto(sender: UIButton){
         print("addPhoto")
     }
+    
+    func sendVoiceButtonStatus(){
+        if sendVoice.selected {
+            sendVoice.backgroundColor = UIColor.lightGrayColor()
+        }else{
+            sendVoice.backgroundColor = UIColor.whiteColor()
+        }
+    }
+    
+    func sendVoiceButtonUpOutside(sender: UIButton){
+        sender.selected = false
+        viewModel.recordAudio.stopRecord()
+        sendVoiceButtonStatus()
+    }
+    
     func sendVoiceButtonDown(sender: UIButton){
+        sender.selected = true
         viewModel.recordAudio.stopPlay()
         viewModel.recordAudio.startRecord()
+        sendVoiceButtonStatus()
     }
     
     func sendVoicButtonUpInside(sender: UIButton){
+        sender.selected = false
+        sendVoiceButtonStatus()
         let url = viewModel.recordAudio.stopRecord()
         let data = EncodeWAVEToAMR(NSData(contentsOfURL: url), 1, 16)
         IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { object in
@@ -241,14 +298,14 @@ class ChatViewController: JSQMessagesViewController {
         if group != nil{
             
             //发送语音
-            let data = UIImageJPEGRepresentation(UIImage(named: "圆-灰")!, 0.8)
-            IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
-                print(object)
-                }, failure: { (error : NSError!) -> Void in
-                    print(error)
-            })
-            let mess = JSQMessage(senderId: sendId, displayName: senderDisplayName, media: JSQPhotoMediaItem(image: UIImage(named: "轮换图1.png")))
-            viewModel.messages?.append(mess)
+//            let data = UIImageJPEGRepresentation(UIImage(named: "圆-灰")!, 0.8)
+//            IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
+//                print(object)
+//                }, failure: { (error : NSError!) -> Void in
+//                    print(error)
+//            })
+//            let mess = JSQMessage(senderId: sendId, displayName: senderDisplayName, media: JSQPhotoMediaItem(image: UIImage(named: "轮换图1.png")))
+//            viewModel.messages?.append(mess)
             
             //发送文字
             IMRequst.SendMessage(text, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
@@ -262,10 +319,9 @@ class ChatViewController: JSQMessagesViewController {
                 {
                     print("发送失败")
                 }
-                self.finishSendingMessageAnimated(true)
                 }, failure: { (error : NSError!) -> Void in
-                    self.finishSendingMessageAnimated(true)
             })
+            self.finishSendingMessageAnimated(true)
             
         }
         
@@ -387,6 +443,11 @@ class ChatViewController: JSQMessagesViewController {
             return 20.0
         }
         return 0.0
+    }
+    
+    // MARK: - JSQMessages Delegate
+    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
+        self.viewModel.playItemAt(indexPath.row)
     }
     /*
     // MARK: - Navigation

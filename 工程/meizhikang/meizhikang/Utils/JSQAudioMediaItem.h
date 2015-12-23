@@ -9,10 +9,11 @@
 
 @interface JSQAudioMediaItem : JSQMediaItem <JSQMessageMediaData, NSCopying, NSCoding>
 
-@property (nonatomic, strong) NSURL *fileURL;
+@property (nonatomic, strong,nullable) NSURL *fileURL;
+@property (strong, nonatomic,nullable) NSData *voiceData;
 @property (nonatomic, assign) BOOL isReadyToPlay;
-- (instancetype)initWithFileURL:(NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay;
-
+- (nonnull instancetype)initWithFileURL:(nonnull NSURL *)fileURL isReadyToPlay:(BOOL)isReadyToPlay;
+- (nonnull instancetype)initWithData:(nonnull NSData *)data;
 - (void)startPlaySound;
 - (void)endPlaySound;
 - (BOOL)isPlaying;
