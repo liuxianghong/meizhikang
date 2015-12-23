@@ -20,4 +20,51 @@
 {
     return UIColorFromRGB(rgb);
 }
+
++(UIColor *)helathColor:(HelathColorType)type{
+    switch (type) {
+        case HelathColorTypeHealth:
+        {
+            return UIColorFromRGB(0x00ff00);
+        }
+        break;
+        case HelathColorTypeSubhealth:
+        {
+            return UIColorFromRGB(0x23debf);
+        }
+        break;
+        case HelathColorTypeInfirm:
+        {
+            return UIColorFromRGB(0xb5b5b6);
+        }
+        break;
+        case HelathColorTypeUnhealthy:
+        {
+            return UIColorFromRGB(0x727171);
+        }
+        break;
+        
+        default:
+        {
+            return UIColorFromRGB(0xffffff);
+        }
+        break;
+    }
+}
+
++(UIColor *)helathColorByValue:(NSInteger)value{
+    if (value>=80) {
+        return [self helathColor:HelathColorTypeHealth];
+    }
+    else if (value>=70) {
+        return [self helathColor:HelathColorTypeSubhealth];
+    }
+    else if (value>=60) {
+        return [self helathColor:HelathColorTypeInfirm];
+    }
+    else{
+        return [self helathColor:HelathColorTypeUnhealthy];
+    }
+    
+}
 @end

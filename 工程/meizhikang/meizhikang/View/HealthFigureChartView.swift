@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol HealthFigureChartViewDelegate{
+    func showCurrentHealthData(health : HealthData);
+}
+
 class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
 
     /*
@@ -18,15 +22,20 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     }
     */
     
-    var viewArray : [UIView] = [UIView()]
+    var viewArray = [UIView]()
     var currentPoint : CGPoint!
     var first : Bool = true
-    var dataArray = []
+    var dataArray = [HealthData]()
+    weak var healthDelegate : HealthFigureChartViewDelegate!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.delegate = self
-        for (var i = 0; i<15; i++){
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        for (var i = viewArray.count; i<dataArray.count; i++){
             let view = UIView()
             view.tag = i
             view.layer.cornerRadius = 10;
@@ -34,23 +43,30 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
             self.addSubview(view)
             viewArray.append(view)
         }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
         for view in viewArray{
-            view.backgroundColor = UIColor.greenColor()
-            let height = self.frame.height - CGFloat(view.tag*10)
+            view.backgroundColor = UIColor.helathColorByValue(dataArray[view.tag].healthValue as! Int)
+            let height = self.frame.height * CGFloat(dataArray[view.tag].healthValue as! Int)/100
             view.frame = CGRect(x: self.frame.size.width - 70 + CGFloat.init((20+10) * view.tag), y: self.frame.height-height, width: 20, height: height)
         }
-        let lastView = viewArray.last
-        let last = (lastView?.frame.origin.x)! + (lastView?.frame.size.width)!
-        self.contentSize = CGSize(width: last+50, height: self.frame.size.height)
+        if let lastView = viewArray.last{
+            let last = (lastView.frame.origin.x) + (lastView.frame.size.width)
+            self.contentSize = CGSize(width: last+50, height: self.frame.size.height)
+        }
+        
+        
         if first{
             first = false
             currentPoint = CGPoint(x: self.contentSize.width, y: 0)
             self.contentOffset = currentPoint
         }
+    }
+    
+    func appendData(data : HealthData){
+        dataArray.append(data)
+        self.layoutSubviews()
+        currentPoint = CGPoint(x: self.contentSize.width - self.frame.size.width, y: 0)
+        self.setContentOffset(currentPoint, animated: true)
+        healthDelegate.showCurrentHealthData(dataArray.last!)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -75,5 +91,8 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         let tag = Int(currentPoint.x/30)
         print("\(tag)")
         self.setContentOffset(currentPoint, animated: true)
+        if healthDelegate != nil{
+            healthDelegate.showCurrentHealthData(dataArray[tag])
+        }
     }
 }

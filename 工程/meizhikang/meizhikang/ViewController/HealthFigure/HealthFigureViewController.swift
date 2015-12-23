@@ -27,7 +27,7 @@ class HealthFigureViewModel: NSObject{
     }
 }
 
-class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITableViewDelegate {
+class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITableViewDelegate ,HealthFigureChartViewDelegate{
 
     @IBOutlet weak var headTableView: UITableView!
     @IBOutlet weak var headTableConstraint: NSLayoutConstraint!
@@ -41,6 +41,8 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     @IBOutlet weak var chatView : HealthFigureChartView!
     @IBOutlet weak var scoreLabel : UILabel!
     @IBOutlet weak var heartRateLabel : UILabel!
+    @IBOutlet weak var dateLabel : UILabel!
+    @IBOutlet weak var timeLabel : UILabel!
     let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer()
     let viewModel = HealthFigureViewModel()
     let tapView = UIView()
@@ -65,8 +67,8 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         self.view.sendSubviewToBack(tapView)
         tapView.backgroundColor = UIColor.clearColor()
         
-        
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "cutDown", userInfo: nil, repeats: true)
+        chatView.healthDelegate = self
+        timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "cutDown", userInfo: nil, repeats: true)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -98,6 +100,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     }
     
     
+    
     func cutDown(){
         let healthData = HealthData.MR_createEntity()
         healthData.time = NSDate()
@@ -105,6 +108,16 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
         healthData.user = UserInfo.CurrentUser()
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        chatView.appendData(healthData)
+    }
+    
+    func showCurrentHealthData(health : HealthData){
+        scoreLabel.text = "\(health.healthValue as! Int)"
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        dateLabel.text = formatter.stringFromDate(health.time!)
+        formatter.dateFormat = "HH:mm"
+        timeLabel.text = formatter.stringFromDate(health.time!)
     }
     
     

@@ -9,8 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM( NSInteger, HelathColorType)
+{
+    HelathColorTypeHealth,
+    HelathColorTypeSubhealth,
+    HelathColorTypeInfirm,
+    HelathColorTypeUnhealthy,
+};
+
 @interface UIColor (gb)
 +(UIColor *)mainGreenColor;
 
 +(UIColor *)rgbColor:(UInt64)rgb;
+
++(UIColor *)helathColor:(HelathColorType)type;
+
++(UIColor *)helathColorByValue:(NSInteger)value;
 @end
