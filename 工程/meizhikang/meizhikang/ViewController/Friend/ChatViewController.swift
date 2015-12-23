@@ -149,7 +149,7 @@ class ChatViewController: JSQMessagesViewController {
         contentView.addConstraint(bottomConstaint)
         contentView.addConstraint(leadingConstaint)
         contentView.addConstraint(trailingConstaint)
-//        sendVoice.hidden = true
+        sendVoice.hidden = true
     }
     
     func layoutInputToolbarLeft(){
@@ -159,6 +159,7 @@ class ChatViewController: JSQMessagesViewController {
         }
         let btn = buttonWith(UIImage(named: "语音.png"), selector: "mediaClicked:")
         let sticker = buttonWith(UIImage(named: "表情.png"), selector: "stickerClicked:")
+        btn.setImage(UIImage(named: "keyboard_btn.png"), forState: .Selected)
         containerView.hidden = false
         containerView.addSubview(sticker)
         containerView.addSubview(btn)
@@ -203,7 +204,14 @@ class ChatViewController: JSQMessagesViewController {
         print("showSticker")
     }
     func mediaClicked(sender: UIButton){
-        print("media")
+        sender.selected = !sender.selected
+        if sender.selected{
+            self.inputToolbar?.contentView?.textView?.resignFirstResponder()
+            sendVoice.hidden = false
+        }else{
+            self.inputToolbar?.contentView?.textView?.becomeFirstResponder()
+            sendVoice.hidden = true
+        }
     }
     func addPhoto(sender: UIButton){
         print("addPhoto")
