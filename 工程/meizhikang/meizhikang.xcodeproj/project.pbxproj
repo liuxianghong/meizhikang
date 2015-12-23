@@ -32,6 +32,9 @@
 		B9709B381C299663004DCD50 /* chat_animation1.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B321C299663004DCD50 /* chat_animation1.png */; };
 		B9709B391C299663004DCD50 /* chat_animation2.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B331C299663004DCD50 /* chat_animation2.png */; };
 		B9709B3A1C299663004DCD50 /* chat_animation3.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B341C299663004DCD50 /* chat_animation3.png */; };
+		B9709B3E1C2A1ECE004DCD50 /* keyboard_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3B1C2A1ECE004DCD50 /* keyboard_btn.png */; };
+		B9709B3F1C2A1ECE004DCD50 /* keyboard_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3C1C2A1ECE004DCD50 /* keyboard_btn@2x.png */; };
+		B9709B401C2A1ECE004DCD50 /* keyboard_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3D1C2A1ECE004DCD50 /* keyboard_btn@3x.png */; };
 		B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBA1C0BF43D0097E9B3 /* 右.png */; };
 		B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */; };
 		B99A8DF51C0BF43D0097E9B3 /* 右@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */; };
@@ -402,6 +405,9 @@
 		B9709B321C299663004DCD50 /* chat_animation1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation1.png; sourceTree = "<group>"; };
 		B9709B331C299663004DCD50 /* chat_animation2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation2.png; sourceTree = "<group>"; };
 		B9709B341C299663004DCD50 /* chat_animation3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation3.png; sourceTree = "<group>"; };
+		B9709B3B1C2A1ECE004DCD50 /* keyboard_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_btn.png; sourceTree = "<group>"; };
+		B9709B3C1C2A1ECE004DCD50 /* keyboard_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_btn@2x.png"; sourceTree = "<group>"; };
+		B9709B3D1C2A1ECE004DCD50 /* keyboard_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_btn@3x.png"; sourceTree = "<group>"; };
 		B99A8DBA1C0BF43D0097E9B3 /* 右.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右.png"; sourceTree = "<group>"; };
 		B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@2x.png"; sourceTree = "<group>"; };
 		B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@3x.png"; sourceTree = "<group>"; };
@@ -1069,6 +1075,9 @@
 		D311C5721C0A119500C80C05 /* 我的好友 */ = {
 			isa = PBXGroup;
 			children = (
+				B9709B3B1C2A1ECE004DCD50 /* keyboard_btn.png */,
+				B9709B3C1C2A1ECE004DCD50 /* keyboard_btn@2x.png */,
+				B9709B3D1C2A1ECE004DCD50 /* keyboard_btn@3x.png */,
 				B9709B2F1C299663004DCD50 /* chat_animation_white1.png */,
 				B9709B301C299663004DCD50 /* chat_animation_white2.png */,
 				B9709B311C299663004DCD50 /* chat_animation_white3.png */,
@@ -1495,6 +1504,7 @@
 				B99A8E1A1C0BF43D0097E9B3 /* 绿-框圆.png in Resources */,
 				D311C5D41C0A119500C80C05 /* 蓝对话框@2x.png in Resources */,
 				D311C5E31C0A119500C80C05 /* 输入框@2x.png in Resources */,
+				B9709B401C2A1ECE004DCD50 /* keyboard_btn@3x.png in Resources */,
 				D311C55D1C0A066F00C80C05 /* 白-长对话框-@2x.png in Resources */,
 				D311C4AF1C09A70C00C80C05 /* 轮换图2.png in Resources */,
 				D311C5C01C0A119500C80C05 /* 灰框@3x.png in Resources */,
@@ -1571,6 +1581,7 @@
 				D3EFFA0D1C182B8F0047E2B0 /* 导航栏@2x.png in Resources */,
 				D3897DEC1C09995800D18BAC /* 矩形.png in Resources */,
 				D3F8E2B51C0C316600263B4E /* chover2.png in Resources */,
+				B9709B3F1C2A1ECE004DCD50 /* keyboard_btn@2x.png in Resources */,
 				D39B899B1C087AC1009086B2 /* Main.storyboard in Resources */,
 				B99A8E041C0BF43D0097E9B3 /* 框-蓝@3x.png in Resources */,
 				D311C4BD1C09A70C00C80C05 /* 我的好友@3x.png in Resources */,
@@ -1646,6 +1657,7 @@
 				D3EFFA091C182B8F0047E2B0 /* 壁纸.png in Resources */,
 				D311C5B31C0A119500C80C05 /* 圆-@2x.png in Resources */,
 				B99A8E011C0BF43D0097E9B3 /* 左@3x.png in Resources */,
+				B9709B3E1C2A1ECE004DCD50 /* keyboard_btn.png in Resources */,
 				B99A8DFE1C0BF43D0097E9B3 /* 圆@3x.png in Resources */,
 				D311C5E81C0A119500C80C05 /* 通讯.png in Resources */,
 				D311C5501C0A066F00C80C05 /* 灰线-短-拷贝.png in Resources */,
