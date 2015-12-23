@@ -44,6 +44,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer()
     let viewModel = HealthFigureViewModel()
     let tapView = UIView()
+    var timer : NSTimer!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,9 +64,28 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         self.view.addSubview(tapView)
         self.view.sendSubviewToBack(tapView)
         tapView.backgroundColor = UIColor.clearColor()
+        
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "cutDown", userInfo: nil, repeats: true)
     }
 
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        if UserInfo.CurrentUser() != nil{
+            if UserInfo.CurrentUser()?.healthDatas?.count == 0{
+                let timeInterval = NSDate().timeIntervalSince1970
+                for index in 1...10000{
+                    let date = NSDate(timeIntervalSince1970: timeInterval - Double(index*60*5))
+                    let healthData = HealthData.MR_createEntity()
+                    healthData.time = date
+                    healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
+                    healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
+                    healthData.user = UserInfo.CurrentUser()
+                }
+                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            }
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -75,6 +95,16 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
+    }
+    
+    
+    func cutDown(){
+        let healthData = HealthData.MR_createEntity()
+        healthData.time = NSDate()
+        healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
+        healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
+        healthData.user = UserInfo.CurrentUser()
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
     }
     
     
@@ -131,14 +161,17 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     func gestureAction(gesture: UITapGestureRecognizer){
         headerShow(false)
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if self.revealViewController() != nil{
+            self.revealViewController().setFrontViewPosition(.Left, animated: true)
+        }
     }
-    */
+
 
 }

@@ -266,6 +266,11 @@ class FriendListTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if self.revealViewController() != nil{
+            self.revealViewController().setFrontViewPosition(.Left, animated: true)
+        }
+        
         if segue.identifier == FriendListTableViewControllerConstant.chatSegueIdentifier{
             guard let vc = segue.destinationViewController as? ChatViewController,
                 let sendId = UserInfo.uid(),

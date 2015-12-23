@@ -90,6 +90,54 @@
 		B99A8E2A1C0BF43D0097E9B3 /* 黑@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DF11C0BF43D0097E9B3 /* 黑@2x.png */; };
 		B99A8E2B1C0BF43D0097E9B3 /* 黑@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DF21C0BF43D0097E9B3 /* 黑@3x.png */; };
 		B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */; };
+		D30902591C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30902571C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift */; };
+		D309025A1C2A78AA001FDF7B /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30902581C2A78AA001FDF7B /* HealthData.swift */; };
+		D309025C1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309025B1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift */; };
+		D30902901C2A8625001FDF7B /* admin.css in Resources */ = {isa = PBXBuildFile; fileRef = D30902601C2A8625001FDF7B /* admin.css */; };
+		D30902911C2A8625001FDF7B /* amazeui.css in Resources */ = {isa = PBXBuildFile; fileRef = D30902611C2A8625001FDF7B /* amazeui.css */; };
+		D30902921C2A8625001FDF7B /* amazeui.flat.css in Resources */ = {isa = PBXBuildFile; fileRef = D30902621C2A8625001FDF7B /* amazeui.flat.css */; };
+		D30902931C2A8625001FDF7B /* amazeui.flat.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D30902631C2A8625001FDF7B /* amazeui.flat.min.css */; };
+		D30902941C2A8625001FDF7B /* amazeui.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D30902641C2A8625001FDF7B /* amazeui.min.css */; };
+		D30902951C2A8625001FDF7B /* app.css in Resources */ = {isa = PBXBuildFile; fileRef = D30902651C2A8625001FDF7B /* app.css */; };
+		D30902961C2A8625001FDF7B /* fontawesome-webfont.eot in Resources */ = {isa = PBXBuildFile; fileRef = D30902671C2A8625001FDF7B /* fontawesome-webfont.eot */; };
+		D30902971C2A8625001FDF7B /* fontawesome-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = D30902681C2A8625001FDF7B /* fontawesome-webfont.svg */; };
+		D30902981C2A8625001FDF7B /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D30902691C2A8625001FDF7B /* fontawesome-webfont.ttf */; };
+		D30902991C2A8625001FDF7B /* fontawesome-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = D309026A1C2A8625001FDF7B /* fontawesome-webfont.woff */; };
+		D309029A1C2A8625001FDF7B /* fontawesome-webfont.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = D309026B1C2A8625001FDF7B /* fontawesome-webfont.woff2 */; };
+		D309029B1C2A8625001FDF7B /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = D309026C1C2A8625001FDF7B /* FontAwesome.otf */; };
+		D309029C1C2A8625001FDF7B /* app-icon72x72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D309026E1C2A8625001FDF7B /* app-icon72x72@2x.png */; };
+		D309029D1C2A8625001FDF7B /* admin-chrome.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902701C2A8625001FDF7B /* admin-chrome.png */; };
+		D309029E1C2A8625001FDF7B /* admin-firefox.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902711C2A8625001FDF7B /* admin-firefox.png */; };
+		D309029F1C2A8625001FDF7B /* admin-ie.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902721C2A8625001FDF7B /* admin-ie.png */; };
+		D30902A01C2A8625001FDF7B /* admin-opera.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902731C2A8625001FDF7B /* admin-opera.png */; };
+		D30902A11C2A8625001FDF7B /* admin-safari.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902741C2A8625001FDF7B /* admin-safari.png */; };
+		D30902A21C2A8625001FDF7B /* adminPage.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902751C2A8625001FDF7B /* adminPage.png */; };
+		D30902A31C2A8625001FDF7B /* blogPage.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902761C2A8625001FDF7B /* blogPage.png */; };
+		D30902A41C2A8625001FDF7B /* landing.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902771C2A8625001FDF7B /* landing.png */; };
+		D30902A51C2A8625001FDF7B /* landingPage.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902781C2A8625001FDF7B /* landingPage.png */; };
+		D30902A61C2A8625001FDF7B /* loginPage.png in Resources */ = {isa = PBXBuildFile; fileRef = D30902791C2A8625001FDF7B /* loginPage.png */; };
+		D30902A71C2A8625001FDF7B /* sidebarPage.png in Resources */ = {isa = PBXBuildFile; fileRef = D309027A1C2A8625001FDF7B /* sidebarPage.png */; };
+		D30902A81C2A8625001FDF7B /* favicon.png in Resources */ = {isa = PBXBuildFile; fileRef = D309027B1C2A8625001FDF7B /* favicon.png */; };
+		D30902A91C2A8625001FDF7B /* startup-640x1096.png in Resources */ = {isa = PBXBuildFile; fileRef = D309027C1C2A8625001FDF7B /* startup-640x1096.png */; };
+		D30902AA1C2A8625001FDF7B /* amazeui.ie8polyfill.js in Resources */ = {isa = PBXBuildFile; fileRef = D309027E1C2A8625001FDF7B /* amazeui.ie8polyfill.js */; };
+		D30902AB1C2A8625001FDF7B /* amazeui.ie8polyfill.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D309027F1C2A8625001FDF7B /* amazeui.ie8polyfill.min.js */; };
+		D30902AC1C2A8625001FDF7B /* amazeui.js in Resources */ = {isa = PBXBuildFile; fileRef = D30902801C2A8625001FDF7B /* amazeui.js */; };
+		D30902AD1C2A8625001FDF7B /* amazeui.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D30902811C2A8625001FDF7B /* amazeui.min.js */; };
+		D30902AE1C2A8625001FDF7B /* amazeui.widgets.helper.js in Resources */ = {isa = PBXBuildFile; fileRef = D30902821C2A8625001FDF7B /* amazeui.widgets.helper.js */; };
+		D30902AF1C2A8625001FDF7B /* amazeui.widgets.helper.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D30902831C2A8625001FDF7B /* amazeui.widgets.helper.min.js */; };
+		D30902B01C2A8625001FDF7B /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = D30902841C2A8625001FDF7B /* app.js */; };
+		D30902B11C2A8625001FDF7B /* handlebars.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D30902851C2A8625001FDF7B /* handlebars.min.js */; };
+		D30902B21C2A8625001FDF7B /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D30902861C2A8625001FDF7B /* jquery.min.js */; };
+		D30902B31C2A8625001FDF7B /* html3.html in Resources */ = {isa = PBXBuildFile; fileRef = D30902871C2A8625001FDF7B /* html3.html */; };
+		D30902B41C2A8625001FDF7B /* html5.html in Resources */ = {isa = PBXBuildFile; fileRef = D30902881C2A8625001FDF7B /* html5.html */; };
+		D30902B51C2A8625001FDF7B /* html8.html in Resources */ = {isa = PBXBuildFile; fileRef = D30902891C2A8625001FDF7B /* html8.html */; };
+		D30902B61C2A8625001FDF7B /* html7.html in Resources */ = {isa = PBXBuildFile; fileRef = D309028A1C2A8625001FDF7B /* html7.html */; };
+		D30902B71C2A8625001FDF7B /* html6.html in Resources */ = {isa = PBXBuildFile; fileRef = D309028B1C2A8625001FDF7B /* html6.html */; };
+		D30902B81C2A8625001FDF7B /* html4.html in Resources */ = {isa = PBXBuildFile; fileRef = D309028C1C2A8625001FDF7B /* html4.html */; };
+		D30902B91C2A8625001FDF7B /* html1.html in Resources */ = {isa = PBXBuildFile; fileRef = D309028D1C2A8625001FDF7B /* html1.html */; };
+		D30902BA1C2A8625001FDF7B /* html2.html in Resources */ = {isa = PBXBuildFile; fileRef = D309028E1C2A8625001FDF7B /* html2.html */; };
+		D30902BB1C2A8625001FDF7B /* web.html in Resources */ = {isa = PBXBuildFile; fileRef = D309028F1C2A8625001FDF7B /* web.html */; };
+		D30902BD1C2A8668001FDF7B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D30902BC1C2A8668001FDF7B /* Settings.bundle */; };
 		D311C4911C09A70C00C80C05 /* BLUEDIAODIAO-拷贝.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C4521C09A70C00C80C05 /* BLUEDIAODIAO-拷贝.png */; };
 		D311C4921C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C4531C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png */; };
 		D311C4931C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311C4541C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png */; };
@@ -461,6 +509,54 @@
 		B99A8DF21C0BF43D0097E9B3 /* 黑@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑@3x.png"; sourceTree = "<group>"; };
 		B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthPercentView.swift; sourceTree = "<group>"; };
 		BCF8D03768A4DCFF61C567B8 /* Pods-meizhikang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meizhikang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang.debug.xcconfig"; sourceTree = "<group>"; };
+		D30902571C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HealthData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D30902581C2A78AA001FDF7B /* HealthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
+		D309025B1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthComDiseasesViewController.swift; sourceTree = "<group>"; };
+		D30902601C2A8625001FDF7B /* admin.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = admin.css; sourceTree = "<group>"; };
+		D30902611C2A8625001FDF7B /* amazeui.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = amazeui.css; sourceTree = "<group>"; };
+		D30902621C2A8625001FDF7B /* amazeui.flat.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = amazeui.flat.css; sourceTree = "<group>"; };
+		D30902631C2A8625001FDF7B /* amazeui.flat.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = amazeui.flat.min.css; sourceTree = "<group>"; };
+		D30902641C2A8625001FDF7B /* amazeui.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = amazeui.min.css; sourceTree = "<group>"; };
+		D30902651C2A8625001FDF7B /* app.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = app.css; sourceTree = "<group>"; };
+		D30902671C2A8625001FDF7B /* fontawesome-webfont.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.eot"; sourceTree = "<group>"; };
+		D30902681C2A8625001FDF7B /* fontawesome-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fontawesome-webfont.svg"; sourceTree = "<group>"; };
+		D30902691C2A8625001FDF7B /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		D309026A1C2A8625001FDF7B /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff"; sourceTree = "<group>"; };
+		D309026B1C2A8625001FDF7B /* fontawesome-webfont.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff2"; sourceTree = "<group>"; };
+		D309026C1C2A8625001FDF7B /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		D309026E1C2A8625001FDF7B /* app-icon72x72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon72x72@2x.png"; sourceTree = "<group>"; };
+		D30902701C2A8625001FDF7B /* admin-chrome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "admin-chrome.png"; sourceTree = "<group>"; };
+		D30902711C2A8625001FDF7B /* admin-firefox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "admin-firefox.png"; sourceTree = "<group>"; };
+		D30902721C2A8625001FDF7B /* admin-ie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "admin-ie.png"; sourceTree = "<group>"; };
+		D30902731C2A8625001FDF7B /* admin-opera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "admin-opera.png"; sourceTree = "<group>"; };
+		D30902741C2A8625001FDF7B /* admin-safari.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "admin-safari.png"; sourceTree = "<group>"; };
+		D30902751C2A8625001FDF7B /* adminPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adminPage.png; sourceTree = "<group>"; };
+		D30902761C2A8625001FDF7B /* blogPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blogPage.png; sourceTree = "<group>"; };
+		D30902771C2A8625001FDF7B /* landing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landing.png; sourceTree = "<group>"; };
+		D30902781C2A8625001FDF7B /* landingPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingPage.png; sourceTree = "<group>"; };
+		D30902791C2A8625001FDF7B /* loginPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginPage.png; sourceTree = "<group>"; };
+		D309027A1C2A8625001FDF7B /* sidebarPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sidebarPage.png; sourceTree = "<group>"; };
+		D309027B1C2A8625001FDF7B /* favicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favicon.png; sourceTree = "<group>"; };
+		D309027C1C2A8625001FDF7B /* startup-640x1096.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startup-640x1096.png"; sourceTree = "<group>"; };
+		D309027E1C2A8625001FDF7B /* amazeui.ie8polyfill.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazeui.ie8polyfill.js; sourceTree = "<group>"; };
+		D309027F1C2A8625001FDF7B /* amazeui.ie8polyfill.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazeui.ie8polyfill.min.js; sourceTree = "<group>"; };
+		D30902801C2A8625001FDF7B /* amazeui.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazeui.js; sourceTree = "<group>"; };
+		D30902811C2A8625001FDF7B /* amazeui.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazeui.min.js; sourceTree = "<group>"; };
+		D30902821C2A8625001FDF7B /* amazeui.widgets.helper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazeui.widgets.helper.js; sourceTree = "<group>"; };
+		D30902831C2A8625001FDF7B /* amazeui.widgets.helper.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = amazeui.widgets.helper.min.js; sourceTree = "<group>"; };
+		D30902841C2A8625001FDF7B /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		D30902851C2A8625001FDF7B /* handlebars.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = handlebars.min.js; sourceTree = "<group>"; };
+		D30902861C2A8625001FDF7B /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		D30902871C2A8625001FDF7B /* html3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html3.html; sourceTree = "<group>"; };
+		D30902881C2A8625001FDF7B /* html5.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html5.html; sourceTree = "<group>"; };
+		D30902891C2A8625001FDF7B /* html8.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html8.html; sourceTree = "<group>"; };
+		D309028A1C2A8625001FDF7B /* html7.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html7.html; sourceTree = "<group>"; };
+		D309028B1C2A8625001FDF7B /* html6.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html6.html; sourceTree = "<group>"; };
+		D309028C1C2A8625001FDF7B /* html4.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html4.html; sourceTree = "<group>"; };
+		D309028D1C2A8625001FDF7B /* html1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html1.html; sourceTree = "<group>"; };
+		D309028E1C2A8625001FDF7B /* html2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html2.html; sourceTree = "<group>"; };
+		D309028F1C2A8625001FDF7B /* web.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = web.html; sourceTree = "<group>"; };
+		D30902BC1C2A8668001FDF7B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D311C4521C09A70C00C80C05 /* BLUEDIAODIAO-拷贝.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLUEDIAODIAO-拷贝.png"; sourceTree = "<group>"; };
 		D311C4531C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLUEDIAODIAO-拷贝@2x.png"; sourceTree = "<group>"; };
 		D311C4541C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BLUEDIAODIAO-拷贝@3x.png"; sourceTree = "<group>"; };
@@ -800,6 +896,8 @@
 		B92C903F1C2040E7005F551F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D30902571C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift */,
+				D30902581C2A78AA001FDF7B /* HealthData.swift */,
 				D3C263CE1C2806290098BEAE /* GroupMember+CoreDataProperties.swift */,
 				D3C263CF1C2806290098BEAE /* GroupMember.swift */,
 				B9709AFF1C26F5ED004DCD50 /* Message+CoreDataProperties.swift */,
@@ -935,6 +1033,105 @@
 				B99A8DF21C0BF43D0097E9B3 /* 黑@3x.png */,
 			);
 			path = "健康分析";
+			sourceTree = "<group>";
+		};
+		D309025D1C2A8625001FDF7B /* html */ = {
+			isa = PBXGroup;
+			children = (
+				D309025E1C2A8625001FDF7B /* assets */,
+				D30902871C2A8625001FDF7B /* html3.html */,
+				D30902881C2A8625001FDF7B /* html5.html */,
+				D30902891C2A8625001FDF7B /* html8.html */,
+				D309028A1C2A8625001FDF7B /* html7.html */,
+				D309028B1C2A8625001FDF7B /* html6.html */,
+				D309028C1C2A8625001FDF7B /* html4.html */,
+				D309028D1C2A8625001FDF7B /* html1.html */,
+				D309028E1C2A8625001FDF7B /* html2.html */,
+				D309028F1C2A8625001FDF7B /* web.html */,
+			);
+			path = html;
+			sourceTree = "<group>";
+		};
+		D309025E1C2A8625001FDF7B /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				D309025F1C2A8625001FDF7B /* css */,
+				D30902661C2A8625001FDF7B /* fonts */,
+				D309026D1C2A8625001FDF7B /* i */,
+				D309027D1C2A8625001FDF7B /* js */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		D309025F1C2A8625001FDF7B /* css */ = {
+			isa = PBXGroup;
+			children = (
+				D30902601C2A8625001FDF7B /* admin.css */,
+				D30902611C2A8625001FDF7B /* amazeui.css */,
+				D30902621C2A8625001FDF7B /* amazeui.flat.css */,
+				D30902631C2A8625001FDF7B /* amazeui.flat.min.css */,
+				D30902641C2A8625001FDF7B /* amazeui.min.css */,
+				D30902651C2A8625001FDF7B /* app.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		D30902661C2A8625001FDF7B /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D30902671C2A8625001FDF7B /* fontawesome-webfont.eot */,
+				D30902681C2A8625001FDF7B /* fontawesome-webfont.svg */,
+				D30902691C2A8625001FDF7B /* fontawesome-webfont.ttf */,
+				D309026A1C2A8625001FDF7B /* fontawesome-webfont.woff */,
+				D309026B1C2A8625001FDF7B /* fontawesome-webfont.woff2 */,
+				D309026C1C2A8625001FDF7B /* FontAwesome.otf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		D309026D1C2A8625001FDF7B /* i */ = {
+			isa = PBXGroup;
+			children = (
+				D309026E1C2A8625001FDF7B /* app-icon72x72@2x.png */,
+				D309026F1C2A8625001FDF7B /* examples */,
+				D309027B1C2A8625001FDF7B /* favicon.png */,
+				D309027C1C2A8625001FDF7B /* startup-640x1096.png */,
+			);
+			path = i;
+			sourceTree = "<group>";
+		};
+		D309026F1C2A8625001FDF7B /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				D30902701C2A8625001FDF7B /* admin-chrome.png */,
+				D30902711C2A8625001FDF7B /* admin-firefox.png */,
+				D30902721C2A8625001FDF7B /* admin-ie.png */,
+				D30902731C2A8625001FDF7B /* admin-opera.png */,
+				D30902741C2A8625001FDF7B /* admin-safari.png */,
+				D30902751C2A8625001FDF7B /* adminPage.png */,
+				D30902761C2A8625001FDF7B /* blogPage.png */,
+				D30902771C2A8625001FDF7B /* landing.png */,
+				D30902781C2A8625001FDF7B /* landingPage.png */,
+				D30902791C2A8625001FDF7B /* loginPage.png */,
+				D309027A1C2A8625001FDF7B /* sidebarPage.png */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		D309027D1C2A8625001FDF7B /* js */ = {
+			isa = PBXGroup;
+			children = (
+				D309027E1C2A8625001FDF7B /* amazeui.ie8polyfill.js */,
+				D309027F1C2A8625001FDF7B /* amazeui.ie8polyfill.min.js */,
+				D30902801C2A8625001FDF7B /* amazeui.js */,
+				D30902811C2A8625001FDF7B /* amazeui.min.js */,
+				D30902821C2A8625001FDF7B /* amazeui.widgets.helper.js */,
+				D30902831C2A8625001FDF7B /* amazeui.widgets.helper.min.js */,
+				D30902841C2A8625001FDF7B /* app.js */,
+				D30902851C2A8625001FDF7B /* handlebars.min.js */,
+				D30902861C2A8625001FDF7B /* jquery.min.js */,
+			);
+			path = js;
 			sourceTree = "<group>";
 		};
 		D311C4511C09A70C00C80C05 /* 功能侧边栏 */ = {
@@ -1159,6 +1356,7 @@
 		D36157531C09760B009ED19D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D309025D1C2A8625001FDF7B /* html */,
 				D3EFF9CC1C182B8F0047E2B0 /* 健康图 */,
 				D311C5721C0A119500C80C05 /* 我的好友 */,
 				D311C4FB1C0A066F00C80C05 /* 设置 */,
@@ -1170,6 +1368,7 @@
 				D3F8E2DF1C0C3A6700263B4E /* 导航栏@2x.png */,
 				D3F8E2DB1C0C3A5500263B4E /* 导航栏@3x.png */,
 				D36157541C09760B009ED19D /* README.md */,
+				D30902BC1C2A8668001FDF7B /* Settings.bundle */,
 			);
 			name = Resource;
 			path = meizhikang/Resource;
@@ -1346,6 +1545,7 @@
 			isa = PBXGroup;
 			children = (
 				D3F8E2D71C0C387A00263B4E /* HealthFigureViewController.swift */,
+				D309025B1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift */,
 			);
 			path = HealthFigure;
 			sourceTree = "<group>";
@@ -1433,7 +1633,9 @@
 			files = (
 				B9709B391C299663004DCD50 /* chat_animation2.png in Resources */,
 				D311C5C31C0A119500C80C05 /* 灰色框@3x.png in Resources */,
+				D30902901C2A8625001FDF7B /* admin.css in Resources */,
 				D311C5BB1C0A119500C80C05 /* 添加.png in Resources */,
+				D30902B51C2A8625001FDF7B /* html8.html in Resources */,
 				B99A8E021C0BF43D0097E9B3 /* 框-蓝.png in Resources */,
 				D311C5C91C0A119500C80C05 /* 白对话框@3x.png in Resources */,
 				D3EFFA141C182B8F0047E2B0 /* 框--紫@3x.png in Resources */,
@@ -1452,6 +1654,7 @@
 				D311C4C71C09A70C00C80C05 /* 设置-拷贝.png in Resources */,
 				D3F8E2E01C0C3A6700263B4E /* 导航栏@2x.png in Resources */,
 				B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */,
+				D30902911C2A8625001FDF7B /* amazeui.css in Resources */,
 				D311C5D81C0A119500C80C05 /* 表情@3x.png in Resources */,
 				D311C5CA1C0A119500C80C05 /* 白框.png in Resources */,
 				B99A8E151C0BF43D0097E9B3 /* 绿-圆@2x.png in Resources */,
@@ -1463,6 +1666,7 @@
 				D311C5471C0A066F00C80C05 /* 开关-灰.png in Resources */,
 				D311C5551C0A066F00C80C05 /* 灰线-长@3x.png in Resources */,
 				B99A8E0E1C0BF43D0097E9B3 /* 灰.png in Resources */,
+				D30902AB1C2A8625001FDF7B /* amazeui.ie8polyfill.min.js in Resources */,
 				D311C4B91C09A70C00C80C05 /* 我的好友-绿@2x.png in Resources */,
 				D311C5481C0A066F00C80C05 /* 开关-灰@2x.png in Resources */,
 				D311C5D91C0A119500C80C05 /* 记录-蓝.png in Resources */,
@@ -1484,18 +1688,24 @@
 				D311C4961C09A70C00C80C05 /* BLUEDIAODIAO-绿@3x.png in Resources */,
 				B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */,
 				D3EFFA0C1C182B8F0047E2B0 /* 导航栏.png in Resources */,
+				D30902A11C2A8625001FDF7B /* admin-safari.png in Resources */,
 				D311C5BE1C0A119500C80C05 /* 灰框.png in Resources */,
 				B99A8E0A1C0BF43D0097E9B3 /* 灰--圆小@3x.png in Resources */,
+				D309029C1C2A8625001FDF7B /* app-icon72x72@2x.png in Resources */,
 				D3EFFA0F1C182B8F0047E2B0 /* 提示框-.png in Resources */,
 				D311C5EC1C0A119500C80C05 /* 通讯@2x.png in Resources */,
 				D311C4CB1C09A70C00C80C05 /* 设置-绿@2x.png in Resources */,
 				D311C4951C09A70C00C80C05 /* BLUEDIAODIAO-绿@2x.png in Resources */,
+				D30902921C2A8625001FDF7B /* amazeui.flat.css in Resources */,
 				D311C5C11C0A119500C80C05 /* 灰色框.png in Resources */,
+				D30902B11C2A8625001FDF7B /* handlebars.min.js in Resources */,
 				D311C4B51C09A70C00C80C05 /* 我的好友-拷贝.png in Resources */,
 				B99A8E1A1C0BF43D0097E9B3 /* 绿-框圆.png in Resources */,
 				D311C5D41C0A119500C80C05 /* 蓝对话框@2x.png in Resources */,
+				D30902B61C2A8625001FDF7B /* html7.html in Resources */,
 				D311C5E31C0A119500C80C05 /* 输入框@2x.png in Resources */,
 				D311C55D1C0A066F00C80C05 /* 白-长对话框-@2x.png in Resources */,
+				D30902B31C2A8625001FDF7B /* html3.html in Resources */,
 				D311C4AF1C09A70C00C80C05 /* 轮换图2.png in Resources */,
 				D311C5C01C0A119500C80C05 /* 灰框@3x.png in Resources */,
 				D311C5631C0A066F00C80C05 /* 矩形-4@2x.png in Resources */,
@@ -1510,16 +1720,20 @@
 				D311C4A51C09A70C00C80C05 /* 健康图-拷贝@3x.png in Resources */,
 				D3EFFA161C182B8F0047E2B0 /* 框@2x.png in Resources */,
 				D311C5D11C0A119500C80C05 /* 联系人@2x.png in Resources */,
+				D30902931C2A8625001FDF7B /* amazeui.flat.min.css in Resources */,
 				B9709B381C299663004DCD50 /* chat_animation1.png in Resources */,
+				D309029F1C2A8625001FDF7B /* admin-ie.png in Resources */,
 				D3897DE41C09945A00D18BAC /* 菜单-白@2x.png in Resources */,
 				D311C5CD1C0A119500C80C05 /* 联系人-蓝.png in Resources */,
 				D311C4921C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png in Resources */,
+				D30902951C2A8625001FDF7B /* app.css in Resources */,
 				B99A8E141C0BF43D0097E9B3 /* 绿-圆.png in Resources */,
 				D311C5561C0A066F00C80C05 /* 灰边.png in Resources */,
 				D3EFFA0E1C182B8F0047E2B0 /* 导航栏@3x.png in Resources */,
 				B99A8E2A1C0BF43D0097E9B3 /* 黑@2x.png in Resources */,
 				D3F8E2E51C0D82DD00263B4E /* 圆-绿@3x.png in Resources */,
 				B99A8E131C0BF43D0097E9B3 /* 灰框-@3x.png in Resources */,
+				D30902B41C2A8625001FDF7B /* html5.html in Resources */,
 				B99A8E1B1C0BF43D0097E9B3 /* 绿-框圆@2x.png in Resources */,
 				D311C4BB1C09A70C00C80C05 /* 我的好友.png in Resources */,
 				D311C5EB1C0A119500C80C05 /* 通讯2@3x.png in Resources */,
@@ -1531,6 +1745,7 @@
 				D311C5EE1C0A119500C80C05 /* 长边-绿.png in Resources */,
 				D311C4A41C09A70C00C80C05 /* 健康图-拷贝@2x.png in Resources */,
 				D311C54A1C0A066F00C80C05 /* 开关-绿.png in Resources */,
+				D309029A1C2A8625001FDF7B /* fontawesome-webfont.woff2 in Resources */,
 				B99A8E0B1C0BF43D0097E9B3 /* 灰-圆.png in Resources */,
 				D3EFFA081C182B8F0047E2B0 /* 图标2@3x.png in Resources */,
 				D311C4B01C09A70C00C80C05 /* 轮换图2@2x.png in Resources */,
@@ -1540,6 +1755,7 @@
 				D311C5401C0A066F00C80C05 /* 小圆-白@3x.png in Resources */,
 				B99A8E201C0BF43D0097E9B3 /* 蓝-圆小.png in Resources */,
 				D3EFFA1D1C182B8F0047E2B0 /* 粉@3x.png in Resources */,
+				D30902AF1C2A8625001FDF7B /* amazeui.widgets.helper.min.js in Resources */,
 				D311C54B1C0A066F00C80C05 /* 开关-绿@2x.png in Resources */,
 				D311C49A1C09A70C00C80C05 /* 健康分析-拷贝.png in Resources */,
 				B9709B371C299663004DCD50 /* chat_animation_white3.png in Resources */,
@@ -1547,6 +1763,8 @@
 				D311C5EF1C0A119500C80C05 /* 长边-绿@2x.png in Resources */,
 				B99A8E1F1C0BF43D0097E9B3 /* 蓝-圆@3x.png in Resources */,
 				D311C5D31C0A119500C80C05 /* 蓝对话框.png in Resources */,
+				D309029B1C2A8625001FDF7B /* FontAwesome.otf in Resources */,
+				D30902AD1C2A8625001FDF7B /* amazeui.min.js in Resources */,
 				D311C4931C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png in Resources */,
 				B99A8E001C0BF43D0097E9B3 /* 左@2x.png in Resources */,
 				B9709B361C299663004DCD50 /* chat_animation_white2.png in Resources */,
@@ -1567,6 +1785,7 @@
 				B99A8E241C0BF43D0097E9B3 /* 黑-圆@2x.png in Resources */,
 				D311C5CC1C0A119500C80C05 /* 白框@3x.png in Resources */,
 				D3EFFA0A1C182B8F0047E2B0 /* 壁纸@2x.png in Resources */,
+				D30902941C2A8625001FDF7B /* amazeui.min.css in Resources */,
 				D311C4CE1C09A70C00C80C05 /* 设置@2x.png in Resources */,
 				D3EFFA0D1C182B8F0047E2B0 /* 导航栏@2x.png in Resources */,
 				D3897DEC1C09995800D18BAC /* 矩形.png in Resources */,
@@ -1583,11 +1802,14 @@
 				D311C4971C09A70C00C80C05 /* BLUEDIAODIAO.png in Resources */,
 				D311C4C61C09A70C00C80C05 /* 蓝牙连接@3x.png in Resources */,
 				B99A8DF91C0BF43D0097E9B3 /* 图标2.png in Resources */,
+				D30902BB1C2A8625001FDF7B /* web.html in Resources */,
+				D30902961C2A8625001FDF7B /* fontawesome-webfont.eot in Resources */,
 				D3EFFA1F1C182B8F0047E2B0 /* 紫@2x.png in Resources */,
 				D311C5611C0A066F00C80C05 /* 白框@3x.png in Resources */,
 				D311C5571C0A066F00C80C05 /* 灰边@2x.png in Resources */,
 				D311C5D01C0A119500C80C05 /* 联系人.png in Resources */,
 				D311C4C31C09A70C00C80C05 /* 蓝牙连接-绿@3x.png in Resources */,
+				D30902A91C2A8625001FDF7B /* startup-640x1096.png in Resources */,
 				D311C5381C0A066F00C80C05 /* 圆-白.png in Resources */,
 				D311C54F1C0A066F00C80C05 /* 开关-蓝@3x.png in Resources */,
 				D311C5391C0A066F00C80C05 /* 圆-白@2x.png in Resources */,
@@ -1625,7 +1847,12 @@
 				D311C5BD1C0A119500C80C05 /* 添加@3x.png in Resources */,
 				D311C5ED1C0A119500C80C05 /* 通讯@3x.png in Resources */,
 				D311C4C91C09A70C00C80C05 /* 设置-拷贝@3x.png in Resources */,
+				D30902971C2A8625001FDF7B /* fontawesome-webfont.svg in Resources */,
 				D311C4CA1C09A70C00C80C05 /* 设置-绿.png in Resources */,
+				D30902A61C2A8625001FDF7B /* loginPage.png in Resources */,
+				D30902B01C2A8625001FDF7B /* app.js in Resources */,
+				D30902B71C2A8625001FDF7B /* html6.html in Resources */,
+				D30902A81C2A8625001FDF7B /* favicon.png in Resources */,
 				D311C5D51C0A119500C80C05 /* 蓝对话框@3x.png in Resources */,
 				D311C5E21C0A119500C80C05 /* 输入框.png in Resources */,
 				B99A8E251C0BF43D0097E9B3 /* 黑-圆@3x.png in Resources */,
@@ -1635,12 +1862,16 @@
 				D311C5B91C0A119500C80C05 /* 添加-灰色@2x.png in Resources */,
 				D311C4B11C09A70C00C80C05 /* 轮换图2@3x.png in Resources */,
 				D311C5E71C0A119500C80C05 /* 返回@3x.png in Resources */,
+				D309029D1C2A8625001FDF7B /* admin-chrome.png in Resources */,
+				D30902B21C2A8625001FDF7B /* jquery.min.js in Resources */,
 				D311C4B21C09A70C00C80C05 /* 轮换图3.png in Resources */,
 				D311C4941C09A70C00C80C05 /* BLUEDIAODIAO-绿.png in Resources */,
 				D3F8E2DC1C0C3A5500263B4E /* 导航栏.png in Resources */,
 				B99A8E191C0BF43D0097E9B3 /* 绿-圆小@3x.png in Resources */,
+				D30902981C2A8625001FDF7B /* fontawesome-webfont.ttf in Resources */,
 				D311C4AB1C09A70C00C80C05 /* 健康图@3x.png in Resources */,
 				D3F8E2E61C0D82DD00263B4E /* 圆-绿@2x.png in Resources */,
+				D30902B91C2A8625001FDF7B /* html1.html in Resources */,
 				D311C4A01C09A70C00C80C05 /* 健康分析.png in Resources */,
 				B99A8E121C0BF43D0097E9B3 /* 灰框-@2x.png in Resources */,
 				D3EFFA091C182B8F0047E2B0 /* 壁纸.png in Resources */,
@@ -1659,14 +1890,19 @@
 				D311C49D1C09A70C00C80C05 /* 健康分析-绿.png in Resources */,
 				D3EFFA1B1C182B8F0047E2B0 /* 粉.png in Resources */,
 				B99A8E031C0BF43D0097E9B3 /* 框-蓝@2x.png in Resources */,
+				D309029E1C2A8625001FDF7B /* admin-firefox.png in Resources */,
+				D30902AA1C2A8625001FDF7B /* amazeui.ie8polyfill.js in Resources */,
 				B99A8DFB1C0BF43D0097E9B3 /* 图标2@3x.png in Resources */,
 				D311C5CF1C0A119500C80C05 /* 联系人-蓝@3x.png in Resources */,
 				D311C4A91C09A70C00C80C05 /* 健康图.png in Resources */,
 				D311C5DB1C0A119500C80C05 /* 记录-蓝@3x.png in Resources */,
 				D311C5B61C0A119500C80C05 /* 深灰框-@2x.png in Resources */,
+				D30902991C2A8625001FDF7B /* fontawesome-webfont.woff in Resources */,
 				D311C4C01C09A70C00C80C05 /* 蓝牙连接-拷贝@3x.png in Resources */,
 				D311C4AC1C09A70C00C80C05 /* 轮换图1.png in Resources */,
+				D30902AC1C2A8625001FDF7B /* amazeui.js in Resources */,
 				D311C5DC1C0A119500C80C05 /* 记录.png in Resources */,
+				D30902AE1C2A8625001FDF7B /* amazeui.widgets.helper.js in Resources */,
 				B99A8E071C0BF43D0097E9B3 /* 框绿@3x.png in Resources */,
 				D3EFFA2B1C182B8F0047E2B0 /* 黑-@2x.png in Resources */,
 				B99A8DFA1C0BF43D0097E9B3 /* 图标2@2x.png in Resources */,
@@ -1676,8 +1912,10 @@
 				D311C5C81C0A119500C80C05 /* 白对话框@2x.png in Resources */,
 				D311C4A71C09A70C00C80C05 /* 健康图-绿@2x.png in Resources */,
 				D311C5BC1C0A119500C80C05 /* 添加@2x.png in Resources */,
+				D30902B81C2A8625001FDF7B /* html4.html in Resources */,
 				D311C4BA1C09A70C00C80C05 /* 我的好友-绿@3x.png in Resources */,
 				D311C4AE1C09A70C00C80C05 /* 轮换图1@3x.png in Resources */,
+				D30902A41C2A8625001FDF7B /* landing.png in Resources */,
 				D3EFFA1A1C182B8F0047E2B0 /* 灰-@3x.png in Resources */,
 				B99A8E0F1C0BF43D0097E9B3 /* 灰@2x.png in Resources */,
 				D311C54C1C0A066F00C80C05 /* 开关-绿@3x.png in Resources */,
@@ -1688,6 +1926,7 @@
 				B99A8E171C0BF43D0097E9B3 /* 绿-圆小.png in Resources */,
 				B99A8E061C0BF43D0097E9B3 /* 框绿@2x.png in Resources */,
 				D311C5351C0A066F00C80C05 /* 圆-灰.png in Resources */,
+				D30902A01C2A8625001FDF7B /* admin-opera.png in Resources */,
 				D311C5CB1C0A119500C80C05 /* 白框@2x.png in Resources */,
 				D311C4AD1C09A70C00C80C05 /* 轮换图1@2x.png in Resources */,
 				D311C49F1C09A70C00C80C05 /* 健康分析-绿@3x.png in Resources */,
@@ -1697,6 +1936,7 @@
 				D3EFFA111C182B8F0047E2B0 /* 提示框-@3x.png in Resources */,
 				D311C4AA1C09A70C00C80C05 /* 健康图@2x.png in Resources */,
 				D311C55E1C0A066F00C80C05 /* 白-长对话框-@3x.png in Resources */,
+				D30902A21C2A8625001FDF7B /* adminPage.png in Resources */,
 				D311C5D61C0A119500C80C05 /* 表情.png in Resources */,
 				B99A8E0D1C0BF43D0097E9B3 /* 灰-圆@3x.png in Resources */,
 				D3EFFA011C182B8F0047E2B0 /* 图标1@2x.png in Resources */,
@@ -1707,6 +1947,7 @@
 				D311C5D71C0A119500C80C05 /* 表情@2x.png in Resources */,
 				D311C49B1C09A70C00C80C05 /* 健康分析-拷贝@2x.png in Resources */,
 				D311C4C41C09A70C00C80C05 /* 蓝牙连接.png in Resources */,
+				D30902BD1C2A8668001FDF7B /* Settings.bundle in Resources */,
 				D3EFF9FE1C182B8F0047E2B0 /* 图标1-紫@2x.png in Resources */,
 				D311C5E41C0A119500C80C05 /* 输入框@3x.png in Resources */,
 				D311C55A1C0A066F00C80C05 /* 白-短对话框-@2x.png in Resources */,
@@ -1715,6 +1956,7 @@
 				D311C4BC1C09A70C00C80C05 /* 我的好友@2x.png in Resources */,
 				B99A8DFC1C0BF43D0097E9B3 /* 圆.png in Resources */,
 				D311C49C1C09A70C00C80C05 /* 健康分析-拷贝@3x.png in Resources */,
+				D30902A51C2A8625001FDF7B /* landingPage.png in Resources */,
 				B9709B3A1C299663004DCD50 /* chat_animation3.png in Resources */,
 				D311C55F1C0A066F00C80C05 /* 白框.png in Resources */,
 				D311C4A11C09A70C00C80C05 /* 健康分析@2x.png in Resources */,
@@ -1722,8 +1964,11 @@
 				D311C4A21C09A70C00C80C05 /* 健康分析@3x.png in Resources */,
 				B99A8DFD1C0BF43D0097E9B3 /* 圆@2x.png in Resources */,
 				B99A8E0C1C0BF43D0097E9B3 /* 灰-圆@2x.png in Resources */,
+				D30902BA1C2A8625001FDF7B /* html2.html in Resources */,
+				D30902A71C2A8625001FDF7B /* sidebarPage.png in Resources */,
 				D3EFFA241C182B8F0047E2B0 /* 蓝.png in Resources */,
 				D311C5511C0A066F00C80C05 /* 灰线-短-拷贝@2x.png in Resources */,
+				D30902A31C2A8625001FDF7B /* blogPage.png in Resources */,
 				D3EFFA151C182B8F0047E2B0 /* 框.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1801,6 +2046,7 @@
 				D3F8E2C41C0C384300263B4E /* BleTableViewController.swift in Sources */,
 				D336C92D1C25868B00E967EB /* User+CoreDataProperties.swift in Sources */,
 				B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */,
+				D309025C1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift in Sources */,
 				B9709B2E1C29962C004DCD50 /* JSQAudioMediaItem.m in Sources */,
 				B95CA5141C239EED002CF05B /* SwiftyJSON.swift in Sources */,
 				B930DEE81C1457E1003576F6 /* EasyOptionalUnwrapping.swift in Sources */,
@@ -1845,6 +2091,7 @@
 				D3EFF9C81C1820E30047E2B0 /* UIColor+greenbaby.m in Sources */,
 				D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */,
 				D36978BF1C1C407A0094921B /* NetWorkingContents.m in Sources */,
+				D30902591C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift in Sources */,
 				D3EFFA371C186D7B0047E2B0 /* IMConnect.m in Sources */,
 				B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */,
 				B96C98C41C11D45000228D21 /* HealthWeeklyViewController.swift in Sources */,
@@ -1852,6 +2099,7 @@
 				D39B899E1C087AC1009086B2 /* meizhikang.xcdatamodeld in Sources */,
 				D3F8E2E81C0D86C900263B4E /* AlarmsViewController.swift in Sources */,
 				D3F8E2C31C0C384300263B4E /* AlertViewController.swift in Sources */,
+				D309025A1C2A78AA001FDF7B /* HealthData.swift in Sources */,
 				D39B89921C087AC1009086B2 /* main.m in Sources */,
 				D3F8E2D11C0C384B00263B4E /* RegistTableViewController.swift in Sources */,
 				B9709B291C298678004DCD50 /* RecordAudio.m in Sources */,

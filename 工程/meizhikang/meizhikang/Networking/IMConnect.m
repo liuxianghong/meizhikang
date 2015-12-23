@@ -539,12 +539,14 @@
         currentIM.sendingType = IMObjectSendFinished;
         reciveIM = nil;
     }
+    NSMutableArray *array = [[NSMutableArray alloc]init];
     for (int i=0; i<IMQueue.count; i++) {
         IMObject *im = IMQueue.firstObject;
         if (im.sendingType == IMObjectSendFinished){
-            [IMQueue removeObject:im];
+            [array addObject:im];
         }
     }
+    [IMQueue removeObjectsInArray:array];
     if (IMQueue.count==0) {
         isListen = YES;
         [asyncSocket readDataToLength:10 withTimeout:-1 tag:0];

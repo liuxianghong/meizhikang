@@ -24,6 +24,12 @@
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="members" inverseEntity="Group" syncable="YES"/>
     </entity>
+    <entity name="HealthData" representedClassName=".HealthData" syncable="YES">
+        <attribute name="healthValue" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="heartRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="healthDatas" inverseEntity="User" syncable="YES"/>
+    </entity>
     <entity name="Message" representedClassName=".Message" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -50,12 +56,14 @@
         <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="emails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Email" inverseName="user" inverseEntity="Email" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="user" inverseEntity="Group" syncable="YES"/>
+        <relationship name="healthDatas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HealthData" inverseName="user" inverseEntity="HealthData" syncable="YES"/>
     </entity>
     <elements>
         <element name="Email" positionX="-83" positionY="-144" width="128" height="135"/>
         <element name="Group" positionX="160" positionY="-108" width="128" height="165"/>
-        <element name="Message" positionX="-117" positionY="198" width="126" height="165"/>
-        <element name="User" positionX="-306" positionY="-81" width="128" height="270"/>
         <element name="GroupMember" positionX="-108" positionY="0" width="128" height="105"/>
+        <element name="Message" positionX="-117" positionY="198" width="126" height="165"/>
+        <element name="User" positionX="-306" positionY="-81" width="128" height="285"/>
+        <element name="HealthData" positionX="-108" positionY="0" width="128" height="105"/>
     </elements>
 </model>

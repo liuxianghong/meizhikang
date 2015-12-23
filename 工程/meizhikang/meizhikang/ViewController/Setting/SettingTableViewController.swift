@@ -159,6 +159,11 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if self.revealViewController() != nil{
+            self.revealViewController().setFrontViewPosition(.Left, animated: true)
+        }
+        
         if segue.identifier == "alertIndentifier"{
             let vc:AlertViewController = segue.destinationViewController as! AlertViewController
             vc.tag = sender as! Int
@@ -173,6 +178,7 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
             }
             vc.delegate = self
         }
+        
     }
     
 

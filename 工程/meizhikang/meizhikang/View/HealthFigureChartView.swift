@@ -21,6 +21,8 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     var viewArray : [UIView] = [UIView()]
     var currentPoint : CGPoint!
     var first : Bool = true
+    var dataArray = []
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.delegate = self
