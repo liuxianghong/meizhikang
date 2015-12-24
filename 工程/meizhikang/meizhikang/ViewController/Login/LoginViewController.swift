@@ -36,6 +36,8 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func registLaterClick(sender : AnyObject) {
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
+        NSUserDefaults.standardUserDefaults().synchronize()
         self.dismissViewControllerAnimated(true) { () -> Void in
             
         }

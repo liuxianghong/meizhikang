@@ -60,6 +60,19 @@
     [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
 }
 
++(void)BGNotifyByDeviceToken:(NSString *)token completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    
+    if (![[IMConnect Instance]isLogin]) {
+        failure(nil);
+        return;
+    }
+    NSDictionary *dic = @{
+                          @"type" : @"ios_bg_notify",
+                          @"device" : token
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
 +(void)LoginOut{
     [[IMConnect Instance] LoginOut];
 }

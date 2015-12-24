@@ -21,12 +21,35 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     var userName = "未登录"
     var nameLabel : UILabel!
+    var currentIndex = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.revealViewController().frontIdentfierArray = viewArray
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("didLogoutNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notif : NSNotification) -> Void in
+            
+            if self.revealViewController() != nil{
+                self.revealViewController().setFrontViewPosition(.Left, animated: true)
+                let dic = self.revealViewController().frontViewControllersDic;
+                for obj in dic.allValues{
+                    if let vc = obj as? UINavigationController{
+                        vc.popToRootViewControllerAnimated(false)
+                    }
+                }
+                let vc:UIViewController = dic.objectForKey("sw_front") as! UIViewController;
+                if !vc.isEqual(self.revealViewController().frontViewController){
+                    self.revealViewController().pushFrontViewController(vc, animated: false)
+                }
+                self.currentIndex = 1
+            }
+        }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,9 +68,8 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         else{
             userName = "未登录"
         }
-        if nameLabel != nil{
-            nameLabel.text = userName
-        }
+        tableView.reloadData()
+        tableView.selectRowAtIndexPath(NSIndexPath(forRow: currentIndex, inSection: 0), animated: false, scrollPosition: .None)
         
     }
     override func viewDidAppear(animated: Bool) {
@@ -109,23 +131,33 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if indexPath.row == 0{
             cell.titleLabel.text = userName
             cell.selectionStyle = .None
-            cell.userInteractionEnabled = false
-            nameLabel = cell.titleLabel
         }
         else{
             cell.titleLabel.text = title
             cell.selectionStyle = .Default
-            cell.userInteractionEnabled = true
         }
-    
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.revealViewController() != nil{
+            
+            if indexPath.row != 1{
+                if UserInfo.CurrentUser() == nil{
+                    self.revealViewController().navigationController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                    self.tableView.reloadData()
+                    tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+                    self.revealViewController().revealToggleAnimated(true)
+                    return;
+                }
+            }
             if indexPath.row == 0{
+                self.tableView.reloadData()
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: currentIndex, inSection: 0), animated: false, scrollPosition: .None)
+                //self.revealViewController().revealToggleAnimated(true)
                 return;
             }
+            currentIndex = indexPath.row
             let dic = self.revealViewController().frontViewControllersDic;
             let vc:UIViewController = dic.objectForKey(viewArray[indexPath.row]) as! UIViewController;
             if !vc.isEqual(self.revealViewController().frontViewController){

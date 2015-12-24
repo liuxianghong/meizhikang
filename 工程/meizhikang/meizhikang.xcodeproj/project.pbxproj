@@ -1613,6 +1613,12 @@
 				TargetAttributes = {
 					D39B898C1C087AC1009086B2 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = F44XSCNJGN;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2229,6 +2235,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = meizhikang/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2241,6 +2249,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.meizhikang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "meizhikang/Utils/meizhikang-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2252,6 +2261,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = meizhikang/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2264,6 +2275,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.meizhikang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "meizhikang/Utils/meizhikang-Bridging-Header.h";
 			};
 			name = Release;

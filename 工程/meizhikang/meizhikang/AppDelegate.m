@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "NSString+scisky.h"
+#import "IMRequst.h"
 #import <MagicalRecord/MagicalRecord.h>
 
 @interface AppDelegate ()
@@ -14,6 +16,9 @@
 @end
 
 @implementation AppDelegate
+{
+    NSString *token;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -22,12 +27,40 @@
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"meizhikang.sqlite"];
     
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil]];
+    
+    //判断是否由远程消息通知触发应用程序启动
+    if (launchOptions) {
+        //获取应用程序消息通知标记数（即小红圈中的数字）
+        NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+        if (badge>0) {
+            //如果应用程序消息通知标记数（即小红圈中的数字）大于0，清除标记。
+            badge--;
+            //清除标记。清除小红圈中数字，小红圈中数字为0，小红圈才会消除。
+            [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
+            NSDictionary *pushInfo = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
+            
+            //获取推送详情
+            NSString *pushString = [NSString stringWithFormat:@"%@",[pushInfo  objectForKey:@"aps"]];
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"" message:pushString delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+    
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    if (token) {
+        [IMRequst BGNotifyByDeviceToken:token completion:^(id info) {
+            NSLog(@"BGNotifyByDeviceToken : %@",info);
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -49,5 +82,32 @@
     [MagicalRecord cleanUp];
 }
 
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    token = [deviceToken.description formatData];
+    NSLog(@"My token is:%@", token);
+    //这里应将device token发送到服务器端
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSString *error_str = [NSString stringWithFormat: @"%@", error];
+    NSLog(@"Failed to get token, error:%@", error_str);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
+    for (id key in userInfo) {
+        NSLog(@"key: %@, value: %@", key, [userInfo objectForKey:key]);
+    }
+    /* eg.
+     key: aps, value: {
+     alert = "\U8fd9\U662f\U4e00\U6761\U6d4b\U8bd5\U4fe1\U606f";
+     badge = 1;
+     sound = default;
+     }
+     */
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"remote notification" message:userInfo[@"aps"][@"alert"] delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+    [alert show];
+}
 
 @end

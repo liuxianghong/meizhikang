@@ -16,6 +16,7 @@ void oxrPWToken(Byte *d,const Byte *p,const Byte *t);
 @interface NSString (scisky)
 +(NSData *)AESAndXOREncrypt:(NSData *)token data:(NSData *)data;
 +(NSData *)AESAndXORDecrypt:(NSData *)token data:(NSData *)data;
+-(NSString *)formatData;
 -(NSData *) dataFromMD5;
 -(NSData *)AESEncrypt;
 +(NSData *)AESDecrypt:(NSData *)data;
