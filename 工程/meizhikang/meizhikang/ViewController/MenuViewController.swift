@@ -109,11 +109,13 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if indexPath.row == 0{
             cell.titleLabel.text = userName
             cell.selectionStyle = .None
+            cell.userInteractionEnabled = false
             nameLabel = cell.titleLabel
         }
         else{
             cell.titleLabel.text = title
             cell.selectionStyle = .Default
+            cell.userInteractionEnabled = true
         }
     
         return cell
