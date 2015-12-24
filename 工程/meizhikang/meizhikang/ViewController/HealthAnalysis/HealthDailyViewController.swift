@@ -13,6 +13,10 @@ struct DailyViewLineData{
 }
 class HealthDailyViewController: UIViewController {
 
+    @IBOutlet weak var todayAvgLabel: UILabel!
+    @IBOutlet weak var yesterdayAvgLabel: UILabel!
+    @IBOutlet weak var lastweekAvgLabel: UILabel!
+    @IBOutlet weak var lastmonthAvgLabel: UILabel!
     @IBOutlet weak var chartView: HealthDailyChartView!
     @IBOutlet weak var todayPercent: HealthPercentView!
     @IBOutlet weak var yesterdayPercent: HealthPercentView!
@@ -26,20 +30,64 @@ class HealthDailyViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.todayPercent.healthPercent.text = "a"
-        self.yesterdayPercent.healthPercent.text = "a"
-        self.lastweekPercent.healthPercent.text = "a"
-        self.lastmonthPercent.healthPercent.text = "a"
+        self.yesterdayPercent.healthPercent.text = "b"
+        self.lastweekPercent.healthPercent.text = "c"
+        self.lastmonthPercent.healthPercent.text = "d"
         if let data = UserInfo.CurrentUser()?.healthDatas?.allObjects as? [HealthData]{
-            self.currentDayData = data.filter({ (data) -> Bool in
-                return NSCalendar.currentCalendar().isDate(self.currentDay!, inSameDayAsDate: data.time!)
-            })
-            self.viewsData = self.currentDayData?.map({ (data) -> DailyViewLineData in
+            self.chartView.data = data.filter({ (data) -> Bool in
+//                return NSCalendar.currentCalendar().isDate(self.currentDay!, inSameDayAsDate: data.time!)
+                return dateIn(0, offset2: 1, date: data.time!)
+            }).map({ (data) -> DailyViewLineData in
                 let pos = CGFloat((data.time?.timeIntervalSinceDate(self.currentDay!))!)
                 let v = Int(data.healthValue!)
                 return DailyViewLineData(position: pos / CGFloat(24*60*60), value: v)
             })
-            self.chartView.data = self.viewsData
+            
+//            self.todayPercent.healthPercent.text = percentOf(data.filter({ (item) -> Bool in
+//                return dateIn(0, offset2: 1, date: item.time!)
+//            }), lowValue: 79, hightValue: 1000)
+            (self.todayPercent.healthPercent.text,self.todayPercent.semiHealthPercent.text,
+                self.todayPercent.weakPercent.text,self.todayPercent.unHealthPercent.text,self.todayAvgLabel.text) = dayStrings(data, fromDayOffset: 0, toDayOffset: 1)
+            (self.yesterdayPercent.healthPercent.text,self.yesterdayPercent.semiHealthPercent.text,
+                self.yesterdayPercent.weakPercent.text,self.yesterdayPercent.unHealthPercent.text,self.yesterdayAvgLabel.text) = dayStrings(data, fromDayOffset: -1, toDayOffset: 0)
+            (self.lastweekPercent.healthPercent.text,self.lastweekPercent.semiHealthPercent.text,
+                self.lastweekPercent.weakPercent.text,self.lastweekPercent.unHealthPercent.text,self.lastweekAvgLabel.text) = dayStrings(data, fromDayOffset: -7, toDayOffset: 0)
+            (self.lastmonthPercent.healthPercent.text,self.lastmonthPercent.semiHealthPercent.text,
+                self.lastmonthPercent.weakPercent.text,self.lastmonthPercent.unHealthPercent.text,self.lastmonthAvgLabel.text) = dayStrings(data, fromDayOffset: -30, toDayOffset: 0)
         }
+    }
+    
+    func dayStrings(data: [HealthData],fromDayOffset: Int,toDayOffset: Int) -> (String?,String?,String?,String?,String?){
+        let filterData = data.filter { (item) -> Bool in
+            return dateIn(fromDayOffset, offset2: toDayOffset, date: item.time!)
+        }
+        let s1 = percentOf(filterData, lowValue: 79, hightValue: 1000)
+        let s2 = percentOf(filterData, lowValue: 69, hightValue: 79)
+        let s3 = percentOf(filterData, lowValue: 59, hightValue: 69)
+        let s4 = String(100 - Int(s1)! - Int(s2)! - Int(s3)!)
+        let s5 = NSString(format: "%.f", filterData.reduce(0.0) { (added, item) -> Float in
+            return added + Float(item.healthValue!)
+        } / Float(filterData.count)) as String
+        return (s1 + "%",s2 + "%",s3 + "%",s4 + "%",s5)
+    }
+    func percentOf(data: [HealthData],lowValue: Int,hightValue: Int) -> String{
+        let filterDataCount = CGFloat(data.filter { (item) -> Bool in
+            return ((lowValue < Int(item.healthValue!))&&(Int(item.healthValue!) <= hightValue))
+        }.count)
+        let count = CGFloat(data.count)
+        return (NSString(format: "%.f", filterDataCount / count * 100) as String)
+    }
+    
+    func dateIn(offset1: Int,offset2: Int,date: NSDate) -> Bool{
+        let from = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: offset1, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
+        let to = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: offset2, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
+        if date.compare(from!) == .OrderedAscending{
+            return false
+        }
+        if date.compare(to!) == .OrderedDescending{
+            return false
+        }
+        return true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -53,8 +101,6 @@ class HealthDailyViewController: UIViewController {
     }
     
     @IBAction func weeklyReportClicked(sender: UIButton) {
-        self.chartView.backgroundColor = UIColor.whiteColor()
-        self.chartView.setNeedsDisplay()
     }
 
     @IBAction func monthlyReportClicked(sender: UIButton) {
