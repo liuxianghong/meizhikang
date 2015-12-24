@@ -8,6 +8,7 @@
 
 import UIKit
 import JSQMessagesViewController
+import MBProgressHUD
 
 class ChatViewModel: NSObject,RecordAudioDelegate{
     var messages: [JSQMessage]?
@@ -103,7 +104,7 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
     }
 }
 
-class ChatViewController: JSQMessagesViewController {
+class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     var currentAvatar: UIImage!
     var receiverId: String!
@@ -252,7 +253,57 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
     func addPhoto(sender: UIButton){
-        print("addPhoto")
+        let actionVC = UIAlertController(title: "", message: "选取图片", preferredStyle: .ActionSheet)
+        let actionPhotoLibrary = UIAlertAction(title: "相册", style: .Default, handler: { (ac :UIAlertAction) -> Void in
+            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary){
+                self.showImagePickVC(.PhotoLibrary)
+            }
+        })
+        let actionCamera = UIAlertAction(title: "拍照", style: .Default, handler: { (UIAlertAction) -> Void in
+            if UIImagePickerController.isSourceTypeAvailable(.Camera){
+                self.showImagePickVC(.Camera)
+            }
+        })
+        let actionCancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            
+        })
+        
+        actionVC.addAction(actionPhotoLibrary)
+        actionVC.addAction(actionCamera)
+        actionVC.addAction(actionCancel)
+        self.presentViewController(actionVC, animated: true, completion: { () -> Void in
+            
+        })
+    }
+    
+    func showImagePickVC(sourceType: UIImagePickerControllerSourceType){
+        let imagePickerController:UIImagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = false;
+        imagePickerController.sourceType = sourceType;
+        self.presentViewController(imagePickerController, animated: true) { () -> Void in
+            
+        }
+    }
+    
+    
+    // MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true) { () -> Void in
+            
+            if let image : UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                let jsq = JSQPhotoMediaItem(image: image)
+                let message2 = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: jsq)
+                self.viewModel.messages?.append(message2!)
+                self.finishSendingMessageAnimated(true)
+                let data = UIImageJPEGRepresentation(image, 0.1)
+                IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: self.group.gid!, completion: { object in
+                    print(object)
+                    }) { error in
+                        print(error)
+                }
+            }
+        }
     }
     
     func sendVoiceButtonStatus(){
@@ -296,18 +347,6 @@ class ChatViewController: JSQMessagesViewController {
         viewModel.messages?.append(message)
         
         if group != nil{
-            
-            //发送语音
-//            let data = UIImageJPEGRepresentation(UIImage(named: "圆-灰")!, 0.8)
-//            IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
-//                print(object)
-//                }, failure: { (error : NSError!) -> Void in
-//                    print(error)
-//            })
-//            let mess = JSQMessage(senderId: sendId, displayName: senderDisplayName, media: JSQPhotoMediaItem(image: UIImage(named: "轮换图1.png")))
-//            viewModel.messages?.append(mess)
-            
-            //发送文字
             IMRequst.SendMessage(text, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
                 print(object)
                 let json = JSON(object)

@@ -25,25 +25,19 @@
 
 @implementation IMConnect
 {
-    //GCDAsyncUdpSocket* udpSocket;
-    
     GCDAsyncSocket *asyncSocket;
-    
     long connectTag;
-    
     IMObject *currentIM;
     IMObject *reciveIM;
-    
     NSData *tokenIMConnect;
     NSData *passWordIMConnect;
-    
+    NSString *loginName;
+    NSString *loginPassWord;
     Byte key[16];
-    
     NSTimer *countDownTimer;
-    
     BOOL isListen;
-    
     NSMutableArray *IMQueue;
+    BOOL isLogin;
 }
 
 +(instancetype)Instance
@@ -63,15 +57,16 @@
     //connectDic = [[NSMutableDictionary alloc] init];
     IMQueue = [[NSMutableArray alloc]init];
     [self setudpSocket];
-    isListen = false;
+    isListen = NO;
+    isLogin = NO;
     countDownTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
     return self;
 }
 
 -(void)countDown
 {
-    if(asyncSocket.isConnected && tokenIMConnect && passWordIMConnect && !(currentIM && currentIM.sendingType == IMObjectSending)){
-        UInt16 size = 14+8;
+    if(isLogin && asyncSocket.isConnected && tokenIMConnect && passWordIMConnect && !(currentIM && currentIM.sendingType == IMObjectSending)){
+        NSUInteger size = 14+8;
         long tag = ++connectTag;
         Byte *CommandStructure = malloc(size);
         [self setsenderHead:CommandStructure cmd:0x87 type:0x0 length:0 tag:tag token:tokenIMConnect];
@@ -110,6 +105,7 @@
 }
 
 -(void)LoginOut{
+    isLogin = NO;
     [asyncSocket disconnect];
 }
 
@@ -138,7 +134,7 @@
 {
     NSData *data2 = [userName AESEncrypt];
     
-    UInt16 size = 14+[data2 length];
+    NSUInteger size = 14+[data2 length];
     long tag = ++connectTag;
     NSUInteger length = 16;
     
@@ -160,6 +156,7 @@
         else
         {
             NSData *token = [NSData dataWithBytes:[data bytes]+10 length:8];
+            loginName = userName;
             completion(token,nil);
         }
     } failure:failure];
@@ -170,7 +167,7 @@
     //NSLog(@"%@",body);
     NSData *dat = [body dataUsingEncoding:NSUTF8StringEncoding];
     NSUInteger length = [dat length];
-    UInt16 size = 12 + length;
+    NSUInteger size = 12 + length;
     char *CommandStructure = malloc(size);
     bzero(CommandStructure, size);
     CommandStructure[0] = 0x1;
@@ -187,7 +184,7 @@
 -(NSData *)getFileBody:(NSData *)file uuid:(UInt32)uuid fileTye:(NSInteger)fileTye {
     //NSLog(@"%@",file);
     NSUInteger length = sizeof(uuid) + [file length];
-    UInt16 size = 12 + length;
+    NSUInteger size = 12 + length;
     char *CommandStructure = malloc(size);
     bzero(CommandStructure, size);
     CommandStructure[0] = 0x1;
@@ -232,7 +229,7 @@
     passWordIMConnect = pwDataf;
     NSData *data2 = [NSString AESAndXOREncrypt:token data:passWordIMConnect];
     
-    UInt16 size = 14+[token length]+[data2 length];
+    NSUInteger size = 14+[token length]+[data2 length];
     long tag = ++connectTag;
     NSUInteger length = 8+16;
     Byte *CommandStructure = malloc(size);
@@ -248,6 +245,8 @@
     } completion:^(NSData *data) {
         UInt32 ip = 0;
         UInt16 port = 0;
+        isLogin = YES;
+        loginPassWord = pw;
         completion(ip,port);
         
     } failure:failure];
@@ -258,7 +257,7 @@
 -(void)getRegistToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
     NSData *data2 = [userName AESEncrypt];
     
-    UInt16 size = 14+[data2 length];
+    NSUInteger size = 14+[data2 length];
     long tag = ++connectTag;
     NSUInteger length = 16;//0x10;
     Byte *CommandStructure = malloc(size);
@@ -287,7 +286,7 @@
 -(void)getResetPWToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
     NSData *data2 = [userName AESEncrypt];
     
-    UInt16 size = 14+[data2 length];
+    NSUInteger size = 14+[data2 length];
     long tag = ++connectTag;
     NSUInteger length = 16;//0x10;
     Byte *CommandStructure = malloc(size);
@@ -328,7 +327,7 @@
     NSData *data2 = [NSString AESAndXOREncrypt:tokenIMConnect data:ddd];
     long tag = ++connectTag;
     NSUInteger length = 8+16+8;
-    UInt16 size = 14+8+[data2 length];
+    NSUInteger size = 14+8+[data2 length];
     Byte *CommandStructure = malloc(size);
     [self setsenderHead:CommandStructure cmd:0x86 type:0x8 length:length tag:tag];
     
@@ -372,7 +371,7 @@
     NSData *bodyData = [NSData dataWithBytes:body length:sizeof(body)];
     NSData *dataBody = [NSString AESAndXOREncrypt:token data:bodyData];
     
-    UInt16 size = 14+[token length]+[dataBody length];
+    NSUInteger size = 14+[token length]+[dataBody length];
     long tag = ++connectTag;
     NSUInteger length = sizeof(body) + 8;//0x10;
     Byte *CommandStructure = malloc(size);
@@ -401,7 +400,7 @@
     oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);
     
     NSData *eBady = [NSString encryptWithAESkey:key data:body];
-    UInt16 size = 14+8+[eBady length];
+    NSUInteger size = 14+8+[eBady length];
     Byte *CommandStructure = malloc(size);
     [self setsenderHead:CommandStructure cmd:0x87 type:0x1 length:length tag:tag token:tokenIMConnect];
     memcpy(CommandStructure+14 + 8, [eBady bytes], [eBady length]);
@@ -446,7 +445,7 @@
     oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);
     
     NSData *eBady = [NSString encryptWithAESkey:key data:body];
-    UInt16 size = 14+8+[eBady length];
+    NSUInteger size = 14+8+[eBady length];
     Byte *CommandStructure = malloc(size);
     [self setsenderHead:CommandStructure cmd:0x87 type:0x1 length:length tag:tag token:tokenIMConnect];
     memcpy(CommandStructure+14 + 8, [eBady bytes], [eBady length]);
@@ -692,20 +691,37 @@
     if (!err) {
         err = [NSError errorWithDomain:@"已和服务器断开连接" code:0 userInfo:nil];
     }
-    if (currentIM && currentIM.sendingType != IMObjectSendFinished) {// err &&
-        currentIM.sendingType = IMObjectSendFinished;
-        currentIM.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
+    
+    if (isLogin) {
+        [[IMConnect Instance] getToken:loginName completion:^(NSData *token, NSData *data) {
+            [[IMConnect Instance] login:loginPassWord withToken:token completion:^(UInt32 ip, UInt16 port) {
+                if (currentIM && currentIM.sendingType != IMObjectSendFinished) {
+                    [self writeData:currentIM.sendData tag:currentIM.tag readHead:currentIM.readHead completion:currentIM.completion failure:currentIM.failure];
+                }
+            } failure:^(NSError *error) {
+            }];
+        } failure:^(NSError *error) {
+        }];
     }
-    for (IMObject *im in IMQueue) {
-        if (im.sendingType != IMObjectSendFinished) {
-            im.sendingType = IMObjectSendFinished;
-            im.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
+    else
+    {
+        if (currentIM && currentIM.sendingType != IMObjectSendFinished) {// err &&
+            currentIM.sendingType = IMObjectSendFinished;
+            currentIM.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
         }
+        for (IMObject *im in IMQueue) {
+            if (im.sendingType != IMObjectSendFinished) {
+                im.sendingType = IMObjectSendFinished;
+                im.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
+            }
+        }
+        if (reciveIM) {
+            reciveIM = nil;
+        }
+        [IMQueue removeAllObjects];
     }
-    if (reciveIM) {
-        reciveIM = nil;
-    }
-    [IMQueue removeAllObjects];
+    
+    
 }
 
 -(void)imRecivePostMessage:(NSData *)data{
@@ -737,6 +753,7 @@
             NSString *str = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"loginOutNotification" object:str];
+            [self LoginOut];
         }
         else if (reciveIM.subCmd == 0x1){
             
@@ -773,7 +790,7 @@
                 }
             }
             
-            UInt16 size = 14;
+            NSUInteger size = 14;
             Byte *CommandStructure = malloc(size);
             [self setsenderHead:CommandStructure cmd:0x98 type:reciveIM.subCmd length:0 tag:reciveIM.tag];
             NSData *data = [NSData dataWithBytes:CommandStructure length:size];

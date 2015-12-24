@@ -65,7 +65,9 @@ class ResetPWViewController: UIViewController {
                 print(data)
                 let image = UIImage(data: data);
                 self.textField1.text = ""
+                self.textField1.resignFirstResponder()
                 self.textField1.placeholder = "请输入上方的验证码"
+                self.textField1.keyboardType = .ASCIICapable
                 self.stepLabel.text = "重置密码共三步，当前为第二步"
                 self.imageView.image = image;
                 self.step++

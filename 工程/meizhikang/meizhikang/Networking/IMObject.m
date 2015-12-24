@@ -47,4 +47,8 @@
     }
     
 }
+
+-(void)dealloc{
+    NSLog(@"IMObject dealloc");
+}
 @end

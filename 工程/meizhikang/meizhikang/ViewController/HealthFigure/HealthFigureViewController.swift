@@ -68,7 +68,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         tapView.backgroundColor = UIColor.clearColor()
         
         chatView.healthDelegate = self
-        timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "cutDown", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(5*60, target: self, selector: "cutDown", userInfo: nil, repeats: true)
     }
 
     override func viewWillAppear(animated: Bool) {

@@ -108,10 +108,12 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.iconImage.highlightedImage = UIImage(named: "\(title)")
         if indexPath.row == 0{
             cell.titleLabel.text = userName
+            cell.selectionStyle = .None
             nameLabel = cell.titleLabel
         }
         else{
             cell.titleLabel.text = title
+            cell.selectionStyle = .Default
         }
     
         return cell
