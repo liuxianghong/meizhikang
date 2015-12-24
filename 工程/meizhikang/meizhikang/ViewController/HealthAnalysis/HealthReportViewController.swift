@@ -133,6 +133,7 @@ class HealthReportViewController: UIViewController,UITableViewDelegate,UITableVi
         // Pass the selected object to the new view controller.
         if (segue.identifier == HealthReportConstant.EmbededSegueIdentifier){
             self.containerViewController = segue.destinationViewController as? HealthReportContainerViewController
+            self.containerViewController?.date = self.viewModel.date
         }
     }
 

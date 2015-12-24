@@ -40,6 +40,7 @@ class HealthReportContainerViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == HealthReportContainerConstant.DailySegueIdentifier{
             self.dailyViewController = segue.destinationViewController as? HealthDailyViewController
+            self.dailyViewController?.currentDay = self.date
         }
         
         if segue.identifier == HealthReportContainerConstant.WeeklySegueIdentifier{
