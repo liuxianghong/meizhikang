@@ -68,7 +68,11 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         tapView.backgroundColor = UIColor.clearColor()
         
         chatView.healthDelegate = self
-        timer = NSTimer.scheduledTimerWithTimeInterval(5*60, target: self, selector: "cutDown", userInfo: nil, repeats: true)
+        self.showCurrentHealthData(nil)
+        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "cutDown", userInfo: nil, repeats: true)
+        for _ in 1...30{
+            //self.cutDown()
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -111,13 +115,20 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         chatView.appendData(healthData)
     }
     
-    func showCurrentHealthData(health : HealthData){
-        scoreLabel.text = "\(health.healthValue as! Int)"
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
-        dateLabel.text = formatter.stringFromDate(health.time!)
-        formatter.dateFormat = "HH:mm"
-        timeLabel.text = formatter.stringFromDate(health.time!)
+    func showCurrentHealthData(health : HealthData?){
+        if health != nil{
+            scoreLabel.text = "\(health!.healthValue as! Int)"
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy.MM.dd"
+            dateLabel.text = formatter.stringFromDate(health!.time!)
+            formatter.dateFormat = "HH:mm"
+            timeLabel.text = formatter.stringFromDate(health!.time!)
+        }
+        else{
+            scoreLabel.text = " "
+            dateLabel.text = " "
+            timeLabel.text = " "
+        }
     }
     
     
@@ -135,6 +146,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.viewModel.processTitles(self.viewModel.headerTitles[indexPath.row])
         self.headerButton.setTitle(self.viewModel.currenTitle, forState: .Normal)
+        chatView.type = self.viewModel.currenTitle == "30分钟模式" ? 1 : 2
         headerShow(false)
     }
     
