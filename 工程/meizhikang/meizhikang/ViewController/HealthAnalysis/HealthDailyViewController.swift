@@ -35,7 +35,6 @@ class HealthDailyViewController: UIViewController {
         self.lastmonthPercent.healthPercent.text = "d"
         if let data = UserInfo.CurrentUser()?.healthDatas?.allObjects as? [HealthData]{
             self.chartView.data = data.filter({ (data) -> Bool in
-//                return NSCalendar.currentCalendar().isDate(self.currentDay!, inSameDayAsDate: data.time!)
                 return dateIn(0, offset2: 1, date: data.time!)
             }).map({ (data) -> DailyViewLineData in
                 let pos = CGFloat((data.time?.timeIntervalSinceDate(self.currentDay!))!)
