@@ -109,6 +109,9 @@
     [asyncSocket disconnect];
 }
 
+-(BOOL)isLogin{
+    return isLogin;
+}
 
 -(void)setsenderHead:(Byte *)CommandStructure cmd:(Byte)cmd type:(Byte)type length:(NSUInteger)length tag:(long)tag{
     UInt32 magic = IM_MAGIC;

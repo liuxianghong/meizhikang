@@ -29,21 +29,26 @@ class Message: NSManagedObject {
         pushtype = dic["pushtype"] as? String
         content = dic["content"] as? String
         if messageType() == .Image{
-            
             let string = content! as NSString
             let array = string.componentsSeparatedByString("[/image][key]")
             var imageUrl = array[0]
             var keyString = array[1]
             imageUrl = imageUrl.stringByReplacingOccurrencesOfString("[image]", withString: "")
             keyString = keyString.stringByReplacingOccurrencesOfString("[/key]", withString: "")
-            let imagedata = NSData(contentsOfURL: NSURL(string: imageUrl)!)
-            let dataKey = keyString.dataFromHexString()
-            print(dataKey)
-            let ddata = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
-            if ddata.length > 16{
-                data = NSData(bytes: ddata.bytes+16, length: ddata.length-16)
+            let urlMD5 = imageUrl.dataFromMD5().description.formatData()
+            let path = getImageFilePath(urlMD5)
+            if !NSFileManager.defaultManager().fileExistsAtPath(path!){
+                let imagedata = NSData(contentsOfURL: NSURL(string: imageUrl)!)
+                let dataKey = keyString.dataFromHexString()
+                print(dataKey)
+                let ddata = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
+                if ddata.length > 16{
+                    let filedata = NSData(bytes: ddata.bytes+16, length: ddata.length-16)
+                    filedata.writeToFile(path!, atomically: true)
+                    filepath = path
+                }
             }
-            
+            filepath = path
         }
         else if messageType() == .Voice{
             
@@ -72,7 +77,7 @@ class Message: NSManagedObject {
     
     func image() -> UIImage?{
         //return UIImage(named: "圆-白");
-        return UIImage(data: data!)
+        return UIImage(data: NSData(contentsOfFile: filepath!)!)
     }
     
     func Data() -> NSData?{
@@ -94,5 +99,10 @@ class Message: NSManagedObject {
             return .Picture
         }
         return .UnKnow
+    }
+    
+    func getImageFilePath(name : String) -> String?{
+        let path = "\(NSHomeDirectory())/Documents/\(name)"
+        return path
     }
 }

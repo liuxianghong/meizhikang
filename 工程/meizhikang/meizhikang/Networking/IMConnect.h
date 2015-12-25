@@ -34,4 +34,5 @@
 
 -(void)test:(NSData *)token;
 -(void)LoginOut;
+-(BOOL)isLogin;
 @end

@@ -2,7 +2,7 @@
 //  Message+CoreDataProperties.swift
 //  meizhikang
 //
-//  Created by 刘向宏 on 15/12/21.
+//  Created by 刘向宏 on 15/12/24.
 //  Copyright © 2015年 刘向宏. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,6 +21,7 @@ extension Message {
     @NSManaged var pushtype: String?
     @NSManaged var sendtime: NSNumber?
     @NSManaged var uuid: NSNumber?
+    @NSManaged var filepath: String?
     @NSManaged var group: Group?
 
 }
