@@ -27,7 +27,7 @@ class HealthFigureViewModel: NSObject{
     }
 }
 
-class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITableViewDelegate ,HealthFigureChartViewDelegate{
+class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITableViewDelegate ,HealthFigureChartViewDelegate ,BLEDataDelegate{
 
     @IBOutlet weak var headTableView: UITableView!
     @IBOutlet weak var headTableConstraint: NSLayoutConstraint!
@@ -61,6 +61,8 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         self.tapGesture.addTarget(self, action: "gestureAction:")
         self.tapGesture.cancelsTouchesInView = false
         
+        BLEConnect.Instance().dataDelegate = self
+        heartRateLabel.text = ""
         
         tapView.frame = self.view.bounds
         self.view.addSubview(tapView)
@@ -103,16 +105,22 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         return .LightContent
     }
     
+    func didUpdateHartValue(value: Int) {
+        heartRateLabel.text = "\(value)"
+    }
     
-    
-    func cutDown(){
+    func didUpdateHealthValue(value: Int) {
         let healthData = HealthData.MR_createEntity()
         healthData.time = NSDate()
-        healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
-        healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
+        healthData.heartRate = 0
+        healthData.healthValue = value
         healthData.user = UserInfo.CurrentUser()
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         chatView.appendData(healthData)
+    }
+    
+    func cutDown(){
+        
     }
     
     func showCurrentHealthData(health : HealthData?){
