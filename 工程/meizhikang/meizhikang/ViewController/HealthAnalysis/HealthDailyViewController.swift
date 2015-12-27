@@ -33,7 +33,7 @@ class HealthDailyViewController: UIViewController {
         self.yesterdayPercent.healthPercent.text = "b"
         self.lastweekPercent.healthPercent.text = "c"
         self.lastmonthPercent.healthPercent.text = "d"
-        if let data = UserInfo.CurrentUser()?.healthDatasOneDay(currentDay!){
+        if let data = UserInfo.CurrentUser()?.healthDatasOneDay(currentDay!) where data.count > 0{
             self.chartView.data = data.map({ (data) -> DailyViewLineData in
                 let pos = CGFloat((data.time?.timeIntervalSinceDate(self.currentDay!))!)
                 let v = Int(data.healthValue!)
@@ -89,7 +89,6 @@ class HealthDailyViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.chartView.setNeedsDisplay()
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,6 +97,7 @@ class HealthDailyViewController: UIViewController {
     }
     
     @IBAction func weeklyReportClicked(sender: UIButton) {
+        self.chartView.setNeedsDisplay()
     }
 
     @IBAction func monthlyReportClicked(sender: UIButton) {
