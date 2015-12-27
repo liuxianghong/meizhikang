@@ -67,9 +67,10 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 -(void)connect:(CBPeripheral *)peripheral
 {
-    if (!(peripheral.state == CBPeripheralStateConnected)) {
-        [manager connectPeripheral:peripheral options:nil];
-    }
+//    if (!(peripheral.state == CBPeripheralStateConnected)) {
+//        [manager cancelPeripheralConnection:activePeripheral];
+//    }
+    [manager connectPeripheral:peripheral options:nil];
 }
 
 -(void)startScan{
@@ -81,7 +82,6 @@ uint64_t reversebytes_uint64t(uint64_t value){
 -(void)stopScan
 {
     [manager stopScan];
-    
 }
 
 -(void)disconnect:(CBPeripheral *)peripheral
@@ -252,6 +252,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
         value[0] = 0x10;
         value[1] = 0xFF;
         UInt32 time = (UInt32) [NSDate date].timeIntervalSince1970;
+        //memcpy(value+2, &time, 4);
         value[5] = (time & 0xff);
         value[4] = ((time >> 8) & 0xff);
         value[3] = ((time >> 16) & 0xff);
@@ -275,7 +276,10 @@ uint64_t reversebytes_uint64t(uint64_t value){
     for (int i=0; i < p.services.count; i++) {
         CBService *s = [p.services objectAtIndex:i];
         NSLog(@"Fetching characteristics for service with UUID : %@\r\n",[self CBUUIDToString:s.UUID]);
-        [p discoverCharacteristics:nil forService:s];
+        CBUUID *uuidSTATUS = [self getUUID:STATUS_SERVICE_UUID];
+        if([self compareCBUUID:s.UUID UUID2:uuidSTATUS]) {
+            [p discoverCharacteristics:nil forService:s];
+        }
     }
 }
 

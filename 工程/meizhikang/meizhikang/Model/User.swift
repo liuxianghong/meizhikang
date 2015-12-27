@@ -40,5 +40,21 @@ class User: NSManagedObject {
         avatar = dic["avatar"] as? String
         
     }
+    
+    
+    func healthDatas(minTime : NSDate ,maxTime : NSDate) -> [HealthData]?{
+        let predicateTemplate = NSPredicate(format: "time <=  %@ AND time >= %@ AND user = %@", maxTime,minTime,self)
+        return HealthData.MR_findAllSortedBy("time", ascending: true, withPredicate: predicateTemplate) as? [HealthData]
+    }
+    
+    func healthDatasOneDay(date : NSDate) -> [HealthData]?{
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let fstr = formatter.stringFromDate(date)
+        let minDate = "\(fstr) 00:00:00"
+        let maxDate = "\(fstr) 23:59:59"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return healthDatas(formatter.dateFromString(minDate)!, maxTime: formatter.dateFromString(maxDate)!)
+    }
 
 }

@@ -92,6 +92,9 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
                 }
                 NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
             }
+            else{
+                
+            }
         }
     }
     

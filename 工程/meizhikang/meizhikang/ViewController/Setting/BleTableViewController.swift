@@ -12,6 +12,7 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
 
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var bleSwitch : UISwitch!
+    @IBOutlet weak var rightBar : UIBarButtonItem!
     var tableViewArray = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +29,21 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        rightBar.title = "扫描"
+        BLEConnect.Instance().stopScan()
+        tableViewArray = []
+        self.tableView.reloadData()
+    }
 
     @IBAction func scanClick(sender : AnyObject) {
+        rightBar.title = "扫描中"
         tableViewArray = []
         BLEConnect.Instance().startScan()
         self.tableView.reloadData()
     }
+    
     // MARK: - BLEConnectDelegate
     
     func peripheralFound(){
