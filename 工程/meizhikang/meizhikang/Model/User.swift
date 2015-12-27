@@ -48,13 +48,19 @@ class User: NSManagedObject {
     }
     
     func healthDatasOneDay(date : NSDate) -> [HealthData]?{
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let fstr = formatter.stringFromDate(date)
-        let minDate = "\(fstr) 00:00:00"
-        let maxDate = "\(fstr) 23:59:59"
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return healthDatas(formatter.dateFromString(minDate)!, maxTime: formatter.dateFromString(maxDate)!)
+        guard
+            let currentDay = NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: date, options: NSCalendarOptions(rawValue: 0)),
+            let nextDay = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay, options: NSCalendarOptions(rawValue: 0))else{
+                return nil
+        }
+        return self.healthDatas(currentDay, maxTime: nextDay)
+//        let formatter = NSDateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let fstr = formatter.stringFromDate(date)
+//        let minDate = "\(fstr) 00:00:00"
+//        let maxDate = "\(fstr) 23:59:59"
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        return healthDatas(formatter.dateFromString(minDate)!, maxTime: formatter.dateFromString(maxDate)!)
     }
 
 }
