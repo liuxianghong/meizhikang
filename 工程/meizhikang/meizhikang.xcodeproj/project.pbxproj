@@ -316,6 +316,7 @@
 		D32D080F1C0ADA7400E2C7EF /* 灰线@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D080E1C0ADA7400E2C7EF /* 灰线@2x.png */; };
 		D32D08131C0AE4CD00E2C7EF /* sex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08121C0AE4CD00E2C7EF /* sex@2x.png */; };
 		D32D08151C0AE55B00E2C7EF /* sex_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */; };
+		D33527031C2EEA760038015D /* BLEConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D33527021C2EEA760038015D /* BLEConnect.m */; };
 		D335B7BF1C0EC41E00975549 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335B7BE1C0EC41E00975549 /* FriendTableViewCell.swift */; };
 		D3364BE81C1AE42E0055C75C /* IMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D3364BE71C1AE42E0055C75C /* IMObject.m */; };
 		D336C92B1C25868B00E967EB /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D336C9271C25868B00E967EB /* Group+CoreDataProperties.swift */; };
@@ -740,6 +741,8 @@
 		D32D080E1C0ADA7400E2C7EF /* 灰线@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "灰线@2x.png"; sourceTree = "<group>"; };
 		D32D08121C0AE4CD00E2C7EF /* sex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex@2x.png"; sourceTree = "<group>"; };
 		D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex_select@2x.png"; sourceTree = "<group>"; };
+		D33527011C2EEA760038015D /* BLEConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEConnect.h; sourceTree = "<group>"; };
+		D33527021C2EEA760038015D /* BLEConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEConnect.m; sourceTree = "<group>"; };
 		D335B7BE1C0EC41E00975549 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		D3364BE61C1AE42E0055C75C /* IMObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMObject.h; sourceTree = "<group>"; };
 		D3364BE71C1AE42E0055C75C /* IMObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMObject.m; sourceTree = "<group>"; };
@@ -1363,6 +1366,8 @@
 				D3364BE71C1AE42E0055C75C /* IMObject.m */,
 				D36978BD1C1C407A0094921B /* NetWorkingContents.h */,
 				D36978BE1C1C407A0094921B /* NetWorkingContents.m */,
+				D33527011C2EEA760038015D /* BLEConnect.h */,
+				D33527021C2EEA760038015D /* BLEConnect.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -2071,6 +2076,7 @@
 				D3364BE81C1AE42E0055C75C /* IMObject.m in Sources */,
 				D3F8E2C41C0C384300263B4E /* BleTableViewController.swift in Sources */,
 				D336C92D1C25868B00E967EB /* User+CoreDataProperties.swift in Sources */,
+				D33527031C2EEA760038015D /* BLEConnect.m in Sources */,
 				B987B9401C2C22C0002FF394 /* HealthDailyChartView.swift in Sources */,
 				B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */,
 				D309025C1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift in Sources */,

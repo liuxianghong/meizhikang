@@ -35,8 +35,8 @@
     NSString *loginPassWord;
     Byte key[16];
     NSTimer *countDownTimer;
-    BOOL isListen;
     NSMutableArray *IMQueue;
+    BOOL isListen;
     BOOL isLogin;
 }
 
@@ -107,6 +107,10 @@
 -(void)LoginOut{
     isLogin = NO;
     [asyncSocket disconnect];
+    NSTimeInterval time = [NSDate date].timeIntervalSince1970;
+    while([NSDate date].timeIntervalSince1970 - time < 0.1){
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
 }
 
 -(BOOL)isLogin{

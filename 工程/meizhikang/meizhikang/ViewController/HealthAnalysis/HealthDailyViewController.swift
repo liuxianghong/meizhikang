@@ -33,10 +33,8 @@ class HealthDailyViewController: UIViewController {
         self.yesterdayPercent.healthPercent.text = "b"
         self.lastweekPercent.healthPercent.text = "c"
         self.lastmonthPercent.healthPercent.text = "d"
-        if let data = UserInfo.CurrentUser()?.healthDatas?.allObjects as? [HealthData]{
-            self.chartView.data = data.filter({ (data) -> Bool in
-                return dateIn(0, offset2: 1, date: data.time!)
-            }).map({ (data) -> DailyViewLineData in
+        if let data = UserInfo.CurrentUser()?.healthDatasOneDay(currentDay!){
+            self.chartView.data = data.map({ (data) -> DailyViewLineData in
                 let pos = CGFloat((data.time?.timeIntervalSinceDate(self.currentDay!))!)
                 let v = Int(data.healthValue!)
                 return DailyViewLineData(position: pos / CGFloat(24*60*60), value: v)

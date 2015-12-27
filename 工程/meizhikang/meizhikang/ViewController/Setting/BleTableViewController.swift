@@ -8,11 +8,12 @@
 
 import UIKit
 
-class BleTableViewController: UIViewController {
+class BleTableViewController: UIViewController ,BLEConnectDelegate {
 
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var bleSwitch : UISwitch!
-    var tableViewArray = ["123","2222"]
+    @IBOutlet weak var rightBar : UIBarButtonItem!
+    var tableViewArray = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +22,44 @@ class BleTableViewController: UIViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        BLEConnect.Instance().connectDelegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        rightBar.title = "扫描"
+        BLEConnect.Instance().stopScan()
+        tableViewArray = []
+        self.tableView.reloadData()
+    }
 
     @IBAction func scanClick(sender : AnyObject) {
+        rightBar.title = "扫描中"
+        tableViewArray = []
+        BLEConnect.Instance().startScan()
+        self.tableView.reloadData()
     }
+    
+    // MARK: - BLEConnectDelegate
+    
+    func peripheralFound(){
+        tableViewArray = BLEConnect.Instance().peripherals()
+        self.tableView.reloadData()
+    }
+    
+    func setConnect() {
+        self.tableView.reloadData()
+    }
+    
+    func setDisconnect() {
+        self.tableView.reloadData()
+    }
+    
+    
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -44,7 +74,13 @@ class BleTableViewController: UIViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        let peripheral = tableViewArray[indexPath.row] as! CBPeripheral
+        if BLEConnect.Instance().connectedPeripheral() != nil{
+            if BLEConnect.Instance().connectedPeripheral().isEqual(peripheral){
+               return
+            }
+        }
+         BLEConnect.Instance().connect(peripheral)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -59,7 +95,14 @@ class BleTableViewController: UIViewController {
         let cell:SettingTableViewCell = tableView.dequeueReusableCellWithIdentifier("settingIndentifer", forIndexPath: indexPath) as! SettingTableViewCell
         
         // Configure the cell...
-        cell.titleLabel.text = tableViewArray[indexPath.row]
+        let peripheral = tableViewArray[indexPath.row] as! CBPeripheral
+        cell.titleLabel.text = peripheral.name
+        cell.stateImageView.hidden = true
+        if BLEConnect.Instance().connectedPeripheral() != nil{
+            if BLEConnect.Instance().connectedPeripheral().isEqual(peripheral){
+                cell.stateImageView.hidden = false
+            }
+        }
         
         return cell
     }
