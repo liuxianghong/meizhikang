@@ -33,8 +33,14 @@ class HealthDailyViewController: UIViewController {
         self.yesterdayPercent.healthPercent.text = "b"
         self.lastweekPercent.healthPercent.text = "c"
         self.lastmonthPercent.healthPercent.text = "d"
-        if let data = UserInfo.CurrentUser()?.healthDatasOneDay(currentDay!){
-            self.chartView.data = data.map({ (data) -> DailyViewLineData in
+        guard let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -30, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0)),
+            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))else{
+                return
+        }
+        if let data = UserInfo.CurrentUser()?.healthDatas(minDate, maxTime: maxDate) where data.count > 0{
+            self.chartView.data = data.filter({ (data) -> Bool in
+                return dateIn(0, offset2: 1, date: currentDay!)
+            }).map({ (data) -> DailyViewLineData in
                 let pos = CGFloat((data.time?.timeIntervalSinceDate(self.currentDay!))!)
                 let v = Int(data.healthValue!)
                 return DailyViewLineData(position: pos / CGFloat(24*60*60), value: v)
@@ -89,7 +95,6 @@ class HealthDailyViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.chartView.setNeedsDisplay()
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,6 +103,7 @@ class HealthDailyViewController: UIViewController {
     }
     
     @IBAction func weeklyReportClicked(sender: UIButton) {
+        self.chartView.setNeedsDisplay()
     }
 
     @IBAction func monthlyReportClicked(sender: UIButton) {
