@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol HealthFigureChartViewDelegate{
+protocol HealthFigureChartViewDelegate:class{
     func showCurrentHealthData(health : HealthData?);
 }
 

@@ -94,6 +94,7 @@
 		B99A8E2A1C0BF43D0097E9B3 /* 黑@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DF11C0BF43D0097E9B3 /* 黑@2x.png */; };
 		B99A8E2B1C0BF43D0097E9B3 /* 黑@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DF21C0BF43D0097E9B3 /* 黑@3x.png */; };
 		B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */; };
+		B9E49BEE1C314677000A3369 /* HealthWeeklyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E49BED1C314677000A3369 /* HealthWeeklyChartView.swift */; };
 		D30902591C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30902571C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift */; };
 		D309025A1C2A78AA001FDF7B /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30902581C2A78AA001FDF7B /* HealthData.swift */; };
 		D309025C1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309025B1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift */; };
@@ -518,6 +519,7 @@
 		B99A8DF11C0BF43D0097E9B3 /* 黑@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑@2x.png"; sourceTree = "<group>"; };
 		B99A8DF21C0BF43D0097E9B3 /* 黑@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑@3x.png"; sourceTree = "<group>"; };
 		B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthPercentView.swift; sourceTree = "<group>"; };
+		B9E49BED1C314677000A3369 /* HealthWeeklyChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthWeeklyChartView.swift; sourceTree = "<group>"; };
 		BCF8D03768A4DCFF61C567B8 /* Pods-meizhikang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-meizhikang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-meizhikang/Pods-meizhikang.debug.xcconfig"; sourceTree = "<group>"; };
 		D30902571C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HealthData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D30902581C2A78AA001FDF7B /* HealthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
@@ -1421,6 +1423,7 @@
 				B9C080C81C170C3D00CC0185 /* HealthPercentView.swift */,
 				D3EFFA2D1C1843330047E2B0 /* HealthFigureChartView.swift */,
 				B987B93F1C2C22C0002FF394 /* HealthDailyChartView.swift */,
+				B9E49BED1C314677000A3369 /* HealthWeeklyChartView.swift */,
 				D33C1E101C2D170100BF7AFA /* DottedLineView.h */,
 				D33C1E111C2D170100BF7AFA /* DottedLineView.m */,
 			);
@@ -1626,7 +1629,7 @@
 				TargetAttributes = {
 					D39B898C1C087AC1009086B2 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = F44XSCNJGN;
+						DevelopmentTeam = G65933C85Y;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 0;
@@ -2114,6 +2117,7 @@
 				D336C92E1C25868B00E967EB /* User.swift in Sources */,
 				B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */,
 				B9709B011C26F5ED004DCD50 /* Message+CoreDataProperties.swift in Sources */,
+				B9E49BEE1C314677000A3369 /* HealthWeeklyChartView.swift in Sources */,
 				B930DEEA1C145822003576F6 /* Array+Extenstion.swift in Sources */,
 				D3F8E2C71C0C384300263B4E /* SwitchAccountTableViewController.swift in Sources */,
 				D3F8E2D51C0C385200263B4E /* FriendListTableViewController.swift in Sources */,
