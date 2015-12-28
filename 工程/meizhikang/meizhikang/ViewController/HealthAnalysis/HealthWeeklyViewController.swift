@@ -7,10 +7,18 @@
 //
 
 import UIKit
-
+enum HealthWeeklyType{
+    case Week
+    case Month
+}
 class HealthWeeklyViewController: UIViewController {
 
+    @IBOutlet weak var chartView: HealthWeeklyChartView!
     @IBOutlet weak var lastPercent: HealthPercentView!
+    var type: HealthWeeklyType?
+    var currentDay: NSDate?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

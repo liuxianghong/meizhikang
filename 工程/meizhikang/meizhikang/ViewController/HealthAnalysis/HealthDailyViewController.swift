@@ -64,6 +64,9 @@ class HealthDailyViewController: UIViewController {
         let filterData = data.filter { (item) -> Bool in
             return dateIn(fromDayOffset, offset2: toDayOffset, date: item.time!)
         }
+        guard filterData.count>0 else{
+            return ("N/A","N/A","N/A","N/A","00")
+        }
         let s1 = percentOf(filterData, lowValue: 79, hightValue: 1000)
         let s2 = percentOf(filterData, lowValue: 69, hightValue: 79)
         let s3 = percentOf(filterData, lowValue: 59, hightValue: 69)

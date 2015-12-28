@@ -134,6 +134,11 @@ class HealthReportViewController: UIViewController,UITableViewDelegate,UITableVi
         if (segue.identifier == HealthReportConstant.EmbededSegueIdentifier){
             self.containerViewController = segue.destinationViewController as? HealthReportContainerViewController
             self.containerViewController?.date = self.viewModel.date
+            if self.viewModel.currenTitle == "健康周报"{
+                self.containerViewController?.weekType = .Week
+            }else{
+                self.containerViewController?.weekType = .Month
+            }
         }
     }
 
