@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sYf-Bt-cUg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sYf-Bt-cUg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -2209,7 +2209,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UiA-Ig-m13">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UiA-Ig-m13" customClass="HealthWeeklyChartView" customModule="meizhikang" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2493,49 +2493,35 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yol-fk-OaY">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="31" width="21" height="21"/>
-                                </variation>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.29803921568627451" green="0.29803921568627451" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qNI-Sj-lG6" firstAttribute="top" secondItem="UiA-Ig-m13" secondAttribute="bottom" constant="20" id="4DE-dE-5ye"/>
-                            <constraint firstItem="UiA-Ig-m13" firstAttribute="top" secondItem="yol-fk-OaY" secondAttribute="top" id="4q1-uD-qgU"/>
                             <constraint firstItem="qNI-Sj-lG6" firstAttribute="centerX" secondItem="w9m-Og-Wt6" secondAttribute="centerX" id="9fE-Sf-X9M"/>
                             <constraint firstItem="J9V-mX-UwT" firstAttribute="centerX" secondItem="w9m-Og-Wt6" secondAttribute="centerX" id="9n0-5A-7Hu"/>
                             <constraint firstItem="qJX-ii-GG6" firstAttribute="centerX" secondItem="w9m-Og-Wt6" secondAttribute="centerX" id="EM8-t2-HLm"/>
-                            <constraint firstItem="UiA-Ig-m13" firstAttribute="leading" secondItem="w9m-Og-Wt6" secondAttribute="leading" constant="25" id="Pf6-2j-ePX"/>
+                            <constraint firstItem="UiA-Ig-m13" firstAttribute="leading" secondItem="w9m-Og-Wt6" secondAttribute="leading" id="Pf6-2j-ePX"/>
                             <constraint firstItem="J9V-mX-UwT" firstAttribute="top" secondItem="apy-IJ-L1a" secondAttribute="bottom" constant="8" id="Rbv-X9-WKy"/>
                             <constraint firstItem="UiA-Ig-m13" firstAttribute="top" secondItem="J9V-mX-UwT" secondAttribute="bottom" constant="8" id="Vi2-jX-Hi5"/>
                             <constraint firstItem="a4B-th-Lr4" firstAttribute="top" secondItem="qJX-ii-GG6" secondAttribute="bottom" constant="30" id="wJD-sy-K1r"/>
-                            <constraint firstItem="yol-fk-OaY" firstAttribute="leading" secondItem="w9m-Og-Wt6" secondAttribute="leading" id="wUl-Ca-zfl"/>
-                            <constraint firstAttribute="trailing" secondItem="UiA-Ig-m13" secondAttribute="trailing" constant="15" id="zMe-Vs-ydW"/>
+                            <constraint firstAttribute="trailing" secondItem="UiA-Ig-m13" secondAttribute="trailing" id="zMe-Vs-ydW"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="J9V-mX-UwT"/>
                                 <exclude reference="UiA-Ig-m13"/>
                                 <exclude reference="qNI-Sj-lG6"/>
-                                <exclude reference="yol-fk-OaY"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="wUl-Ca-zfl"/>
-                                <exclude reference="4q1-uD-qgU"/>
+                                <exclude reference="wJD-sy-K1r"/>
+                                <exclude reference="EM8-t2-HLm"/>
+                                <exclude reference="9n0-5A-7Hu"/>
+                                <exclude reference="Rbv-X9-WKy"/>
                                 <exclude reference="Pf6-2j-ePX"/>
                                 <exclude reference="Vi2-jX-Hi5"/>
                                 <exclude reference="zMe-Vs-ydW"/>
-                                <exclude reference="9n0-5A-7Hu"/>
-                                <exclude reference="Rbv-X9-WKy"/>
                                 <exclude reference="4DE-dE-5ye"/>
                                 <exclude reference="9fE-Sf-X9M"/>
-                                <exclude reference="EM8-t2-HLm"/>
-                                <exclude reference="wJD-sy-K1r"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2543,24 +2529,22 @@
                                 <include reference="J9V-mX-UwT"/>
                                 <include reference="UiA-Ig-m13"/>
                                 <include reference="qNI-Sj-lG6"/>
-                                <include reference="yol-fk-OaY"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="wUl-Ca-zfl"/>
-                                <include reference="4q1-uD-qgU"/>
+                                <include reference="wJD-sy-K1r"/>
+                                <include reference="EM8-t2-HLm"/>
+                                <include reference="9n0-5A-7Hu"/>
+                                <include reference="Rbv-X9-WKy"/>
                                 <include reference="Pf6-2j-ePX"/>
                                 <include reference="Vi2-jX-Hi5"/>
                                 <include reference="zMe-Vs-ydW"/>
-                                <include reference="9n0-5A-7Hu"/>
-                                <include reference="Rbv-X9-WKy"/>
                                 <include reference="4DE-dE-5ye"/>
                                 <include reference="9fE-Sf-X9M"/>
-                                <include reference="EM8-t2-HLm"/>
-                                <include reference="wJD-sy-K1r"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="chartView" destination="UiA-Ig-m13" id="6mP-Z4-lIa"/>
                         <outlet property="lastPercent" destination="jPj-9X-tXd" id="w7C-n5-jdK"/>
                     </connections>
                 </viewController>

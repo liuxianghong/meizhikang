@@ -16,6 +16,7 @@ class HealthReportContainerViewController: UIViewController {
 
     var currentSegueIdentifier = HealthReportContainerConstant.DailySegueIdentifier
     var date : NSDate?
+    var weekType: HealthWeeklyType?
     var dailyViewController : HealthDailyViewController?
     var weeklyViewController : HealthWeeklyViewController?
     
@@ -45,6 +46,8 @@ class HealthReportContainerViewController: UIViewController {
         
         if segue.identifier == HealthReportContainerConstant.WeeklySegueIdentifier{
             self.weeklyViewController = segue.destinationViewController as? HealthWeeklyViewController
+            self.weeklyViewController?.type = self.weekType
+            self.weeklyViewController?.currentDay = self.date
         }
         
         if segue.identifier == HealthReportContainerConstant.DailySegueIdentifier{
