@@ -37,24 +37,23 @@ class FriendListTableViewController: UITableViewController {
         frame?.size.height = 50.0
         self.tableView.tableHeaderView?.frame = frame!
         
-        let dic = ["type":"get_email","page":1 ,"number":20]
-        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
-            print(object)
-
-            }) { (error : NSError!) -> Void in
-                
+        NSNotificationCenter.defaultCenter().addObserverForName("groupChangeNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
+            self.loadGrous()
+            self.tableView.reloadData()
         }
-
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("reciveEmailNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
+            self.loadEmail()
+            self.tableView.reloadData()
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        emailArray = Email.MR_findAll() as! [Email]
-        self.tableView.reloadData()
-        
+        self.loadEmail()
         self.loadGrous()
-        
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,32 +61,22 @@ class FriendListTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func loadGrous(){
-        let dic = ["type":"groups"]
-        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
-            print(object)
-            let json = JSON(object)
-            let groups = json["groups"].arrayValue
-            self.groupArray.removeAll()
-            for groupDic in groups{
-                let dd = groupDic.dictionaryValue
-                if dd.count != 0{
-                    let group = Group.GroupByGid((dd["gid"]?.object)!)
-                    group?.upDateGroupInfo(groupDic.dictionaryObject!)
-                    let user = UserInfo.CurrentUser()
-                    if !(group!.user?.containsObject(user!))!{
-                        let users = group!.mutableSetValueForKey("user")
-                        users.addObject(user!)
-                    }
-                    self.groupArray.append(group!)
-                }
-                
+    func loadEmail(){
+        if let user = UserInfo.CurrentUser(){
+            emailArray.removeAll()
+            for e in user.emails!{
+                emailArray.append(e as! Email)
             }
-            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-            self.tableView.reloadData()
-            
-            }, failure: { (error : NSError!) -> Void in
-        })
+        }
+    }
+    
+    func loadGrous(){
+        if let user = UserInfo.CurrentUser(){
+            groupArray.removeAll()
+            for g in user.groups!{
+                groupArray.append(g as! Group)
+            }
+        }
     }
 
     @IBAction func typeButtonClick(sender : UIButton){
@@ -171,7 +160,7 @@ class FriendListTableViewController: UITableViewController {
                         let flag = joson["flag"].intValue
                         if flag == 1{
                             hud.detailsLabelText = "创建组成功";
-                             self.loadGrous()
+                            UserInfo.CurrentUser()?.loadGrous()
                         }
                         else if flag == -1{
                             hud.detailsLabelText = "已经创建1个组";

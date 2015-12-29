@@ -39,6 +39,24 @@ class User: NSManagedObject {
         gid = dic["gid"] as? NSNumber
         avatar = dic["avatar"] as? String
         
+        loadGrous()
+        
+        let dic = ["type":"get_email","page":1 ,"number":20]
+        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            print(object)
+            
+            }) { (error : NSError!) -> Void in
+                
+        }
+        
+        let dic2 = ["type":"messages","page":1 ,"number":20]
+        IMConnect.Instance().RequstUserInfo(dic2, completion: { (object) -> Void in
+            print(object)
+            
+            }) { (error : NSError!) -> Void in
+                
+        }
+        
     }
     
     
@@ -54,13 +72,42 @@ class User: NSManagedObject {
                 return nil
         }
         return self.healthDatas(currentDay, maxTime: nextDay)
-//        let formatter = NSDateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        let fstr = formatter.stringFromDate(date)
-//        let minDate = "\(fstr) 00:00:00"
-//        let maxDate = "\(fstr) 23:59:59"
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        return healthDatas(formatter.dateFromString(minDate)!, maxTime: formatter.dateFromString(maxDate)!)
     }
-
+    
+    func groupByID(gid : NSNumber) -> Group?{
+        for group in groups!{
+            let g = group as! Group
+            if g.gid!.isEqualToNumber(gid){
+                return g
+            }
+        }
+        return nil
+    }
+    
+    func loadGrous(){
+        let dic = ["type":"groups"]
+        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            print(object)
+            let json = JSON(object)
+            let groups = json["groups"].arrayValue
+            let user = UserInfo.CurrentUser()
+            user?.groups = nil
+            for groupDic in groups{
+                let dd = groupDic.dictionaryValue
+                if dd.count != 0{
+                    let group = Group.GroupByGid((dd["gid"]?.object)!)
+                    group?.upDateGroupInfo(groupDic.dictionaryObject!)
+                    if !(group!.user?.containsObject(user!))!{
+                        let users = group!.mutableSetValueForKey("user")
+                        users.addObject(user!)
+                    }
+                }
+            }
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            NSNotificationCenter.defaultCenter().postNotificationName("groupChangeNotification", object: nil)
+            
+            }, failure: { (error : NSError!) -> Void in
+        })
+    }
+    
 }

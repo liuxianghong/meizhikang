@@ -255,7 +255,6 @@
         isLogin = YES;
         loginPassWord = pw;
         completion(ip,port);
-        
     } failure:failure];
     free(CommandStructure);
 }
@@ -781,16 +780,16 @@
                          postNotificationName:@"reciveMessageNotification" object:message];
                     });
                     
-                    
                 }
                 else if ([object[@"pushtype"] isEqualToString:@"email"] ) {
                     Email *email = [Email EmailByUuid:object[@"uuid"]];
                     [email upDateEmailInfo:object];
                     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"reciveEmailNotification" object:nil];
                 }
                 else if ([object[@"pushtype"] isEqualToString:@"group_change"]){
-                    [[NSNotificationCenter defaultCenter]
-                     postNotificationName:@"groupChangeNotification" object:object];
+                    [[UserInfo CurrentUser] loadGrous];
                 }
                 else{
                     NSLog(@"unknow pushtype");

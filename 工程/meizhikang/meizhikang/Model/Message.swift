@@ -28,6 +28,7 @@ class Message: NSManagedObject {
         uuid = dic["uuid"] as? NSNumber
         pushtype = dic["pushtype"] as? String
         content = dic["content"] as? String
+        
         if messageType() == .Image{
             let string = content! as NSString
             let array = string.componentsSeparatedByString("[/image][key]")
@@ -67,6 +68,13 @@ class Message: NSManagedObject {
             }
             
         }
+        
+        dispatch_async(dispatch_get_main_queue()){
+            if self.gid?.integerValue != 0 {
+                let g = UserInfo.CurrentUser()!.groupByID(self.gid!)! as Group
+                g.mutableSetValueForKey("messages").addObject(self)
+            }
+        }
     }
     
     func text() -> String{
@@ -77,11 +85,24 @@ class Message: NSManagedObject {
     
     func image() -> UIImage?{
         //return UIImage(named: "圆-白");
-        return UIImage(data: NSData(contentsOfFile: filepath!)!)
+        if let data = NSData(contentsOfFile: filepath!){
+            return UIImage(data: data)
+        }
+        else {
+            return UIImage(named: "框")
+        }
     }
     
     func Data() -> NSData?{
         return data
+    }
+    
+    func saveData(data : NSData) -> String?{
+        let urlMD5 = NSDate().description.dataFromMD5().description.formatData()
+        let path = getImageFilePath(urlMD5)
+        data.writeToFile(path!, atomically: true)
+        filepath = path
+        return path
     }
     
     

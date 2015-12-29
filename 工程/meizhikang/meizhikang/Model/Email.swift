@@ -30,6 +30,7 @@ class Email: NSManagedObject {
         sendtime = dic["sendtime"] as? NSNumber
         title = dic["title"] as? String
         content = dic["content"] as? String
+        user = UserInfo.CurrentUser()
     }
 
 }

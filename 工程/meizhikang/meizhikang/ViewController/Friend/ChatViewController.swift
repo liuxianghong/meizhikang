@@ -112,6 +112,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     var viewModel: ChatViewModel!
     var group : Group!
     var sendVoice: UIButton!
+    var observer : NSObjectProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
@@ -120,36 +121,50 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         viewModel = ChatViewModel(senderId: senderId, senderName: senderDisplayName, displayAvatar: nil, receiverId: receiverId, receiverName: receiverName, receiverAvatar: currentAvatar)
         configInputToolbar()
         
-        NSNotificationCenter.defaultCenter().addObserverForName("reciveMessageNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
+        observer = NSNotificationCenter.defaultCenter().addObserverForName("reciveMessageNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
             let message = notification.object as! Message
-            var message2: JSQMessage?
-            if message.messageType() == .Text{
-                message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, text: message.text())
+            if message.group == self.group{
+                self.addMessage(message)
             }
-            else if message.messageType() == .Image{
-                message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, media: JSQPhotoMediaItem(image: message.image()))
-            }else if message.messageType() == .Voice{
-                let item = JSQAudioMediaItem(data: message.Data()!)
-                item.appliesMediaViewMaskAsOutgoing = false
-                message2 = JSQMessage(senderId: self.receiverId, displayName: self.receiverName, media: item)
-            }else{
-                return
-            }
-            self.viewModel.messages?.append(message2!)
-            self.finishSendingMessageAnimated(true)
         }
         
-        let dic = ["type" : "messages" ,"page" : 1 ,"number" :20 ]
-        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
-            print(object)
-//            let json = JSON(object)
-            }, failure: { (error : NSError!) -> Void in
-        })
-        
+        let messages = Message.MR_findByAttribute("group", withValue: group, andOrderBy: "sendtime", ascending: true)
+        for message in messages {
+            self.addMessage(message as! Message)
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        NSNotificationCenter.defaultCenter().removeObserver(observer)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    func addMessage(message : Message){
+        var message2: JSQMessage?
+        var sender = receiverId
+        var displayName = GroupMember.GroupMemberByUid(message.fromid!)?.nickname
+        if message.fromid!.isEqualToNumber(UserInfo.CurrentUser()!.uid!){
+            sender = self.senderId
+            displayName = senderDisplayName
+        }
+        if message.messageType() == .Text{
+            message2 = JSQMessage(senderId: sender, displayName: displayName, text: message.text())
+        }
+        else if message.messageType() == .Image{
+            message2 = JSQMessage(senderId: sender, displayName: displayName, media: JSQPhotoMediaItem(image: message.image()))
+        }else if message.messageType() == .Voice{
+            let item = JSQAudioMediaItem(data: message.Data()!)
+            item.appliesMediaViewMaskAsOutgoing = false
+            message2 = JSQMessage(senderId: sender, displayName: displayName, media: item)
+        }else{
+            return
+        }
+        self.viewModel.messages?.append(message2!)
+        self.finishSendingMessageAnimated(true)
     }
     
     func configInputToolbar(){
@@ -299,6 +314,17 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 let data = UIImageJPEGRepresentation(image, 0.1)
                 IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: self.group.gid!, completion: { object in
                     print(object)
+                    
+                    let json = JSON(object)
+                    let mesage = Message.MR_createEntity()
+                    mesage.gid = self.group.gid
+                    mesage.group = self.group
+                    mesage.fromid = UserInfo.CurrentUser()?.uid
+                    mesage.sendtime = json["sendtime"].number
+                    mesage.content = "[image][/image]"
+                    mesage.saveData(data!)
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                    
                     }) { error in
                         print(error)
                 }
@@ -334,6 +360,17 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         let data = EncodeWAVEToAMR(NSData(contentsOfURL: url), 1, 16)
         IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { object in
             print(object)
+            
+            let json = JSON(object)
+            let mesage = Message.MR_createEntity()
+            mesage.gid = self.group.gid
+            mesage.group = self.group
+            mesage.fromid = UserInfo.CurrentUser()?.uid
+            mesage.sendtime = json["sendtime"].number
+            mesage.content = "[url][/url]"
+            mesage.data = data
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            
             }) { error in
                 print(error)
         }
@@ -353,6 +390,13 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 let flag = json["flag"].intValue
                 if flag == 1{
                     print("发送成功")
+                    let mesage = Message.MR_createEntity()
+                    mesage.gid = self.group.gid
+                    mesage.group = self.group
+                    mesage.fromid = UserInfo.CurrentUser()?.uid
+                    mesage.sendtime = json["sendtime"].number
+                    mesage.content = "[text]\(text)[/text]"
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                 }
                 else
                 {

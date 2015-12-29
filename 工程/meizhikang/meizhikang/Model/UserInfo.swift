@@ -27,8 +27,6 @@ class UserInfo: NSObject {
 
     static func CurrentUser()->User?{
         
-        return User.MR_findFirst()
-        
         if let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as? [String : AnyObject],let uid = userInfo["uid"] as? Int{
             return User.userByUid(uid)
         }

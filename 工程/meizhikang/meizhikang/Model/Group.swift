@@ -63,5 +63,10 @@ class Group: NSManagedObject {
                 
         }
     }
+    
+//    func messages() -> [Message]{
+//        let predicateTemplate = NSPredicate(format: "time <=  %@ AND time >= %@ AND group = %@", maxTime,minTime,self)
+//        return Message.MR_findAllSortedBy("sendtime", ascending: true, withPredicate: predicateTemplate) as? [HealthData]
+//    }
 
 }
