@@ -18,7 +18,7 @@ class HealthWeeklyChartView: UIView {
     override func drawRect(rect: CGRect) {
         // Drawing code
         super.drawRect(rect)
-        let image = UIImage(named: "小圆点绿.jpg")
+        let image = UIImage(named: "小圆点绿.png")
         chartData?.forEach({ (item) -> () in
             if item.value > maxValue{
                 maxValue = item.value
