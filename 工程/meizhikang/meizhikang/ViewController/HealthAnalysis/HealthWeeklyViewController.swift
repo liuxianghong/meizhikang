@@ -30,31 +30,39 @@ class HealthWeeklyViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         if self.type! == .Week{
-            for i in 0..<7{
-                let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
-                let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i + 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
-                let datas = UserInfo.CurrentUser()?.healthDatas(minDate!, maxTime: maxDate!)
-                if datas?.count > 0 {
-                    let value = (datas?.reduce(0, combine: { (item, data) -> CGFloat in
-                        return item + CGFloat(data.healthValue!)
-                    }))! / CGFloat((datas?.count)!)
-                    let data = WeeklyViewLineData(date: minDate!, value: value)
-                    chartData.append(data)
-                }else{
-                    chartData.append(WeeklyViewLineData(date: minDate!, value: 0))
-                }
-            }
-            chartData = chartData.reverse()
-            chartView.chartData = chartData
-            chartView.setNeedsDisplay()
-            guard let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -7, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0)),
-                let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))else{
-                    return
-            }
-            if let data = UserInfo.CurrentUser()?.healthDatas(minDate, maxTime: maxDate) where data.count > 0{
-            (self.lastPercent.healthPercent.text,self.lastPercent.semiHealthPercent.text,self.lastPercent.weakPercent.text,self.lastPercent.unHealthPercent.text,self.avgLabel.text) = dayStrings(data, fromDayOffset: -7, toDayOffset: 0)
-            }
+            generateData(7)
             self.typeTitle.setTitle("前七天", forState: .Normal)
+        }else{
+            let day = NSCalendar.currentCalendar().component(.Day, fromDate: currentDay!)
+            generateData(day)
+            self.typeTitle.setTitle("当月", forState: .Normal)
+        }
+    }
+    
+    func generateData(days: Int){
+        for i in 0..<days{
+            let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
+            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i + 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
+            let datas = UserInfo.CurrentUser()?.healthDatas(minDate!, maxTime: maxDate!)
+            if datas?.count > 0 {
+                let value = (datas?.reduce(0, combine: { (item, data) -> CGFloat in
+                    return item + CGFloat(data.healthValue!)
+                }))! / CGFloat((datas?.count)!)
+                let data = WeeklyViewLineData(date: minDate!, value: value)
+                chartData.append(data)
+            }else{
+                chartData.append(WeeklyViewLineData(date: minDate!, value: 0))
+            }
+        }
+        chartData = chartData.reverse()
+        chartView.chartData = chartData
+        chartView.setNeedsDisplay()
+        guard let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -days, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0)),
+            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))else{
+                return
+        }
+        if let data = UserInfo.CurrentUser()?.healthDatas(minDate, maxTime: maxDate) where data.count > 0{
+        (self.lastPercent.healthPercent.text,self.lastPercent.semiHealthPercent.text,self.lastPercent.weakPercent.text,self.lastPercent.unHealthPercent.text,self.avgLabel.text) = dayStrings(data, fromDayOffset: -days, toDayOffset: 0)
         }
     }
 
