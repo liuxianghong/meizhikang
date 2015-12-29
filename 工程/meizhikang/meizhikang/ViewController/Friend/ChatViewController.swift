@@ -507,6 +507,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 let mask = JSQMessagesMediaViewBubbleImageMasker(bubbleImageFactory: factory)
                 mask.applyOutgoingBubbleImageMaskToMediaView(imageView)
                 cell?.mediaView = imageView
+            }else if let audioItem = message.media as? JSQAudioMediaItem{
+                audioItem.appliesMediaViewMaskAsOutgoing = message.senderId == self.senderId
+                cell?.mediaView = audioItem.mediaView()
             }
             
         }
