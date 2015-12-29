@@ -18,7 +18,7 @@ class HealthWeeklyChartView: UIView {
     override func drawRect(rect: CGRect) {
         // Drawing code
         super.drawRect(rect)
-        let image = UIImage(named: "小圆点绿.png")
+        let image = UIImage(named: "小圆点绿.jpg")
         chartData?.forEach({ (item) -> () in
             if item.value > maxValue{
                 maxValue = item.value
@@ -38,15 +38,19 @@ class HealthWeeklyChartView: UIView {
         let color = UIColor.mainGreenColor()
         CGContextSetStrokeColorWithColor(context, color.CGColor)
         CGContextMoveToPoint(context, 0,rect.size.height - rect.size.height * (data[0].value - minValue) / (maxValue - minValue))
+        var imagePoint = [CGPoint]()
         for (index,item) in data.enumerate(){
             let pos = rect.size.width * CGFloat(index)/CGFloat(data.count - 1)//CGFloat(item.position) * rect.size.width
             let height = rect.size.height - rect.size.height * (item.value - minValue) / (maxValue - minValue)
             let imageX = pos - (image?.size.width)! / 2
             let imageY = height - (image?.size.height)! / 2
             CGContextAddLineToPoint(context, pos, height)
-            image?.drawAtPoint(CGPoint(x: imageX, y: imageY))
+            imagePoint.append(CGPoint(x: imageX, y: imageY))
         }
         CGContextStrokePath(context)
+        for point in imagePoint{
+            image?.drawAtPoint(point)
+        }
     }
 
 }

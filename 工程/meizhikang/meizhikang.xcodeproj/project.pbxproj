@@ -36,7 +36,7 @@
 		B9709B3F1C2A1ECE004DCD50 /* keyboard_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3C1C2A1ECE004DCD50 /* keyboard_btn@2x.png */; };
 		B9709B401C2A1ECE004DCD50 /* keyboard_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3D1C2A1ECE004DCD50 /* keyboard_btn@3x.png */; };
 		B987B9401C2C22C0002FF394 /* HealthDailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B987B93F1C2C22C0002FF394 /* HealthDailyChartView.swift */; };
-		B993A7011C32CA2C00B89839 /* 小圆点绿.png in Resources */ = {isa = PBXBuildFile; fileRef = B993A7001C32CA2C00B89839 /* 小圆点绿.png */; };
+		B993A7031C32DB0B00B89839 /* 小圆点绿.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B993A7021C32DB0B00B89839 /* 小圆点绿.jpg */; };
 		B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBA1C0BF43D0097E9B3 /* 右.png */; };
 		B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */; };
 		B99A8DF51C0BF43D0097E9B3 /* 右@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */; };
@@ -462,7 +462,7 @@
 		B9709B3C1C2A1ECE004DCD50 /* keyboard_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_btn@2x.png"; sourceTree = "<group>"; };
 		B9709B3D1C2A1ECE004DCD50 /* keyboard_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_btn@3x.png"; sourceTree = "<group>"; };
 		B987B93F1C2C22C0002FF394 /* HealthDailyChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDailyChartView.swift; sourceTree = "<group>"; };
-		B993A7001C32CA2C00B89839 /* 小圆点绿.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小圆点绿.png"; sourceTree = "<group>"; };
+		B993A7021C32DB0B00B89839 /* 小圆点绿.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "小圆点绿.jpg"; sourceTree = "<group>"; };
 		B99A8DBA1C0BF43D0097E9B3 /* 右.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右.png"; sourceTree = "<group>"; };
 		B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@2x.png"; sourceTree = "<group>"; };
 		B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右@3x.png"; sourceTree = "<group>"; };
@@ -992,7 +992,7 @@
 		B99A8DB91C0BF43D0097E9B3 /* 健康分析 */ = {
 			isa = PBXGroup;
 			children = (
-				B993A7001C32CA2C00B89839 /* 小圆点绿.png */,
+				B993A7021C32DB0B00B89839 /* 小圆点绿.jpg */,
 				B99A8DBA1C0BF43D0097E9B3 /* 右.png */,
 				B99A8DBB1C0BF43D0097E9B3 /* 右@2x.png */,
 				B99A8DBC1C0BF43D0097E9B3 /* 右@3x.png */,
@@ -1755,7 +1755,6 @@
 				D311C4A51C09A70C00C80C05 /* 健康图-拷贝@3x.png in Resources */,
 				D3EFFA161C182B8F0047E2B0 /* 框@2x.png in Resources */,
 				D311C5D11C0A119500C80C05 /* 联系人@2x.png in Resources */,
-				B993A7011C32CA2C00B89839 /* 小圆点绿.png in Resources */,
 				D30902931C2A8625001FDF7B /* amazeui.flat.min.css in Resources */,
 				B9709B381C299663004DCD50 /* chat_animation1.png in Resources */,
 				D309029F1C2A8625001FDF7B /* admin-ie.png in Resources */,
@@ -1917,6 +1916,7 @@
 				B9709B3E1C2A1ECE004DCD50 /* keyboard_btn.png in Resources */,
 				B99A8DFE1C0BF43D0097E9B3 /* 圆@3x.png in Resources */,
 				D311C5E81C0A119500C80C05 /* 通讯.png in Resources */,
+				B993A7031C32DB0B00B89839 /* 小圆点绿.jpg in Resources */,
 				D311C5501C0A066F00C80C05 /* 灰线-短-拷贝.png in Resources */,
 				D311C5521C0A066F00C80C05 /* 灰线-短-拷贝@3x.png in Resources */,
 				D32D08131C0AE4CD00E2C7EF /* sex@2x.png in Resources */,
