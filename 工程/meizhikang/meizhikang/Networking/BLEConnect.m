@@ -190,10 +190,13 @@ uint64_t reversebytes_uint64t(uint64_t value){
             [dataDelegate didUpdateHartValue:rote];
         }
     }
-    else if (byte[0] == 0){
+    else if (byte[0] == 0 && [data length] == 18){
         UInt8 rote = byte[1];
+        UInt32 time = 0;
+        memcpy(&time, byte + 14, 4);
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
         if (dataDelegate) {
-            [dataDelegate didUpdateHealthValue:rote];
+            [dataDelegate didUpdateHealthValue:rote date:date];
         }
     }
 }

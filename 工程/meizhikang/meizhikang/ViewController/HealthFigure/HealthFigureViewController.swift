@@ -47,6 +47,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     let viewModel = HealthFigureViewModel()
     let tapView = UIView()
     var timer : NSTimer!
+    var beforUser : User!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,28 +74,40 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         self.showCurrentHealthData(nil)
         timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "cutDown", userInfo: nil, repeats: true)
         for _ in 1...30{
-            //self.cutDown()
+            self.cutDown()
         }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         if UserInfo.CurrentUser() != nil{
-            if UserInfo.CurrentUser()?.healthDatas?.count == 0{
-                let timeInterval = NSDate().timeIntervalSince1970
-                for index in 1...10000{
-                    let date = NSDate(timeIntervalSince1970: timeInterval - Double(index*60*5))
-                    let healthData = HealthData.MR_createEntity()
-                    healthData.time = date
-                    healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
-                    healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
-                    healthData.user = UserInfo.CurrentUser()
+            if beforUser != UserInfo.CurrentUser(){
+                chatView.clear()
+                let healthData = UserInfo.CurrentUser()?.healthDatasOneDay(NSDate())
+                for hdata in healthData!{
+                    chatView.appendData(hdata)
                 }
-                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
             }
-            else{
-                
-            }
+            beforUser = UserInfo.CurrentUser()
+            
+//            if UserInfo.CurrentUser()?.healthDatas?.count == 0{
+//                let timeInterval = NSDate().timeIntervalSince1970
+//                for index in 1...10000{
+//                    let date = NSDate(timeIntervalSince1970: timeInterval - Double(index*60*5))
+//                    let healthData = HealthData.MR_createEntity()
+//                    healthData.time = date
+//                    healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
+//                    healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
+//                    healthData.user = UserInfo.CurrentUser()
+//                }
+//                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+//            }
+//            else{
+//                
+//            }
+        }
+        else{
+            chatView.clear()
         }
     }
     
@@ -112,9 +125,9 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         heartRateLabel.text = "\(value)"
     }
     
-    func didUpdateHealthValue(value: Int) {
+    func didUpdateHealthValue(value: Int, date: NSDate!) {
         let healthData = HealthData.MR_createEntity()
-        healthData.time = NSDate()
+        healthData.time = date
         healthData.heartRate = 0
         healthData.healthValue = value
         healthData.user = UserInfo.CurrentUser()
@@ -122,8 +135,9 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         chatView.appendData(healthData)
     }
     
+    
     func cutDown(){
-        
+        //self.didUpdateHealthValue(80)
     }
     
     func showCurrentHealthData(health : HealthData?){
@@ -157,7 +171,9 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.viewModel.processTitles(self.viewModel.headerTitles[indexPath.row])
         self.headerButton.setTitle(self.viewModel.currenTitle, forState: .Normal)
-        chatView.type = self.viewModel.currenTitle == "30分钟模式" ? 1 : 2
+        UIView.animateWithDuration(0.5) { () -> Void in
+            self.chatView.type = self.viewModel.currenTitle == "30分钟模式" ? 1 : 2
+        }
         headerShow(false)
     }
     

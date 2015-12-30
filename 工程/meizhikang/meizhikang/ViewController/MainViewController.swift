@@ -28,10 +28,10 @@ class MainViewController: UINavigationController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if first{
-            first = false
-            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
-        }
+//        if first{
+//            first = false
+//            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+//        }
     }
 
     override func didReceiveMemoryWarning() {

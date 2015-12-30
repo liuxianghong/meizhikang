@@ -132,27 +132,40 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         
         var pos = CGFloat((data.time?.timeIntervalSinceDate(self.zeroOfDate(date)!))!)
         let v = Int(data.healthValue!)
-        var pos2 = (pos + CGFloat(5*60*dataArray.count)) / CGFloat(24*60*60)
+        var pos2 = (pos) / CGFloat(24*60*60)
         if pos2 > 1{
             dataArray.removeAll()
             date = NSDate()
             pos = CGFloat((data.time?.timeIntervalSinceDate(self.zeroOfDate(date)!))!)
-            pos2 = (pos + CGFloat(5*60*dataArray.count)) / CGFloat(24*60*60)
+            pos2 = (pos) / CGFloat(24*60*60)
         }
         let lineData = HealthFigureChartViewModel(position:  pos2, value: v, healthData: data)
         dataArray.append(lineData)
         self.layoutAllViews()
-        self.doScroll()
+        let point = CGPoint(x: lineData.position * (cwidth - rightMargin - fwidth), y: 0)
+        self.setContentOffset(point, animated: true)
+        position = lineData.position
+        healthDelegate.showCurrentHealthData(lineData.healthData)
     }
     
     
-    func zeroOfDate(data : NSDate) -> NSDate?{
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let fstr = formatter.stringFromDate(data)
-        let zeroDate = "\(fstr) 00:00:00"
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.dateFromString(zeroDate)
+    func clear(){
+        dataArray.removeAll()
+        for view in viewArray{
+            view.removeFromSuperview()
+        }
+        viewArray.removeAll()
+    }
+    
+    
+    func zeroOfDate(date : NSDate) -> NSDate?{
+        return NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: date, options: NSCalendarOptions(rawValue: 0))
+//        let formatter = NSDateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let fstr = formatter.stringFromDate(data)
+//        let zeroDate = "\(fstr) 00:00:00"
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        return formatter.dateFromString(zeroDate)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

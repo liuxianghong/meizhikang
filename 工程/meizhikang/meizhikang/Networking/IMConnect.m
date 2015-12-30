@@ -805,9 +805,6 @@
             free(CommandStructure);
             
         }
-        
-        
-        
         [self listenRecive];
     }
 }

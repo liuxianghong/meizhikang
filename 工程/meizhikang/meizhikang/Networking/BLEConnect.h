@@ -21,7 +21,7 @@
 @end
 
 @protocol BLEDataDelegate<BLEConnectDelegate>
-- (void)didUpdateHealthValue: (NSInteger )value;
+- (void)didUpdateHealthValue: (NSInteger )value date:(NSDate *)date;
 - (void)didUpdateHartValue: (NSInteger )value;
 @optional
 

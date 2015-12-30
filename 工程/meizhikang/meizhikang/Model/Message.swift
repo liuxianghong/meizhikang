@@ -36,20 +36,30 @@ class Message: NSManagedObject {
             var keyString = array[1]
             imageUrl = imageUrl.stringByReplacingOccurrencesOfString("[image]", withString: "")
             keyString = keyString.stringByReplacingOccurrencesOfString("[/key]", withString: "")
-            let urlMD5 = imageUrl.dataFromMD5().description.formatData()
-            let path = getImageFilePath(urlMD5)
-            if !NSFileManager.defaultManager().fileExistsAtPath(path!){
-                let imagedata = NSData(contentsOfURL: NSURL(string: imageUrl)!)
-                let dataKey = keyString.dataFromHexString()
-                print(dataKey)
-                let ddata = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
-                if ddata.length > 16{
-                    let filedata = NSData(bytes: ddata.bytes+16, length: ddata.length-16)
-                    filedata.writeToFile(path!, atomically: true)
-                    filepath = path
-                }
+            //let urlMD5 = imageUrl.dataFromMD5().description.formatData()
+            
+            let imagedata = NSData(contentsOfURL: NSURL(string: imageUrl)!)
+            let dataKey = keyString.dataFromHexString()
+            print(dataKey)
+            let ddata = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
+            if ddata.length > 16{
+                data = NSData(bytes: ddata.bytes+16, length: ddata.length-16)
+//                if filedata.writeToFile(path!, atomically: false){
+//                    filepath = path
+//                }
+//                else
+//                {
+//                    data = filedata
+//                }
             }
-            filepath = path
+            
+//            let path = getImageFilePath(urlMD5)
+//            if !NSFileManager.defaultManager().fileExistsAtPath(path!){
+//                
+//            }
+//            else{
+//                filepath = path
+//            }
         }
         else if messageType() == .Voice{
             
@@ -84,25 +94,20 @@ class Message: NSManagedObject {
     }
     
     func image() -> UIImage?{
-        //return UIImage(named: "圆-白");
-        if let data = NSData(contentsOfFile: filepath!){
-            return UIImage(data: data)
+        if (data != nil){
+            if let image = UIImage(data: data!){
+                return image
+            }
         }
-        else {
-            return UIImage(named: "框")
-        }
+        return UIImage(named: "框")
     }
     
     func Data() -> NSData?{
         return data
     }
     
-    func saveData(data : NSData) -> String?{
-        let urlMD5 = NSDate().description.dataFromMD5().description.formatData()
-        let path = getImageFilePath(urlMD5)
-        data.writeToFile(path!, atomically: true)
-        filepath = path
-        return path
+    func saveData(dataFile : NSData){
+        data = dataFile
     }
     
     
