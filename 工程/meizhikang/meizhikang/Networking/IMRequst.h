@@ -25,5 +25,5 @@
 
 +(void)BGNotifyByDeviceToken:(NSString *)token completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
-+(void)LoginOut;
++(void)LoginOut:(BOOL)waite;
 @end

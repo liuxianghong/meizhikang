@@ -128,6 +128,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             }
         }
         
+        self.title = group.gname
         let messages = Message.MR_findByAttribute("group", withValue: group, andOrderBy: "sendtime", ascending: true)
         for message in messages {
             self.addMessage(message as! Message)

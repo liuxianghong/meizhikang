@@ -11,7 +11,7 @@
 @implementation IMRequst
 
 +(void)LoginWithUserName:(NSString *)userName PassWord:(NSString *)pw  completion:(IMObjectLoginHandler)completion failure:(IMObjectFailureHandler)failure{
-    [IMRequst LoginOut];
+    [IMRequst LoginOut:true];
     [[IMConnect Instance] getToken:userName completion:^(NSData *token, NSData *data) {
         [[IMConnect Instance] login:pw withToken:token completion:completion failure:failure];
     } failure:failure];
@@ -73,7 +73,7 @@
     [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
 }
 
-+(void)LoginOut{
-    [[IMConnect Instance] LoginOut];
++(void)LoginOut:(BOOL)waite{
+    [[IMConnect Instance] LoginOut:waite];
 }
 @end

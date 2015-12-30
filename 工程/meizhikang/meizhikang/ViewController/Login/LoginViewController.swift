@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        IMRequst.LoginOut()
+        IMRequst.LoginOut(false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,8 +36,7 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func registLaterClick(sender : AnyObject) {
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        
         self.dismissViewControllerAnimated(true) { () -> Void in
             
         }
@@ -80,11 +79,11 @@ class LoginViewController: UIViewController {
                     hud.mode = .Text
                     hud.detailsLabelText = error.domain;
                     hud.hide(true, afterDelay: 1.5)
-                    IMRequst.LoginOut()
+                    IMRequst.LoginOut(false)
                     print(error)
             })
             }) { (error : NSError!) -> Void in
-                IMRequst.LoginOut()
+                IMRequst.LoginOut(false)
                 hud.mode = .Text
                 hud.detailsLabelText = error.domain;
                 hud.hide(true, afterDelay: 1.5)

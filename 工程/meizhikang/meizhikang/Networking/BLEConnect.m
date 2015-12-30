@@ -60,6 +60,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 -(id)init{
     self = [super init];
+    peripherals = [[NSMutableArray alloc]init];
     manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     return self;
 }
@@ -77,6 +78,20 @@ uint64_t reversebytes_uint64t(uint64_t value){
     [self stopScan];
     [peripherals removeAllObjects];
     [manager scanForPeripheralsWithServices:nil options:nil];
+    
+    CBUUID *uuidSTATUS = [self getUUID:STATUS_SERVICE_UUID];
+    NSArray<CBPeripheral *> *peris = [manager retrieveConnectedPeripheralsWithServices:@[uuidSTATUS]];
+    
+    for (CBPeripheral *p in peris){
+        NSLog(@"%@",p);
+        if (![peripherals containsObject:p]){
+            [peripherals addObject:p];
+        }
+    }
+    if (connectDelegate) {
+        [connectDelegate peripheralFound];
+    }
+    
 }
 
 -(void)stopScan
@@ -109,13 +124,13 @@ uint64_t reversebytes_uint64t(uint64_t value){
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     NSLog(@"Now we found device\n");
-    if (!peripherals) {
-        peripherals = [[NSMutableArray alloc] initWithObjects:peripheral, nil];
-        if (connectDelegate) {
-            [connectDelegate peripheralFound];
-        }
-        return;
-    }
+//    if (!peripherals) {
+//        peripherals = [[NSMutableArray alloc] initWithObjects:peripheral, nil];
+//        if (connectDelegate) {
+//            [connectDelegate peripheralFound];
+//        }
+//        return;
+//    }
     
     if((__bridge CFUUIDRef )peripheral.identifier == NULL) return;
     if(peripheral.name.length < 1) return;

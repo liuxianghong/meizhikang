@@ -18,7 +18,8 @@ class MainViewController: UINavigationController {
         // Do any additional setup after loading the view.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "login:", name: "loginOutNotification", object: nil)
         
-        
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -58,7 +59,7 @@ class MainViewController: UINavigationController {
                         print(ip,port)
                         hud.hide(true)
                         }) { (error : NSError!) -> Void in
-                            IMRequst.LoginOut()
+                            IMRequst.LoginOut(false)
                             hud.mode = .Text
                             hud.detailsLabelText = error.domain;
                             hud.hide(true, afterDelay: 1.5)

@@ -33,6 +33,6 @@
 -(void)UploadFileRequst:(NSData *)file fileType:(IMMsgSendFileType)fieType fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 -(void)test:(NSData *)token;
--(void)LoginOut;
+-(void)LoginOut:(BOOL)waite;
 -(BOOL)isLogin;
 @end

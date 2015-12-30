@@ -104,12 +104,14 @@
     }
 }
 
--(void)LoginOut{
+-(void)LoginOut:(BOOL)waite{
     isLogin = NO;
     [asyncSocket disconnect];
-    NSTimeInterval time = [NSDate date].timeIntervalSince1970;
-    while([NSDate date].timeIntervalSince1970 - time < 0.1){
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    if (waite) {
+        NSTimeInterval time = [NSDate date].timeIntervalSince1970;
+        while([NSDate date].timeIntervalSince1970 - time < 0.1){
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
     }
 }
 
@@ -759,7 +761,7 @@
             NSString *str = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"loginOutNotification" object:str];
-            [self LoginOut];
+            [self LoginOut:NO];
         }
         else if (reciveIM.subCmd == 0x1){
             

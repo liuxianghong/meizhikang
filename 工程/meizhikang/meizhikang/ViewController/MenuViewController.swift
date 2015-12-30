@@ -130,11 +130,11 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.iconImage.highlightedImage = UIImage(named: "\(title)")
         if indexPath.row == 0{
             cell.titleLabel.text = userName
-            cell.selectionStyle = .None
+            //cell.selectionStyle = .None
         }
         else{
             cell.titleLabel.text = title
-            cell.selectionStyle = .Default
+            //cell.selectionStyle = .Default
         }
         return cell
     }
@@ -147,16 +147,16 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     self.revealViewController().navigationController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
                     self.tableView.reloadData()
                     tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
-                    self.revealViewController().revealToggleAnimated(true)
+                    //self.revealViewController().revealToggleAnimated(true)
                     return;
                 }
             }
-            if indexPath.row == 0{
-                self.tableView.reloadData()
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: currentIndex, inSection: 0), animated: false, scrollPosition: .None)
-                //self.revealViewController().revealToggleAnimated(true)
-                return;
-            }
+//            if indexPath.row == 0{
+//                self.tableView.reloadData()
+//                tableView.selectRowAtIndexPath(NSIndexPath(forRow: currentIndex, inSection: 0), animated: false, scrollPosition: .None)
+//                //self.revealViewController().revealToggleAnimated(true)
+//                return;
+//            }
             currentIndex = indexPath.row
             let dic = self.revealViewController().frontViewControllersDic;
             let vc:UIViewController = dic.objectForKey(viewArray[indexPath.row]) as! UIViewController;

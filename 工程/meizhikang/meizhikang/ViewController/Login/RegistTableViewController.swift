@@ -140,7 +140,7 @@ class RegistTableViewController: UITableViewController {
                 hud.mode = .Text
                 hud.detailsLabelText = error.domain;
                 hud.hide(true, afterDelay: 1.5)
-                IMRequst.LoginOut()
+                IMRequst.LoginOut(false)
         }
     
     }

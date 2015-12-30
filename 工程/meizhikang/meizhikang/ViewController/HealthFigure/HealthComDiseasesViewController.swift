@@ -13,6 +13,8 @@ class HealthComDiseasesViewController: UIViewController {
     @IBOutlet weak var scrollView : UIScrollView!
     @IBOutlet weak var webView : UIWebView!
     var viewArray = [UIImageView]()
+    @IBOutlet weak var scrollView2 : UIScrollView!
+    @IBOutlet weak var imageView : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +32,7 @@ class HealthComDiseasesViewController: UIViewController {
             viewArray.append(view)
         }
         
+        imageView.image = UIImage(named: "疾病图绿1")
         let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
         let path = NSBundle.mainBundle().pathForResource("web", ofType: "html")
         do{
@@ -58,6 +61,8 @@ class HealthComDiseasesViewController: UIViewController {
     func tapGestureClick(tapGesture : UITapGestureRecognizer){
         
         let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
+        imageView.image = UIImage(named: "疾病图绿\(tapGesture.view!.tag)")
+        scrollView2.setContentOffset(CGPointMake(0, 0), animated: false)
         print(tapGesture.view?.tag)
         let path = NSBundle.mainBundle().pathForResource("html\(tapGesture.view!.tag)", ofType: "html")
         do{
