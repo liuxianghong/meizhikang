@@ -32,6 +32,12 @@ class HealthWeeklyChartView: UIView {
         guard let data = chartData else{
             return
         }
+        let step = Int((maxValue - minValue) / 10)
+        for i in 0..<step{
+            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))")
+            let fontSize = str
+            str.drawAtPoint(CGPointMake(0, rect.size.height * CGFloat(i) / CGFloat(step)))
+        }
         let context = UIGraphicsGetCurrentContext()
         CGContextSetLineWidth(context, 2.0)
         CGContextBeginPath(context)
@@ -40,7 +46,7 @@ class HealthWeeklyChartView: UIView {
         CGContextMoveToPoint(context, 0,rect.size.height - rect.size.height * (data[0].value - minValue) / (maxValue - minValue))
         var imagePoint = [CGPoint]()
         for (index,item) in data.enumerate(){
-            let pos = rect.size.width * CGFloat(index)/CGFloat(data.count - 1)//CGFloat(item.position) * rect.size.width
+            let pos = rect.size.width * CGFloat(index)/CGFloat(data.count - 1)
             let height = rect.size.height - rect.size.height * (item.value - minValue) / (maxValue - minValue)
             let imageX = pos - (image?.size.width)! / 2
             let imageY = height - (image?.size.height)! / 2
