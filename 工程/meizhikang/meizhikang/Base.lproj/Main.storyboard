@@ -2211,7 +2211,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UiA-Ig-m13" customClass="HealthWeeklyChartView" customModule="meizhikang" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="FhZ-gd-dLw"/>
                                 </constraints>
@@ -2544,8 +2544,10 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="avgLabel" destination="i2i-r9-aVG" id="RiO-TC-wOp"/>
                         <outlet property="chartView" destination="UiA-Ig-m13" id="6mP-Z4-lIa"/>
                         <outlet property="lastPercent" destination="jPj-9X-tXd" id="w7C-n5-jdK"/>
+                        <outlet property="typeTitle" destination="jLu-o7-3Ob" id="mds-ct-KH4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvk-DO-CcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

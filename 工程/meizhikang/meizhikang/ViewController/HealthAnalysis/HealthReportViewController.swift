@@ -86,6 +86,11 @@ class HealthReportViewController: UIViewController,UITableViewDelegate,UITableVi
         self.viewModel.processTitles(self.viewModel.headerTitles[indexPath.row])
         self.headerButton.setTitle(self.viewModel.currenTitle, forState: .Normal)
         headerShow(false)
+        if self.viewModel.currenTitle == "健康周报"{
+            self.containerViewController?.weekType = .Week
+        }else{
+            self.containerViewController?.weekType = .Month
+        }
         self.containerViewController?.performSegueWithIdentifier(self.viewModel.containerIdentifier, sender: nil)
     }
     
@@ -134,11 +139,6 @@ class HealthReportViewController: UIViewController,UITableViewDelegate,UITableVi
         if (segue.identifier == HealthReportConstant.EmbededSegueIdentifier){
             self.containerViewController = segue.destinationViewController as? HealthReportContainerViewController
             self.containerViewController?.date = self.viewModel.date
-            if self.viewModel.currenTitle == "健康周报"{
-                self.containerViewController?.weekType = .Week
-            }else{
-                self.containerViewController?.weekType = .Month
-            }
         }
     }
 
