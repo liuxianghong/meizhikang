@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IMConnect.h"
+#import "NetWorkingContents.h"
+
 
 @interface IMRequst : NSObject
 
@@ -24,6 +25,19 @@
 +(void)CreateGroupByGid:(NSString *)groupName completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 +(void)BGNotifyByDeviceToken:(NSString *)token completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
++(void)getRegistToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
+
++(void)registWithToken:(NSData *)token withCode:(NSString *)code withNickName:(NSString *)nickName withPW:(NSString *)pw withSex:(UInt8)sex withAge:(UInt8)age withHeiht:(UInt8)height withWight:(UInt16)wight completion:(void (^)())completion failure:(IMObjectFailureHandler)failure;
+
++(void)getResetPWToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
+
++(void)getCode:(NSString *)phoenName code:(NSString *)code completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;
+
++(void)RequstUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
+//发送图片。语音
++(void)UploadFileRequst:(NSData *)file fileType:(IMMsgSendFileType)fieType fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 +(void)LoginOut:(BOOL)waite;
 @end

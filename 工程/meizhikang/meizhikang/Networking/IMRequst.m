@@ -7,6 +7,7 @@
 //
 
 #import "IMRequst.h"
+#import "IMConnect.h"
 
 @implementation IMRequst
 
@@ -71,6 +72,28 @@
                           @"device" : token
                           };
     [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
+
++(void)registWithToken:(NSData *)token withCode:(NSString *)code withNickName:(NSString *)nickName withPW:(NSString *)pw withSex:(UInt8)sex withAge:(UInt8)age withHeiht:(UInt8)height withWight:(UInt16)wight completion:(void (^)())completion failure:(IMObjectFailureHandler)failure{
+    [[IMConnect Instance] registWithToken:token withCode:code withNickName:nickName withPW:pw withSex:sex withAge:age withHeiht:height withWight:wight completion:completion failure:failure];
+}
+
++(void)getResetPWToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
+    [[IMConnect Instance] getResetPWToken:userName completion:completion failure:failure];
+}
+
++(void)getCode:(NSString *)phoenName code:(NSString *)code completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
+    [[IMConnect Instance] getCode:phoenName code:code completion:completion failure:failure];
+}
+
++(void)RequstUserInfo:(NSDictionary *)dic completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
+//发送图片。语音
++(void)UploadFileRequst:(NSData *)file fileType:(IMMsgSendFileType)fieType fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    [[IMConnect Instance] UploadFileRequst:file fileType:fieType fromType:fromtype toid:toid completion:completion failure:failure];
 }
 
 +(void)LoginOut:(BOOL)waite{

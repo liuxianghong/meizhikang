@@ -15,10 +15,13 @@
 #define STATUS_Acc_UUID        0x9804L
 
 #define HRV_SERVICE_UUID       0x6802L
-#define HRV_HRV_UUID        0x9810L
+#define HRV_HRV_UUID           0x9810L
 
 #define MZKHR_SERVICE_UUID     0x6803L
 #define MZKHR_NOTI_UUID        0x9820L
+
+#define HART_SERVICE_UUID      0x180dL
+#define HART_NOTI_UUID         0x2a37L
 
 
 uint64_t reversebytes_uint64t(uint64_t value){
@@ -193,27 +196,49 @@ uint64_t reversebytes_uint64t(uint64_t value){
         return;
     }
     Byte *byte = [data bytes];
-    if (byte[0] == 3) {
-        UInt8 rote = byte[1];
-        UInt32 time = 0;
-        memcpy(&time, byte + 2, 4);
-        NSDateFormatter *f = [[NSDateFormatter alloc]init];
-        f.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-        NSLog(@" %d %@",rote, [f stringFromDate:date]);
-        if (dataDelegate) {
-            [dataDelegate didUpdateHartValue:rote];
+    if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:STATUS_Warnsync_UUID]]) {
+        if (byte[0] == 3) {
+            UInt8 rote = byte[1];
+            UInt32 time = 0;
+            memcpy(&time, byte + 2, 4);
+            NSDateFormatter *f = [[NSDateFormatter alloc]init];
+            f.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+            NSLog(@" %d %@",rote, [f stringFromDate:date]);
+            if (dataDelegate) {
+                [dataDelegate didUpdateHartValue:rote];
+            }
+        }
+        else if (byte[0] == 0 && [data length] == 18){
+            UInt8 rote = byte[1];
+            UInt32 time = 0;
+            memcpy(&time, byte + 14, 4);
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+            if (dataDelegate) {
+                [dataDelegate didUpdateHealthValue:rote date:date];
+            }
         }
     }
-    else if (byte[0] == 0 && [data length] == 18){
-        UInt8 rote = byte[1];
-        UInt32 time = 0;
-        memcpy(&time, byte + 14, 4);
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-        if (dataDelegate) {
-            [dataDelegate didUpdateHealthValue:rote date:date];
+    else if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:HRV_HRV_UUID]]) {
+        if (byte[0] == 0 && [data length] == 18){
+            UInt8 rote = byte[1];
+            UInt32 time = 0;
+            memcpy(&time, byte + 14, 4);
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+            if (dataDelegate) {
+                [dataDelegate didUpdateHealthValue:rote date:[NSDate date]];
+            }
         }
     }
+    else if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:HART_NOTI_UUID]]) {
+        if (byte[0] == 0) {
+            UInt8 rote = byte[1];
+            if (dataDelegate) {
+                [dataDelegate didUpdateHartValue:rote];
+            }
+        }
+    }
+    
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -249,12 +274,23 @@ uint64_t reversebytes_uint64t(uint64_t value){
         for(int i = 0; i < service.characteristics.count; i++) { //Show every one
             CBCharacteristic *c = [service.characteristics objectAtIndex:i];
             NSLog(@"Found characteristic %@\r\n",[ self CBUUIDToString:c.UUID]);
+            [peripheral setNotifyValue:YES forCharacteristic:c];
         }
         
-        CBUUID *uuidSTATUS = [self getUUID:STATUS_SERVICE_UUID];
-        if([self compareCBUUID:service.UUID UUID2:uuidSTATUS]) {
-            [self notification:STATUS_SERVICE_UUID characteristicUUID:STATUS_Warnsync_UUID p:peripheral on:YES];
-        }
+//        CBUUID *uuidSTATUS = [self getUUID:STATUS_SERVICE_UUID];
+//        if([self compareCBUUID:service.UUID UUID2:uuidSTATUS]) {
+//            [self notification:STATUS_SERVICE_UUID characteristicUUID:STATUS_Warnsync_UUID p:peripheral on:YES];
+//        }
+//        
+//        uuidSTATUS = [self getUUID:HRV_SERVICE_UUID];
+//        if([self compareCBUUID:service.UUID UUID2:uuidSTATUS]) {
+//            [self notification:HRV_SERVICE_UUID characteristicUUID:HRV_HRV_UUID p:peripheral on:YES];
+//        }
+//        
+//        uuidSTATUS = [self getUUID:HART_SERVICE_UUID];
+//        if([self compareCBUUID:service.UUID UUID2:uuidSTATUS]) {
+//            [self notification:HART_SERVICE_UUID characteristicUUID:HART_NOTI_UUID p:peripheral on:YES];
+//        }
     }
     else {
         NSLog(@"%@",error);
@@ -266,20 +302,25 @@ uint64_t reversebytes_uint64t(uint64_t value){
 {
     if (!error) {
         NSLog(@"Updated notification state for characteristic with UUID %@ on service with  UUID %@ on peripheral with UUID %@\r\n",[self CBUUIDToString:characteristic.UUID],[self CBUUIDToString:characteristic.service.UUID],peripheral.identifier);
-        Byte value[6];
-        value[0] = 0x10;
-        value[1] = 0xFF;
-        UInt32 time = (UInt32) [NSDate date].timeIntervalSince1970;
-        //memcpy(value+2, &time, 4);
-        value[5] = (time & 0xff);
-        value[4] = ((time >> 8) & 0xff);
-        value[3] = ((time >> 16) & 0xff);
-        value[2] = ((time >> 24) & 0xff);
-        NSData *data = [NSData dataWithBytes:value length:6];
-        [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
-        if (connectDelegate) {
-            [connectDelegate setConnect];
+       
+        CBUUID *uuidSTATUS = [self getUUID:STATUS_Warnsync_UUID];
+        if([self compareCBUUID:characteristic.UUID UUID2:uuidSTATUS]) {
+            Byte value[6];
+            value[0] = 0x10;
+            value[1] = 0xFF;
+            UInt32 time = (UInt32) [NSDate date].timeIntervalSince1970;
+            //memcpy(value+2, &time, 4);
+            value[5] = (time & 0xff);
+            value[4] = ((time >> 8) & 0xff);
+            value[3] = ((time >> 16) & 0xff);
+            value[2] = ((time >> 24) & 0xff);
+            NSData *data = [NSData dataWithBytes:value length:6];
+            [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
+            if (connectDelegate) {
+                [connectDelegate setConnect];
+            }
         }
+        
     }
     else {
         NSLog(@"Error in setting notification state for characteristic with UUID %@ on service with  UUID %@ on peripheral with UUID %@\r\n",[self CBUUIDToString:characteristic.UUID],[self CBUUIDToString:characteristic.service.UUID],peripheral.identifier);
@@ -294,10 +335,22 @@ uint64_t reversebytes_uint64t(uint64_t value){
     for (int i=0; i < p.services.count; i++) {
         CBService *s = [p.services objectAtIndex:i];
         NSLog(@"Fetching characteristics for service with UUID : %@\r\n",[self CBUUIDToString:s.UUID]);
-        CBUUID *uuidSTATUS = [self getUUID:STATUS_SERVICE_UUID];
-        if([self compareCBUUID:s.UUID UUID2:uuidSTATUS]) {
-            [p discoverCharacteristics:nil forService:s];
-        }
+        [p discoverCharacteristics:nil forService:s];
+//        CBUUID *uuidSTATUS = [self getUUID:STATUS_SERVICE_UUID];
+//        [p discoverCharacteristics:nil forService:s];
+//        if([self compareCBUUID:s.UUID UUID2:uuidSTATUS]) {
+//            [p discoverCharacteristics:nil forService:s];
+//        }
+//        uuidSTATUS = [self getUUID:HRV_SERVICE_UUID];
+//        [p discoverCharacteristics:nil forService:s];
+//        if([self compareCBUUID:s.UUID UUID2:uuidSTATUS]) {
+//            [p discoverCharacteristics:nil forService:s];
+//        }
+//        uuidSTATUS = [self getUUID:HART_SERVICE_UUID];
+//        [p discoverCharacteristics:nil forService:s];
+//        if([self compareCBUUID:s.UUID UUID2:uuidSTATUS]) {
+//            [p discoverCharacteristics:nil forService:s];
+//        }
     }
 }
 

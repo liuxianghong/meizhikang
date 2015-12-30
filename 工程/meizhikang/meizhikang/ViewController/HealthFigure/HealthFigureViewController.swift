@@ -48,6 +48,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     let tapView = UIView()
     var timer : NSTimer!
     var beforUser : User!
+    var healthDataArray = [HealthData]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -88,6 +89,13 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
                     chatView.appendData(hdata)
                 }
             }
+            if beforUser == nil{
+                for hd in healthDataArray{
+                    hd.user = UserInfo.CurrentUser()
+                }
+                healthDataArray.removeAll()
+                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            }
             beforUser = UserInfo.CurrentUser()
             
 //            if UserInfo.CurrentUser()?.healthDatas?.count == 0{
@@ -107,7 +115,10 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
 //            }
         }
         else{
-            chatView.clear()
+            if beforUser != nil{
+                chatView.clear()
+            }
+            beforUser = nil
         }
     }
     
@@ -130,8 +141,15 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         healthData.time = date
         healthData.heartRate = 0
         healthData.healthValue = value
-        healthData.user = UserInfo.CurrentUser()
-        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        if UserInfo.CurrentUser() == nil{
+            healthDataArray.append(healthData)
+        }
+        else
+        {
+            healthData.user = UserInfo.CurrentUser()
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        }
+        
         chatView.appendData(healthData)
     }
     

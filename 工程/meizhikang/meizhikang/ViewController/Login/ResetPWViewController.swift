@@ -35,7 +35,7 @@ class ResetPWViewController: UIViewController {
     @IBAction func reflushButtonClick(){
         
         let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
-        IMConnect.Instance().getResetPWToken(userName, completion: { (token : NSData!, data : NSData!) -> Void in
+        IMRequst.getResetPWToken(userName, completion: { (token : NSData!, data : NSData!) -> Void in
             let image = UIImage(data: data);
             self.imageView.image = image;
             hud.hide(true)
@@ -61,7 +61,7 @@ class ResetPWViewController: UIViewController {
                 return;
             }
             userName = self.textField1.text!
-            IMConnect.Instance().getResetPWToken(self.textField1.text, completion: { (token : NSData!, data : NSData!) -> Void in
+            IMRequst.getResetPWToken(self.textField1.text, completion: { (token : NSData!, data : NSData!) -> Void in
                 print(data)
                 let image = UIImage(data: data);
                 self.textField1.text = ""
@@ -90,7 +90,7 @@ class ResetPWViewController: UIViewController {
                 return;
             }
             
-            IMConnect.Instance().getCode(userName, code: self.textField1.text, completion: { (data : NSData!, Int32) -> Void in
+            IMRequst.getCode(userName, code: self.textField1.text, completion: { (data : NSData!, Int32) -> Void in
                 
                 }, failure: { (error : NSError!) -> Void in
                     hud.mode = .Text

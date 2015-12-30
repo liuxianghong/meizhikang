@@ -112,7 +112,7 @@ class UserInformationTableViewController: UITableViewController {
         //let dic : NSDictionary = ["type":"modify_account","uid ":userInfo["uid"]!,"nickname":"234","height":175,"weight":650.5,"old":19,"sex":1]
         let dic : NSDictionary = ["type":"modify_account","uid ":userInfo["uid"]!,"nickname":self.nickNameTextField.text!,"height": Int(self.heightTextField.text!)!,"weight":Int(self.wightTextField.text!)!,"old":Int(self.ageTextField.text!)!,"sex": self.sexManButton.selected ? 0 : 1]
         
-        IMConnect.Instance().RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
+        IMRequst.RequstUserInfo(dic as [NSObject : AnyObject], completion: { (object) -> Void in
             print(object)
             let flag = object["flag"] as! Int
             if flag == 1{

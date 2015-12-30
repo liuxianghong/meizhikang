@@ -131,6 +131,9 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     func appendData(data : HealthData){
         
         var pos = CGFloat((data.time?.timeIntervalSinceDate(self.zeroOfDate(date)!))!)
+        if pos < 0{
+            return
+        }
         let v = Int(data.healthValue!)
         var pos2 = (pos) / CGFloat(24*60*60)
         if pos2 > 1{
