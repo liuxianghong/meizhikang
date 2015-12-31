@@ -51,7 +51,7 @@ class ResetPhoneTableViewController: UITableViewController {
             
             let dic = ["type":"modify_tele","psd": pwTextField.text!.getBCDPassWord(),"phone":self.nickNameTextField.text!]
             
-            IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+            IMRequst.RequstUserInfo(dic, completion: { (object) -> Void in
                 print(object)
                 let flag = object["flag"] as! Int
                 if flag == 1{
@@ -93,7 +93,7 @@ class ResetPhoneTableViewController: UITableViewController {
             
             let dic = ["type":"modify_phone","code": nickNameTextField.text!]
             
-            IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+           IMRequst.RequstUserInfo(dic, completion: { (object) -> Void in
                 print(object)
                 let flag = object["flag"] as! Int
                 if flag == 1{

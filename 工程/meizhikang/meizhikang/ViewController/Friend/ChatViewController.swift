@@ -313,7 +313,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 self.viewModel.messages?.append(message2!)
                 self.finishSendingMessageAnimated(true)
                 let data = UIImageJPEGRepresentation(image, 0.1)
-                IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: self.group.gid!, completion: { object in
+                IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: self.group.gid!, completion: { object in
                     print(object)
                     
                     let json = JSON(object)
@@ -359,7 +359,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         sendVoiceButtonStatus()
         let url = viewModel.recordAudio.stopRecord()
         let data = EncodeWAVEToAMR(NSData(contentsOfURL: url), 1, 16)
-        IMConnect.Instance().UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { object in
+        IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { object in
             print(object)
             
             let json = JSON(object)

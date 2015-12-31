@@ -60,7 +60,7 @@ class ModifPWTableViewController: UITableViewController {
         }
         let dic = ["type":"modify_psd","oldpsd": odlpwTextField.text!.getBCDPassWord() ,"newpsd":newpwTextField.text!.getBCDPassWord()]
         
-        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+        IMRequst.RequstUserInfo(dic, completion: { (object) -> Void in
             print(object)
             let flag = object["flag"] as! Int
             if flag == 1{

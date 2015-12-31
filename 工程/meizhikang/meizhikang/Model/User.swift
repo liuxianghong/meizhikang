@@ -42,7 +42,7 @@ class User: NSManagedObject {
         loadGrous()
         
         let dic = ["type":"get_email","page":1 ,"number":20]
-        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+        IMRequst.RequstUserInfo(dic, completion: { (object) -> Void in
             print(object)
             
             }) { (error : NSError!) -> Void in
@@ -50,7 +50,7 @@ class User: NSManagedObject {
         }
         
         let dic2 = ["type":"messages","page":1 ,"number":20]
-        IMConnect.Instance().RequstUserInfo(dic2, completion: { (object) -> Void in
+        IMRequst.RequstUserInfo(dic2, completion: { (object) -> Void in
             print(object)
             
             }) { (error : NSError!) -> Void in
@@ -86,7 +86,7 @@ class User: NSManagedObject {
     
     func loadGrous(){
         let dic = ["type":"groups"]
-        IMConnect.Instance().RequstUserInfo(dic, completion: { (object) -> Void in
+        IMRequst.RequstUserInfo(dic, completion: { (object) -> Void in
             print(object)
             let json = JSON(object)
             let groups = json["groups"].arrayValue
