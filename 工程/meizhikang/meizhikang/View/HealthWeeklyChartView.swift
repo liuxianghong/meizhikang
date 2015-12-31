@@ -34,8 +34,9 @@ class HealthWeeklyChartView: UIView {
         }
         let step = Int((maxValue - minValue) / 10)
         for i in 0..<step{
-            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))")
-            let fontSize = str
+            let attr = [NSFontAttributeName : UIFont.systemFontOfSize(10)]
+//            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))")
+            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))", attributes: attr)
             str.drawAtPoint(CGPointMake(0, rect.size.height * CGFloat(i) / CGFloat(step)))
         }
         let context = UIGraphicsGetCurrentContext()

@@ -18,8 +18,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //self.userNameTextField.text = "12345671"
-        //self.passWordTextField.text = "111111"
+        #if DEBUG
+        self.userNameTextField.text = "12345671"
+        self.passWordTextField.text = "111111"
+        #endif
         
         //IMConnect.Instance().test()
     }

@@ -2275,6 +2275,7 @@
 					"$(PROJECT_DIR)/meizhikang/Dependence/UMSocial_Sdk_4.4/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/meizhikang/Dependence/arm/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.meizhikang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2301,6 +2302,7 @@
 					"$(PROJECT_DIR)/meizhikang/Dependence/UMSocial_Sdk_4.4/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/meizhikang/Dependence/arm/lib",
 				);
+				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugong.meizhikang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
