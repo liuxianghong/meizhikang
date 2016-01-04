@@ -113,6 +113,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     var group : Group!
     var sendVoice: UIButton!
     var observer : NSObjectProtocol!
+    var voiceTimeInterval : NSTimeInterval = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
@@ -349,6 +350,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     func sendVoiceButtonDown(sender: UIButton){
         sender.selected = true
+        voiceTimeInterval = NSDate().timeIntervalSince1970
         viewModel.recordAudio.stopPlay()
         viewModel.recordAudio.startRecord()
         sendVoiceButtonStatus()
@@ -358,6 +360,22 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         sender.selected = false
         sendVoiceButtonStatus()
         let url = viewModel.recordAudio.stopRecord()
+        let endVoiceTimeInterval = NSDate().timeIntervalSince1970
+        if endVoiceTimeInterval - voiceTimeInterval < 1{
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.mode = .Text
+            hud.detailsLabelText = "录音时间太短"
+            hud.hide(true, afterDelay: 0.8)
+            return
+        }
+        else if endVoiceTimeInterval - voiceTimeInterval > 60{
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.mode = .Text
+            hud.detailsLabelText = "录音时间过长"
+            hud.hide(true, afterDelay: 0.8)
+            return
+        }
+        
         let data = EncodeWAVEToAMR(NSData(contentsOfURL: url), 1, 16)
         IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { object in
             print(object)
