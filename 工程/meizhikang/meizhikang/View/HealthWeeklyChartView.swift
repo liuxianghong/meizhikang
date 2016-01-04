@@ -33,13 +33,26 @@ class HealthWeeklyChartView: UIView {
             return
         }
         let step = Int((maxValue - minValue) / 10)
-        for i in 0..<step{
-            let attr = [NSFontAttributeName : UIFont.systemFontOfSize(10)]
-//            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))")
-            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))", attributes: attr)
-            str.drawAtPoint(CGPointMake(0, rect.size.height * CGFloat(i) / CGFloat(step)))
-        }
         let context = UIGraphicsGetCurrentContext()
+        CGContextSetLineWidth(context, 1.0)
+        for i in 0...step{
+            let attr = [NSFontAttributeName : UIFont.systemFontOfSize(10),
+                NSForegroundColorAttributeName : UIColor.whiteColor()]
+            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))", attributes: attr)
+            let strPoint = CGPointMake(8,(rect.size.height - 10) - (rect.size.height - 10) * CGFloat(i) / CGFloat(step))
+            str.drawAtPoint(strPoint)
+            CGContextBeginPath(context)
+            CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
+            let currentPoint = CGPointMake(25, 1 + (rect.size.height - 2) - (rect.size.height - 2) * CGFloat(i) / CGFloat(step))
+            CGContextMoveToPoint(context, currentPoint.x, currentPoint.y)
+            CGContextAddLineToPoint(context, currentPoint.x + 8, currentPoint.y)
+            if i < step {
+                let nextPoint = CGPointMake(25, 1 + (rect.size.height - 2) - (rect.size.height - 2) * CGFloat(i + 1) / CGFloat(step))
+                CGContextMoveToPoint(context, currentPoint.x, currentPoint.y)
+                CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y)
+            }
+            CGContextStrokePath(context)
+        }
         CGContextSetLineWidth(context, 2.0)
         CGContextBeginPath(context)
         let color = UIColor.mainGreenColor()
