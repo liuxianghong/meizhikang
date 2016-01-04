@@ -57,10 +57,10 @@ class HealthWeeklyChartView: UIView {
         CGContextBeginPath(context)
         let color = UIColor.mainGreenColor()
         CGContextSetStrokeColorWithColor(context, color.CGColor)
-        CGContextMoveToPoint(context, 0,rect.size.height - rect.size.height * (data[0].value - minValue) / (maxValue - minValue))
+        CGContextMoveToPoint(context, 40 ,rect.size.height - rect.size.height * (data[0].value - minValue) / (maxValue - minValue))
         var imagePoint = [CGPoint]()
         for (index,item) in data.enumerate(){
-            let pos = rect.size.width * CGFloat(index)/CGFloat(data.count - 1)
+            let pos = 40 + (rect.size.width - 60) * CGFloat(index)/CGFloat(data.count - 1)
             let height = rect.size.height - rect.size.height * (item.value - minValue) / (maxValue - minValue)
             let imageX = pos - (image?.size.width)! / 2
             let imageY = height - (image?.size.height)! / 2
