@@ -15,23 +15,7 @@ class HealthWeeklyChartView: UIView {
     var maxValue: CGFloat = 0
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-        super.drawRect(rect)
-        let image = UIImage(named: "小圆点绿.png")
-        chartData?.forEach({ (item) -> () in
-            if item.value > maxValue{
-                maxValue = item.value
-            }
-            if item.value < minValue{
-                minValue = item.value
-            }
-        })
-        minValue = CGFloat(Int(minValue) / 10 * 10)
-        maxValue = CGFloat((Int(maxValue) / 10 + 1) * 10)
-        guard let data = chartData else{
-            return
-        }
+    func drawCoordinate(rect: CGRect){
         let step = Int((maxValue - minValue) / 10)
         let context = UIGraphicsGetCurrentContext()
         CGContextSetLineWidth(context, 1.0)
@@ -53,6 +37,15 @@ class HealthWeeklyChartView: UIView {
             }
             CGContextStrokePath(context)
         }
+        
+    }
+    
+    func drawChart(rect: CGRect){
+        let image = UIImage(named: "小圆点绿.png")
+        guard let data = chartData else{
+            return
+        }
+        let context = UIGraphicsGetCurrentContext()
         CGContextSetLineWidth(context, 2.0)
         CGContextBeginPath(context)
         let color = UIColor.mainGreenColor()
@@ -71,6 +64,23 @@ class HealthWeeklyChartView: UIView {
         for point in imagePoint{
             image?.drawAtPoint(point)
         }
+    }
+    
+    override func drawRect(rect: CGRect) {
+        // Drawing code
+        super.drawRect(rect)
+        chartData?.forEach({ (item) -> () in
+            if item.value > maxValue{
+                maxValue = item.value
+            }
+            if item.value < minValue{
+                minValue = item.value
+            }
+        })
+        minValue = CGFloat(Int(minValue) / 10 * 10)
+        maxValue = CGFloat((Int(maxValue) / 10 + 1) * 10)
+        drawCoordinate(rect)
+        drawChart(rect)
     }
 
 }
