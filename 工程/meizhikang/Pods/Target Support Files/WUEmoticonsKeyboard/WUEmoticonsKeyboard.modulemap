@@ -1,0 +1,6 @@
+framework module WUEmoticonsKeyboard {
+  umbrella header "WUEmoticonsKeyboard-umbrella.h"
+
+  export *
+  module * { export * }
+}

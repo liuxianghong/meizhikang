@@ -13,3 +13,4 @@
 #import "JSQAudioMediaItem.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import "RecordAudio.h"
+#import "EmotionsKeyboardBuilder.h"

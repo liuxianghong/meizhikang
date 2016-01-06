@@ -35,6 +35,124 @@
 		B9709B3E1C2A1ECE004DCD50 /* keyboard_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3B1C2A1ECE004DCD50 /* keyboard_btn.png */; };
 		B9709B3F1C2A1ECE004DCD50 /* keyboard_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3C1C2A1ECE004DCD50 /* keyboard_btn@2x.png */; };
 		B9709B401C2A1ECE004DCD50 /* keyboard_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9709B3D1C2A1ECE004DCD50 /* keyboard_btn@3x.png */; };
+		B975157F1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = B975157E1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m */; };
+		B97515F61C3D571C00A7DC16 /* emoji_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515811C3D571C00A7DC16 /* emoji_1.png */; };
+		B97515F71C3D571C00A7DC16 /* emoji_10.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515821C3D571C00A7DC16 /* emoji_10.png */; };
+		B97515F81C3D571C00A7DC16 /* emoji_11.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515831C3D571C00A7DC16 /* emoji_11.png */; };
+		B97515F91C3D571C00A7DC16 /* emoji_12.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515841C3D571C00A7DC16 /* emoji_12.png */; };
+		B97515FA1C3D571C00A7DC16 /* emoji_13.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515851C3D571C00A7DC16 /* emoji_13.png */; };
+		B97515FB1C3D571C00A7DC16 /* emoji_14.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515861C3D571C00A7DC16 /* emoji_14.png */; };
+		B97515FC1C3D571C00A7DC16 /* emoji_15.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515871C3D571C00A7DC16 /* emoji_15.png */; };
+		B97515FD1C3D571C00A7DC16 /* emoji_16.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515881C3D571C00A7DC16 /* emoji_16.png */; };
+		B97515FE1C3D571C00A7DC16 /* emoji_17.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515891C3D571C00A7DC16 /* emoji_17.png */; };
+		B97515FF1C3D571C00A7DC16 /* emoji_179.png in Resources */ = {isa = PBXBuildFile; fileRef = B975158A1C3D571C00A7DC16 /* emoji_179.png */; };
+		B97516001C3D571C00A7DC16 /* emoji_18.png in Resources */ = {isa = PBXBuildFile; fileRef = B975158B1C3D571C00A7DC16 /* emoji_18.png */; };
+		B97516011C3D571C00A7DC16 /* emoji_180.png in Resources */ = {isa = PBXBuildFile; fileRef = B975158C1C3D571C00A7DC16 /* emoji_180.png */; };
+		B97516021C3D571C00A7DC16 /* emoji_181.png in Resources */ = {isa = PBXBuildFile; fileRef = B975158D1C3D571C00A7DC16 /* emoji_181.png */; };
+		B97516031C3D571C00A7DC16 /* emoji_182.png in Resources */ = {isa = PBXBuildFile; fileRef = B975158E1C3D571C00A7DC16 /* emoji_182.png */; };
+		B97516041C3D571C00A7DC16 /* emoji_183.png in Resources */ = {isa = PBXBuildFile; fileRef = B975158F1C3D571C00A7DC16 /* emoji_183.png */; };
+		B97516051C3D571C00A7DC16 /* emoji_184.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515901C3D571C00A7DC16 /* emoji_184.png */; };
+		B97516061C3D571C00A7DC16 /* emoji_185.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515911C3D571C00A7DC16 /* emoji_185.png */; };
+		B97516071C3D571C00A7DC16 /* emoji_186.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515921C3D571C00A7DC16 /* emoji_186.png */; };
+		B97516081C3D571C00A7DC16 /* emoji_187.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515931C3D571C00A7DC16 /* emoji_187.png */; };
+		B97516091C3D571C00A7DC16 /* emoji_188.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515941C3D571C00A7DC16 /* emoji_188.png */; };
+		B975160A1C3D571C00A7DC16 /* emoji_189.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515951C3D571C00A7DC16 /* emoji_189.png */; };
+		B975160B1C3D571C00A7DC16 /* emoji_19.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515961C3D571C00A7DC16 /* emoji_19.png */; };
+		B975160C1C3D571C00A7DC16 /* emoji_190.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515971C3D571C00A7DC16 /* emoji_190.png */; };
+		B975160D1C3D571C00A7DC16 /* emoji_191.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515981C3D571C00A7DC16 /* emoji_191.png */; };
+		B975160E1C3D571C00A7DC16 /* emoji_192.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515991C3D571C00A7DC16 /* emoji_192.png */; };
+		B975160F1C3D571C00A7DC16 /* emoji_193.png in Resources */ = {isa = PBXBuildFile; fileRef = B975159A1C3D571C00A7DC16 /* emoji_193.png */; };
+		B97516101C3D571C00A7DC16 /* emoji_194.png in Resources */ = {isa = PBXBuildFile; fileRef = B975159B1C3D571C00A7DC16 /* emoji_194.png */; };
+		B97516111C3D571C00A7DC16 /* emoji_195.png in Resources */ = {isa = PBXBuildFile; fileRef = B975159C1C3D571C00A7DC16 /* emoji_195.png */; };
+		B97516121C3D571C00A7DC16 /* emoji_196.png in Resources */ = {isa = PBXBuildFile; fileRef = B975159D1C3D571C00A7DC16 /* emoji_196.png */; };
+		B97516131C3D571C00A7DC16 /* emoji_197.png in Resources */ = {isa = PBXBuildFile; fileRef = B975159E1C3D571C00A7DC16 /* emoji_197.png */; };
+		B97516141C3D571C00A7DC16 /* emoji_198.png in Resources */ = {isa = PBXBuildFile; fileRef = B975159F1C3D571C00A7DC16 /* emoji_198.png */; };
+		B97516151C3D571C00A7DC16 /* emoji_199.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A01C3D571C00A7DC16 /* emoji_199.png */; };
+		B97516161C3D571C00A7DC16 /* emoji_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A11C3D571C00A7DC16 /* emoji_2.png */; };
+		B97516171C3D571C00A7DC16 /* emoji_20.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A21C3D571C00A7DC16 /* emoji_20.png */; };
+		B97516181C3D571C00A7DC16 /* emoji_200.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A31C3D571C00A7DC16 /* emoji_200.png */; };
+		B97516191C3D571C00A7DC16 /* emoji_201.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A41C3D571C00A7DC16 /* emoji_201.png */; };
+		B975161A1C3D571C00A7DC16 /* emoji_202.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A51C3D571C00A7DC16 /* emoji_202.png */; };
+		B975161B1C3D571C00A7DC16 /* emoji_203.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A61C3D571C00A7DC16 /* emoji_203.png */; };
+		B975161C1C3D571C00A7DC16 /* emoji_204.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A71C3D571C00A7DC16 /* emoji_204.png */; };
+		B975161D1C3D571C00A7DC16 /* emoji_205.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A81C3D571C00A7DC16 /* emoji_205.png */; };
+		B975161E1C3D571C00A7DC16 /* emoji_206.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515A91C3D571C00A7DC16 /* emoji_206.png */; };
+		B975161F1C3D571C00A7DC16 /* emoji_207.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515AA1C3D571C00A7DC16 /* emoji_207.png */; };
+		B97516201C3D571C00A7DC16 /* emoji_208.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515AB1C3D571C00A7DC16 /* emoji_208.png */; };
+		B97516211C3D571C00A7DC16 /* emoji_209.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515AC1C3D571C00A7DC16 /* emoji_209.png */; };
+		B97516221C3D571C00A7DC16 /* emoji_21.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515AD1C3D571C00A7DC16 /* emoji_21.png */; };
+		B97516231C3D571C00A7DC16 /* emoji_210.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515AE1C3D571C00A7DC16 /* emoji_210.png */; };
+		B97516241C3D571C00A7DC16 /* emoji_211.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515AF1C3D571C00A7DC16 /* emoji_211.png */; };
+		B97516251C3D571C00A7DC16 /* emoji_212.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B01C3D571C00A7DC16 /* emoji_212.png */; };
+		B97516261C3D571C00A7DC16 /* emoji_213.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B11C3D571C00A7DC16 /* emoji_213.png */; };
+		B97516271C3D571C00A7DC16 /* emoji_214.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B21C3D571C00A7DC16 /* emoji_214.png */; };
+		B97516281C3D571C00A7DC16 /* emoji_215.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B31C3D571C00A7DC16 /* emoji_215.png */; };
+		B97516291C3D571C00A7DC16 /* emoji_216.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B41C3D571C00A7DC16 /* emoji_216.png */; };
+		B975162A1C3D571C00A7DC16 /* emoji_217.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B51C3D571C00A7DC16 /* emoji_217.png */; };
+		B975162B1C3D571C00A7DC16 /* emoji_218.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B61C3D571C00A7DC16 /* emoji_218.png */; };
+		B975162C1C3D571C00A7DC16 /* emoji_219.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B71C3D571C00A7DC16 /* emoji_219.png */; };
+		B975162D1C3D571C00A7DC16 /* emoji_22.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B81C3D571C00A7DC16 /* emoji_22.png */; };
+		B975162E1C3D571C00A7DC16 /* emoji_220.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515B91C3D571C00A7DC16 /* emoji_220.png */; };
+		B975162F1C3D571C00A7DC16 /* emoji_221.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515BA1C3D571C00A7DC16 /* emoji_221.png */; };
+		B97516301C3D571C00A7DC16 /* emoji_222.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515BB1C3D571C00A7DC16 /* emoji_222.png */; };
+		B97516311C3D571C00A7DC16 /* emoji_223.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515BC1C3D571C00A7DC16 /* emoji_223.png */; };
+		B97516321C3D571C00A7DC16 /* emoji_224.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515BD1C3D571C00A7DC16 /* emoji_224.png */; };
+		B97516331C3D571C00A7DC16 /* emoji_23.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515BE1C3D571C00A7DC16 /* emoji_23.png */; };
+		B97516341C3D571C00A7DC16 /* emoji_24.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515BF1C3D571C00A7DC16 /* emoji_24.png */; };
+		B97516351C3D571C00A7DC16 /* emoji_25.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C01C3D571C00A7DC16 /* emoji_25.png */; };
+		B97516361C3D571C00A7DC16 /* emoji_26.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C11C3D571C00A7DC16 /* emoji_26.png */; };
+		B97516371C3D571C00A7DC16 /* emoji_27.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C21C3D571C00A7DC16 /* emoji_27.png */; };
+		B97516381C3D571C00A7DC16 /* emoji_28.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C31C3D571C00A7DC16 /* emoji_28.png */; };
+		B97516391C3D571C00A7DC16 /* emoji_29.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C41C3D571C00A7DC16 /* emoji_29.png */; };
+		B975163A1C3D571C00A7DC16 /* emoji_3.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C51C3D571C00A7DC16 /* emoji_3.png */; };
+		B975163B1C3D571C00A7DC16 /* emoji_30.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C61C3D571C00A7DC16 /* emoji_30.png */; };
+		B975163C1C3D571C00A7DC16 /* emoji_31.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C71C3D571C00A7DC16 /* emoji_31.png */; };
+		B975163D1C3D571C00A7DC16 /* emoji_32.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C81C3D571C00A7DC16 /* emoji_32.png */; };
+		B975163E1C3D571C00A7DC16 /* emoji_33.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515C91C3D571C00A7DC16 /* emoji_33.png */; };
+		B975163F1C3D571C00A7DC16 /* emoji_34.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515CA1C3D571C00A7DC16 /* emoji_34.png */; };
+		B97516401C3D571C00A7DC16 /* emoji_35.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515CB1C3D571C00A7DC16 /* emoji_35.png */; };
+		B97516411C3D571C00A7DC16 /* emoji_36.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515CC1C3D571C00A7DC16 /* emoji_36.png */; };
+		B97516421C3D571C00A7DC16 /* emoji_37.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515CD1C3D571C00A7DC16 /* emoji_37.png */; };
+		B97516431C3D571C00A7DC16 /* emoji_38.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515CE1C3D571C00A7DC16 /* emoji_38.png */; };
+		B97516441C3D571C00A7DC16 /* emoji_39.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515CF1C3D571C00A7DC16 /* emoji_39.png */; };
+		B97516451C3D571C00A7DC16 /* emoji_4.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D01C3D571C00A7DC16 /* emoji_4.png */; };
+		B97516461C3D571C00A7DC16 /* emoji_40.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D11C3D571C00A7DC16 /* emoji_40.png */; };
+		B97516471C3D571C00A7DC16 /* emoji_41.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D21C3D571C00A7DC16 /* emoji_41.png */; };
+		B97516481C3D571C00A7DC16 /* emoji_42.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D31C3D571C00A7DC16 /* emoji_42.png */; };
+		B97516491C3D571C00A7DC16 /* emoji_43.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D41C3D571C00A7DC16 /* emoji_43.png */; };
+		B975164A1C3D571C00A7DC16 /* emoji_44.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D51C3D571C00A7DC16 /* emoji_44.png */; };
+		B975164B1C3D571C00A7DC16 /* emoji_45.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D61C3D571C00A7DC16 /* emoji_45.png */; };
+		B975164C1C3D571C00A7DC16 /* emoji_46.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D71C3D571C00A7DC16 /* emoji_46.png */; };
+		B975164D1C3D571C00A7DC16 /* emoji_47.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D81C3D571C00A7DC16 /* emoji_47.png */; };
+		B975164E1C3D571C00A7DC16 /* emoji_48.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515D91C3D571C00A7DC16 /* emoji_48.png */; };
+		B975164F1C3D571C00A7DC16 /* emoji_49.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515DA1C3D571C00A7DC16 /* emoji_49.png */; };
+		B97516501C3D571C00A7DC16 /* emoji_5.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515DB1C3D571C00A7DC16 /* emoji_5.png */; };
+		B97516511C3D571C00A7DC16 /* emoji_50.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515DC1C3D571C00A7DC16 /* emoji_50.png */; };
+		B97516521C3D571C00A7DC16 /* emoji_51.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515DD1C3D571C00A7DC16 /* emoji_51.png */; };
+		B97516531C3D571C00A7DC16 /* emoji_52.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515DE1C3D571C00A7DC16 /* emoji_52.png */; };
+		B97516541C3D571C00A7DC16 /* emoji_53.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515DF1C3D571C00A7DC16 /* emoji_53.png */; };
+		B97516551C3D571C00A7DC16 /* emoji_54.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E01C3D571C00A7DC16 /* emoji_54.png */; };
+		B97516561C3D571C00A7DC16 /* emoji_55.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E11C3D571C00A7DC16 /* emoji_55.png */; };
+		B97516571C3D571C00A7DC16 /* emoji_56.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E21C3D571C00A7DC16 /* emoji_56.png */; };
+		B97516581C3D571C00A7DC16 /* emoji_57.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E31C3D571C00A7DC16 /* emoji_57.png */; };
+		B97516591C3D571C00A7DC16 /* emoji_58.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E41C3D571C00A7DC16 /* emoji_58.png */; };
+		B975165A1C3D571C00A7DC16 /* emoji_59.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E51C3D571C00A7DC16 /* emoji_59.png */; };
+		B975165B1C3D571C00A7DC16 /* emoji_6.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E61C3D571C00A7DC16 /* emoji_6.png */; };
+		B975165C1C3D571C00A7DC16 /* emoji_60.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E71C3D571C00A7DC16 /* emoji_60.png */; };
+		B975165D1C3D571C00A7DC16 /* emoji_61.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E81C3D571C00A7DC16 /* emoji_61.png */; };
+		B975165E1C3D571C00A7DC16 /* emoji_62.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515E91C3D571C00A7DC16 /* emoji_62.png */; };
+		B975165F1C3D571C00A7DC16 /* emoji_63.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515EA1C3D571C00A7DC16 /* emoji_63.png */; };
+		B97516601C3D571C00A7DC16 /* emoji_64.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515EB1C3D571C00A7DC16 /* emoji_64.png */; };
+		B97516611C3D571C00A7DC16 /* emoji_65.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515EC1C3D571C00A7DC16 /* emoji_65.png */; };
+		B97516621C3D571C00A7DC16 /* emoji_66.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515ED1C3D571C00A7DC16 /* emoji_66.png */; };
+		B97516631C3D571C00A7DC16 /* emoji_67.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515EE1C3D571C00A7DC16 /* emoji_67.png */; };
+		B97516641C3D571C00A7DC16 /* emoji_68.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515EF1C3D571C00A7DC16 /* emoji_68.png */; };
+		B97516651C3D571C00A7DC16 /* emoji_69.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F01C3D571C00A7DC16 /* emoji_69.png */; };
+		B97516661C3D571C00A7DC16 /* emoji_7.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F11C3D571C00A7DC16 /* emoji_7.png */; };
+		B97516671C3D571C00A7DC16 /* emoji_70.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F21C3D571C00A7DC16 /* emoji_70.png */; };
+		B97516681C3D571C00A7DC16 /* emoji_71.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F31C3D571C00A7DC16 /* emoji_71.png */; };
+		B97516691C3D571C00A7DC16 /* emoji_8.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F41C3D571C00A7DC16 /* emoji_8.png */; };
+		B975166A1C3D571C00A7DC16 /* emoji_9.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F51C3D571C00A7DC16 /* emoji_9.png */; };
 		B987B9401C2C22C0002FF394 /* HealthDailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B987B93F1C2C22C0002FF394 /* HealthDailyChartView.swift */; };
 		B993A7031C32DB0B00B89839 /* 小圆点绿.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B993A7021C32DB0B00B89839 /* 小圆点绿.jpg */; };
 		B993A7051C32DF1700B89839 /* 小圆点绿.png in Resources */ = {isa = PBXBuildFile; fileRef = B993A7041C32DF1700B89839 /* 小圆点绿.png */; };
@@ -462,6 +580,125 @@
 		B9709B3B1C2A1ECE004DCD50 /* keyboard_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_btn.png; sourceTree = "<group>"; };
 		B9709B3C1C2A1ECE004DCD50 /* keyboard_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_btn@2x.png"; sourceTree = "<group>"; };
 		B9709B3D1C2A1ECE004DCD50 /* keyboard_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_btn@3x.png"; sourceTree = "<group>"; };
+		B975157D1C3D554D00A7DC16 /* EmotionsKeyboardBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionsKeyboardBuilder.h; sourceTree = "<group>"; };
+		B975157E1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionsKeyboardBuilder.m; sourceTree = "<group>"; };
+		B97515811C3D571C00A7DC16 /* emoji_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_1.png; sourceTree = "<group>"; };
+		B97515821C3D571C00A7DC16 /* emoji_10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_10.png; sourceTree = "<group>"; };
+		B97515831C3D571C00A7DC16 /* emoji_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_11.png; sourceTree = "<group>"; };
+		B97515841C3D571C00A7DC16 /* emoji_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_12.png; sourceTree = "<group>"; };
+		B97515851C3D571C00A7DC16 /* emoji_13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_13.png; sourceTree = "<group>"; };
+		B97515861C3D571C00A7DC16 /* emoji_14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_14.png; sourceTree = "<group>"; };
+		B97515871C3D571C00A7DC16 /* emoji_15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_15.png; sourceTree = "<group>"; };
+		B97515881C3D571C00A7DC16 /* emoji_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_16.png; sourceTree = "<group>"; };
+		B97515891C3D571C00A7DC16 /* emoji_17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_17.png; sourceTree = "<group>"; };
+		B975158A1C3D571C00A7DC16 /* emoji_179.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_179.png; sourceTree = "<group>"; };
+		B975158B1C3D571C00A7DC16 /* emoji_18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_18.png; sourceTree = "<group>"; };
+		B975158C1C3D571C00A7DC16 /* emoji_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_180.png; sourceTree = "<group>"; };
+		B975158D1C3D571C00A7DC16 /* emoji_181.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_181.png; sourceTree = "<group>"; };
+		B975158E1C3D571C00A7DC16 /* emoji_182.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_182.png; sourceTree = "<group>"; };
+		B975158F1C3D571C00A7DC16 /* emoji_183.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_183.png; sourceTree = "<group>"; };
+		B97515901C3D571C00A7DC16 /* emoji_184.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_184.png; sourceTree = "<group>"; };
+		B97515911C3D571C00A7DC16 /* emoji_185.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_185.png; sourceTree = "<group>"; };
+		B97515921C3D571C00A7DC16 /* emoji_186.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_186.png; sourceTree = "<group>"; };
+		B97515931C3D571C00A7DC16 /* emoji_187.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_187.png; sourceTree = "<group>"; };
+		B97515941C3D571C00A7DC16 /* emoji_188.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_188.png; sourceTree = "<group>"; };
+		B97515951C3D571C00A7DC16 /* emoji_189.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_189.png; sourceTree = "<group>"; };
+		B97515961C3D571C00A7DC16 /* emoji_19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_19.png; sourceTree = "<group>"; };
+		B97515971C3D571C00A7DC16 /* emoji_190.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_190.png; sourceTree = "<group>"; };
+		B97515981C3D571C00A7DC16 /* emoji_191.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_191.png; sourceTree = "<group>"; };
+		B97515991C3D571C00A7DC16 /* emoji_192.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_192.png; sourceTree = "<group>"; };
+		B975159A1C3D571C00A7DC16 /* emoji_193.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_193.png; sourceTree = "<group>"; };
+		B975159B1C3D571C00A7DC16 /* emoji_194.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_194.png; sourceTree = "<group>"; };
+		B975159C1C3D571C00A7DC16 /* emoji_195.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_195.png; sourceTree = "<group>"; };
+		B975159D1C3D571C00A7DC16 /* emoji_196.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_196.png; sourceTree = "<group>"; };
+		B975159E1C3D571C00A7DC16 /* emoji_197.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_197.png; sourceTree = "<group>"; };
+		B975159F1C3D571C00A7DC16 /* emoji_198.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_198.png; sourceTree = "<group>"; };
+		B97515A01C3D571C00A7DC16 /* emoji_199.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_199.png; sourceTree = "<group>"; };
+		B97515A11C3D571C00A7DC16 /* emoji_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_2.png; sourceTree = "<group>"; };
+		B97515A21C3D571C00A7DC16 /* emoji_20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_20.png; sourceTree = "<group>"; };
+		B97515A31C3D571C00A7DC16 /* emoji_200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_200.png; sourceTree = "<group>"; };
+		B97515A41C3D571C00A7DC16 /* emoji_201.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_201.png; sourceTree = "<group>"; };
+		B97515A51C3D571C00A7DC16 /* emoji_202.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_202.png; sourceTree = "<group>"; };
+		B97515A61C3D571C00A7DC16 /* emoji_203.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_203.png; sourceTree = "<group>"; };
+		B97515A71C3D571C00A7DC16 /* emoji_204.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_204.png; sourceTree = "<group>"; };
+		B97515A81C3D571C00A7DC16 /* emoji_205.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_205.png; sourceTree = "<group>"; };
+		B97515A91C3D571C00A7DC16 /* emoji_206.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_206.png; sourceTree = "<group>"; };
+		B97515AA1C3D571C00A7DC16 /* emoji_207.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_207.png; sourceTree = "<group>"; };
+		B97515AB1C3D571C00A7DC16 /* emoji_208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_208.png; sourceTree = "<group>"; };
+		B97515AC1C3D571C00A7DC16 /* emoji_209.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_209.png; sourceTree = "<group>"; };
+		B97515AD1C3D571C00A7DC16 /* emoji_21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_21.png; sourceTree = "<group>"; };
+		B97515AE1C3D571C00A7DC16 /* emoji_210.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_210.png; sourceTree = "<group>"; };
+		B97515AF1C3D571C00A7DC16 /* emoji_211.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_211.png; sourceTree = "<group>"; };
+		B97515B01C3D571C00A7DC16 /* emoji_212.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_212.png; sourceTree = "<group>"; };
+		B97515B11C3D571C00A7DC16 /* emoji_213.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_213.png; sourceTree = "<group>"; };
+		B97515B21C3D571C00A7DC16 /* emoji_214.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_214.png; sourceTree = "<group>"; };
+		B97515B31C3D571C00A7DC16 /* emoji_215.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_215.png; sourceTree = "<group>"; };
+		B97515B41C3D571C00A7DC16 /* emoji_216.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_216.png; sourceTree = "<group>"; };
+		B97515B51C3D571C00A7DC16 /* emoji_217.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_217.png; sourceTree = "<group>"; };
+		B97515B61C3D571C00A7DC16 /* emoji_218.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_218.png; sourceTree = "<group>"; };
+		B97515B71C3D571C00A7DC16 /* emoji_219.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_219.png; sourceTree = "<group>"; };
+		B97515B81C3D571C00A7DC16 /* emoji_22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_22.png; sourceTree = "<group>"; };
+		B97515B91C3D571C00A7DC16 /* emoji_220.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_220.png; sourceTree = "<group>"; };
+		B97515BA1C3D571C00A7DC16 /* emoji_221.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_221.png; sourceTree = "<group>"; };
+		B97515BB1C3D571C00A7DC16 /* emoji_222.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_222.png; sourceTree = "<group>"; };
+		B97515BC1C3D571C00A7DC16 /* emoji_223.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_223.png; sourceTree = "<group>"; };
+		B97515BD1C3D571C00A7DC16 /* emoji_224.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_224.png; sourceTree = "<group>"; };
+		B97515BE1C3D571C00A7DC16 /* emoji_23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_23.png; sourceTree = "<group>"; };
+		B97515BF1C3D571C00A7DC16 /* emoji_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_24.png; sourceTree = "<group>"; };
+		B97515C01C3D571C00A7DC16 /* emoji_25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_25.png; sourceTree = "<group>"; };
+		B97515C11C3D571C00A7DC16 /* emoji_26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_26.png; sourceTree = "<group>"; };
+		B97515C21C3D571C00A7DC16 /* emoji_27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_27.png; sourceTree = "<group>"; };
+		B97515C31C3D571C00A7DC16 /* emoji_28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_28.png; sourceTree = "<group>"; };
+		B97515C41C3D571C00A7DC16 /* emoji_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_29.png; sourceTree = "<group>"; };
+		B97515C51C3D571C00A7DC16 /* emoji_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_3.png; sourceTree = "<group>"; };
+		B97515C61C3D571C00A7DC16 /* emoji_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_30.png; sourceTree = "<group>"; };
+		B97515C71C3D571C00A7DC16 /* emoji_31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_31.png; sourceTree = "<group>"; };
+		B97515C81C3D571C00A7DC16 /* emoji_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_32.png; sourceTree = "<group>"; };
+		B97515C91C3D571C00A7DC16 /* emoji_33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_33.png; sourceTree = "<group>"; };
+		B97515CA1C3D571C00A7DC16 /* emoji_34.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_34.png; sourceTree = "<group>"; };
+		B97515CB1C3D571C00A7DC16 /* emoji_35.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_35.png; sourceTree = "<group>"; };
+		B97515CC1C3D571C00A7DC16 /* emoji_36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_36.png; sourceTree = "<group>"; };
+		B97515CD1C3D571C00A7DC16 /* emoji_37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_37.png; sourceTree = "<group>"; };
+		B97515CE1C3D571C00A7DC16 /* emoji_38.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_38.png; sourceTree = "<group>"; };
+		B97515CF1C3D571C00A7DC16 /* emoji_39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_39.png; sourceTree = "<group>"; };
+		B97515D01C3D571C00A7DC16 /* emoji_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_4.png; sourceTree = "<group>"; };
+		B97515D11C3D571C00A7DC16 /* emoji_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_40.png; sourceTree = "<group>"; };
+		B97515D21C3D571C00A7DC16 /* emoji_41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_41.png; sourceTree = "<group>"; };
+		B97515D31C3D571C00A7DC16 /* emoji_42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_42.png; sourceTree = "<group>"; };
+		B97515D41C3D571C00A7DC16 /* emoji_43.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_43.png; sourceTree = "<group>"; };
+		B97515D51C3D571C00A7DC16 /* emoji_44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_44.png; sourceTree = "<group>"; };
+		B97515D61C3D571C00A7DC16 /* emoji_45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_45.png; sourceTree = "<group>"; };
+		B97515D71C3D571C00A7DC16 /* emoji_46.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_46.png; sourceTree = "<group>"; };
+		B97515D81C3D571C00A7DC16 /* emoji_47.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_47.png; sourceTree = "<group>"; };
+		B97515D91C3D571C00A7DC16 /* emoji_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_48.png; sourceTree = "<group>"; };
+		B97515DA1C3D571C00A7DC16 /* emoji_49.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_49.png; sourceTree = "<group>"; };
+		B97515DB1C3D571C00A7DC16 /* emoji_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_5.png; sourceTree = "<group>"; };
+		B97515DC1C3D571C00A7DC16 /* emoji_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_50.png; sourceTree = "<group>"; };
+		B97515DD1C3D571C00A7DC16 /* emoji_51.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_51.png; sourceTree = "<group>"; };
+		B97515DE1C3D571C00A7DC16 /* emoji_52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_52.png; sourceTree = "<group>"; };
+		B97515DF1C3D571C00A7DC16 /* emoji_53.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_53.png; sourceTree = "<group>"; };
+		B97515E01C3D571C00A7DC16 /* emoji_54.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_54.png; sourceTree = "<group>"; };
+		B97515E11C3D571C00A7DC16 /* emoji_55.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_55.png; sourceTree = "<group>"; };
+		B97515E21C3D571C00A7DC16 /* emoji_56.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_56.png; sourceTree = "<group>"; };
+		B97515E31C3D571C00A7DC16 /* emoji_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_57.png; sourceTree = "<group>"; };
+		B97515E41C3D571C00A7DC16 /* emoji_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_58.png; sourceTree = "<group>"; };
+		B97515E51C3D571C00A7DC16 /* emoji_59.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_59.png; sourceTree = "<group>"; };
+		B97515E61C3D571C00A7DC16 /* emoji_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_6.png; sourceTree = "<group>"; };
+		B97515E71C3D571C00A7DC16 /* emoji_60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_60.png; sourceTree = "<group>"; };
+		B97515E81C3D571C00A7DC16 /* emoji_61.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_61.png; sourceTree = "<group>"; };
+		B97515E91C3D571C00A7DC16 /* emoji_62.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_62.png; sourceTree = "<group>"; };
+		B97515EA1C3D571C00A7DC16 /* emoji_63.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_63.png; sourceTree = "<group>"; };
+		B97515EB1C3D571C00A7DC16 /* emoji_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_64.png; sourceTree = "<group>"; };
+		B97515EC1C3D571C00A7DC16 /* emoji_65.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_65.png; sourceTree = "<group>"; };
+		B97515ED1C3D571C00A7DC16 /* emoji_66.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_66.png; sourceTree = "<group>"; };
+		B97515EE1C3D571C00A7DC16 /* emoji_67.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_67.png; sourceTree = "<group>"; };
+		B97515EF1C3D571C00A7DC16 /* emoji_68.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_68.png; sourceTree = "<group>"; };
+		B97515F01C3D571C00A7DC16 /* emoji_69.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_69.png; sourceTree = "<group>"; };
+		B97515F11C3D571C00A7DC16 /* emoji_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_7.png; sourceTree = "<group>"; };
+		B97515F21C3D571C00A7DC16 /* emoji_70.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_70.png; sourceTree = "<group>"; };
+		B97515F31C3D571C00A7DC16 /* emoji_71.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_71.png; sourceTree = "<group>"; };
+		B97515F41C3D571C00A7DC16 /* emoji_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_8.png; sourceTree = "<group>"; };
+		B97515F51C3D571C00A7DC16 /* emoji_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_9.png; sourceTree = "<group>"; };
 		B987B93F1C2C22C0002FF394 /* HealthDailyChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDailyChartView.swift; sourceTree = "<group>"; };
 		B993A7021C32DB0B00B89839 /* 小圆点绿.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "小圆点绿.jpg"; sourceTree = "<group>"; };
 		B993A7041C32DF1700B89839 /* 小圆点绿.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小圆点绿.png"; sourceTree = "<group>"; };
@@ -991,6 +1228,130 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		B97515801C3D571C00A7DC16 /* drawable-hdpi */ = {
+			isa = PBXGroup;
+			children = (
+				B97515811C3D571C00A7DC16 /* emoji_1.png */,
+				B97515821C3D571C00A7DC16 /* emoji_10.png */,
+				B97515831C3D571C00A7DC16 /* emoji_11.png */,
+				B97515841C3D571C00A7DC16 /* emoji_12.png */,
+				B97515851C3D571C00A7DC16 /* emoji_13.png */,
+				B97515861C3D571C00A7DC16 /* emoji_14.png */,
+				B97515871C3D571C00A7DC16 /* emoji_15.png */,
+				B97515881C3D571C00A7DC16 /* emoji_16.png */,
+				B97515891C3D571C00A7DC16 /* emoji_17.png */,
+				B975158A1C3D571C00A7DC16 /* emoji_179.png */,
+				B975158B1C3D571C00A7DC16 /* emoji_18.png */,
+				B975158C1C3D571C00A7DC16 /* emoji_180.png */,
+				B975158D1C3D571C00A7DC16 /* emoji_181.png */,
+				B975158E1C3D571C00A7DC16 /* emoji_182.png */,
+				B975158F1C3D571C00A7DC16 /* emoji_183.png */,
+				B97515901C3D571C00A7DC16 /* emoji_184.png */,
+				B97515911C3D571C00A7DC16 /* emoji_185.png */,
+				B97515921C3D571C00A7DC16 /* emoji_186.png */,
+				B97515931C3D571C00A7DC16 /* emoji_187.png */,
+				B97515941C3D571C00A7DC16 /* emoji_188.png */,
+				B97515951C3D571C00A7DC16 /* emoji_189.png */,
+				B97515961C3D571C00A7DC16 /* emoji_19.png */,
+				B97515971C3D571C00A7DC16 /* emoji_190.png */,
+				B97515981C3D571C00A7DC16 /* emoji_191.png */,
+				B97515991C3D571C00A7DC16 /* emoji_192.png */,
+				B975159A1C3D571C00A7DC16 /* emoji_193.png */,
+				B975159B1C3D571C00A7DC16 /* emoji_194.png */,
+				B975159C1C3D571C00A7DC16 /* emoji_195.png */,
+				B975159D1C3D571C00A7DC16 /* emoji_196.png */,
+				B975159E1C3D571C00A7DC16 /* emoji_197.png */,
+				B975159F1C3D571C00A7DC16 /* emoji_198.png */,
+				B97515A01C3D571C00A7DC16 /* emoji_199.png */,
+				B97515A11C3D571C00A7DC16 /* emoji_2.png */,
+				B97515A21C3D571C00A7DC16 /* emoji_20.png */,
+				B97515A31C3D571C00A7DC16 /* emoji_200.png */,
+				B97515A41C3D571C00A7DC16 /* emoji_201.png */,
+				B97515A51C3D571C00A7DC16 /* emoji_202.png */,
+				B97515A61C3D571C00A7DC16 /* emoji_203.png */,
+				B97515A71C3D571C00A7DC16 /* emoji_204.png */,
+				B97515A81C3D571C00A7DC16 /* emoji_205.png */,
+				B97515A91C3D571C00A7DC16 /* emoji_206.png */,
+				B97515AA1C3D571C00A7DC16 /* emoji_207.png */,
+				B97515AB1C3D571C00A7DC16 /* emoji_208.png */,
+				B97515AC1C3D571C00A7DC16 /* emoji_209.png */,
+				B97515AD1C3D571C00A7DC16 /* emoji_21.png */,
+				B97515AE1C3D571C00A7DC16 /* emoji_210.png */,
+				B97515AF1C3D571C00A7DC16 /* emoji_211.png */,
+				B97515B01C3D571C00A7DC16 /* emoji_212.png */,
+				B97515B11C3D571C00A7DC16 /* emoji_213.png */,
+				B97515B21C3D571C00A7DC16 /* emoji_214.png */,
+				B97515B31C3D571C00A7DC16 /* emoji_215.png */,
+				B97515B41C3D571C00A7DC16 /* emoji_216.png */,
+				B97515B51C3D571C00A7DC16 /* emoji_217.png */,
+				B97515B61C3D571C00A7DC16 /* emoji_218.png */,
+				B97515B71C3D571C00A7DC16 /* emoji_219.png */,
+				B97515B81C3D571C00A7DC16 /* emoji_22.png */,
+				B97515B91C3D571C00A7DC16 /* emoji_220.png */,
+				B97515BA1C3D571C00A7DC16 /* emoji_221.png */,
+				B97515BB1C3D571C00A7DC16 /* emoji_222.png */,
+				B97515BC1C3D571C00A7DC16 /* emoji_223.png */,
+				B97515BD1C3D571C00A7DC16 /* emoji_224.png */,
+				B97515BE1C3D571C00A7DC16 /* emoji_23.png */,
+				B97515BF1C3D571C00A7DC16 /* emoji_24.png */,
+				B97515C01C3D571C00A7DC16 /* emoji_25.png */,
+				B97515C11C3D571C00A7DC16 /* emoji_26.png */,
+				B97515C21C3D571C00A7DC16 /* emoji_27.png */,
+				B97515C31C3D571C00A7DC16 /* emoji_28.png */,
+				B97515C41C3D571C00A7DC16 /* emoji_29.png */,
+				B97515C51C3D571C00A7DC16 /* emoji_3.png */,
+				B97515C61C3D571C00A7DC16 /* emoji_30.png */,
+				B97515C71C3D571C00A7DC16 /* emoji_31.png */,
+				B97515C81C3D571C00A7DC16 /* emoji_32.png */,
+				B97515C91C3D571C00A7DC16 /* emoji_33.png */,
+				B97515CA1C3D571C00A7DC16 /* emoji_34.png */,
+				B97515CB1C3D571C00A7DC16 /* emoji_35.png */,
+				B97515CC1C3D571C00A7DC16 /* emoji_36.png */,
+				B97515CD1C3D571C00A7DC16 /* emoji_37.png */,
+				B97515CE1C3D571C00A7DC16 /* emoji_38.png */,
+				B97515CF1C3D571C00A7DC16 /* emoji_39.png */,
+				B97515D01C3D571C00A7DC16 /* emoji_4.png */,
+				B97515D11C3D571C00A7DC16 /* emoji_40.png */,
+				B97515D21C3D571C00A7DC16 /* emoji_41.png */,
+				B97515D31C3D571C00A7DC16 /* emoji_42.png */,
+				B97515D41C3D571C00A7DC16 /* emoji_43.png */,
+				B97515D51C3D571C00A7DC16 /* emoji_44.png */,
+				B97515D61C3D571C00A7DC16 /* emoji_45.png */,
+				B97515D71C3D571C00A7DC16 /* emoji_46.png */,
+				B97515D81C3D571C00A7DC16 /* emoji_47.png */,
+				B97515D91C3D571C00A7DC16 /* emoji_48.png */,
+				B97515DA1C3D571C00A7DC16 /* emoji_49.png */,
+				B97515DB1C3D571C00A7DC16 /* emoji_5.png */,
+				B97515DC1C3D571C00A7DC16 /* emoji_50.png */,
+				B97515DD1C3D571C00A7DC16 /* emoji_51.png */,
+				B97515DE1C3D571C00A7DC16 /* emoji_52.png */,
+				B97515DF1C3D571C00A7DC16 /* emoji_53.png */,
+				B97515E01C3D571C00A7DC16 /* emoji_54.png */,
+				B97515E11C3D571C00A7DC16 /* emoji_55.png */,
+				B97515E21C3D571C00A7DC16 /* emoji_56.png */,
+				B97515E31C3D571C00A7DC16 /* emoji_57.png */,
+				B97515E41C3D571C00A7DC16 /* emoji_58.png */,
+				B97515E51C3D571C00A7DC16 /* emoji_59.png */,
+				B97515E61C3D571C00A7DC16 /* emoji_6.png */,
+				B97515E71C3D571C00A7DC16 /* emoji_60.png */,
+				B97515E81C3D571C00A7DC16 /* emoji_61.png */,
+				B97515E91C3D571C00A7DC16 /* emoji_62.png */,
+				B97515EA1C3D571C00A7DC16 /* emoji_63.png */,
+				B97515EB1C3D571C00A7DC16 /* emoji_64.png */,
+				B97515EC1C3D571C00A7DC16 /* emoji_65.png */,
+				B97515ED1C3D571C00A7DC16 /* emoji_66.png */,
+				B97515EE1C3D571C00A7DC16 /* emoji_67.png */,
+				B97515EF1C3D571C00A7DC16 /* emoji_68.png */,
+				B97515F01C3D571C00A7DC16 /* emoji_69.png */,
+				B97515F11C3D571C00A7DC16 /* emoji_7.png */,
+				B97515F21C3D571C00A7DC16 /* emoji_70.png */,
+				B97515F31C3D571C00A7DC16 /* emoji_71.png */,
+				B97515F41C3D571C00A7DC16 /* emoji_8.png */,
+				B97515F51C3D571C00A7DC16 /* emoji_9.png */,
+			);
+			path = "drawable-hdpi";
+			sourceTree = "<group>";
+		};
 		B99A8DB91C0BF43D0097E9B3 /* 健康分析 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1383,6 +1744,7 @@
 		D36157531C09760B009ED19D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B97515801C3D571C00A7DC16 /* drawable-hdpi */,
 				D309025D1C2A8625001FDF7B /* html */,
 				D3EFF9CC1C182B8F0047E2B0 /* 健康图 */,
 				D311C5721C0A119500C80C05 /* 我的好友 */,
@@ -1415,6 +1777,8 @@
 				B930DEE91C145822003576F6 /* Array+Extenstion.swift */,
 				B9709B2C1C29962C004DCD50 /* JSQAudioMediaItem.h */,
 				B9709B2D1C29962C004DCD50 /* JSQAudioMediaItem.m */,
+				B975157D1C3D554D00A7DC16 /* EmotionsKeyboardBuilder.h */,
+				B975157E1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1635,7 +1999,7 @@
 				TargetAttributes = {
 					D39B898C1C087AC1009086B2 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = F44XSCNJGN;
+						DevelopmentTeam = G65933C85Y;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1675,19 +2039,25 @@
 				D311C5C31C0A119500C80C05 /* 灰色框@3x.png in Resources */,
 				D30902901C2A8625001FDF7B /* admin.css in Resources */,
 				D311C5BB1C0A119500C80C05 /* 添加.png in Resources */,
+				B97515FE1C3D571C00A7DC16 /* emoji_17.png in Resources */,
 				D30902B51C2A8625001FDF7B /* html8.html in Resources */,
+				B975161B1C3D571C00A7DC16 /* emoji_203.png in Resources */,
 				B99A8E021C0BF43D0097E9B3 /* 框-蓝.png in Resources */,
 				D311C5C91C0A119500C80C05 /* 白对话框@3x.png in Resources */,
 				D3EFFA141C182B8F0047E2B0 /* 框--紫@3x.png in Resources */,
 				D311C4C81C09A70C00C80C05 /* 设置-拷贝@2x.png in Resources */,
+				B97516241C3D571C00A7DC16 /* emoji_211.png in Resources */,
 				D311C4B71C09A70C00C80C05 /* 我的好友-拷贝@3x.png in Resources */,
+				B97516401C3D571C00A7DC16 /* emoji_35.png in Resources */,
 				D311C5DA1C0A119500C80C05 /* 记录-蓝@2x.png in Resources */,
 				D311C55C1C0A066F00C80C05 /* 白-长对话框-.png in Resources */,
 				D311C4C51C09A70C00C80C05 /* 蓝牙连接@2x.png in Resources */,
+				B975165A1C3D571C00A7DC16 /* emoji_59.png in Resources */,
 				D3EFFA231C182B8F0047E2B0 /* 绿色@3x.png in Resources */,
 				D311C5B81C0A119500C80C05 /* 添加-灰色.png in Resources */,
 				B9709B351C299663004DCD50 /* chat_animation_white1.png in Resources */,
 				D311C5E91C0A119500C80C05 /* 通讯2.png in Resources */,
+				B97516061C3D571C00A7DC16 /* emoji_185.png in Resources */,
 				B99A8E181C0BF43D0097E9B3 /* 绿-圆小@2x.png in Resources */,
 				D3EFFA211C182B8F0047E2B0 /* 绿色.png in Resources */,
 				D311C4B41C09A70C00C80C05 /* 轮换图3@3x.png in Resources */,
@@ -1695,8 +2065,10 @@
 				D3F8E2E01C0C3A6700263B4E /* 导航栏@2x.png in Resources */,
 				B99A8DF41C0BF43D0097E9B3 /* 右@2x.png in Resources */,
 				D30902911C2A8625001FDF7B /* amazeui.css in Resources */,
+				B97516141C3D571C00A7DC16 /* emoji_198.png in Resources */,
 				D311C5D81C0A119500C80C05 /* 表情@3x.png in Resources */,
 				D311C5CA1C0A119500C80C05 /* 白框.png in Resources */,
+				B97516691C3D571C00A7DC16 /* emoji_8.png in Resources */,
 				B99A8E151C0BF43D0097E9B3 /* 绿-圆@2x.png in Resources */,
 				D311C5E01C0A119500C80C05 /* 语音@2x.png in Resources */,
 				D311C53E1C0A066F00C80C05 /* 小圆-白.png in Resources */,
@@ -1705,6 +2077,7 @@
 				D311C5E61C0A119500C80C05 /* 返回@2x.png in Resources */,
 				D311C5471C0A066F00C80C05 /* 开关-灰.png in Resources */,
 				D311C5551C0A066F00C80C05 /* 灰线-长@3x.png in Resources */,
+				B975160F1C3D571C00A7DC16 /* emoji_193.png in Resources */,
 				B99A8E0E1C0BF43D0097E9B3 /* 灰.png in Resources */,
 				D30902AB1C2A8625001FDF7B /* amazeui.ie8polyfill.min.js in Resources */,
 				D311C4B91C09A70C00C80C05 /* 我的好友-绿@2x.png in Resources */,
@@ -1712,8 +2085,11 @@
 				D311C5D91C0A119500C80C05 /* 记录-蓝.png in Resources */,
 				D311C4BF1C09A70C00C80C05 /* 蓝牙连接-拷贝@2x.png in Resources */,
 				D311C4A81C09A70C00C80C05 /* 健康图-绿@3x.png in Resources */,
+				B97516371C3D571C00A7DC16 /* emoji_27.png in Resources */,
 				B99A8E291C0BF43D0097E9B3 /* 黑.png in Resources */,
+				B975160A1C3D571C00A7DC16 /* emoji_189.png in Resources */,
 				D311C4981C09A70C00C80C05 /* BLUEDIAODIAO@2x.png in Resources */,
+				B97516631C3D571C00A7DC16 /* emoji_67.png in Resources */,
 				B99A8DF71C0BF43D0097E9B3 /* 图标1-@2x.png in Resources */,
 				D311C4B81C09A70C00C80C05 /* 我的好友-绿.png in Resources */,
 				D311C5531C0A066F00C80C05 /* 灰线-长.png in Resources */,
@@ -1724,19 +2100,25 @@
 				D3EFF9FD1C182B8F0047E2B0 /* 图标1-紫.png in Resources */,
 				D311C4A61C09A70C00C80C05 /* 健康图-绿.png in Resources */,
 				D311C5B71C0A119500C80C05 /* 深灰框-@3x.png in Resources */,
+				B97516421C3D571C00A7DC16 /* emoji_37.png in Resources */,
 				D311C5601C0A066F00C80C05 /* 白框@2x.png in Resources */,
+				B975161A1C3D571C00A7DC16 /* emoji_202.png in Resources */,
 				D311C4961C09A70C00C80C05 /* BLUEDIAODIAO-绿@3x.png in Resources */,
 				B99A8DF31C0BF43D0097E9B3 /* 右.png in Resources */,
 				D3EFFA0C1C182B8F0047E2B0 /* 导航栏.png in Resources */,
 				D30902A11C2A8625001FDF7B /* admin-safari.png in Resources */,
 				D311C5BE1C0A119500C80C05 /* 灰框.png in Resources */,
 				B99A8E0A1C0BF43D0097E9B3 /* 灰--圆小@3x.png in Resources */,
+				B97515F61C3D571C00A7DC16 /* emoji_1.png in Resources */,
 				D309029C1C2A8625001FDF7B /* app-icon72x72@2x.png in Resources */,
+				B975160E1C3D571C00A7DC16 /* emoji_192.png in Resources */,
 				D3EFFA0F1C182B8F0047E2B0 /* 提示框-.png in Resources */,
 				D311C5EC1C0A119500C80C05 /* 通讯@2x.png in Resources */,
 				D311C4CB1C09A70C00C80C05 /* 设置-绿@2x.png in Resources */,
+				B975164D1C3D571C00A7DC16 /* emoji_47.png in Resources */,
 				D311C4951C09A70C00C80C05 /* BLUEDIAODIAO-绿@2x.png in Resources */,
 				D30902921C2A8625001FDF7B /* amazeui.flat.css in Resources */,
+				B975163B1C3D571C00A7DC16 /* emoji_30.png in Resources */,
 				D311C5C11C0A119500C80C05 /* 灰色框.png in Resources */,
 				D30902B11C2A8625001FDF7B /* handlebars.min.js in Resources */,
 				D311C4B51C09A70C00C80C05 /* 我的好友-拷贝.png in Resources */,
@@ -1745,32 +2127,46 @@
 				D30902B61C2A8625001FDF7B /* html7.html in Resources */,
 				D311C5E31C0A119500C80C05 /* 输入框@2x.png in Resources */,
 				B9709B401C2A1ECE004DCD50 /* keyboard_btn@3x.png in Resources */,
+				B975163E1C3D571C00A7DC16 /* emoji_33.png in Resources */,
+				B97516011C3D571C00A7DC16 /* emoji_180.png in Resources */,
 				D311C55D1C0A066F00C80C05 /* 白-长对话框-@2x.png in Resources */,
 				D30902B31C2A8625001FDF7B /* html3.html in Resources */,
+				B97516091C3D571C00A7DC16 /* emoji_188.png in Resources */,
 				D311C4AF1C09A70C00C80C05 /* 轮换图2.png in Resources */,
+				B97516591C3D571C00A7DC16 /* emoji_58.png in Resources */,
+				B97516321C3D571C00A7DC16 /* emoji_224.png in Resources */,
 				D311C5C01C0A119500C80C05 /* 灰框@3x.png in Resources */,
 				D311C5631C0A066F00C80C05 /* 矩形-4@2x.png in Resources */,
 				D311C4991C09A70C00C80C05 /* BLUEDIAODIAO@3x.png in Resources */,
 				D3EFFA291C182B8F0047E2B0 /* 边框@3x.png in Resources */,
+				B97516231C3D571C00A7DC16 /* emoji_210.png in Resources */,
 				D3EFFA171C182B8F0047E2B0 /* 框@3x.png in Resources */,
 				D3EFFA2C1C182B8F0047E2B0 /* 黑-@3x.png in Resources */,
+				B97516221C3D571C00A7DC16 /* emoji_21.png in Resources */,
+				B97516641C3D571C00A7DC16 /* emoji_68.png in Resources */,
 				D311C5371C0A066F00C80C05 /* 圆-灰@3x.png in Resources */,
+				B97516441C3D571C00A7DC16 /* emoji_39.png in Resources */,
 				D311C5D21C0A119500C80C05 /* 联系人@3x.png in Resources */,
+				B97516161C3D571C00A7DC16 /* emoji_2.png in Resources */,
 				B99A8E081C0BF43D0097E9B3 /* 灰--圆小.png in Resources */,
 				D3EFFA1E1C182B8F0047E2B0 /* 紫.png in Resources */,
 				D311C4A51C09A70C00C80C05 /* 健康图-拷贝@3x.png in Resources */,
 				D3EFFA161C182B8F0047E2B0 /* 框@2x.png in Resources */,
+				B97516291C3D571C00A7DC16 /* emoji_216.png in Resources */,
 				D311C5D11C0A119500C80C05 /* 联系人@2x.png in Resources */,
 				D30902931C2A8625001FDF7B /* amazeui.flat.min.css in Resources */,
 				B9709B381C299663004DCD50 /* chat_animation1.png in Resources */,
+				B975160B1C3D571C00A7DC16 /* emoji_19.png in Resources */,
 				D309029F1C2A8625001FDF7B /* admin-ie.png in Resources */,
 				D3897DE41C09945A00D18BAC /* 菜单-白@2x.png in Resources */,
 				D311C5CD1C0A119500C80C05 /* 联系人-蓝.png in Resources */,
 				D311C4921C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@2x.png in Resources */,
 				D30902951C2A8625001FDF7B /* app.css in Resources */,
+				B97516211C3D571C00A7DC16 /* emoji_209.png in Resources */,
 				B99A8E141C0BF43D0097E9B3 /* 绿-圆.png in Resources */,
 				D311C5561C0A066F00C80C05 /* 灰边.png in Resources */,
 				D3EFFA0E1C182B8F0047E2B0 /* 导航栏@3x.png in Resources */,
+				B97515F71C3D571C00A7DC16 /* emoji_10.png in Resources */,
 				B99A8E2A1C0BF43D0097E9B3 /* 黑@2x.png in Resources */,
 				D3F8E2E51C0D82DD00263B4E /* 圆-绿@3x.png in Resources */,
 				B99A8E131C0BF43D0097E9B3 /* 灰框-@3x.png in Resources */,
@@ -1779,15 +2175,20 @@
 				D311C4BB1C09A70C00C80C05 /* 我的好友.png in Resources */,
 				D311C5EB1C0A119500C80C05 /* 通讯2@3x.png in Resources */,
 				B99A8DFF1C0BF43D0097E9B3 /* 左.png in Resources */,
+				B97516391C3D571C00A7DC16 /* emoji_29.png in Resources */,
 				B99A8E261C0BF43D0097E9B3 /* 黑-圆小.png in Resources */,
 				B99A8E271C0BF43D0097E9B3 /* 黑-圆小@2x.png in Resources */,
 				B99A8E281C0BF43D0097E9B3 /* 黑-圆小@3x.png in Resources */,
+				B97516311C3D571C00A7DC16 /* emoji_223.png in Resources */,
 				D311C5681C0A066F00C80C05 /* 选择-.png in Resources */,
 				D311C5EE1C0A119500C80C05 /* 长边-绿.png in Resources */,
 				D311C4A41C09A70C00C80C05 /* 健康图-拷贝@2x.png in Resources */,
 				D311C54A1C0A066F00C80C05 /* 开关-绿.png in Resources */,
+				B97516541C3D571C00A7DC16 /* emoji_53.png in Resources */,
 				D309029A1C2A8625001FDF7B /* fontawesome-webfont.woff2 in Resources */,
+				B97516341C3D571C00A7DC16 /* emoji_24.png in Resources */,
 				B99A8E0B1C0BF43D0097E9B3 /* 灰-圆.png in Resources */,
+				B97516121C3D571C00A7DC16 /* emoji_196.png in Resources */,
 				D3EFFA081C182B8F0047E2B0 /* 图标2@3x.png in Resources */,
 				D311C4B01C09A70C00C80C05 /* 轮换图2@2x.png in Resources */,
 				D311C5E51C0A119500C80C05 /* 返回.png in Resources */,
@@ -1805,34 +2206,58 @@
 				D311C5EF1C0A119500C80C05 /* 长边-绿@2x.png in Resources */,
 				B99A8E1F1C0BF43D0097E9B3 /* 蓝-圆@3x.png in Resources */,
 				D311C5D31C0A119500C80C05 /* 蓝对话框.png in Resources */,
+				B975160D1C3D571C00A7DC16 /* emoji_191.png in Resources */,
+				B97516451C3D571C00A7DC16 /* emoji_4.png in Resources */,
 				D309029B1C2A8625001FDF7B /* FontAwesome.otf in Resources */,
+				B97516431C3D571C00A7DC16 /* emoji_38.png in Resources */,
+				B975163A1C3D571C00A7DC16 /* emoji_3.png in Resources */,
 				D30902AD1C2A8625001FDF7B /* amazeui.min.js in Resources */,
+				B97516191C3D571C00A7DC16 /* emoji_201.png in Resources */,
+				B97515F81C3D571C00A7DC16 /* emoji_11.png in Resources */,
 				D311C4931C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png in Resources */,
+				B97516201C3D571C00A7DC16 /* emoji_208.png in Resources */,
 				B99A8E001C0BF43D0097E9B3 /* 左@2x.png in Resources */,
 				B9709B361C299663004DCD50 /* chat_animation_white2.png in Resources */,
 				B99A8E111C0BF43D0097E9B3 /* 灰框-.png in Resources */,
 				D3EFFA281C182B8F0047E2B0 /* 边框@2x.png in Resources */,
+				B97516361C3D571C00A7DC16 /* emoji_26.png in Resources */,
+				B97516681C3D571C00A7DC16 /* emoji_71.png in Resources */,
 				B99A8E1D1C0BF43D0097E9B3 /* 蓝-圆.png in Resources */,
 				D3EFFA251C182B8F0047E2B0 /* 蓝@2x.png in Resources */,
 				B99A8E221C0BF43D0097E9B3 /* 蓝-圆小@3x.png in Resources */,
 				D32D080F1C0ADA7400E2C7EF /* 灰线@2x.png in Resources */,
 				D311C4CF1C09A70C00C80C05 /* 设置@3x.png in Resources */,
+				B97515F91C3D571C00A7DC16 /* emoji_12.png in Resources */,
+				B97516551C3D571C00A7DC16 /* emoji_54.png in Resources */,
+				B97516501C3D571C00A7DC16 /* emoji_5.png in Resources */,
 				D311C54D1C0A066F00C80C05 /* 开关-蓝.png in Resources */,
 				D311C5671C0A066F00C80C05 /* 蓝框-@3x.png in Resources */,
 				D3EFFA031C182B8F0047E2B0 /* 图标2-紫.png in Resources */,
+				B975163F1C3D571C00A7DC16 /* emoji_34.png in Resources */,
 				D39B89A31C087AC1009086B2 /* LaunchScreen.storyboard in Resources */,
 				D39B89A01C087AC1009086B2 /* Assets.xcassets in Resources */,
+				B975162A1C3D571C00A7DC16 /* emoji_217.png in Resources */,
+				B97516151C3D571C00A7DC16 /* emoji_199.png in Resources */,
 				D311C4CD1C09A70C00C80C05 /* 设置.png in Resources */,
 				D311C5491C0A066F00C80C05 /* 开关-灰@3x.png in Resources */,
 				B99A8E241C0BF43D0097E9B3 /* 黑-圆@2x.png in Resources */,
+				B97515FC1C3D571C00A7DC16 /* emoji_15.png in Resources */,
+				B97516351C3D571C00A7DC16 /* emoji_25.png in Resources */,
+				B975162D1C3D571C00A7DC16 /* emoji_22.png in Resources */,
 				D311C5CC1C0A119500C80C05 /* 白框@3x.png in Resources */,
+				B97516521C3D571C00A7DC16 /* emoji_51.png in Resources */,
 				D3EFFA0A1C182B8F0047E2B0 /* 壁纸@2x.png in Resources */,
 				D30902941C2A8625001FDF7B /* amazeui.min.css in Resources */,
+				B97516621C3D571C00A7DC16 /* emoji_66.png in Resources */,
+				B97516461C3D571C00A7DC16 /* emoji_40.png in Resources */,
 				D311C4CE1C09A70C00C80C05 /* 设置@2x.png in Resources */,
+				B97516601C3D571C00A7DC16 /* emoji_64.png in Resources */,
 				D3EFFA0D1C182B8F0047E2B0 /* 导航栏@2x.png in Resources */,
 				D3897DEC1C09995800D18BAC /* 矩形.png in Resources */,
 				D3F8E2B51C0C316600263B4E /* chover2.png in Resources */,
 				B9709B3F1C2A1ECE004DCD50 /* keyboard_btn@2x.png in Resources */,
+				B97516661C3D571C00A7DC16 /* emoji_7.png in Resources */,
+				B97516271C3D571C00A7DC16 /* emoji_214.png in Resources */,
 				D39B899B1C087AC1009086B2 /* Main.storyboard in Resources */,
 				B99A8E041C0BF43D0097E9B3 /* 框-蓝@3x.png in Resources */,
 				D311C4BD1C09A70C00C80C05 /* 我的好友@3x.png in Resources */,
@@ -1851,28 +2276,38 @@
 				D311C5611C0A066F00C80C05 /* 白框@3x.png in Resources */,
 				D311C5571C0A066F00C80C05 /* 灰边@2x.png in Resources */,
 				D311C5D01C0A119500C80C05 /* 联系人.png in Resources */,
+				B975162C1C3D571C00A7DC16 /* emoji_219.png in Resources */,
 				D311C4C31C09A70C00C80C05 /* 蓝牙连接-绿@3x.png in Resources */,
 				D30902A91C2A8625001FDF7B /* startup-640x1096.png in Resources */,
 				D311C5381C0A066F00C80C05 /* 圆-白.png in Resources */,
 				D311C54F1C0A066F00C80C05 /* 开关-蓝@3x.png in Resources */,
+				B97516381C3D571C00A7DC16 /* emoji_28.png in Resources */,
 				D311C5391C0A066F00C80C05 /* 圆-白@2x.png in Resources */,
 				B99A8E1E1C0BF43D0097E9B3 /* 蓝-圆@2x.png in Resources */,
+				B97516001C3D571C00A7DC16 /* emoji_18.png in Resources */,
 				D311C5F01C0A119500C80C05 /* 长边-绿@3x.png in Resources */,
 				B99A8DF51C0BF43D0097E9B3 /* 右@3x.png in Resources */,
+				B975161F1C3D571C00A7DC16 /* emoji_207.png in Resources */,
+				B975162E1C3D571C00A7DC16 /* emoji_220.png in Resources */,
 				B99A8E051C0BF43D0097E9B3 /* 框绿.png in Resources */,
 				D3EFFA101C182B8F0047E2B0 /* 提示框-@2x.png in Resources */,
+				B97516181C3D571C00A7DC16 /* emoji_200.png in Resources */,
 				D311C5581C0A066F00C80C05 /* 灰边@3x.png in Resources */,
 				D311C5661C0A066F00C80C05 /* 蓝框-@2x.png in Resources */,
 				D3EFFA021C182B8F0047E2B0 /* 图标1@3x.png in Resources */,
+				B97516171C3D571C00A7DC16 /* emoji_20.png in Resources */,
+				B97516301C3D571C00A7DC16 /* emoji_222.png in Resources */,
 				B99A8E211C0BF43D0097E9B3 /* 蓝-圆小@2x.png in Resources */,
 				D3EFFA121C182B8F0047E2B0 /* 框--紫.png in Resources */,
 				B99A8E1C1C0BF43D0097E9B3 /* 绿-框圆@3x.png in Resources */,
 				D311C49E1C09A70C00C80C05 /* 健康分析-绿@2x.png in Resources */,
 				D311C5591C0A066F00C80C05 /* 白-短对话框-.png in Resources */,
 				D3EFF9FF1C182B8F0047E2B0 /* 图标1-紫@3x.png in Resources */,
+				B975164F1C3D571C00A7DC16 /* emoji_49.png in Resources */,
 				D311C5DD1C0A119500C80C05 /* 记录@2x.png in Resources */,
 				D3EFFA2A1C182B8F0047E2B0 /* 黑-.png in Resources */,
 				D311C4A31C09A70C00C80C05 /* 健康图-拷贝.png in Resources */,
+				B97516471C3D571C00A7DC16 /* emoji_41.png in Resources */,
 				D311C53F1C0A066F00C80C05 /* 小圆-白@2x.png in Resources */,
 				B99A8E161C0BF43D0097E9B3 /* 绿-圆@3x.png in Resources */,
 				B99A8DF61C0BF43D0097E9B3 /* 图标1-.png in Resources */,
@@ -1883,12 +2318,18 @@
 				D311C5651C0A066F00C80C05 /* 蓝框-.png in Resources */,
 				D311C5EA1C0A119500C80C05 /* 通讯2@2x.png in Resources */,
 				D311C5B21C0A119500C80C05 /* 圆-.png in Resources */,
+				B97516081C3D571C00A7DC16 /* emoji_187.png in Resources */,
 				D3F8E2B41C0C316600263B4E /* chover1.png in Resources */,
 				D311C5621C0A066F00C80C05 /* 矩形-4.png in Resources */,
 				D311C5BF1C0A119500C80C05 /* 灰框@2x.png in Resources */,
 				D311C54E1C0A066F00C80C05 /* 开关-蓝@2x.png in Resources */,
+				B975164E1C3D571C00A7DC16 /* emoji_48.png in Resources */,
+				B97516051C3D571C00A7DC16 /* emoji_184.png in Resources */,
 				D311C5BD1C0A119500C80C05 /* 添加@3x.png in Resources */,
+				B97516581C3D571C00A7DC16 /* emoji_57.png in Resources */,
 				D311C5ED1C0A119500C80C05 /* 通讯@3x.png in Resources */,
+				B97516031C3D571C00A7DC16 /* emoji_182.png in Resources */,
+				B97516281C3D571C00A7DC16 /* emoji_215.png in Resources */,
 				D311C4C91C09A70C00C80C05 /* 设置-拷贝@3x.png in Resources */,
 				D30902971C2A8625001FDF7B /* fontawesome-webfont.svg in Resources */,
 				D311C4CA1C09A70C00C80C05 /* 设置-绿.png in Resources */,
@@ -1899,28 +2340,41 @@
 				D311C5D51C0A119500C80C05 /* 蓝对话框@3x.png in Resources */,
 				D311C5E21C0A119500C80C05 /* 输入框.png in Resources */,
 				B99A8E251C0BF43D0097E9B3 /* 黑-圆@3x.png in Resources */,
+				B97516671C3D571C00A7DC16 /* emoji_70.png in Resources */,
+				B975163D1C3D571C00A7DC16 /* emoji_32.png in Resources */,
 				D311C53A1C0A066F00C80C05 /* 圆-白@3x.png in Resources */,
 				D311C55B1C0A066F00C80C05 /* 白-短对话框-@3x.png in Resources */,
 				D3EFFA001C182B8F0047E2B0 /* 图标1.png in Resources */,
 				D311C5B91C0A119500C80C05 /* 添加-灰色@2x.png in Resources */,
+				B975165B1C3D571C00A7DC16 /* emoji_6.png in Resources */,
+				B975164C1C3D571C00A7DC16 /* emoji_46.png in Resources */,
+				B97516411C3D571C00A7DC16 /* emoji_36.png in Resources */,
 				D311C4B11C09A70C00C80C05 /* 轮换图2@3x.png in Resources */,
 				D311C5E71C0A119500C80C05 /* 返回@3x.png in Resources */,
 				D309029D1C2A8625001FDF7B /* admin-chrome.png in Resources */,
 				D30902B21C2A8625001FDF7B /* jquery.min.js in Resources */,
+				B97516111C3D571C00A7DC16 /* emoji_195.png in Resources */,
 				D311C4B21C09A70C00C80C05 /* 轮换图3.png in Resources */,
+				B975162F1C3D571C00A7DC16 /* emoji_221.png in Resources */,
 				D311C4941C09A70C00C80C05 /* BLUEDIAODIAO-绿.png in Resources */,
+				B975161D1C3D571C00A7DC16 /* emoji_205.png in Resources */,
 				D3F8E2DC1C0C3A5500263B4E /* 导航栏.png in Resources */,
+				B975166A1C3D571C00A7DC16 /* emoji_9.png in Resources */,
 				B99A8E191C0BF43D0097E9B3 /* 绿-圆小@3x.png in Resources */,
 				D30902981C2A8625001FDF7B /* fontawesome-webfont.ttf in Resources */,
 				D311C4AB1C09A70C00C80C05 /* 健康图@3x.png in Resources */,
+				B97516131C3D571C00A7DC16 /* emoji_197.png in Resources */,
 				D3F8E2E61C0D82DD00263B4E /* 圆-绿@2x.png in Resources */,
 				D30902B91C2A8625001FDF7B /* html1.html in Resources */,
 				D311C4A01C09A70C00C80C05 /* 健康分析.png in Resources */,
 				B99A8E121C0BF43D0097E9B3 /* 灰框-@2x.png in Resources */,
 				D3EFFA091C182B8F0047E2B0 /* 壁纸.png in Resources */,
+				B97516491C3D571C00A7DC16 /* emoji_43.png in Resources */,
 				D311C5B31C0A119500C80C05 /* 圆-@2x.png in Resources */,
 				B99A8E011C0BF43D0097E9B3 /* 左@3x.png in Resources */,
 				B9709B3E1C2A1ECE004DCD50 /* keyboard_btn.png in Resources */,
+				B97516531C3D571C00A7DC16 /* emoji_52.png in Resources */,
+				B975164A1C3D571C00A7DC16 /* emoji_44.png in Resources */,
 				B99A8DFE1C0BF43D0097E9B3 /* 圆@3x.png in Resources */,
 				D311C5E81C0A119500C80C05 /* 通讯.png in Resources */,
 				B993A7031C32DB0B00B89839 /* 小圆点绿.jpg in Resources */,
@@ -1929,20 +2383,31 @@
 				D32D08131C0AE4CD00E2C7EF /* sex@2x.png in Resources */,
 				D311C5B41C0A119500C80C05 /* 圆-@3x.png in Resources */,
 				D3EFFA071C182B8F0047E2B0 /* 图标2@2x.png in Resources */,
+				B97516331C3D571C00A7DC16 /* emoji_23.png in Resources */,
 				D3EFFA1C1C182B8F0047E2B0 /* 粉@2x.png in Resources */,
 				D311C5361C0A066F00C80C05 /* 圆-灰@2x.png in Resources */,
+				B97516261C3D571C00A7DC16 /* emoji_213.png in Resources */,
 				D3EFFA0B1C182B8F0047E2B0 /* 壁纸@3x.png in Resources */,
+				B97516021C3D571C00A7DC16 /* emoji_181.png in Resources */,
+				B975165D1C3D571C00A7DC16 /* emoji_61.png in Resources */,
 				D311C49D1C09A70C00C80C05 /* 健康分析-绿.png in Resources */,
+				B975165F1C3D571C00A7DC16 /* emoji_63.png in Resources */,
 				D3EFFA1B1C182B8F0047E2B0 /* 粉.png in Resources */,
 				B99A8E031C0BF43D0097E9B3 /* 框-蓝@2x.png in Resources */,
 				D309029E1C2A8625001FDF7B /* admin-firefox.png in Resources */,
 				D30902AA1C2A8625001FDF7B /* amazeui.ie8polyfill.js in Resources */,
+				B97515FF1C3D571C00A7DC16 /* emoji_179.png in Resources */,
+				B97515FA1C3D571C00A7DC16 /* emoji_13.png in Resources */,
 				B99A8DFB1C0BF43D0097E9B3 /* 图标2@3x.png in Resources */,
 				D311C5CF1C0A119500C80C05 /* 联系人-蓝@3x.png in Resources */,
 				D311C4A91C09A70C00C80C05 /* 健康图.png in Resources */,
 				D311C5DB1C0A119500C80C05 /* 记录-蓝@3x.png in Resources */,
 				D311C5B61C0A119500C80C05 /* 深灰框-@2x.png in Resources */,
 				D30902991C2A8625001FDF7B /* fontawesome-webfont.woff in Resources */,
+				B975161E1C3D571C00A7DC16 /* emoji_206.png in Resources */,
+				B97516571C3D571C00A7DC16 /* emoji_56.png in Resources */,
+				B97516071C3D571C00A7DC16 /* emoji_186.png in Resources */,
+				B97516561C3D571C00A7DC16 /* emoji_55.png in Resources */,
 				D311C4C01C09A70C00C80C05 /* 蓝牙连接-拷贝@3x.png in Resources */,
 				D311C4AC1C09A70C00C80C05 /* 轮换图1.png in Resources */,
 				D30902AC1C2A8625001FDF7B /* amazeui.js in Resources */,
@@ -1951,15 +2416,20 @@
 				B99A8E071C0BF43D0097E9B3 /* 框绿@3x.png in Resources */,
 				D3EFFA2B1C182B8F0047E2B0 /* 黑-@2x.png in Resources */,
 				B99A8DFA1C0BF43D0097E9B3 /* 图标2@2x.png in Resources */,
+				B97516481C3D571C00A7DC16 /* emoji_42.png in Resources */,
 				D311C5641C0A066F00C80C05 /* 矩形-4@3x.png in Resources */,
 				B99A8DF81C0BF43D0097E9B3 /* 图标1-@3x.png in Resources */,
 				D311C5CE1C0A119500C80C05 /* 联系人-蓝@2x.png in Resources */,
 				D311C5C81C0A119500C80C05 /* 白对话框@2x.png in Resources */,
 				D311C4A71C09A70C00C80C05 /* 健康图-绿@2x.png in Resources */,
+				B975160C1C3D571C00A7DC16 /* emoji_190.png in Resources */,
 				D311C5BC1C0A119500C80C05 /* 添加@2x.png in Resources */,
+				B97516611C3D571C00A7DC16 /* emoji_65.png in Resources */,
+				B97516251C3D571C00A7DC16 /* emoji_212.png in Resources */,
 				D30902B81C2A8625001FDF7B /* html4.html in Resources */,
 				D311C4BA1C09A70C00C80C05 /* 我的好友-绿@3x.png in Resources */,
 				D311C4AE1C09A70C00C80C05 /* 轮换图1@3x.png in Resources */,
+				B97516041C3D571C00A7DC16 /* emoji_183.png in Resources */,
 				D30902A41C2A8625001FDF7B /* landing.png in Resources */,
 				D3EFFA1A1C182B8F0047E2B0 /* 灰-@3x.png in Resources */,
 				B99A8E0F1C0BF43D0097E9B3 /* 灰@2x.png in Resources */,
@@ -1973,13 +2443,19 @@
 				D311C5351C0A066F00C80C05 /* 圆-灰.png in Resources */,
 				D30902A01C2A8625001FDF7B /* admin-opera.png in Resources */,
 				D311C5CB1C0A119500C80C05 /* 白框@2x.png in Resources */,
+				B97515FB1C3D571C00A7DC16 /* emoji_14.png in Resources */,
+				B97516101C3D571C00A7DC16 /* emoji_194.png in Resources */,
 				D311C4AD1C09A70C00C80C05 /* 轮换图1@2x.png in Resources */,
 				D311C49F1C09A70C00C80C05 /* 健康分析-绿@3x.png in Resources */,
 				D311C5E11C0A119500C80C05 /* 语音@3x.png in Resources */,
+				B975165C1C3D571C00A7DC16 /* emoji_60.png in Resources */,
 				D311C56A1C0A066F00C80C05 /* 选择-@3x.png in Resources */,
+				B975165E1C3D571C00A7DC16 /* emoji_62.png in Resources */,
 				D3EFFA261C182B8F0047E2B0 /* 蓝@3x.png in Resources */,
 				D3EFFA111C182B8F0047E2B0 /* 提示框-@3x.png in Resources */,
 				D311C4AA1C09A70C00C80C05 /* 健康图@2x.png in Resources */,
+				B97516511C3D571C00A7DC16 /* emoji_50.png in Resources */,
+				B975161C1C3D571C00A7DC16 /* emoji_204.png in Resources */,
 				D311C55E1C0A066F00C80C05 /* 白-长对话框-@3x.png in Resources */,
 				D30902A21C2A8625001FDF7B /* adminPage.png in Resources */,
 				D311C5D61C0A119500C80C05 /* 表情.png in Resources */,
@@ -1996,10 +2472,12 @@
 				D3EFF9FE1C182B8F0047E2B0 /* 图标1-紫@2x.png in Resources */,
 				D311C5E41C0A119500C80C05 /* 输入框@3x.png in Resources */,
 				D311C55A1C0A066F00C80C05 /* 白-短对话框-@2x.png in Resources */,
+				B975164B1C3D571C00A7DC16 /* emoji_45.png in Resources */,
 				D3EFFA131C182B8F0047E2B0 /* 框--紫@2x.png in Resources */,
 				B99A8E091C0BF43D0097E9B3 /* 灰--圆小@2x.png in Resources */,
 				D311C4BC1C09A70C00C80C05 /* 我的好友@2x.png in Resources */,
 				B99A8DFC1C0BF43D0097E9B3 /* 圆.png in Resources */,
+				B975163C1C3D571C00A7DC16 /* emoji_31.png in Resources */,
 				D311C49C1C09A70C00C80C05 /* 健康分析-拷贝@3x.png in Resources */,
 				D30902A51C2A8625001FDF7B /* landingPage.png in Resources */,
 				B9709B3A1C299663004DCD50 /* chat_animation3.png in Resources */,
@@ -2009,9 +2487,12 @@
 				D311C4A21C09A70C00C80C05 /* 健康分析@3x.png in Resources */,
 				B99A8DFD1C0BF43D0097E9B3 /* 圆@2x.png in Resources */,
 				B99A8E0C1C0BF43D0097E9B3 /* 灰-圆@2x.png in Resources */,
+				B97515FD1C3D571C00A7DC16 /* emoji_16.png in Resources */,
 				D30902BA1C2A8625001FDF7B /* html2.html in Resources */,
+				B97516651C3D571C00A7DC16 /* emoji_69.png in Resources */,
 				D30902A71C2A8625001FDF7B /* sidebarPage.png in Resources */,
 				D3EFFA241C182B8F0047E2B0 /* 蓝.png in Resources */,
+				B975162B1C3D571C00A7DC16 /* emoji_218.png in Resources */,
 				D311C5511C0A066F00C80C05 /* 灰线-短-拷贝@2x.png in Resources */,
 				D30902A31C2A8625001FDF7B /* blogPage.png in Resources */,
 				D3EFFA151C182B8F0047E2B0 /* 框.png in Resources */,
@@ -2111,6 +2592,7 @@
 				D3F8E2C61C0C384300263B4E /* SettingTableViewController.swift in Sources */,
 				D361575C1C09760B009ED19D /* README.md in Sources */,
 				D3F8E2C51C0C384300263B4E /* ResetPhoneTableViewController.swift in Sources */,
+				B975157F1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m in Sources */,
 				D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */,
 				B9709B261C298678004DCD50 /* amrFileCodec.m in Sources */,
 				D3EFF9C51C181D720047E2B0 /* ThemeViewController.swift in Sources */,
