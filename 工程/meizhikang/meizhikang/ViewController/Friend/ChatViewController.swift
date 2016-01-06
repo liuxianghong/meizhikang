@@ -258,6 +258,19 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     func stickerClicked(sender: UIButton){
         print("showSticker")
+        guard let textView = self.inputToolbar?.contentView?.textView else{
+            return
+        }
+        if textView.isFirstResponder(){
+            if let _ = textView.emoticonsKeyboard{
+                textView.switchToDefaultKeyboard()
+            }else{
+                textView.switchToEmoticonsKeyboard(EmotionsKeyboardBuilder.sharedEmoticonsKeyboard())
+            }
+        }else{
+            textView.switchToEmoticonsKeyboard(EmotionsKeyboardBuilder.sharedEmoticonsKeyboard())
+            textView.becomeFirstResponder()
+        }
     }
     func mediaClicked(sender: UIButton){
         sender.selected = !sender.selected
