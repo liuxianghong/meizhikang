@@ -226,7 +226,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
             memcpy(&time, byte + 14, 4);
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
             if (dataDelegate) {
-                [dataDelegate didUpdateHealthValue:rote date:[NSDate date]];
+                [dataDelegate didUpdateHealthValue:rote date:date];
             }
         }
     }

@@ -74,6 +74,10 @@
     [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
 }
 
++(void)getRegistToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
+    [[IMConnect Instance] getRegistToken:userName completion:completion failure:failure];
+}
+
 
 +(void)registWithToken:(NSData *)token withCode:(NSString *)code withNickName:(NSString *)nickName withPW:(NSString *)pw withSex:(UInt8)sex withAge:(UInt8)age withHeiht:(UInt8)height withWight:(UInt16)wight completion:(void (^)())completion failure:(IMObjectFailureHandler)failure{
     [[IMConnect Instance] registWithToken:token withCode:code withNickName:nickName withPW:pw withSex:sex withAge:age withHeiht:height withWight:wight completion:completion failure:failure];
