@@ -77,6 +77,9 @@ class FriendListTableViewController: UITableViewController {
             for g in user.groups!{
                 groupArray.append(g as! Group)
             }
+            groupArray = groupArray.sort({ (g1 : Group, g2 : Group) -> Bool in
+                return g1.createtime?.compare(g2.createtime!) == .OrderedAscending
+            })
         }
     }
 
