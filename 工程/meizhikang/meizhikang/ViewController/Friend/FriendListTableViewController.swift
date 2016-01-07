@@ -46,6 +46,7 @@ class FriendListTableViewController: UITableViewController {
             self.loadEmail()
             self.tableView.reloadData()
         }
+        
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -262,8 +263,8 @@ class FriendListTableViewController: UITableViewController {
         
         if segue.identifier == FriendListTableViewControllerConstant.chatSegueIdentifier{
             guard let vc = segue.destinationViewController as? ChatViewController,
-                let sendId = UserInfo.uid(),
-                let nickname = UserInfo.nickname(),
+                let sendId = UserInfo.CurrentUser()?.uid,
+                let nickname = UserInfo.CurrentUser()?.nickname,
                 let indexPath = sender as? NSIndexPath where indexPath.row > 0,
                 let gid = groupArray[indexPath.row - 1].gid,
                 let gname = groupArray[indexPath.row - 1].gname
@@ -276,7 +277,7 @@ class FriendListTableViewController: UITableViewController {
                 vc.group = group
             }
             
-            vc.senderId = sendId
+            vc.senderId = sendId.stringValue
             vc.senderDisplayName = nickname
             vc.currentAvatar = UIImage(named: "联系人-蓝.png")
             // TODO: pass the friend or group to me

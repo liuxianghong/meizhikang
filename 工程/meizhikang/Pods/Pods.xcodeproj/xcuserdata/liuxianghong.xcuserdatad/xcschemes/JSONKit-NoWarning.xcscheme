@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C2123A68DE2EA82BE9966BD8'
+               BlueprintIdentifier = '4D045DE61120396996DDFA24'
                BlueprintName = 'JSONKit-NoWarning'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'JSONKit_NoWarning.framework'>

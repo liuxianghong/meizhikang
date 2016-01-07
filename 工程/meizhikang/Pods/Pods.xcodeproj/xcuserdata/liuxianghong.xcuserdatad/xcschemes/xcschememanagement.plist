@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ISEmojiView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JSONKit-NoWarning.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -84,6 +89,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>WUEmoticonsKeyboard.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -102,7 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>272B9D0A5CBA5B776686CA8382786ECE</key>
+		<key>4BC3343A0F55024BD14C13A94C565A33</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,22 +127,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>69B1F0C503E15C6FFB64FD461E884E06</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>848DD9D9E3F6E5A3019B4F08B602F43B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8676266169E5641ADD40E08DEC16AC8B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>89E998750171F1CAE1E099A50D8A0553</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DE1172DB7D9D499874E769A13182A2C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +142,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B1A2FCA6E1C9F2E679A1F089D66D09ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C2F0A155DEA8A18ADA85AC06B6F812B2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D58D76EC529B4A92F3E5EDADE0A96661</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D66D2C23E646B80809B3043B04D42B86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DF28FAF6D513AA945271406969887C93</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,7 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FBC6C36771F3617ADCC5032BD1C4D4CF</key>
+		<key>FF4D7CEA40453116B0CC594D4396B09A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

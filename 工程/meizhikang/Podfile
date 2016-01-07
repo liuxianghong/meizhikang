@@ -18,5 +18,6 @@ pod 'FSCalendar', :git => 'https://github.com/hxx0215/FSCalendar', :tag =>'1.7.0
 pod 'CocoaAsyncSocket'
 pod 'MagicalRecord'
 pod 'WUEmoticonsKeyboard'
+pod 'ISEmojiView'
 end
 

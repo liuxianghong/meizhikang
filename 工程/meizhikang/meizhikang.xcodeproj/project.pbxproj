@@ -445,6 +445,7 @@
 		D336C92D1C25868B00E967EB /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D336C9291C25868B00E967EB /* User+CoreDataProperties.swift */; };
 		D336C92E1C25868B00E967EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D336C92A1C25868B00E967EB /* User.swift */; };
 		D336C9301C2586C600E967EB /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D336C92F1C2586C600E967EB /* UserInfo.swift */; };
+		D3395AF11C3E54B7004F4B2F /* ISEmojiList.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3395AF01C3E54B7004F4B2F /* ISEmojiList.plist */; };
 		D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */; };
 		D33984731C26EA9D00A78D33 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984711C26EA9D00A78D33 /* Email.swift */; };
 		D33C1E121C2D170100BF7AFA /* DottedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33C1E111C2D170100BF7AFA /* DottedLineView.m */; };
@@ -994,6 +995,7 @@
 		D336C9291C25868B00E967EB /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D336C92A1C25868B00E967EB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D336C92F1C2586C600E967EB /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		D3395AF01C3E54B7004F4B2F /* ISEmojiList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ISEmojiList.plist; sourceTree = "<group>"; };
 		D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Email+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D33984711C26EA9D00A78D33 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		D33C1E101C2D170100BF7AFA /* DottedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DottedLineView.h; sourceTree = "<group>"; };
@@ -1779,6 +1781,7 @@
 				B9709B2D1C29962C004DCD50 /* JSQAudioMediaItem.m */,
 				B975157D1C3D554D00A7DC16 /* EmotionsKeyboardBuilder.h */,
 				B975157E1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m */,
+				D3395AF01C3E54B7004F4B2F /* ISEmojiList.plist */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2376,6 +2379,7 @@
 				B97516531C3D571C00A7DC16 /* emoji_52.png in Resources */,
 				B975164A1C3D571C00A7DC16 /* emoji_44.png in Resources */,
 				B99A8DFE1C0BF43D0097E9B3 /* 圆@3x.png in Resources */,
+				D3395AF11C3E54B7004F4B2F /* ISEmojiList.plist in Resources */,
 				D311C5E81C0A119500C80C05 /* 通讯.png in Resources */,
 				B993A7031C32DB0B00B89839 /* 小圆点绿.jpg in Resources */,
 				D311C5501C0A066F00C80C05 /* 灰线-短-拷贝.png in Resources */,

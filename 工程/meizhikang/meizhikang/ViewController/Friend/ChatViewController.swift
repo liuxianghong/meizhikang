@@ -9,6 +9,7 @@
 import UIKit
 import JSQMessagesViewController
 import MBProgressHUD
+import ISEmojiView
 
 class ChatViewModel: NSObject,RecordAudioDelegate{
     var messages: [JSQMessage]?
@@ -104,7 +105,7 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
     }
 }
 
-class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ISEmojiViewDelegate {
 
     var currentAvatar: UIImage!
     var receiverId: String!
@@ -114,6 +115,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     var sendVoice: UIButton!
     var observer : NSObjectProtocol!
     var voiceTimeInterval : NSTimeInterval = 0
+    var emojiView : ISEmojiView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
@@ -178,6 +180,8 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             layoutInputToolbarLeft()
             layoutInputToolbarRight()
             initSendVoiceButton()
+            emojiView = ISEmojiView(frame: CGRectMake(0, 0, self.view.frame.size.width, 216))
+            emojiView.delegate = self
         }
     }
     
@@ -262,15 +266,27 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             return
         }
         if textView.isFirstResponder(){
-            if let _ = textView.emoticonsKeyboard{
-                textView.switchToDefaultKeyboard()
-            }else{
-                textView.switchToEmoticonsKeyboard(EmotionsKeyboardBuilder.sharedEmoticonsKeyboard())
+            if textView.inputView == emojiView{
+                textView.inputView = nil
             }
+            else{
+                textView.inputView = emojiView
+            }
+            textView.reloadInputViews()
         }else{
-            textView.switchToEmoticonsKeyboard(EmotionsKeyboardBuilder.sharedEmoticonsKeyboard())
+            textView.inputView = emojiView
             textView.becomeFirstResponder()
         }
+//        if textView.isFirstResponder(){
+////            if let _ = textView.emoticonsKeyboard{
+////                textView.switchToDefaultKeyboard()
+////            }else{
+////                textView.switchToEmoticonsKeyboard(EmotionsKeyboardBuilder.sharedEmoticonsKeyboard())
+////            }
+//        }else{
+//            //textView.switchToEmoticonsKeyboard(EmotionsKeyboardBuilder.sharedEmoticonsKeyboard())
+//            //textView.becomeFirstResponder()
+//        }
     }
     func mediaClicked(sender: UIButton){
         sender.selected = !sender.selected
@@ -304,6 +320,17 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         self.presentViewController(actionVC, animated: true, completion: { () -> Void in
             
         })
+    }
+    
+    func emojiView(emojiView: ISEmojiView!, didSelectEmoji emoji: String!){
+        self.inputToolbar?.contentView?.textView?.text = self.inputToolbar?.contentView?.textView?.text.stringByAppendingString(emoji)
+    }
+    
+    func emojiView(emojiView: ISEmojiView!, didPressDeleteButton deletebutton: UIButton!){
+        if !(self.inputToolbar?.contentView?.textView?.text)!.isEmpty {
+            let endIndex = self.inputToolbar?.contentView?.textView?.text.endIndex.advancedBy(-1)
+            self.inputToolbar?.contentView?.textView?.text.removeAtIndex(endIndex!)
+        }
     }
     
     func showImagePickVC(sourceType: UIImagePickerControllerSourceType){

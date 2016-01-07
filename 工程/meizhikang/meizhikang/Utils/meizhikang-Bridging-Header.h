@@ -14,3 +14,4 @@
 #import <MagicalRecord/MagicalRecord.h>
 #import "RecordAudio.h"
 #import "EmotionsKeyboardBuilder.h"
+#import <ISEmojiView/ISEmojiView.h>
