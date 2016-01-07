@@ -142,15 +142,15 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.revealViewController() != nil{
             
-//            if indexPath.row != 1 && indexPath.row != 3{
-//                if UserInfo.CurrentUser() == nil{
-//                    self.revealViewController().navigationController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
-//                    self.tableView.reloadData()
-//                    tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
-//                    //self.revealViewController().revealToggleAnimated(true)
-//                    return;
-//                }
-//            }
+            if indexPath.row != 1 && indexPath.row != 3{
+                if UserInfo.CurrentUser() == nil{
+                    self.revealViewController().navigationController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                    self.tableView.reloadData()
+                    tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+                    //self.revealViewController().revealToggleAnimated(true)
+                    return;
+                }
+            }
 //            if indexPath.row == 0{
 //                self.tableView.reloadData()
 //                tableView.selectRowAtIndexPath(NSIndexPath(forRow: currentIndex, inSection: 0), animated: false, scrollPosition: .None)
