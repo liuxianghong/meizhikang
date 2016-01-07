@@ -10,6 +10,32 @@ import UIKit
 import JSQMessagesViewController
 import MBProgressHUD
 import ISEmojiView
+import ObjectiveC
+
+enum JSQMessageSendingStatus: String{
+    case Sending
+    case Successful
+    case Failed
+    case None
+}
+
+private var jsqSendingStatusKey: UInt8 = 0
+extension JSQMessage{
+    var sendStauts : JSQMessageSendingStatus {
+        get{
+            if let retString = objc_getAssociatedObject(self, &jsqSendingStatusKey) as? String,
+            let ret = JSQMessageSendingStatus(rawValue: retString){
+                return ret
+            }else{
+                return .Successful
+            }
+        }
+        set(newValue){
+            objc_setAssociatedObject(self, &jsqSendingStatusKey, newValue.rawValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+}
+
 
 class ChatViewModel: NSObject,RecordAudioDelegate{
     var messages: [JSQMessage]?
@@ -351,12 +377,13 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             if let image : UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 let jsq = JSQPhotoMediaItem(image: image)
                 let message2 = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: jsq)
+                message2.sendStauts = .Sending
                 self.viewModel.messages?.append(message2!)
                 self.finishSendingMessageAnimated(true)
                 let data = UIImageJPEGRepresentation(image, 0.1)
                 IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: self.group.gid!, completion: { object in
                     print(object)
-                    
+                    message2.sendStauts = .Successful
                     let json = JSON(object)
                     let mesage = Message.MR_createEntity()
                     mesage.gid = self.group.gid
@@ -366,8 +393,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                     mesage.content = "[image][/image]"
                     mesage.saveData(data!)
                     NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-                    
+                    self.finishSendingMessageAnimated(true)
                     }) { error in
+                    message2.sendStauts = .Failed
                         print(error)
                 }
             }
@@ -439,9 +467,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     }
     
     func sendMessage(text: String, sendId: String, senderDisplayName: String, date: NSDate){
-        let message = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
-        viewModel.messages?.append(message)
-        
+        let jsqmessage = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
+        jsqmessage.sendStauts = .Sending
+        viewModel.messages?.append(jsqmessage)
         if group != nil{
             IMRequst.SendMessage(text, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
                 print(object)
@@ -449,6 +477,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 let flag = json["flag"].intValue
                 if flag == 1{
                     print("发送成功")
+                    jsqmessage.sendStauts = .Successful
                     let mesage = Message.MR_createEntity()
                     mesage.gid = self.group.gid
                     mesage.group = self.group
@@ -459,14 +488,15 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 }
                 else
                 {
+                    jsqmessage.sendStauts = .Failed
                     print("发送失败")
                 }
                 }, failure: { (error : NSError!) -> Void in
+                    jsqmessage.sendStauts = .Failed
             })
             self.finishSendingMessageAnimated(true)
-            
         }
-        
+        self.finishSendingMessageAnimated(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -566,6 +596,11 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 let mask = JSQMessagesMediaViewBubbleImageMasker(bubbleImageFactory: factory)
                 mask.applyOutgoingBubbleImageMaskToMediaView(imageView)
                 cell?.mediaView = imageView
+                if message.sendStauts == .Successful{
+                    MBProgressHUD.hideHUDForView(cell?.mediaView, animated: true)
+                }else{
+                    MBProgressHUD.showHUDAddedTo(cell?.mediaView, animated: true)
+                }
             }else if let audioItem = message.media as? JSQAudioMediaItem{
                 audioItem.appliesMediaViewMaskAsOutgoing = message.senderId == self.senderId
                 cell?.mediaView = audioItem.mediaView()
@@ -575,6 +610,22 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         return cell!
     }
     
+    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        guard let superClass = self.superclass else{
+            return
+        }
+        if superClass.instancesRespondToSelector("collectionView:didEndDisplayingCell:forItemAtIndexPath:"){
+            super.collectionView(collectionView, didEndDisplayingCell: cell, forItemAtIndexPath: indexPath)
+        }
+        guard let jsqCell = cell as? JSQMessagesCollectionViewCell else{
+            return
+        }
+        let message = viewModel.messages![indexPath.item]
+        let mediaMessage = message.isMediaMessage
+        if (mediaMessage){
+            MBProgressHUD.hideHUDForView(jsqCell.mediaView, animated: true)
+        }
+    }
     // MARK: - JSQMessages collection view flow layout delegate
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         if indexPath.item % 3 == 0{
