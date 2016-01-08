@@ -185,7 +185,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             message2 = JSQMessage(senderId: sender, displayName: displayName, text: message.text())
         }
         else if message.messageType() == .Image{
-            message2 = JSQMessage(senderId: sender, displayName: displayName, media: JSQPhotoMediaItem(image: message.image()))
+            message2 = JSQMessage(senderId: sender, displayName: displayName, media: JSQMyPhotoMediaItem(image: message.image()))
         }else if message.messageType() == .Voice{
             let item = JSQAudioMediaItem(data: message.Data()!)
             item.appliesMediaViewMaskAsOutgoing = false
@@ -375,7 +375,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         picker.dismissViewControllerAnimated(true) { () -> Void in
             
             if let image : UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                let jsq = JSQPhotoMediaItem(image: image)
+                let jsq = JSQMyPhotoMediaItem(image: image)
                 let message2 = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: jsq)
                 message2.sendStauts = .Sending
                 self.viewModel.messages?.append(message2!)
@@ -580,22 +580,8 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         }
         let mediaMessage = message.isMediaMessage
         if (mediaMessage){
-            if let photoItem = message.media as? JSQPhotoMediaItem{
-                let size = CGSizeMake(210, 150)
-                let imageView = UIImageView(image: photoItem.image)
-                imageView.frame = CGRectMake(0.0, 0.0, size.width, size.height)
-                imageView.contentMode = .ScaleAspectFill
-                imageView.clipsToBounds = true
-                var image : UIImage?
-                if message.senderId == self.senderId{
-                    image = UIImage(named: "蓝对话框.png")
-                }else{
-                    image = UIImage(named: "白对话框.png")
-                }
-                let factory = JSQMessagesBubbleImageFactory(bubbleImage: image, capInsets: UIEdgeInsetsMake(7, 12, 25, 12))
-                let mask = JSQMessagesMediaViewBubbleImageMasker(bubbleImageFactory: factory)
-                mask.applyOutgoingBubbleImageMaskToMediaView(imageView)
-                cell?.mediaView = imageView
+            if let photoItem = message.media as? JSQMyPhotoMediaItem{
+                cell?.mediaView = photoItem.mediaView(message.senderId == self.senderId)
                 if message.sendStauts == .Successful{
                     MBProgressHUD.hideHUDForView(cell?.mediaView, animated: true)
                 }else{

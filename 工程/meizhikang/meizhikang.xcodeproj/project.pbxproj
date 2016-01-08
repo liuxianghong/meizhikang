@@ -153,6 +153,7 @@
 		B97516681C3D571C00A7DC16 /* emoji_71.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F31C3D571C00A7DC16 /* emoji_71.png */; };
 		B97516691C3D571C00A7DC16 /* emoji_8.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F41C3D571C00A7DC16 /* emoji_8.png */; };
 		B975166A1C3D571C00A7DC16 /* emoji_9.png in Resources */ = {isa = PBXBuildFile; fileRef = B97515F51C3D571C00A7DC16 /* emoji_9.png */; };
+		B97516741C3FBB1B00A7DC16 /* JSQMyPhotoMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97516731C3FBB1B00A7DC16 /* JSQMyPhotoMediaItem.swift */; };
 		B987B9401C2C22C0002FF394 /* HealthDailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B987B93F1C2C22C0002FF394 /* HealthDailyChartView.swift */; };
 		B993A7031C32DB0B00B89839 /* 小圆点绿.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B993A7021C32DB0B00B89839 /* 小圆点绿.jpg */; };
 		B993A7051C32DF1700B89839 /* 小圆点绿.png in Resources */ = {isa = PBXBuildFile; fileRef = B993A7041C32DF1700B89839 /* 小圆点绿.png */; };
@@ -700,6 +701,7 @@
 		B97515F31C3D571C00A7DC16 /* emoji_71.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_71.png; sourceTree = "<group>"; };
 		B97515F41C3D571C00A7DC16 /* emoji_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_8.png; sourceTree = "<group>"; };
 		B97515F51C3D571C00A7DC16 /* emoji_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_9.png; sourceTree = "<group>"; };
+		B97516731C3FBB1B00A7DC16 /* JSQMyPhotoMediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQMyPhotoMediaItem.swift; sourceTree = "<group>"; };
 		B987B93F1C2C22C0002FF394 /* HealthDailyChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDailyChartView.swift; sourceTree = "<group>"; };
 		B993A7021C32DB0B00B89839 /* 小圆点绿.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "小圆点绿.jpg"; sourceTree = "<group>"; };
 		B993A7041C32DF1700B89839 /* 小圆点绿.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小圆点绿.png"; sourceTree = "<group>"; };
@@ -1779,6 +1781,7 @@
 				B930DEE91C145822003576F6 /* Array+Extenstion.swift */,
 				B9709B2C1C29962C004DCD50 /* JSQAudioMediaItem.h */,
 				B9709B2D1C29962C004DCD50 /* JSQAudioMediaItem.m */,
+				B97516731C3FBB1B00A7DC16 /* JSQMyPhotoMediaItem.swift */,
 				B975157D1C3D554D00A7DC16 /* EmotionsKeyboardBuilder.h */,
 				B975157E1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m */,
 				D3395AF01C3E54B7004F4B2F /* ISEmojiList.plist */,
@@ -2610,6 +2613,7 @@
 				D336C92C1C25868B00E967EB /* Group.swift in Sources */,
 				B96C98BE1C11C9DE00228D21 /* EmptySegue.swift in Sources */,
 				D3C263D11C2806290098BEAE /* GroupMember.swift in Sources */,
+				B97516741C3FBB1B00A7DC16 /* JSQMyPhotoMediaItem.swift in Sources */,
 				D3897E251C09A08400D18BAC /* MenuViewController.swift in Sources */,
 				D336C92E1C25868B00E967EB /* User.swift in Sources */,
 				B96C98C01C11D2E000228D21 /* HealthDailyViewController.swift in Sources */,
