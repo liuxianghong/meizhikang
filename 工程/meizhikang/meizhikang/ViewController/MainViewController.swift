@@ -17,9 +17,7 @@ class MainViewController: UINavigationController {
 
         // Do any additional setup after loading the view.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "login:", name: "loginOutNotification", object: nil)
-        
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        BLEConnect.Instance().startScan()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -29,10 +27,10 @@ class MainViewController: UINavigationController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-//        if first{
-//            first = false
-//            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
-//        }
+        if first{
+            first = false
+            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +90,8 @@ class MainViewController: UINavigationController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "loginIdentifier"{
+            NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
+            NSUserDefaults.standardUserDefaults().synchronize()
             NSNotificationCenter.defaultCenter().postNotificationName("didLogoutNotification", object: nil)
         }
     }

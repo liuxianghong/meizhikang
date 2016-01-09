@@ -25,4 +25,5 @@ typedef NS_ENUM( NSInteger, HelathColorType)
 +(UIColor *)helathColor:(HelathColorType)type;
 
 +(UIColor *)helathColorByValue:(NSInteger)value;
+
 @end

@@ -106,13 +106,16 @@
 
 -(void)LoginOut:(BOOL)waite{
     isLogin = NO;
-    [asyncSocket disconnect];
-    if (waite) {
-        NSTimeInterval time = [NSDate date].timeIntervalSince1970;
-        while([NSDate date].timeIntervalSince1970 - time < 0.1){
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    if (asyncSocket.isConnected){
+        [asyncSocket disconnect];
+        if (waite) {
+            NSTimeInterval time = [NSDate date].timeIntervalSince1970;
+            while([NSDate date].timeIntervalSince1970 - time < 0.1){
+                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+            }
         }
     }
+    
 }
 
 -(BOOL)isLogin{

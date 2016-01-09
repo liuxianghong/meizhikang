@@ -35,6 +35,7 @@
 -(void)disconnect:(CBPeripheral *)peripheral;
 -(CBPeripheral *)connectedPeripheral;
 -(NSArray *)peripherals;
+-(void)setHeartCommand:(UInt16)time;
 @property (nonatomic, weak) id <BLEDataDelegate> dataDelegate;
 @property (nonatomic, weak) id <BLEConnectDelegate> connectDelegate;
 @end

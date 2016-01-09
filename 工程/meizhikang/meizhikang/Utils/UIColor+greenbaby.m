@@ -35,12 +35,12 @@
         break;
         case HelathColorTypeInfirm:
         {
-            return UIColorFromRGB(0xb5b5b6);
+            return UIColorFromRGB(0x5d51f4);
         }
         break;
         case HelathColorTypeUnhealthy:
         {
-            return UIColorFromRGB(0x727171);
+            return UIColorFromRGB(0xf2007f);
         }
         break;
         

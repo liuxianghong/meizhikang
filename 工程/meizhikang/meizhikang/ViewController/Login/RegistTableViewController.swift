@@ -71,21 +71,6 @@ class RegistTableViewController: UITableViewController {
             return;
         }
         
-        if self.wightTextField.text!.isEmpty{
-            hud.mode = .Text
-            hud.detailsLabelText = "请输入体重"
-            hud.hide(true, afterDelay: 1.5)
-            return;
-        }
-        
-        let wight = UInt16(self.wightTextField.text!)
-        if wight<30 || wight>200{
-            hud.mode = .Text
-            hud.detailsLabelText = "体重应该在30kg-200kg"
-            hud.hide(true, afterDelay: 1.5)
-            return;
-        }
-        
         
         if self.heightTextField.text!.isEmpty{
             hud.mode = .Text
@@ -98,6 +83,21 @@ class RegistTableViewController: UITableViewController {
         if height<70 || height>250{
             hud.mode = .Text
             hud.detailsLabelText = "身高应该在70cm-250cm"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.wightTextField.text!.isEmpty{
+            hud.mode = .Text
+            hud.detailsLabelText = "请输入体重"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        let wight = UInt16(self.wightTextField.text!)
+        if wight<30 || wight>200{
+            hud.mode = .Text
+            hud.detailsLabelText = "体重应该在30kg-200kg"
             hud.hide(true, afterDelay: 1.5)
             return;
         }

@@ -38,6 +38,7 @@ class SwitchAccountTableViewController: UITableViewController {
             IMRequst.GetUserInfoCompletion({ (object) -> Void in
                 print(object)
                 NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                NSUserDefaults.standardUserDefaults().setObject(object["uid"], forKey: "LastUserID")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 let user = User.userByUid(object["uid"]!!)
                 user!.upDateUserInfo(object as! [String : AnyObject])
