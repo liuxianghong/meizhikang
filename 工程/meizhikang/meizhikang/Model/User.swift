@@ -67,12 +67,11 @@ class User: NSManagedObject {
     }
     
     func healthDatasOneDay(date : NSDate) -> [HealthData]?{
-        guard
-            let currentDay = NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: date, options: NSCalendarOptions(rawValue: 0)),
-            let nextDay = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay, options: NSCalendarOptions(rawValue: 0))else{
+        guard let nextDay = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: date, options: NSCalendarOptions(rawValue: 0))else{
                 return nil
         }
-        return self.healthDatas(currentDay, maxTime: nextDay)
+        //let currentDay = NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: date, options: NSCalendarOptions(rawValue: 0)),
+        return self.healthDatas(nextDay, maxTime: date)
     }
     
     func groupByID(gid : NSNumber) -> Group?{

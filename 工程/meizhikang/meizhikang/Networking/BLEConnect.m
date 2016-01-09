@@ -116,7 +116,9 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 -(void)disconnect:(CBPeripheral *)peripheral
 {
-    [manager cancelPeripheralConnection:peripheral];
+    if (peripheral) {
+        [manager cancelPeripheralConnection:peripheral];
+    }
 }
 
 -(CBPeripheral *)connectedPeripheral{
@@ -321,9 +323,9 @@ uint64_t reversebytes_uint64t(uint64_t value){
        
         CBUUID *uuidSTATUS = [self getUUID:STATUS_Warnsync_UUID];
         if([self compareCBUUID:characteristic.UUID UUID2:uuidSTATUS]) {
-            Byte value[13];
-            value[0] = 0b01010000; //
-            value[1] = 0b00100011;
+            Byte value[10];
+            value[0] = 0b00010000; //
+            value[1] = 0xff;
             UInt32 time = (UInt32) [NSDate date].timeIntervalSince1970;
             //memcpy(value+2, &time, 4);
             value[5] = (time & 0xff);
@@ -338,13 +340,12 @@ uint64_t reversebytes_uint64t(uint64_t value){
             value[7] = ((timeZone >> 16) & 0xff);
             value[6] = ((timeZone >> 24) & 0xff);
             
-            value[10] = 0x01;
+            NSData *data = [NSData dataWithBytes:value length:10];
+            [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
             
             UInt16 heart = self.heartCommandOn ? 3600 : 0;
-            memcpy(value+11, &heart, 2);
+            [self setHeartCommand:heart];
             
-            NSData *data = [NSData dataWithBytes:value length:13];
-            [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
             self.isConnected = YES;
             if (connectDelegate) {
                 NSString *str = peripheral.identifier.UUIDString;
@@ -372,7 +373,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     Byte value[13];
     bzero(value, 13);
     value[0] = 0b01000000;
-    value[1] = 0b00100011;
+    value[1] = 0xff;
     value[10] = 0x01;
     memcpy(value+11, &time, 2);
     NSData *data = [NSData dataWithBytes:value length:13];

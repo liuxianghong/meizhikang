@@ -35,7 +35,7 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     }
     */
     
-    var viewArray = [UIView]()
+    var viewArray = [RectView]()
     var timeViewArray = [HealthFigureChartTimeView]()
     var currentPoint : CGPoint!
     var first : Bool = true
@@ -53,25 +53,67 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
             self.setContentOffset(point, animated: false)
         }
     }
-    var date = NSDate()
+    var date : NSDate!
     let leftMargin : CGFloat = 15
     let rightMargin : CGFloat = 60
-    var position: CGFloat = 0
+    var position: CGFloat = 1
+    var timeOffer : CGFloat = 0
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.delegate = self
         for index in 0...48{
             let timeLabel = UILabel()
-            timeLabel.text = NSString(format: "%02d:%02d", index/2,index%2*30) as String
             timeLabel.font = UIFont.systemFontOfSize(8)
-            timeLabel.sizeToFit()
             let view = UIView()
             view.backgroundColor = UIColor.lightGrayColor()
             timeViewArray.append(HealthFigureChartTimeView(timeLabel: timeLabel, view: view ,tag: index))
             self.addSubview(timeLabel)
             self.addSubview(view)
         }
+        setDateEnd(NSDate())
+    }
+    
+    func configTimeView(){
+        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: date)
+        let minute = NSCalendar.currentCalendar().component(.Minute, fromDate: date)
+        var minuteTag : Int
+        if minute >= 30{
+            minuteTag = 1
+            timeOffer = CGFloat(minute - 30)/(24*60)
+        }
+        else{
+            minuteTag = 0
+            timeOffer = CGFloat(minute)/(24*60)
+        }
+        for timeView in timeViewArray{
+            let minuteValue = (minuteTag + timeView.tag)%2*30
+            var hourValue = hour
+            if minuteTag == 1{
+                hourValue = hour - (48 - timeView.tag )/2
+            }
+            else{
+                hourValue = hour - (48 - timeView.tag + 1)/2
+            }
+            if hourValue < 0{
+                hourValue = 24 + hourValue
+            }
+            timeView.view.tag = (minuteTag + timeView.tag)%2
+            timeView.timeLabel.text = NSString(format: "%02d:%02d", hourValue,minuteValue) as String
+            timeView.timeLabel.sizeToFit()
+        }
         
+        
+        
+        var rearray = [HealthFigureChartViewModel]()
+        for lineData2 in dataArray{
+            if CGFloat((lineData2.healthData.time?.timeIntervalSinceDate(date))!)  > -24*60*60{
+                let pos = CGFloat((lineData2.healthData.time?.timeIntervalSinceDate(date))!)
+                let pos2 = (pos) / CGFloat(24*60*60) + 1
+                let lineData3 = HealthFigureChartViewModel(position: pos2, value: lineData2.value, healthData: lineData2.healthData)
+                rearray.append(lineData3)
+            }
+        }
+        dataArray = rearray
     }
     
     override func layoutSubviews() {
@@ -79,6 +121,9 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         if first{
             self.updateContentSize()
             first = false
+            self.setContentOffset(CGPointMake(cwidth, 0), animated: false)
+            doScroll()
+            position = 1
         }
     }
     
@@ -87,10 +132,10 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         twidth = 0
         cwidth = 0
         if type == 1{
-            cwidth = fwidth*48+rightMargin+fwidth
-            twidth = fwidth
-            chartWidth = fwidth/6
-            space = 10
+            cwidth = fwidth*24+rightMargin+fwidth
+            twidth = fwidth/2
+            chartWidth = fwidth/12
+            space = 6
         }
         else{
             cwidth = fwidth*6+rightMargin+fwidth
@@ -104,7 +149,7 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     
     func layoutAllViews(){
         for (var i = viewArray.count; i<dataArray.count; i++){
-            let view = UIView()
+            let view = RectView()
             view.tag = i
             view.layer.masksToBounds = true;
             self.addSubview(view)
@@ -114,8 +159,19 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         for timeView in timeViewArray{
             let width = timeView.timeLabel.frame.size.width
             let heght : CGFloat = 15
-            timeView.timeLabel.frame = CGRectMake(fwidth + twidth * CGFloat(timeView.tag) - width/2, self.contentSize.height - heght, width, heght)
+            timeView.timeLabel.frame = CGRectMake(fwidth + twidth * CGFloat(timeView.tag) - width/2 - timeOffer*(cwidth - rightMargin - fwidth), self.contentSize.height - heght, width, heght)
             timeView.view.frame = CGRectMake(timeView.timeLabel.frame.origin.x+width/2, timeView.timeLabel.frame.origin.y-8, 1, 8)
+            timeView.view.hidden = false
+            timeView.timeLabel.hidden = false
+            if self.type == 1{
+                
+            }else {
+                if timeView.view.tag == 1{
+                    timeView.view.hidden = true
+                    timeView.timeLabel.hidden = true
+                }
+            }
+            
         }
         
         for view in viewArray{
@@ -123,32 +179,45 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
             let hdata = dataArray[view.tag]
             view.backgroundColor = UIColor.helathColorByValue(hdata.value)
             let height = sheight * CGFloat(hdata.value)/100
-            view.frame = CGRect(x: fwidth + (cwidth - rightMargin - fwidth) * hdata.position - (chartWidth - space)/2 , y: sheight-height, width: chartWidth-space, height: height)
+            view.frame = CGRect(x: fwidth + (cwidth - rightMargin - fwidth) * hdata.position - (chartWidth - space) , y: sheight-height, width: chartWidth-space, height: height)
             view.layer.cornerRadius = (chartWidth-space)/2;
         }
     }
     
+    func setDateEnd(ndate : NSDate){
+        date = ndate
+        configTimeView()
+    }
+    
     func appendData(data : HealthData){
         
-        var pos = CGFloat((data.time?.timeIntervalSinceDate(self.zeroOfDate(date)!))!)
-        if pos < 0{
+        var doSroll = false
+        if dataArray.isEmpty{
+            doSroll = true
+        }
+        else if (self.contentOffset.x / (cwidth - rightMargin - fwidth)) >= dataArray.last?.position{
+            doSroll = true
+        }
+        var pos = CGFloat((data.time?.timeIntervalSinceDate(date))!)
+        if pos < -24*60*60{
             return
         }
-        let v = Int(data.healthValue!)
-        var pos2 = (pos) / CGFloat(24*60*60)
-        if pos2 > 1{
-            dataArray.removeAll()
-            date = NSDate()
-            pos = CGFloat((data.time?.timeIntervalSinceDate(self.zeroOfDate(date)!))!)
-            pos2 = (pos) / CGFloat(24*60*60)
+        if pos > 0{
+            setDateEnd(data.time!)
+            pos = CGFloat((data.time?.timeIntervalSinceDate(date))!)
         }
+        let v = Int(data.healthValue!)
+        let pos2 = (pos) / CGFloat(24*60*60) + 1
         let lineData = HealthFigureChartViewModel(position:  pos2, value: v, healthData: data)
+        
         dataArray.append(lineData)
         self.layoutAllViews()
-        let point = CGPoint(x: lineData.position * (cwidth - rightMargin - fwidth), y: 0)
-        self.setContentOffset(point, animated: true)
-        position = lineData.position
-        healthDelegate.showCurrentHealthData(lineData.healthData)
+        if doSroll{
+            let point = CGPoint(x: lineData.position * (cwidth - rightMargin - fwidth), y: 0)
+            self.setContentOffset(point, animated: true)
+            position = lineData.position
+            healthDelegate.showCurrentHealthData(lineData.healthData)
+        }
     }
     
     
@@ -163,12 +232,6 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     
     func zeroOfDate(date : NSDate) -> NSDate?{
         return NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: date, options: NSCalendarOptions(rawValue: 0))
-//        let formatter = NSDateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        let fstr = formatter.stringFromDate(data)
-//        let zeroDate = "\(fstr) 00:00:00"
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        return formatter.dateFromString(zeroDate)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -185,12 +248,12 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     
     func doScroll(){
         let f = self.contentOffset.x
-        let pos2d5 : CGFloat = 2.5*60 / ( 60 * 60 * 24)
+        let pos2d5 : CGFloat = 4*60 / ( 60 * 60 * 24)
         //* (cwidth - rightMargin - fwidth)
         let posCurrnt = f / (cwidth - rightMargin - fwidth)
         for vm in dataArray{
             let posd = posCurrnt - vm.position
-            if posd <= pos2d5 && posd >= -pos2d5{
+            if posd <= pos2d5/4 && posd >= -pos2d5{
                 let point = CGPoint(x: vm.position * (cwidth - rightMargin - fwidth), y: 0)
                 self.setContentOffset(point, animated: true)
                 position = vm.position
