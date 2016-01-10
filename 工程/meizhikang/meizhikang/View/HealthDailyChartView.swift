@@ -11,6 +11,29 @@ import UIKit
 class HealthDailyChartView: UIView {
 
     var data: [DailyViewLineData]?
+    override var transform: CGAffineTransform{
+        set{
+            var constrainedTransform = newValue
+            constrainedTransform.d = 1.0
+            let scale = constrainedTransform.a
+            constrainedTransform = CGAffineTransformTranslate(constrainedTransform, 0.0, (scale - 1) * -36)
+            super.transform = constrainedTransform
+        }
+        get{
+            return super.transform
+        }
+    }
+//    override var frame: CGRect{
+//        set{
+//            var nFrame = newValue
+//            nFrame.origin.x = 0
+//            nFrame.origin.y = 0
+//            super.frame = nFrame
+//        }
+//        get{
+//            return super.frame
+//        }
+//    }
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
@@ -30,10 +53,10 @@ class HealthDailyChartView: UIView {
             let color = UIColor.helathColorByValue(item.value)
             CGContextBeginPath(context)
             CGContextSetStrokeColorWithColor(context, color.CGColor)
-            CGContextMoveToPoint(context, pos, 0)
-            CGContextAddLineToPoint(context, pos, rect.size.height)
+            CGContextMoveToPoint(context, pos, rect.size.height)
+            CGContextAddLineToPoint(context, pos, rect.size.height - rect.size.height * CGFloat(item.value) / 100)
             CGContextStrokePath(context)
         }
     }
-
+    
 }

@@ -11,8 +11,11 @@ struct DailyViewLineData{
     var position: CGFloat
     var value: NSInteger
 }
-class HealthDailyViewController: UIViewController {
+class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
 
+    @IBOutlet weak var scrollViewContainer: UIScrollView!
+    @IBOutlet weak var coordinateView: UIView!
+    @IBOutlet weak var coodinateWidth: NSLayoutConstraint!
     @IBOutlet weak var todayAvgLabel: UILabel!
     @IBOutlet weak var yesterdayAvgLabel: UILabel!
     @IBOutlet weak var lastweekAvgLabel: UILabel!
@@ -29,10 +32,16 @@ class HealthDailyViewController: UIViewController {
     var currentDayData: [HealthData]?
     var currentDay: NSDate?
     var viewsData: [DailyViewLineData]?
+    
+    var currentScale: CGFloat = 1.0
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.scrollViewContainer.delegate = self
+        self.scrollViewContainer.maximumZoomScale = 4.0
+        self.scrollViewContainer.minimumZoomScale = 1.0
+        self.scrollViewContainer.showsHorizontalScrollIndicator = false
         self.imageView1.backgroundColor = UIColor.helathColor(.Health)
         self.imageView2.backgroundColor = UIColor.helathColor(.Subhealth)
         self.imageView3.backgroundColor = UIColor.helathColor(.Infirm)
@@ -74,6 +83,7 @@ class HealthDailyViewController: UIViewController {
                 self.lastweekPercent.weakPercent.text,self.lastweekPercent.unHealthPercent.text,self.lastweekAvgLabel.text) = dayStrings(data, fromDayOffset: -7, toDayOffset: 0)
             (self.lastmonthPercent.healthPercent.text,self.lastmonthPercent.semiHealthPercent.text,
                 self.lastmonthPercent.weakPercent.text,self.lastmonthPercent.unHealthPercent.text,self.lastmonthAvgLabel.text) = dayStrings(data, fromDayOffset: -30, toDayOffset: 0)
+            self.coodinateWidth.constant = self.view.bounds.size.width - 30
         }
     }
     
@@ -127,6 +137,30 @@ class HealthDailyViewController: UIViewController {
     }
 
     @IBAction func monthlyReportClicked(sender: UIButton) {
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.chartView
+    }
+    
+    func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
+        self.currentScale = scrollView.zoomScale
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        self.coodinateWidth.constant = scrollView.contentSize.width
+    }
+    
+    func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
+        if fabs(scale - self.currentScale) < 1e-6 {
+            return
+        }
+        print(self.chartView)
+        if scale > self.currentScale {
+            scrollView.zoomScale = self.currentScale * 2
+        }else{
+            scrollView.zoomScale = self.currentScale / 2
+        }
     }
     /*
     // MARK: - Navigation
