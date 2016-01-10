@@ -16,7 +16,7 @@ class GroupMember: NSManagedObject {
     static func GroupMemberByUid(uid : AnyObject) -> GroupMember?{
         
         if let user = GroupMember.MR_findByAttribute("uid", withValue: uid).first as? GroupMember{
-            return user;
+            return user
         }
         else{
             let user = GroupMember.MR_createEntity()

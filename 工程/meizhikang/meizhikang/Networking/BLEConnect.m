@@ -373,7 +373,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     Byte value[13];
     bzero(value, 13);
     value[0] = 0b01000000;
-    value[1] = 0xff;
+    //value[1] = 0xff;
     value[10] = 0x01;
     memcpy(value+11, &time, 2);
     NSData *data = [NSData dataWithBytes:value length:13];
