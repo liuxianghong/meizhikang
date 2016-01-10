@@ -21,6 +21,7 @@ class User: NSManagedObject {
         else{
             let user = User.MR_createEntity()
             user.uid = uid as? NSNumber
+            user.heartCommand = 60
             return user
         }
     }

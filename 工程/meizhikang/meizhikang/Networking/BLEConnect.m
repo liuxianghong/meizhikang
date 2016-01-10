@@ -41,6 +41,8 @@ uint64_t reversebytes_uint64t(uint64_t value){
 @property (strong, nonatomic) NSMutableArray *peripherals;
 @property (strong, nonatomic) CBCentralManager *manager;
 @property (strong, nonatomic) CBPeripheral *activePeripheral;
+@property (assign, nonatomic) BOOL isConnected;
+@property (assign, nonatomic) BOOL heartCommandOn;
 @end
 
 @implementation BLEConnect
@@ -65,6 +67,8 @@ uint64_t reversebytes_uint64t(uint64_t value){
     self = [super init];
     peripherals = [[NSMutableArray alloc]init];
     manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    self.isConnected = NO;
+    self.heartCommandOn = YES;
     return self;
 }
 
@@ -89,6 +93,14 @@ uint64_t reversebytes_uint64t(uint64_t value){
         NSLog(@"%@",p);
         if (![peripherals containsObject:p]){
             [peripherals addObject:p];
+        }
+        if (!activePeripheral) {
+            activePeripheral = p;
+            activePeripheral.delegate = self;
+            self.isConnected = YES;
+            if (connectDelegate) {
+                [connectDelegate setConnect];
+            }
         }
     }
     if (connectDelegate) {
@@ -153,7 +165,10 @@ uint64_t reversebytes_uint64t(uint64_t value){
     if (connectDelegate) {
         [connectDelegate peripheralFound];
     }
-    return;
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"BLEConnected"] isEqualToString:peripheral.identifier.UUIDString]) {
+        [self connect:peripheral];
+    }
 }
 
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
@@ -173,6 +188,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     if (connectDelegate) {
         [connectDelegate setDisconnect];
     }
+    self.isConnected = NO;
     activePeripheral = nil;
 }
 
@@ -305,22 +321,39 @@ uint64_t reversebytes_uint64t(uint64_t value){
        
         CBUUID *uuidSTATUS = [self getUUID:STATUS_Warnsync_UUID];
         if([self compareCBUUID:characteristic.UUID UUID2:uuidSTATUS]) {
-            Byte value[6];
-            value[0] = 0x10;
-            value[1] = 0xFF;
+            Byte value[13];
+            value[0] = 0b01010000; //
+            value[1] = 0b00100011;
             UInt32 time = (UInt32) [NSDate date].timeIntervalSince1970;
             //memcpy(value+2, &time, 4);
             value[5] = (time & 0xff);
             value[4] = ((time >> 8) & 0xff);
             value[3] = ((time >> 16) & 0xff);
             value[2] = ((time >> 24) & 0xff);
-            NSData *data = [NSData dataWithBytes:value length:6];
+            
+            NSTimeZone *defaultTimeZone = [NSTimeZone systemTimeZone];
+            UInt32 timeZone = (UInt32) defaultTimeZone.secondsFromGMT;
+            value[9] = (timeZone & 0xff);
+            value[8] = ((timeZone >> 8) & 0xff);
+            value[7] = ((timeZone >> 16) & 0xff);
+            value[6] = ((timeZone >> 24) & 0xff);
+            
+            value[10] = 0x01;
+            
+            UInt16 heart = self.heartCommandOn ? 3600 : 0;
+            memcpy(value+11, &heart, 2);
+            
+            NSData *data = [NSData dataWithBytes:value length:13];
             [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
+            self.isConnected = YES;
             if (connectDelegate) {
+                NSString *str = peripheral.identifier.UUIDString;
+                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"BLEConnected"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 [connectDelegate setConnect];
+                
             }
         }
-        
     }
     else {
         NSLog(@"Error in setting notification state for characteristic with UUID %@ on service with  UUID %@ on peripheral with UUID %@\r\n",[self CBUUIDToString:characteristic.UUID],[self CBUUIDToString:characteristic.service.UUID],peripheral.identifier);
@@ -330,6 +363,21 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 
 #pragma mark -
+
+-(void)setHeartCommand:(UInt16)time{
+    if (!self.isConnected) {
+        return;
+    }
+    self.heartCommandOn = time != 0;
+    Byte value[13];
+    bzero(value, 13);
+    value[0] = 0b01000000;
+    value[1] = 0b00100011;
+    value[10] = 0x01;
+    memcpy(value+11, &time, 2);
+    NSData *data = [NSData dataWithBytes:value length:13];
+    [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
+}
 
 -(void)getAllCharacteristicsFromKeyfob:(CBPeripheral *)p{
     for (int i=0; i < p.services.count; i++) {

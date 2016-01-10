@@ -110,6 +110,8 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
             {
                 if self.revealViewController() != nil{
                     IMRequst.LoginOut(false)
+                    UserInfo.CurrentUser()?.passWord = nil
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                     self.revealViewController().navigationController!.performSegueWithIdentifier("loginIdentifier", sender: nil)
                 }
             }

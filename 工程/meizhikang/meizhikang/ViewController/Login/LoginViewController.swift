@@ -14,21 +14,37 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var userNameTextField : UITextField!
     @IBOutlet weak var passWordTextField : UITextField!
+    var first : Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        #if DEBUG
-        self.userNameTextField.text = "12345671"
-        self.passWordTextField.text = "111111"
-        #endif
+//        #if DEBUG
+//        self.userNameTextField.text = "12345671"
+//        self.passWordTextField.text = "111111"
+//        #endif
         
-        //IMConnect.Instance().test()
+        if UserInfo.LastLoginUser() != nil{
+            self.userNameTextField.text = UserInfo.LastLoginUser()?.userName
+            self.passWordTextField.text = UserInfo.LastLoginUser()?.passWord
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        IMRequst.LoginOut(false)
+        if !first{
+            IMRequst.LoginOut(false)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if first{
+            first = false
+            if !self.passWordTextField.text!.isEmpty{
+                loginClick(1)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +84,7 @@ class LoginViewController: UIViewController {
                 hud.hide(true)
                 print(object)
                 NSUserDefaults.standardUserDefaults().setObject(object, forKey: "userInfo")
+                NSUserDefaults.standardUserDefaults().setObject(object["uid"], forKey: "LastUserID")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 let user = User.userByUid(object["uid"]!!)
                 user!.upDateUserInfo(object as! [String : AnyObject])

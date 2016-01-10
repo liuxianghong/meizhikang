@@ -45,6 +45,7 @@
         <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createtime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="gid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="heartCommand" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="old" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -65,6 +66,6 @@
         <element name="GroupMember" positionX="-108" positionY="0" width="128" height="105"/>
         <element name="HealthData" positionX="-108" positionY="0" width="128" height="105"/>
         <element name="Message" positionX="-117" positionY="198" width="126" height="180"/>
-        <element name="User" positionX="-306" positionY="-81" width="128" height="285"/>
+        <element name="User" positionX="-306" positionY="-81" width="128" height="300"/>
     </elements>
 </model>

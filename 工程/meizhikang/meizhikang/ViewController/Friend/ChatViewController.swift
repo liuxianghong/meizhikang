@@ -589,7 +589,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 if message.sendStauts == .Successful{
                     MBProgressHUD.hideHUDForView(cell?.mediaView, animated: true)
                 }else{
-                    MBProgressHUD.showHUDAddedTo(cell?.mediaView, animated: true)
+                    let hud = MBProgressHUD.showHUDAddedTo(cell?.mediaView, animated: true)
+                    hud.color = UIColor.clearColor()
+                    hud.dimBackground = true
                 }
             }else if let audioItem = message.media as? JSQAudioMediaItem{
                 audioItem.appliesMediaViewMaskAsOutgoing = message.senderId == self.senderId

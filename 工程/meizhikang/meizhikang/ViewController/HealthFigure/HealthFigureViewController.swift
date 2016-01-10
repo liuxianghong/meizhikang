@@ -43,6 +43,8 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     @IBOutlet weak var heartRateLabel : UILabel!
     @IBOutlet weak var dateLabel : UILabel!
     @IBOutlet weak var timeLabel : UILabel!
+    @IBOutlet weak var heartRateSwith : UISwitch!
+    @IBOutlet weak var scoreStringLabel : UILabel!
     let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer()
     let viewModel = HealthFigureViewModel()
     let tapView = UIView()
@@ -73,14 +75,19 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         
         chatView.healthDelegate = self
         self.showCurrentHealthData(nil)
-        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "cutDown", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "cutDown", userInfo: nil, repeats: true)
         for _ in 1...30{
             self.cutDown()
         }
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        self.headrCommand(false)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.headrCommand(heartRateSwith.on)
         if UserInfo.CurrentUser() != nil{
             if beforUser != UserInfo.CurrentUser(){
                 chatView.clear()
@@ -132,6 +139,15 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         return .LightContent
     }
     
+    @IBAction func didHearCommandClick(){
+        heartRateLabel.hidden = !heartRateSwith.on
+        self.headrCommand(heartRateSwith.on)
+    }
+    
+    func headrCommand(bo : Bool){
+        BLEConnect.Instance().setHeartCommand(bo ? 3600 : 0)
+    }
+    
     func didUpdateHartValue(value: Int) {
         heartRateLabel.text = "\(value)"
     }
@@ -161,6 +177,9 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     func showCurrentHealthData(health : HealthData?){
         if health != nil{
             scoreLabel.text = "\(health!.healthValue as! Int)"
+            scoreLabel.textColor = UIColor.helathColorByValue(health!.healthValue as! Int)
+            scoreStringLabel.textColor = UIColor.helathColorByValue(health!.healthValue as! Int)
+            scoreStringLabel.text = health?.helathString()
             let formatter = NSDateFormatter()
             formatter.dateFormat = "yyyy.MM.dd"
             dateLabel.text = formatter.stringFromDate(health!.time!)
@@ -171,6 +190,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
             scoreLabel.text = " "
             dateLabel.text = " "
             timeLabel.text = " "
+            scoreStringLabel.text = " "
         }
     }
     
