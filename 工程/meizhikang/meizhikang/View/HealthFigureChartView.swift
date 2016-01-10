@@ -79,14 +79,15 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     func configTimeView(){
         let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: date)
         let minute = NSCalendar.currentCalendar().component(.Minute, fromDate: date)
+        let second = NSCalendar.currentCalendar().component(.Second, fromDate: date)
         var minuteTag : Int
         if minute >= 30{
             minuteTag = 1
-            timeOffer = CGFloat(minute - 30)/(24*60)
+            timeOffer = CGFloat(minute - 30)/(24*60) + CGFloat(second)/(24*60*60)
         }
         else{
             minuteTag = 0
-            timeOffer = CGFloat(minute)/(24*60)
+            timeOffer = CGFloat(minute)/(24*60) + CGFloat(second)/(24*60*60)
         }
         for timeView in timeViewArray{
             let minuteValue = (minuteTag + timeView.tag)%2*30
@@ -220,6 +221,16 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
             self.setContentOffset(point, animated: true)
             positionDate = data.time!
             healthDelegate.showCurrentHealthData(lineData.healthData)
+        }
+        else{
+            var position = CGFloat(positionDate.timeIntervalSinceDate(date))
+            if position < -24*60*60{
+                position = -24*60*60
+                positionDate = date.dateByAddingTimeInterval(NSTimeInterval(position))
+            }
+            let pos3 = (position) / CGFloat(24*60*60) + 1
+            let point = CGPoint(x: pos3 * (cwidth - rightMargin - fwidth), y: 0)
+            self.setContentOffset(point, animated: false)
         }
     }
     
