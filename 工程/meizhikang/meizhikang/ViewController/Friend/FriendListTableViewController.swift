@@ -19,6 +19,7 @@ class FriendListTableViewController: UITableViewController {
     @IBOutlet weak var typeImageView1 : UIImageView!
     @IBOutlet weak var typeImageView2 : UIImageView!
     @IBOutlet weak var typeImageView3 : UIImageView!
+    var emptyLabel = UILabel()
     var groupArray :Array<Group> = []
     var emailArray = [Email]()
     var type = 1
@@ -32,6 +33,11 @@ class FriendListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         typeImageView2.hidden = true;
         typeImageView3.hidden = true;
+        
+        self.tableView.addSubview(emptyLabel)
+        emptyLabel.text = "无群组会话"
+        emptyLabel.frame = CGRectMake(0, tableView.frame.size.height/2, tableView.frame.size.width, 30)
+        emptyLabel.textAlignment = .Center
         
         var frame = self.tableView.tableHeaderView?.frame
         frame?.size.height = 50.0
@@ -102,11 +108,17 @@ class FriendListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if type == 1{
+            emptyLabel.hidden = !groupArray.isEmpty
+            emptyLabel.text = "无群组会话"
             return self.groupArray.count + 1
         }
         else if type == 3{
+            emptyLabel.hidden = !emailArray.isEmpty
+            emptyLabel.text = "无系统消息"
             return emailArray.count
         }
+        emptyLabel.hidden = false//!emailArray.isEmpty
+        emptyLabel.text = "无会话"
         return 0
     }
 
