@@ -19,10 +19,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        #if DEBUG
-//        self.userNameTextField.text = "12345671"
-//        self.passWordTextField.text = "111111"
-//        #endif
+        #if DEBUG
+        self.userNameTextField.text = "12345671"
+        self.passWordTextField.text = "111111"
+        #endif
         
         self.userNameTextField.delegate = self
         self.passWordTextField.delegate = self
