@@ -49,14 +49,17 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     var type : Int = 1{
         didSet{
             self.updateContentSize()
-            let point = CGPoint(x: position * (cwidth - rightMargin - fwidth), y: 0)
+            let position = CGFloat(positionDate.timeIntervalSinceDate(date))
+            let pos2 = (position) / CGFloat(24*60*60) + 1
+            let point = CGPoint(x: pos2 * (cwidth - rightMargin - fwidth), y: 0)
             self.setContentOffset(point, animated: false)
         }
     }
     var date : NSDate!
     let leftMargin : CGFloat = 15
     let rightMargin : CGFloat = 60
-    var position: CGFloat = 1
+    //var position: CGFloat = 1
+    var positionDate = NSDate()
     var timeOffer : CGFloat = 0
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -121,9 +124,9 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         if first{
             self.updateContentSize()
             first = false
-            self.setContentOffset(CGPointMake(cwidth, 0), animated: false)
+            self.setContentOffset(CGPointMake((cwidth - rightMargin - fwidth), 0), animated: false)
             doScroll()
-            position = 1
+            positionDate = date
         }
     }
     
@@ -215,7 +218,7 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         if doSroll{
             let point = CGPoint(x: lineData.position * (cwidth - rightMargin - fwidth), y: 0)
             self.setContentOffset(point, animated: true)
-            position = lineData.position
+            positionDate = data.time!
             healthDelegate.showCurrentHealthData(lineData.healthData)
         }
     }
@@ -256,7 +259,7 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
             if posd <= pos2d5/4 && posd >= -pos2d5{
                 let point = CGPoint(x: vm.position * (cwidth - rightMargin - fwidth), y: 0)
                 self.setContentOffset(point, animated: true)
-                position = vm.position
+                positionDate = vm.healthData.time!
                 if healthDelegate != nil{
                     healthDelegate.showCurrentHealthData(vm.healthData)
                 }
@@ -264,6 +267,6 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
             }
         }
         healthDelegate.showCurrentHealthData(nil)
-        position = posCurrnt
+        positionDate = date.dateByAddingTimeInterval(NSTimeInterval((posCurrnt-1)*(24*60*60)))
     }
 }

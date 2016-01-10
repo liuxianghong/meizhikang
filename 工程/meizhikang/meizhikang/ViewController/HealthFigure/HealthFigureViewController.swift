@@ -122,21 +122,21 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
             }
             beforUser = UserInfo.CurrentUser()
             
-//            if UserInfo.CurrentUser()?.healthDatas?.count == 0{
-//                let timeInterval = NSDate().timeIntervalSince1970
-//                for index in 1...10000{
-//                    let date = NSDate(timeIntervalSince1970: timeInterval - Double(index*60*5))
-//                    let healthData = HealthData.MR_createEntity()
-//                    healthData.time = date
-//                    healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
-//                    healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
-//                    healthData.user = UserInfo.CurrentUser()
-//                }
-//                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-//            }
-//            else{
-//                
-//            }
+            if UserInfo.CurrentUser()?.healthDatas?.count <= 100{
+                let timeInterval = NSDate().timeIntervalSince1970
+                for index in 1...10000{
+                    let date = NSDate(timeIntervalSince1970: timeInterval - Double(index*60*5))
+                    let healthData = HealthData.MR_createEntity()
+                    healthData.time = date
+                    healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
+                    healthData.healthValue = 20 + Int((healthData.time?.timeIntervalSince1970)!) % 80
+                    healthData.user = UserInfo.CurrentUser()
+                }
+                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            }
+            else{
+                
+            }
         }
         else{
             if beforUser != nil{
