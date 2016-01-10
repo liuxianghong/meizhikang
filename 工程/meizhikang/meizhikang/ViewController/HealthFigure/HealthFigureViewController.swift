@@ -122,6 +122,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
             }
             beforUser = UserInfo.CurrentUser()
             
+            #if DEBUG
             if UserInfo.CurrentUser()?.healthDatas?.count <= 100{
                 let timeInterval = NSDate().timeIntervalSince1970
                 for index in 1...10000{
@@ -137,6 +138,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
             else{
                 
             }
+            #endif
         }
         else{
             if beforUser != nil{
