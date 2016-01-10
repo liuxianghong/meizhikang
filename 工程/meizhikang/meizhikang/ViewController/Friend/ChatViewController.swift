@@ -94,14 +94,14 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
         return NSAttributedString(string: message.senderDisplayName)
     }
     
-    func playItemAt(index :Int){
+    func playItemAt(index :Int) -> (String,AnyObject)?{
         let message = self.messages![index];
         if message.isMediaMessage{
             if let media = message.media as? JSQAudioMediaItem{
                 self.recordAudio.stopPlay()
                 guard media != self.currentAudioItem else{
                     media.endPlaySound()
-                    return
+                    return nil
                 }
                 self.currentAudioItem = media
                 media.startPlaySound()
@@ -112,11 +112,15 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
                     data = media.voiceData
                 }
                 guard let d = data else{
-                    return
+                    return nil
                 }
                 self.recordAudio.play(d)
             }
+            if let media = message.media as? JSQMyPhotoMediaItem{
+                print(media)
+            }
         }
+        return nil
     }
     
     //MARK: RecordDelegate
