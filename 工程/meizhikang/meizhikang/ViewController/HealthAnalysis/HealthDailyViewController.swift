@@ -22,6 +22,10 @@ class HealthDailyViewController: UIViewController {
     @IBOutlet weak var yesterdayPercent: HealthPercentView!
     @IBOutlet weak var lastweekPercent: HealthPercentView!
     @IBOutlet weak var lastmonthPercent: HealthPercentView!
+    @IBOutlet weak var imageView1 : UIImageView!
+    @IBOutlet weak var imageView2 : UIImageView!
+    @IBOutlet weak var imageView3 : UIImageView!
+    @IBOutlet weak var imageView4 : UIImageView!
     var currentDayData: [HealthData]?
     var currentDay: NSDate?
     var viewsData: [DailyViewLineData]?
@@ -29,6 +33,19 @@ class HealthDailyViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.imageView1.backgroundColor = UIColor.helathColor(.Health)
+        self.imageView2.backgroundColor = UIColor.helathColor(.Subhealth)
+        self.imageView3.backgroundColor = UIColor.helathColor(.Infirm)
+        self.imageView4.backgroundColor = UIColor.helathColor(.Unhealthy)
+        self.imageView1.layer.masksToBounds = true
+        self.imageView1.layer.cornerRadius = 15/2.0
+        self.imageView2.layer.masksToBounds = true
+        self.imageView2.layer.cornerRadius = 15/2.0
+        self.imageView3.layer.masksToBounds = true
+        self.imageView3.layer.cornerRadius = 15/2.0
+        self.imageView4.layer.masksToBounds = true
+        self.imageView4.layer.cornerRadius = 15/2.0
+        
         self.todayPercent.healthPercent.text = "a"
         self.yesterdayPercent.healthPercent.text = "b"
         self.lastweekPercent.healthPercent.text = "c"

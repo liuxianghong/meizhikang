@@ -13,6 +13,7 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var bleSwitch : UISwitch!
     @IBOutlet weak var rightBar : UIBarButtonItem!
+    @IBOutlet var rightDisconnectBar : UIBarButtonItem!
     var tableViewArray = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +31,35 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        BLEConnect.Instance().connectDelegate = self
+        if BLEConnect.Instance().connectedPeripheral() != nil{
+            self.navigationItem.setRightBarButtonItems([rightBar,rightDisconnectBar], animated: false)
+        }
+        else
+        {
+            self.navigationItem.setRightBarButtonItems([rightBar], animated: false)
+        }
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         rightBar.title = "扫描"
-        BLEConnect.Instance().stopScan()
+        //BLEConnect.Instance().stopScan()
         tableViewArray = []
         self.tableView.reloadData()
     }
 
     @IBAction func scanClick(sender : AnyObject) {
-        rightBar.title = "扫描中"
+        rightBar.title = "扫描"
         tableViewArray = []
         BLEConnect.Instance().startScan()
         self.tableView.reloadData()
+        
+    }
+    
+    @IBAction func disConnectClick(sender : AnyObject) {
+        BLEConnect.Instance().disconnect(BLEConnect.Instance().connectedPeripheral())
     }
     
     // MARK: - BLEConnectDelegate
@@ -52,10 +70,12 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
     }
     
     func setConnect() {
+        self.navigationItem.setRightBarButtonItems([rightBar,rightDisconnectBar], animated: false)
         self.tableView.reloadData()
     }
     
     func setDisconnect() {
+        self.navigationItem.setRightBarButtonItems([rightDisconnectBar], animated: false)
         self.tableView.reloadData()
     }
     

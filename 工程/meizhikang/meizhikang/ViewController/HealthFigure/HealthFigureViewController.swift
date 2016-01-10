@@ -12,7 +12,7 @@ class HealthFigureViewModel: NSObject{
     var headerTitles : [String]
     var currenTitle : String?
     override init(){
-        self.headerTitles = [" 4小时模式","30分钟模式"]
+        self.headerTitles = ["4小时模式","1小时模式"]
     }
     
     func processTitles(nextTitle: String){
@@ -45,6 +45,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     @IBOutlet weak var timeLabel : UILabel!
     @IBOutlet weak var heartRateSwith : UISwitch!
     @IBOutlet weak var scoreStringLabel : UILabel!
+    @IBOutlet weak var heartRateSwithLabel : UILabel!
     let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer()
     let viewModel = HealthFigureViewModel()
     let tapView = UIView()
@@ -58,6 +59,21 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         if self.revealViewController() != nil{
             self.revealViewController().rearViewRevealWidth = 215
         }
+        
+        self.imageView1.backgroundColor = UIColor.helathColor(.Health)
+        self.imageView2.backgroundColor = UIColor.helathColor(.Subhealth)
+        self.imageView3.backgroundColor = UIColor.helathColor(.Infirm)
+        self.imageView4.backgroundColor = UIColor.helathColor(.Unhealthy)
+        self.imageView1.layer.masksToBounds = true
+        self.imageView1.layer.cornerRadius = 15/2.0
+        self.imageView2.layer.masksToBounds = true
+        self.imageView2.layer.cornerRadius = 15/2.0
+        self.imageView3.layer.masksToBounds = true
+        self.imageView3.layer.cornerRadius = 15/2.0
+        self.imageView4.layer.masksToBounds = true
+        self.imageView4.layer.cornerRadius = 15/2.0
+        
+        self.headerButton.setTitle("1小时模式", forState: .Normal)
         
         self.headTableConstraint.constant = -44
         self.headTableView.hidden = true
@@ -75,10 +91,11 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         
         chatView.healthDelegate = self
         self.showCurrentHealthData(nil)
-        timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: "cutDown", userInfo: nil, repeats: true)
-        for _ in 1...30{
-            self.cutDown()
-        }
+        timer = NSTimer.scheduledTimerWithTimeInterval(60*5, target: self, selector: "cutDown", userInfo: nil, repeats: true)
+        self.cutDown()
+//        for _ in 1...30{
+//            self.cutDown()
+//        }
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -89,19 +106,19 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         super.viewWillAppear(true)
         self.headrCommand(heartRateSwith.on)
         if UserInfo.CurrentUser() != nil{
-            if beforUser != UserInfo.CurrentUser(){
-                chatView.clear()
-                let healthData = UserInfo.CurrentUser()?.healthDatasOneDay(NSDate())
-                for hdata in healthData!{
-                    chatView.appendData(hdata)
-                }
-            }
             if beforUser == nil{
                 for hd in healthDataArray{
                     hd.user = UserInfo.CurrentUser()
                 }
                 healthDataArray.removeAll()
                 NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            }
+            if beforUser != UserInfo.CurrentUser(){
+                chatView.clear()
+                let healthData = UserInfo.CurrentUser()?.healthDatasOneDay(NSDate())
+                for hdata in healthData!{
+                    chatView.appendData(hdata)
+                }
             }
             beforUser = UserInfo.CurrentUser()
             
@@ -140,6 +157,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     }
     
     @IBAction func didHearCommandClick(){
+        heartRateSwithLabel.hidden = !heartRateSwith.on
         heartRateLabel.hidden = !heartRateSwith.on
         self.headrCommand(heartRateSwith.on)
     }
@@ -171,7 +189,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     
     
     func cutDown(){
-        //self.didUpdateHealthValue(80)
+        self.didUpdateHealthValue(60, date: NSDate())
     }
     
     func showCurrentHealthData(health : HealthData?){
@@ -210,7 +228,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         self.viewModel.processTitles(self.viewModel.headerTitles[indexPath.row])
         self.headerButton.setTitle(self.viewModel.currenTitle, forState: .Normal)
         UIView.animateWithDuration(0.5) { () -> Void in
-            self.chatView.type = self.viewModel.currenTitle == "30分钟模式" ? 1 : 2
+            self.chatView.type = self.viewModel.currenTitle == "1小时模式" ? 1 : 2
         }
         headerShow(false)
     }

@@ -438,6 +438,7 @@
 		D32D080F1C0ADA7400E2C7EF /* 灰线@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D080E1C0ADA7400E2C7EF /* 灰线@2x.png */; };
 		D32D08131C0AE4CD00E2C7EF /* sex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08121C0AE4CD00E2C7EF /* sex@2x.png */; };
 		D32D08151C0AE55B00E2C7EF /* sex_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */; };
+		D334CB021C414FFE00814DE9 /* RectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D334CB011C414FFE00814DE9 /* RectView.swift */; };
 		D33527031C2EEA760038015D /* BLEConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = D33527021C2EEA760038015D /* BLEConnect.m */; };
 		D335B7BF1C0EC41E00975549 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335B7BE1C0EC41E00975549 /* FriendTableViewCell.swift */; };
 		D3364BE81C1AE42E0055C75C /* IMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D3364BE71C1AE42E0055C75C /* IMObject.m */; };
@@ -987,6 +988,7 @@
 		D32D080E1C0ADA7400E2C7EF /* 灰线@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "灰线@2x.png"; sourceTree = "<group>"; };
 		D32D08121C0AE4CD00E2C7EF /* sex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex@2x.png"; sourceTree = "<group>"; };
 		D32D08141C0AE55B00E2C7EF /* sex_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sex_select@2x.png"; sourceTree = "<group>"; };
+		D334CB011C414FFE00814DE9 /* RectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectView.swift; sourceTree = "<group>"; };
 		D33527011C2EEA760038015D /* BLEConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEConnect.h; sourceTree = "<group>"; };
 		D33527021C2EEA760038015D /* BLEConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEConnect.m; sourceTree = "<group>"; };
 		D335B7BE1C0EC41E00975549 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -1802,6 +1804,7 @@
 				B9E49BED1C314677000A3369 /* HealthWeeklyChartView.swift */,
 				D33C1E101C2D170100BF7AFA /* DottedLineView.h */,
 				D33C1E111C2D170100BF7AFA /* DottedLineView.m */,
+				D334CB011C414FFE00814DE9 /* RectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2005,7 +2008,7 @@
 				TargetAttributes = {
 					D39B898C1C087AC1009086B2 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = G65933C85Y;
+						DevelopmentTeam = F44XSCNJGN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2630,6 +2633,7 @@
 				D3EFF9C81C1820E30047E2B0 /* UIColor+greenbaby.m in Sources */,
 				D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */,
 				D36978BF1C1C407A0094921B /* NetWorkingContents.m in Sources */,
+				D334CB021C414FFE00814DE9 /* RectView.swift in Sources */,
 				D30902591C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift in Sources */,
 				D3EFFA371C186D7B0047E2B0 /* IMConnect.m in Sources */,
 				B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */,

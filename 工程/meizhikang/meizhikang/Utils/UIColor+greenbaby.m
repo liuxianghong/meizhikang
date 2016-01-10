@@ -30,7 +30,7 @@
         break;
         case HelathColorTypeSubhealth:
         {
-            return UIColorFromRGB(0x23debf);
+            return UIColorFromRGB(0xFFB92E);
         }
         break;
         case HelathColorTypeInfirm:

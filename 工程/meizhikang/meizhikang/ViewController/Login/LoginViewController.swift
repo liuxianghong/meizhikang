@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 import MagicalRecord
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var userNameTextField : UITextField!
     @IBOutlet weak var passWordTextField : UITextField!
@@ -23,6 +23,9 @@ class LoginViewController: UIViewController {
 //        self.userNameTextField.text = "12345671"
 //        self.passWordTextField.text = "111111"
 //        #endif
+        
+        self.userNameTextField.delegate = self
+        self.passWordTextField.delegate = self
         
         if UserInfo.LastLoginUser() != nil{
             self.userNameTextField.text = UserInfo.LastLoginUser()?.userName
@@ -50,6 +53,11 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 
