@@ -69,6 +69,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     self.isConnected = NO;
     self.heartCommandOn = YES;
+    self.warningState = NO;
     return self;
 }
 
@@ -91,6 +92,9 @@ uint64_t reversebytes_uint64t(uint64_t value){
     
     for (CBPeripheral *p in peris){
         NSLog(@"%@",p);
+        if (p.state != CBPeripheralStateConnected) {
+            continue;
+        }
         if (![peripherals containsObject:p]){
             [peripherals addObject:p];
         }
@@ -117,6 +121,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
 -(void)disconnect:(CBPeripheral *)peripheral
 {
     if (peripheral) {
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"BLEConnected"];
         [manager cancelPeripheralConnection:peripheral];
     }
 }
@@ -158,6 +163,9 @@ uint64_t reversebytes_uint64t(uint64_t value){
         CFUUIDBytes b2 = CFUUIDGetUUIDBytes((__bridge CFUUIDRef )peripheral.identifier);
         if (memcmp(&b1, &b2, 16) == 0) {
             [peripherals replaceObjectAtIndex:i withObject:peripheral];
+            if (connectDelegate) {
+                [connectDelegate peripheralFound];
+            }
             NSLog(@"Duplicated peripheral is found...\n");
             return;
         }
@@ -168,7 +176,8 @@ uint64_t reversebytes_uint64t(uint64_t value){
         [connectDelegate peripheralFound];
     }
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"BLEConnected"] isEqualToString:peripheral.identifier.UUIDString]) {
+    NSLog(@"BLEConnected : %@ %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"BLEConnected"] ,peripheral.identifier.UUIDString);
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"BLEConnected"] isEqualToString:peripheral.name]) {
         [self connect:peripheral];
     }
 }
@@ -186,12 +195,16 @@ uint64_t reversebytes_uint64t(uint64_t value){
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     NSLog(@"disconnected to the active peripheral\n");
-    if(activePeripheral != nil)
+    NSLog(@"%@",error);
+    [peripherals removeObject:peripheral];
+    self.isConnected = NO;
+    if(activePeripheral != nil){
+        activePeripheral = nil;
+    }
     if (connectDelegate) {
         [connectDelegate setDisconnect];
+        [connectDelegate peripheralFound];
     }
-    self.isConnected = NO;
-    activePeripheral = nil;
 }
 
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -224,7 +237,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
             NSLog(@" %d %@",rote, [f stringFromDate:date]);
             if (dataDelegate) {
-                [dataDelegate didUpdateHartValue:rote];
+                //[dataDelegate didUpdateHartValue:rote];
             }
         }
         else if (byte[0] == 0 && [data length] == 18){
@@ -253,6 +266,30 @@ uint64_t reversebytes_uint64t(uint64_t value){
             UInt8 rote = byte[1];
             if (dataDelegate) {
                 [dataDelegate didUpdateHartValue:rote];
+            }
+        }
+    }
+    else if ([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:STATUS_Warnsync_UUID]]){
+        if (byte[0] == 0x01) {
+            UInt8 flag = byte[1];
+            if (flag == 0x01) {
+                if ([data length]<3) {
+                    return;
+                }
+                if (byte[2] == 0x01) {
+                    self.warningState = YES;
+                } else if (byte[2] == 0x02) {
+                    self.warningState = NO;
+                }
+            }
+            else if (flag == 0x02){
+                BOOL ringSwich = byte[2] == 0x01 ? YES : NO;
+                if (ringSwich) {
+                    UInt8 ringType = byte[3];
+                }
+            }
+            if (dataDelegate) {
+                //[dataDelegate didUpdateHartValue:rote];
             }
         }
     }
@@ -323,37 +360,43 @@ uint64_t reversebytes_uint64t(uint64_t value){
        
         CBUUID *uuidSTATUS = [self getUUID:STATUS_Warnsync_UUID];
         if([self compareCBUUID:characteristic.UUID UUID2:uuidSTATUS]) {
-            Byte value[10];
-            value[0] = 0b00010000; //
-            value[1] = 0xff;
-            UInt32 time = (UInt32) [NSDate date].timeIntervalSince1970;
-            //memcpy(value+2, &time, 4);
-            value[5] = (time & 0xff);
-            value[4] = ((time >> 8) & 0xff);
-            value[3] = ((time >> 16) & 0xff);
-            value[2] = ((time >> 24) & 0xff);
             
-            NSTimeZone *defaultTimeZone = [NSTimeZone systemTimeZone];
-            UInt32 timeZone = (UInt32) defaultTimeZone.secondsFromGMT;
-            value[9] = (timeZone & 0xff);
-            value[8] = ((timeZone >> 8) & 0xff);
-            value[7] = ((timeZone >> 16) & 0xff);
-            value[6] = ((timeZone >> 24) & 0xff);
-            
-            NSData *data = [NSData dataWithBytes:value length:10];
-            [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
-            
-            UInt16 heart = self.heartCommandOn ? 3600 : 0;
-            [self setHeartCommand:heart];
-            
-            self.isConnected = YES;
-            if (connectDelegate) {
-                NSString *str = peripheral.identifier.UUIDString;
+            //UInt16 heart = self.heartCommandOn ? 3600 : 0;
+            //[self setHeartCommand:heart];
+            double delayInSeconds = 0.5;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                
+                Byte value[10];
+                value[0] = 0b00110000; //
+                value[1] = 0xff;
+                UInt32 time = (UInt32) [NSDate date].timeIntervalSince1970;
+                //memcpy(value+2, &time, 4);
+                value[5] = (time & 0xff);
+                value[4] = ((time >> 8) & 0xff);
+                value[3] = ((time >> 16) & 0xff);
+                value[2] = ((time >> 24) & 0xff);
+                
+                NSTimeZone *defaultTimeZone = [NSTimeZone systemTimeZone];
+                UInt32 timeZone = (UInt32) defaultTimeZone.secondsFromGMT;
+                value[9] = (timeZone & 0xff);
+                value[8] = ((timeZone >> 8) & 0xff);
+                value[7] = ((timeZone >> 16) & 0xff);
+                value[6] = ((timeZone >> 24) & 0xff);
+                
+                NSData *data = [NSData dataWithBytes:value length:10];
+                [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:peripheral data:data];
+                
+                self.isConnected = YES;
+                if (connectDelegate) {
+                    [connectDelegate setConnect];
+                }
+                NSString *str = peripheral.name;
                 [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"BLEConnected"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                [connectDelegate setConnect];
-                
-            }
+            });
+            
+            
         }
     }
     else {
@@ -377,6 +420,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     value[10] = 0x01;
     memcpy(value+11, &time, 2);
     NSData *data = [NSData dataWithBytes:value length:13];
+    NSLog(@"%@",data);
     [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
 }
 

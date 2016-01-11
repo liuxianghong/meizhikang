@@ -101,6 +101,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-meizhikang/SDWebImage.framework"
   install_framework "Pods-meizhikang/SWRevealViewController.framework"
   install_framework "Pods-meizhikang/WUEmoticonsKeyboard.framework"
+  install_framework "Pods-meizhikang/WYPopoverController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-meizhikang/AFNetworking.framework"
@@ -120,4 +121,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-meizhikang/SDWebImage.framework"
   install_framework "Pods-meizhikang/SWRevealViewController.framework"
   install_framework "Pods-meizhikang/WUEmoticonsKeyboard.framework"
+  install_framework "Pods-meizhikang/WYPopoverController.framework"
 fi

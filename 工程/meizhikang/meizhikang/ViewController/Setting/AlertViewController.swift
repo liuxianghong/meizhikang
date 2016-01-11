@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AlartViewControllerDelegate{
+protocol AlartViewControllerDelegate : NSObjectProtocol{
     func didClickButton(index:Int, tag:Int)
 }
 
@@ -16,7 +16,7 @@ class AlertViewController: UIViewController {
 
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var messgaeLabel : UILabel!
-    var delegate : AlartViewControllerDelegate?
+    weak var delegate : AlartViewControllerDelegate?
     var tag:Int = 0
     var titleText:String! = ""
     var messageText:String! = ""

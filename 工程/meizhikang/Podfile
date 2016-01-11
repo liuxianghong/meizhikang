@@ -19,5 +19,6 @@ pod 'CocoaAsyncSocket'
 pod 'MagicalRecord'
 pod 'WUEmoticonsKeyboard'
 pod 'ISEmojiView'
+pod 'WYPopoverController'
 end
 

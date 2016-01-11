@@ -192,7 +192,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     
     func cutDown(){
         #if DEBUG
-        self.didUpdateHealthValue(60, date: NSDate())
+        //self.didUpdateHealthValue(60, date: NSDate())
         #endif
         self.didHearCommandClick()
     }

@@ -11,6 +11,7 @@ import JSQMessagesViewController
 import MBProgressHUD
 import ISEmojiView
 import ObjectiveC
+import WYPopoverController
 
 enum JSQMessageSendingStatus: String{
     case Sending
@@ -135,7 +136,7 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
     }
 }
 
-class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ISEmojiViewDelegate {
+class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ISEmojiViewDelegate ,WYPopoverControllerDelegate,GroupMoreViewControllerDelegate{
 
     var currentAvatar: UIImage!
     var receiverId: String!
@@ -146,6 +147,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     var observer : NSObjectProtocol!
     var voiceTimeInterval : NSTimeInterval = 0
     var emojiView : ISEmojiView!
+    var popoverController : WYPopoverController!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
@@ -175,6 +177,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    @IBAction func moreClick(sneder : AnyObject?){
+        self.performSegueWithIdentifier("groupMoreInderfier", sender: sneder)
     }
     
     func addMessage(message : Message){
@@ -637,14 +643,46 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
         self.viewModel.playItemAt(indexPath.row)
     }
-    /*
+    
+    // MARK: - WY
+    
+    func popoverControllerDidPresentPopover(popoverController: WYPopoverController!){
+        print("popoverControllerDidPresentPopover")
+    }
+    
+    func popoverControllerDidDismissPopover(popoverController: WYPopoverController!){
+        print("popoverControllerDidDismissPopover")
+    }
+    
+    // MARK: - GroupMore
+    func didClickGroupMoreType(type : GroupMoreType){
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "groupMoreInderfier"{
+            let vc = segue.destinationViewController as! GroupMoreTableViewController
+            vc.preferredContentSize = CGSizeMake(120.0, 150)
+            vc.delegate = self
+            let popoverSegue = segue as! WYStoryboardPopoverSegue;
+            popoverController = popoverSegue.popoverControllerWithSender(sender, permittedArrowDirections: .Any, animated: true)
+            popoverController.delegate = self
+            popoverController.dismissOnTap = true
+            popoverController.theme.outerCornerRadius = 0
+            popoverController.theme.innerCornerRadius = 0
+            popoverController.theme.glossShadowColor = UIColor.clearColor()
+            popoverController.theme.fillTopColor = UIColor.clearColor()
+            popoverController.theme.fillBottomColor = UIColor.clearColor()
+            popoverController.theme.arrowHeight = 10
+            popoverController.popoverLayoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        }
+        
     }
-    */
+
 
 }
