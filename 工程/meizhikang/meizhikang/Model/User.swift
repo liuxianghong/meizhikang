@@ -60,6 +60,17 @@ class User: NSManagedObject {
         
     }
     
+    func healthDataHaveDataOn(date: NSDate) -> Bool{
+        let minTime = NSCalendar.currentCalendar().startOfDayForDate(date)
+        guard let maxTime = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: minTime, options: NSCalendarOptions(rawValue: 0)) else{
+            return false
+        }
+        let predicateTemplate = NSPredicate(format: "time <=  %@ AND time >= %@ AND user = %@", maxTime,minTime,self)
+        if HealthData.MR_findFirstWithPredicate(predicateTemplate) != nil{
+            return true
+        }
+        return false
+    }
     
     func healthDatas(minTime : NSDate ,maxTime : NSDate) -> [HealthData]?{
         let predicateTemplate = NSPredicate(format: "time <=  %@ AND time >= %@ AND user = %@", maxTime,minTime,self)
