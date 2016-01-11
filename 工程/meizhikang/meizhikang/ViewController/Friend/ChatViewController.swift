@@ -163,6 +163,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             }
         }
         
+        if group == nil{
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        
         self.title = group.gname
         let messages = Message.MR_findByAttribute("group", withValue: group, andOrderBy: "sendtime", ascending: true)
         for message in messages {
@@ -667,7 +671,18 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         
         if segue.identifier == "groupMoreInderfier"{
             let vc = segue.destinationViewController as! GroupMoreTableViewController
-            vc.preferredContentSize = CGSizeMake(120.0, 150)
+            vc.tableViewArray.append(.GroupMembers)
+            vc.tableViewArray.append(.GroupMessage)
+            vc.tableViewArray.append(.GroupOnShare)
+            if group.owner == UserInfo.CurrentUser()?.uid{
+                vc.tableViewArray.append(.GroupUpdateName)
+                vc.tableViewArray.append(.GroupDelete)
+                vc.tableViewArray.append(.GroupAddMenber)
+            }
+            else{
+                vc.tableViewArray.append(.GroupQuite)
+            }
+            vc.preferredContentSize = CGSizeMake(120.0, CGFloat(vc.tableViewArray.count * 46))
             vc.delegate = self
             let popoverSegue = segue as! WYStoryboardPopoverSegue;
             popoverController = popoverSegue.popoverControllerWithSender(sender, permittedArrowDirections: .Any, animated: true)

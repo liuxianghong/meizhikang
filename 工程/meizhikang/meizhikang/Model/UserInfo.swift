@@ -9,6 +9,8 @@
 import UIKit
 
 class UserInfo: NSObject {
+    static var autoLogin = true
+    static var ringing = false
     static func uid()->String?{
         if let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as? [String : AnyObject],let uid = userInfo["uid"] as? Int{
             return String(uid)

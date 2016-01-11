@@ -39,6 +39,7 @@
 -(void)ternOnRing:(UInt32)time;
 -(void)coloseRing:(BOOL)on;
 -(void)ternOffRing;
+-(BOOL)isBleConnected;
 @property (nonatomic, weak) id <BLEDataDelegate> dataDelegate;
 @property (nonatomic, weak) id <BLEConnectDelegate> connectDelegate;
 @property (nonatomic, assign) BOOL warningState;

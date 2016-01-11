@@ -22,6 +22,7 @@ class AlarmsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        UserInfo.ringing = true
         let strSoundFile = NSBundle.mainBundle().pathForResource("frog", ofType: "wav")
         let sample = NSURL(fileURLWithPath: strSoundFile!)
         let err = AudioServicesCreateSystemSoundID(sample, &soundID);
@@ -50,6 +51,7 @@ class AlarmsViewController: UIViewController {
         self.timer.invalidate()
         NSNotificationCenter.defaultCenter().removeObserver(observer)
         BLEConnect.Instance().ternOffRing()
+        UserInfo.ringing = false
     }
 
     @IBAction func endClick(sender : UIButton){

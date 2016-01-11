@@ -23,7 +23,7 @@ class MainViewController: UINavigationController {
         
         NSNotificationCenter.defaultCenter().addObserverForName("RingSwichOnNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
             
-            if self.timer != nil{
+            if UserInfo.ringing{
                 return
             }
             self.timerCount = 61
@@ -117,8 +117,7 @@ class MainViewController: UINavigationController {
             NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
             NSUserDefaults.standardUserDefaults().synchronize()
             if let bo = sender as? Bool{
-                let vc = segue.destinationViewController as! LoginViewController
-                vc.autoLogin = bo
+                UserInfo.autoLogin = bo
             }
             NSNotificationCenter.defaultCenter().postNotificationName("didLogoutNotification", object: nil)
         }

@@ -318,7 +318,7 @@
     } completion:^(NSData *data) {
         tokenIMConnect = [NSData dataWithBytes:[data bytes]+10 length:8];
         NSData *imageData = [NSData dataWithBytes:[data bytes]+18 length:([data length]-18)];
-        NSLog(@"imageData : %@",imageData);
+        //NSLog(@"imageData : %@",imageData);
         imageData = [NSString AESAndXORDecrypt:tokenIMConnect data:imageData];
         completion(tokenIMConnect,imageData);
     } failure:failure];
@@ -333,7 +333,7 @@
     memcpy(body+16,[codeData bytes],[codeData length]);
     
     NSData *ddd = [NSData dataWithBytes:body length:24];
-    NSLog(@"%@",ddd);
+    //NSLog(@"%@",ddd);
     
     NSData *data2 = [NSString AESAndXOREncrypt:tokenIMConnect data:ddd];
     long tag = ++connectTag;
@@ -347,7 +347,7 @@
     
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-    NSLog(@"%@",data);
+    //NSLog(@"%@",data);
     [self writeData:data tag:tag readHead:^UInt32(UInt32 lenth_) {
         return 0;
     } completion:^(NSData *data) {
@@ -370,7 +370,7 @@
     NSData *pwDataf = [pw getPassWord];
     tokenIMConnect = token;
     passWordIMConnect = pwDataf;
-    NSLog(@"密码 %@",passWordIMConnect);
+    //NSLog(@"密码 %@",passWordIMConnect);
     memcpy(body+8+16, [passWordIMConnect bytes], [passWordIMConnect length]);
     
     UInt8 sexAndAhe = (sex<<7) + age;
@@ -582,7 +582,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
+    //NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
     if (!isListen && tag != -1) {
         [self listenHeadDataWithIMObject:currentIM];
     }
@@ -591,7 +591,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    NSLog(@"didReadData%@",data);
+    //NSLog(@"didReadData%@",data);
     
     if (tag == 0) {
         isListen = false;

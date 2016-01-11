@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class AlarmViewController: UIViewController {
 
@@ -62,8 +63,21 @@ class AlarmViewController: UIViewController {
     }
     
     @IBAction func switchClick(sender : UISwitch?){
-        BLEConnect.Instance().coloseRing(alarmSwitch.on)
-        chageTime()
+        if BLEConnect.Instance().isBleConnected(){
+            BLEConnect.Instance().coloseRing(alarmSwitch.on)
+            chageTime()
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.mode = .Text
+            hud.detailsLabelText = "设置成功"
+            hud.hide(true, afterDelay: 1.5)
+        }
+        else{
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.mode = .Text
+            hud.detailsLabelText = "蓝牙尚未连接！"
+            hud.hide(true, afterDelay: 1.5)
+            self.alarmSwitch.on = !self.alarmSwitch.on
+        }
     }
 
     func chageTime(){

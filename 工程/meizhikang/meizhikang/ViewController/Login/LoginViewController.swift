@@ -15,7 +15,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var userNameTextField : UITextField!
     @IBOutlet weak var passWordTextField : UITextField!
     var first : Bool = true
-    var autoLogin = true
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,12 +42,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if first && autoLogin{
+        if first && UserInfo.autoLogin{
             first = false
             if !self.passWordTextField.text!.isEmpty{
                 loginClick(1)
             }
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserInfo.autoLogin = true
     }
 
     override func didReceiveMemoryWarning() {
