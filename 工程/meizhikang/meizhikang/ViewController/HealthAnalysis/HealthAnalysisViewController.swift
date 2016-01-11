@@ -78,6 +78,9 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
             let user = UserInfo.CurrentUser() else{
             return
         }
+        if dataDate.compare(self.todayDate!) != .OrderedAscending{
+            return
+        }
         if user.healthDataHaveDataOn(dataDate) {
             self.performSegueWithIdentifier(HealthAnalysisConstant.HealthAnalysisSegueIdentifier, sender: self.toSystemDate(date))
         }
@@ -91,8 +94,13 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
         guard let cDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: systemDate, options: NSCalendarOptions(rawValue: 0)) else{
             return false
         }
-        if cDate.compare(self.todayDate!) == .OrderedDescending{
+        if cDate.compare(self.todayDate!) != .OrderedAscending{
            return false
+        }
+        let todayComponents = NSCalendar.currentCalendar().componentsInTimeZone(NSTimeZone.systemTimeZone(), fromDate: NSDate())
+        let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: date)
+        if todayComponents.year == dateComponents.year && todayComponents.month == dateComponents.month && todayComponents.day == dateComponents.day{
+            return NSDate().compare(self.todayDate!) == .OrderedDescending
         }
         return self.cacheDay(cDate)
     }
