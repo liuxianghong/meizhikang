@@ -453,6 +453,8 @@
 		D33C1E121C2D170100BF7AFA /* DottedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33C1E111C2D170100BF7AFA /* DottedLineView.m */; };
 		D33EF1031C4390E80074E9FC /* GroupMoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */; };
 		D33EF1051C43A5980074E9FC /* GroupMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */; };
+		D33EF1071C43B97B0074E9FC /* frog.wav in Resources */ = {isa = PBXBuildFile; fileRef = D33EF1061C43B97B0074E9FC /* frog.wav */; };
+		D33EF1091C43C9E00074E9FC /* AlarmsTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1081C43C9E00074E9FC /* AlarmsTestViewController.swift */; };
 		D361575C1C09760B009ED19D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D36157541C09760B009ED19D /* README.md */; };
 		D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */; };
 		D361576A1C097937009ED19D /* NSString+scisky.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157691C097937009ED19D /* NSString+scisky.m */; };
@@ -1008,6 +1010,8 @@
 		D33C1E111C2D170100BF7AFA /* DottedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DottedLineView.m; sourceTree = "<group>"; };
 		D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMoreTableViewController.swift; sourceTree = "<group>"; };
 		D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMoreTableViewCell.swift; sourceTree = "<group>"; };
+		D33EF1061C43B97B0074E9FC /* frog.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = frog.wav; sourceTree = "<group>"; };
+		D33EF1081C43C9E00074E9FC /* AlarmsTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmsTestViewController.swift; sourceTree = "<group>"; };
 		D36157541C09760B009ED19D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHTTPRequestOperationManager.m; sourceTree = "<group>"; };
@@ -1754,6 +1758,7 @@
 		D36157531C09760B009ED19D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D33EF1061C43B97B0074E9FC /* frog.wav */,
 				B97515801C3D571C00A7DC16 /* drawable-hdpi */,
 				D309025D1C2A8625001FDF7B /* html */,
 				D3EFF9CC1C182B8F0047E2B0 /* 健康图 */,
@@ -1944,6 +1949,7 @@
 				D3F8E2C01C0C384300263B4E /* SwitchoverViewController.swift */,
 				D3F8E2C11C0C384300263B4E /* UserInformationTableViewController.swift */,
 				D3F8E2E11C0D77D500263B4E /* AlarmViewController.swift */,
+				D33EF1081C43C9E00074E9FC /* AlarmsTestViewController.swift */,
 				D3F8E2E71C0D86C900263B4E /* AlarmsViewController.swift */,
 				D3EFF9C41C181D720047E2B0 /* ThemeViewController.swift */,
 			);
@@ -2231,6 +2237,7 @@
 				B97515F81C3D571C00A7DC16 /* emoji_11.png in Resources */,
 				D311C4931C09A70C00C80C05 /* BLUEDIAODIAO-拷贝@3x.png in Resources */,
 				B97516201C3D571C00A7DC16 /* emoji_208.png in Resources */,
+				D33EF1071C43B97B0074E9FC /* frog.wav in Resources */,
 				B99A8E001C0BF43D0097E9B3 /* 左@2x.png in Resources */,
 				B9709B361C299663004DCD50 /* chat_animation_white2.png in Resources */,
 				B99A8E111C0BF43D0097E9B3 /* 灰框-.png in Resources */,
@@ -2617,6 +2624,7 @@
 				D3F8E2CF1C0C384B00263B4E /* LoginViewController.swift in Sources */,
 				D32D080D1C0AD39500E2C7EF /* MainViewController.swift in Sources */,
 				D336C9301C2586C600E967EB /* UserInfo.swift in Sources */,
+				D33EF1091C43C9E00074E9FC /* AlarmsTestViewController.swift in Sources */,
 				D33C1E121C2D170100BF7AFA /* DottedLineView.m in Sources */,
 				D3C263D01C2806290098BEAE /* GroupMember+CoreDataProperties.swift in Sources */,
 				D3897DDF1C09934100D18BAC /* ViewController+menu.m in Sources */,

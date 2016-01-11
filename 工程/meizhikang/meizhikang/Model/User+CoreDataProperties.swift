@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  meizhikang
 //
-//  Created by 刘向宏 on 16/1/9.
+//  Created by 刘向宏 on 16/1/11.
 //  Copyright © 2016年 刘向宏. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,6 +17,7 @@ extension User {
     @NSManaged var avatar: String?
     @NSManaged var createtime: NSNumber?
     @NSManaged var gid: NSNumber?
+    @NSManaged var heartCommand: NSNumber?
     @NSManaged var height: NSNumber?
     @NSManaged var nickname: String?
     @NSManaged var old: NSNumber?
@@ -27,7 +28,7 @@ extension User {
     @NSManaged var uid: NSNumber?
     @NSManaged var userName: String?
     @NSManaged var weight: NSNumber?
-    @NSManaged var heartCommand: NSNumber?
+    @NSManaged var alarmTime: NSNumber?
     @NSManaged var emails: NSSet?
     @NSManaged var groups: NSSet?
     @NSManaged var healthDatas: NSSet?

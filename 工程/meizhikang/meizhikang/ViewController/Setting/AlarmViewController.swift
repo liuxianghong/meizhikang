@@ -23,7 +23,28 @@ class AlarmViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.buttonClic(timeButton1)
+        
+        timeButton1.selected = false
+        selectedButton = timeButton1
+        alarmSwitch.on = true
+        if let user = UserInfo.CurrentUser(){
+            if user.alarmTime == 0{
+                alarmSwitch.on = false
+            }
+            else if user.alarmTime == 2*60{
+                selectedButton = timeButton2
+            }
+            else if user.alarmTime == 3*60{
+                selectedButton = timeButton3
+            }
+            else if user.alarmTime == 4*60{
+                selectedButton = timeButton4
+            }
+            else if user.alarmTime == 5*60{
+                selectedButton = timeButton5
+            }
+        }
+        selectedButton.selected = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,8 +58,25 @@ class AlarmViewController: UIViewController {
         }
         sender.selected = true
         selectedButton = sender
+        chageTime()
+    }
+    
+    @IBAction func switchClick(sender : UISwitch?){
+        BLEConnect.Instance().coloseRing(alarmSwitch.on)
+        chageTime()
     }
 
+    func chageTime(){
+        if let user = UserInfo.CurrentUser(){
+            if alarmSwitch.on{
+                user.alarmTime = NSNumber(integer: selectedButton.tag * 60)
+            }
+            else{
+                user.alarmTime = NSNumber(integer: 0)
+            }
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        }
+    }
     /*
     // MARK: - Navigation
 
