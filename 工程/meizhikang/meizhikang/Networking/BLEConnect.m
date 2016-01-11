@@ -271,21 +271,30 @@ uint64_t reversebytes_uint64t(uint64_t value){
     }
     else if ([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:STATUS_Warnsync_UUID]]){
         if (byte[0] == 0x01) {
+            if ([data length]<3) {
+                return;
+            }
             UInt8 flag = byte[1];
             if (flag == 0x01) {
-                if ([data length]<3) {
-                    return;
-                }
                 if (byte[2] == 0x01) {
                     self.warningState = YES;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RingStateNotification" object:@(self.warningState)];
                 } else if (byte[2] == 0x02) {
                     self.warningState = NO;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RingStateNotification" object:@(self.warningState)];
                 }
             }
             else if (flag == 0x02){
                 BOOL ringSwich = byte[2] == 0x01 ? YES : NO;
                 if (ringSwich) {
+                    if ([data length]<4) {
+                        return;
+                    }
                     UInt8 ringType = byte[3];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RingSwichOnNotification" object:@(ringType)];
+                }
+                else{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RingSwichOffNotification" object:nil];
                 }
             }
             if (dataDelegate) {
@@ -407,6 +416,66 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 
 #pragma mark -
+
+-(void)ternOnRing:(UInt32)time{
+    [self setAlarms:0x03 on:NO flag:2 time:time];
+}
+
+-(void)coloseRing:(BOOL)on{
+    [self setAlarms:0 on:on flag:1 time:0];
+}
+
+-(void)ternOffRing{
+    [self setAlarms:0 on:NO flag:2 time:0];
+}
+/*
+ flag
+ 0x01	预警上锁开关
+ 0x02	预警事件
+ type
+ 0x01	手动预警（Ble设备产生） //Warn
+ 0x02	低心率预警（Ble设备产生） //Warn
+ 0x03	APP告警（App产生） //Warn
+ 0x00	关闭铃声
+ 
+ 0x01	Warn
+ 0x02	关闭铃声
+ */
+
+-(void)setAlarms:(UInt8)type on:(BOOL)on flag:(UInt8)flag time:(UInt32)time{
+    if (!self.isConnected) {
+        return;
+    }
+    Byte value[13];
+    bzero(value, 13);
+    long length = 1;
+    value[0] = flag;
+    if (flag == 1) {
+        value[1] = on? 0x01: 0x02;
+        length = 2;
+    }else if (flag == 2){
+        if (type == 0) {
+            length = 2;
+            value[1] =  0x02;
+        }
+        else{
+            value[1] =  0x01;
+            value[2] =  type;
+            
+            value[6] = (time & 0xff);
+            value[5] = ((time >> 8) & 0xff);
+            value[4] = ((time >> 16) & 0xff);
+            value[3] = ((time >> 24) & 0xff);
+            //memcpy(value+3, &time, 4);
+            length = 3 + 4;
+        }
+    }
+    else{
+        return;
+    }
+    NSData *data = [NSData dataWithBytes:value length:length];
+    [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_Warnsync_UUID p:activePeripheral data:data];
+}
 
 -(void)setHeartCommand:(UInt16)time{
     if (!self.isConnected) {

@@ -12,11 +12,26 @@ import MBProgressHUD
 class MainViewController: UINavigationController {
 
     var first : Bool = true
+    var timer : NSTimer!
+    var timerCount =  60
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "login:", name: "loginOutNotification", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("RingSwichOnNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
+            
+            if self.timer != nil{
+                return
+            }
+            self.timerCount = 61
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:"cutDown" , userInfo: nil, repeats: true)
+            self.cutDown()
+            self.performSegueWithIdentifier("RingIdenfier", sender: nil)
+        }
+        
         BLEConnect.Instance().startScan()
     }
     
@@ -42,6 +57,15 @@ class MainViewController: UINavigationController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+    
+    func cutDown(){
+        timerCount--
+        if timerCount == 0{
+            self.timer.invalidate()
+            self.timer = nil
+        }
+    }
+    
     
     func login(object : AnyObject?){
         print(object)

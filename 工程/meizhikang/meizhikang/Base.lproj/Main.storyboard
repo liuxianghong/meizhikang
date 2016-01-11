@@ -22,6 +22,7 @@
                     <connections>
                         <segue destination="C2e-pf-fxS" kind="relationship" relationship="rootViewController" id="0Ef-jg-Ivd"/>
                         <segue destination="ytZ-Bf-e8Y" kind="presentation" identifier="loginIdentifier" id="T72-Sr-VDI"/>
+                        <segue destination="QOe-2P-8xe" kind="presentation" identifier="RingIdenfier" id="6ex-8x-kl3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XiA-AB-cmz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4927,6 +4928,9 @@
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="753" verticalHuggingPriority="753" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azz-4i-0xd">
                                 <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchClick:" destination="5AF-3C-g2q" eventType="valueChanged" id="SKk-qM-4hg"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5043,6 +5047,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="alarmSwitch" destination="Azz-4i-0xd" id="otT-r8-IQG"/>
                         <outlet property="timeButton1" destination="Gmj-Gs-410" id="7e7-MB-IhD"/>
                         <outlet property="timeButton2" destination="Cyo-xv-CTe" id="yVf-VU-al5"/>
                         <outlet property="timeButton3" destination="VC4-3w-31Q" id="9ne-uu-a9Q"/>
@@ -5057,7 +5062,7 @@
         <!--告警演示-->
         <scene sceneID="fSs-ds-x5a">
             <objects>
-                <viewController title="告警演示" id="0yw-S2-dmr" sceneMemberID="viewController">
+                <viewController title="告警演示" id="0yw-S2-dmr" customClass="AlarmsTestViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ViI-tW-CMT"/>
                         <viewControllerLayoutGuide type="bottom" id="C0Y-Ic-iOu"/>
@@ -5089,7 +5094,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="re6-L0-ppO" kind="show" id="4gd-W3-Wrs"/>
+                                    <action selector="testClick" destination="0yw-S2-dmr" eventType="touchUpInside" id="F8P-dq-qCt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本软件在开启时间内将持续监测你的身体状况，当经过一系列计算，得知你的身体出现异常时，将触发警报，手机将持续震动并发出警报。如果你认为告警是一次错误判断，可在规定倒计时内点击取消，倒计时结束未取消，警报将通过网络或短信方式发送给你的亲友。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsG-SV-9iX">
@@ -5152,121 +5157,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="33v-Si-8Yd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4854" y="5240.25"/>
-        </scene>
-        <!--告警消息-->
-        <scene sceneID="abY-pe-U83">
-            <objects>
-                <viewController title="告警消息" id="re6-L0-ppO" customClass="AlarmsViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nVU-WT-mR6"/>
-                        <viewControllerLayoutGuide type="bottom" id="BH4-ok-wSE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TZ6-x2-yun">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RG8-Yc-Ddj">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="77" id="Xr0-9R-ZJ4"/>
-                                    <constraint firstAttribute="height" constant="77" id="Zjp-4g-DyH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="点击结束" backgroundImage="圆-灰.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Xr0-9R-ZJ4"/>
-                                        <exclude reference="Zjp-4g-DyH"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Xr0-9R-ZJ4"/>
-                                        <include reference="Zjp-4g-DyH"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="endClick:" destination="re6-L0-ppO" eventType="touchUpInside" id="7sT-TN-jmZ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请注意，这是一次模拟报警" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43Q-dy-3p6">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="1" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFO-HD-Gww">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自动报警剩余时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Tr-ax-Kvl">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="RG8-Yc-Ddj" firstAttribute="centerX" secondItem="TZ6-x2-yun" secondAttribute="centerX" id="7oA-DX-Y3C"/>
-                            <constraint firstItem="gFO-HD-Gww" firstAttribute="centerX" secondItem="TZ6-x2-yun" secondAttribute="centerX" id="E0n-JA-mcz"/>
-                            <constraint firstItem="gFO-HD-Gww" firstAttribute="centerY" secondItem="TZ6-x2-yun" secondAttribute="centerY" id="H62-DM-Ewl"/>
-                            <constraint firstItem="5Tr-ax-Kvl" firstAttribute="centerX" secondItem="TZ6-x2-yun" secondAttribute="centerX" id="LEQ-bg-A4v"/>
-                            <constraint firstItem="BH4-ok-wSE" firstAttribute="top" secondItem="RG8-Yc-Ddj" secondAttribute="bottom" constant="30" id="oo4-ZL-gO8"/>
-                            <constraint firstItem="43Q-dy-3p6" firstAttribute="centerX" secondItem="TZ6-x2-yun" secondAttribute="centerX" id="tK7-8p-dM9"/>
-                            <constraint firstItem="43Q-dy-3p6" firstAttribute="top" secondItem="nVU-WT-mR6" secondAttribute="bottom" constant="19" id="uyK-PI-Gv9"/>
-                            <constraint firstItem="gFO-HD-Gww" firstAttribute="top" secondItem="5Tr-ax-Kvl" secondAttribute="bottom" constant="10" id="vqg-Fz-QkM"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="RG8-Yc-Ddj"/>
-                                <exclude reference="43Q-dy-3p6"/>
-                                <exclude reference="gFO-HD-Gww"/>
-                                <exclude reference="5Tr-ax-Kvl"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="oo4-ZL-gO8"/>
-                                <exclude reference="7oA-DX-Y3C"/>
-                                <exclude reference="tK7-8p-dM9"/>
-                                <exclude reference="uyK-PI-Gv9"/>
-                                <exclude reference="LEQ-bg-A4v"/>
-                                <exclude reference="E0n-JA-mcz"/>
-                                <exclude reference="H62-DM-Ewl"/>
-                                <exclude reference="vqg-Fz-QkM"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="RG8-Yc-Ddj"/>
-                                <include reference="43Q-dy-3p6"/>
-                                <include reference="gFO-HD-Gww"/>
-                                <include reference="5Tr-ax-Kvl"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="oo4-ZL-gO8"/>
-                                <include reference="7oA-DX-Y3C"/>
-                                <include reference="tK7-8p-dM9"/>
-                                <include reference="uyK-PI-Gv9"/>
-                                <include reference="LEQ-bg-A4v"/>
-                                <include reference="E0n-JA-mcz"/>
-                                <include reference="H62-DM-Ewl"/>
-                                <include reference="vqg-Fz-QkM"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="endButton" destination="RG8-Yc-Ddj" id="eT5-vA-Zjd"/>
-                        <outlet property="timeLabel" destination="gFO-HD-Gww" id="ULj-39-5BT"/>
-                        <outlet property="typeLabel" destination="43Q-dy-3p6" id="uFb-ay-J1Y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Il3-vC-9qn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5922" y="5240.25"/>
         </scene>
         <!--修改密码-->
         <scene sceneID="5FV-SH-FL2">
@@ -8084,6 +7974,152 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ma4-pF-a6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3847.5" y="-1437"/>
+        </scene>
+        <!--告警消息-->
+        <scene sceneID="tFw-6W-Dmg">
+            <objects>
+                <viewController title="告警消息" id="BAY-mn-Sa9" customClass="AlarmsViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pej-u1-bYf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gfx-KB-5zr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8R0-mH-TeN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0EU-N5-MfG">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="fnQ-Bq-jcf"/>
+                                    <constraint firstAttribute="height" constant="77" id="v24-Na-bB7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="点击结束" backgroundImage="圆-灰.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fnQ-Bq-jcf"/>
+                                        <exclude reference="v24-Na-bB7"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="fnQ-Bq-jcf"/>
+                                        <include reference="v24-Na-bB7"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="endClick:" destination="BAY-mn-Sa9" eventType="touchUpInside" id="4kn-xH-RRF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请注意，这是一次模拟报警" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQ4-WP-aMg">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="110" y="83" width="180" height="18"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS1-U2-GMt">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="136" y="370" width="128" height="60"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自动报警剩余时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOv-iz-4wJ">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="132" y="339" width="136" height="21"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cS1-U2-GMt" firstAttribute="centerY" secondItem="8R0-mH-TeN" secondAttribute="centerY" id="0HF-kh-6x0"/>
+                            <constraint firstItem="NOv-iz-4wJ" firstAttribute="centerX" secondItem="8R0-mH-TeN" secondAttribute="centerX" id="De0-Gg-Sg7"/>
+                            <constraint firstItem="cS1-U2-GMt" firstAttribute="top" secondItem="NOv-iz-4wJ" secondAttribute="bottom" constant="10" id="ESd-wx-hhF"/>
+                            <constraint firstItem="xQ4-WP-aMg" firstAttribute="top" secondItem="pej-u1-bYf" secondAttribute="bottom" constant="19" id="F4P-1B-rNm"/>
+                            <constraint firstItem="0EU-N5-MfG" firstAttribute="centerX" secondItem="8R0-mH-TeN" secondAttribute="centerX" id="bSP-Tu-Tlq"/>
+                            <constraint firstItem="xQ4-WP-aMg" firstAttribute="centerX" secondItem="8R0-mH-TeN" secondAttribute="centerX" id="eVa-2i-z8V"/>
+                            <constraint firstItem="cS1-U2-GMt" firstAttribute="centerX" secondItem="8R0-mH-TeN" secondAttribute="centerX" id="hk3-0a-b4g"/>
+                            <constraint firstItem="Gfx-KB-5zr" firstAttribute="top" secondItem="0EU-N5-MfG" secondAttribute="bottom" constant="30" id="zUU-Gd-PXR"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="0EU-N5-MfG"/>
+                                <exclude reference="xQ4-WP-aMg"/>
+                                <exclude reference="cS1-U2-GMt"/>
+                                <exclude reference="NOv-iz-4wJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="zUU-Gd-PXR"/>
+                                <exclude reference="bSP-Tu-Tlq"/>
+                                <exclude reference="eVa-2i-z8V"/>
+                                <exclude reference="F4P-1B-rNm"/>
+                                <exclude reference="De0-Gg-Sg7"/>
+                                <exclude reference="hk3-0a-b4g"/>
+                                <exclude reference="0HF-kh-6x0"/>
+                                <exclude reference="ESd-wx-hhF"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="0EU-N5-MfG"/>
+                                <include reference="xQ4-WP-aMg"/>
+                                <include reference="cS1-U2-GMt"/>
+                                <include reference="NOv-iz-4wJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="zUU-Gd-PXR"/>
+                                <include reference="bSP-Tu-Tlq"/>
+                                <include reference="eVa-2i-z8V"/>
+                                <include reference="F4P-1B-rNm"/>
+                                <include reference="De0-Gg-Sg7"/>
+                                <include reference="hk3-0a-b4g"/>
+                                <include reference="0HF-kh-6x0"/>
+                                <include reference="ESd-wx-hhF"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="告警信息" id="X12-jS-vK0"/>
+                    <connections>
+                        <outlet property="endButton" destination="0EU-N5-MfG" id="O1F-PR-4Ip"/>
+                        <outlet property="timeLabel" destination="cS1-U2-GMt" id="LGf-mt-XJe"/>
+                        <outlet property="typeLabel" destination="xQ4-WP-aMg" id="WbE-8Q-11P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0br-Sh-TPF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="211.5" y="-667.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="81C-JW-V5g">
+            <objects>
+                <navigationController id="QOe-2P-8xe" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zkw-Gu-TLm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BAY-mn-Sa9" kind="relationship" relationship="rootViewController" id="Agx-V2-cTA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DUV-UF-drw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-747" y="-675.75"/>
         </scene>
     </scenes>
     <resources>

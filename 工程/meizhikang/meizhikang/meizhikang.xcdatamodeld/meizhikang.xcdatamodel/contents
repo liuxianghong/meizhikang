@@ -42,6 +42,7 @@
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="messages" inverseEntity="Group" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="alarmTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createtime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="gid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -66,6 +67,6 @@
         <element name="GroupMember" positionX="-108" positionY="0" width="128" height="105"/>
         <element name="HealthData" positionX="-108" positionY="0" width="128" height="105"/>
         <element name="Message" positionX="-117" positionY="198" width="126" height="180"/>
-        <element name="User" positionX="-306" positionY="-81" width="128" height="300"/>
+        <element name="User" positionX="-306" positionY="-81" width="128" height="315"/>
     </elements>
 </model>
