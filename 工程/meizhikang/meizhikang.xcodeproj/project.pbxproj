@@ -12,6 +12,7 @@
 		B930DEE61C1438C4003576F6 /* HealthReportHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930DEE51C1438C4003576F6 /* HealthReportHeaderTableViewCell.swift */; };
 		B930DEE81C1457E1003576F6 /* EasyOptionalUnwrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930DEE71C1457E1003576F6 /* EasyOptionalUnwrapping.swift */; };
 		B930DEEA1C145822003576F6 /* Array+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B930DEE91C145822003576F6 /* Array+Extenstion.swift */; };
+		B959301C1C43F0750079AA9D /* UIImage+DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959301B1C43F0750079AA9D /* UIImage+DrawView.swift */; };
 		B95CA5141C239EED002CF05B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95CA5131C239EED002CF05B /* SwiftyJSON.swift */; };
 		B96C98B61C0EC7CB00228D21 /* HealthReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98B51C0EC7CB00228D21 /* HealthReportViewController.swift */; };
 		B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C98BB1C11C33900228D21 /* HealthReportContainerViewController.swift */; };
@@ -555,6 +556,7 @@
 		B930DEE51C1438C4003576F6 /* HealthReportHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthReportHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B930DEE71C1457E1003576F6 /* EasyOptionalUnwrapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyOptionalUnwrapping.swift; sourceTree = "<group>"; };
 		B930DEE91C145822003576F6 /* Array+Extenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extenstion.swift"; sourceTree = "<group>"; };
+		B959301B1C43F0750079AA9D /* UIImage+DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+DrawView.swift"; sourceTree = "<group>"; };
 		B95CA5131C239EED002CF05B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B96C98B51C0EC7CB00228D21 /* HealthReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthReportViewController.swift; sourceTree = "<group>"; };
 		B96C98BB1C11C33900228D21 /* HealthReportContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthReportContainerViewController.swift; sourceTree = "<group>"; };
@@ -1785,6 +1787,7 @@
 				D3897DDD1C09934100D18BAC /* ViewController+menu.h */,
 				D3897DDE1C09934100D18BAC /* ViewController+menu.m */,
 				B930DEE91C145822003576F6 /* Array+Extenstion.swift */,
+				B959301B1C43F0750079AA9D /* UIImage+DrawView.swift */,
 				B9709B2C1C29962C004DCD50 /* JSQAudioMediaItem.h */,
 				B9709B2D1C29962C004DCD50 /* JSQAudioMediaItem.m */,
 				B97516731C3FBB1B00A7DC16 /* JSQMyPhotoMediaItem.swift */,
@@ -2623,6 +2626,7 @@
 				B96C98B61C0EC7CB00228D21 /* HealthReportViewController.swift in Sources */,
 				D336C92C1C25868B00E967EB /* Group.swift in Sources */,
 				B96C98BE1C11C9DE00228D21 /* EmptySegue.swift in Sources */,
+				B959301C1C43F0750079AA9D /* UIImage+DrawView.swift in Sources */,
 				D3C263D11C2806290098BEAE /* GroupMember.swift in Sources */,
 				B97516741C3FBB1B00A7DC16 /* JSQMyPhotoMediaItem.swift in Sources */,
 				D3897E251C09A08400D18BAC /* MenuViewController.swift in Sources */,

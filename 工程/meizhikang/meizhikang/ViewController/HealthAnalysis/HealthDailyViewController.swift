@@ -72,7 +72,6 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
                 let v = Int(data.healthValue!)
                 return DailyViewLineData(position: pos / CGFloat(24*60*60), value: v)
             })
-            
 //            self.todayPercent.healthPercent.text = percentOf(data.filter({ (item) -> Bool in
 //                return dateIn(0, offset2: 1, date: item.time!)
 //            }), lowValue: 79, hightValue: 1000)
@@ -133,6 +132,15 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func generateDailyImage() -> UIImage?{
+        let trans = self.chartView.transform
+        defer{
+            self.chartView.transform = trans
+        }
+        self.chartView.transform = CGAffineTransformIdentity
+        return UIImage.imageWith(self.chartView)
+    }
+    
     @IBAction func weeklyReportClicked(sender: UIButton) {
         self.chartView.setNeedsDisplay()
     }
@@ -163,6 +171,7 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
             scrollView.zoomScale = self.currentScale / 2
         }
     }
+    
     /*
     // MARK: - Navigation
 
