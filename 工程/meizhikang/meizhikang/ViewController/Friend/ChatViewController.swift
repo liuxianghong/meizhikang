@@ -666,11 +666,55 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         case .GroupOnShare:break
         case .GroupUpdateName:
             groupUpdateName()
-        case .GroupDelete:break
+        case .GroupDelete:
+            deleteGroup()
         case .GroupAddMenber:break
         case .GroupQuite:break
         default: break
         }
+    }
+    
+    func deleteGroup(){
+        
+        let actionGroup = UIAlertController(title: "", message: "是否要删除组", preferredStyle: .Alert)
+        let actionA = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+            IMRequst.DeleteGroupByGid(self.group.gid, completion: { (object) -> Void in
+                print(object)
+                let joson = JSON(object)
+                let flag = joson["flag"].intValue
+                if flag == 1{
+                    hud.detailsLabelText = "删除组成功";
+                    let users = self.group.mutableSetValueForKey("user")
+                    users.removeObject(UserInfo.CurrentUser()!)
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+                else
+                {
+                    hud.detailsLabelText = "删除组失败";
+                }
+                hud.mode = .Text
+                
+                hud.hide(true, afterDelay: 1.5)
+                
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+        })
+        
+        let actionC = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            
+        })
+        actionGroup.addAction(actionA)
+        actionGroup.addAction(actionC)
+        self.presentViewController(actionGroup, animated: true, completion: { () -> Void in
+            
+        })
+        
     }
     
     func groupUpdateName(){
