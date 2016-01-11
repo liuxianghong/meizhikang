@@ -31,8 +31,13 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
     }
     
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
-        self.performSegueWithIdentifier(HealthAnalysisConstant.HealthAnalysisSegueIdentifier, sender: date)
+        let currentGMT = NSTimeZone(abbreviation: "GMT")
+        let currentZone = NSTimeZone.systemTimeZone()
+        let interval = (currentGMT?.secondsFromGMTForDate(date))! - currentZone.secondsFromGMTForDate(date)
+        let currentTimeZoneDate = NSDate(timeInterval: NSTimeInterval(interval), sinceDate: date)
+        self.performSegueWithIdentifier(HealthAnalysisConstant.HealthAnalysisSegueIdentifier, sender: currentTimeZoneDate)
         calendar.deselectDate(date)
+        print(NSTimeZone.systemTimeZone().secondsFromGMT)
     }
     // MARK: - Navigation
 

@@ -59,15 +59,16 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
         self.yesterdayPercent.healthPercent.text = "b"
         self.lastweekPercent.healthPercent.text = "c"
         self.lastmonthPercent.healthPercent.text = "d"
-        guard let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -30, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0)),
-            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))else{
+        guard let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -30 * 24 - 4, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0)),
+            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: 20, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))else{
                 return
         }
         if let data = UserInfo.CurrentUser()?.healthDatas(minDate, maxTime: maxDate) where data.count > 0{
             self.chartView.data = data.filter({ (data) -> Bool in
                 return dateIn(0, offset2: 1, date: currentDay!)
             }).map({ (data) -> DailyViewLineData in
-                let pos = CGFloat((data.time?.timeIntervalSinceDate(self.currentDay!))!)
+                let offsetDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
+                let pos = CGFloat((data.time?.timeIntervalSinceDate(offsetDate!))!)
                 let v = Int(data.healthValue!)
                 return DailyViewLineData(position: pos / CGFloat(24*60*60), value: v)
             })
@@ -112,8 +113,8 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
     }
     
     func dateIn(offset1: Int,offset2: Int,date: NSDate) -> Bool{
-        let from = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: offset1, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
-        let to = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: offset2, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
+        let from = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: offset1 * 24 - 4, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
+        let to = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: offset2 * 24 - 4, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
         if date.compare(from!) == .OrderedAscending{
             return false
         }
