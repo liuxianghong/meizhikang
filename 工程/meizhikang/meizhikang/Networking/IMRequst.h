@@ -24,6 +24,8 @@
 
 +(void)CreateGroupByGid:(NSString *)groupName completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
++(void)UpdateGroupNameByGid:(NSNumber *)gid name:(NSString *)groupName completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
 +(void)BGNotifyByDeviceToken:(NSString *)token completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 +(void)getRegistToken:(NSString *)userName completion:(IMObjectTokenCompletionHandler)completion failure:(IMObjectFailureHandler)failure;

@@ -660,6 +660,61 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     // MARK: - GroupMore
     func didClickGroupMoreType(type : GroupMoreType){
+        switch type{
+        case .GroupMembers:break
+        case .GroupMessage:break
+        case .GroupOnShare:break
+        case .GroupUpdateName:
+            groupUpdateName()
+        case .GroupDelete:break
+        case .GroupAddMenber:break
+        case .GroupQuite:break
+        default: break
+        }
+    }
+    
+    func groupUpdateName(){
+        let actionGroup = UIAlertController(title: "", message: "更新组名", preferredStyle: .Alert)
+        let actionA = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let tf = actionGroup.textFields![0]
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            IMRequst.UpdateGroupNameByGid(self.group.gid,name:tf.text, completion: { (object) -> Void in
+                print(object)
+                let joson = JSON(object)
+                let flag = joson["flag"].intValue
+                if flag == 1{
+                    hud.detailsLabelText = "更新组名成功";
+                    self.group.gname = joson["gname"].stringValue
+                    self.title = self.group.gname
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                }
+                else
+                {
+                    hud.detailsLabelText = "更新组名失败";
+                }
+                hud.mode = .Text
+                
+                hud.hide(true, afterDelay: 1.5)
+                
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+        })
+        
+        let actionC = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            
+        })
+        actionGroup.addTextFieldWithConfigurationHandler({ (textField : UITextField) -> Void in
+            textField.placeholder = "请输入新组名"
+        })
+        actionGroup.addAction(actionA)
+        actionGroup.addAction(actionC)
+        self.presentViewController(actionGroup, animated: true, completion: { () -> Void in
+            
+        })
     }
     
     // MARK: - Navigation
