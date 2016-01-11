@@ -68,7 +68,7 @@ class MainViewController: UINavigationController {
                 
                 })
                 let actionCancel = UIAlertAction(title: "退出", style: .Cancel, handler: { (UIAlertAction) -> Void in
-                    self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                    self.performSegueWithIdentifier("loginIdentifier", sender: false)
                 })
                 
                 actionVC.addAction(actionlogin)
@@ -92,6 +92,10 @@ class MainViewController: UINavigationController {
         if segue.identifier == "loginIdentifier"{
             NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
             NSUserDefaults.standardUserDefaults().synchronize()
+            if let bo = sender as? Bool{
+                let vc = segue.destinationViewController as! LoginViewController
+                vc.autoLogin = bo
+            }
             NSNotificationCenter.defaultCenter().postNotificationName("didLogoutNotification", object: nil)
         }
     }

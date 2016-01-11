@@ -39,6 +39,7 @@ PODS:
   - SDWebImage/Core (3.7.3)
   - SWRevealViewController (2.3.0)
   - WUEmoticonsKeyboard (0.3.1)
+  - WYPopoverController (0.3.8)
 
 DEPENDENCIES:
   - AFNetworking
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - SDWebImage
   - SWRevealViewController
   - WUEmoticonsKeyboard
+  - WYPopoverController
 
 EXTERNAL SOURCES:
   FSCalendar:
@@ -86,5 +88,6 @@ SPEC CHECKSUMS:
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   WUEmoticonsKeyboard: 6e3a0188788aec12da36ab06320046bc0b5dfb74
+  WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
 COCOAPODS: 0.39.0

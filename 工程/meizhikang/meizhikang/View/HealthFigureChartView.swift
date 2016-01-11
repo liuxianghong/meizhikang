@@ -179,12 +179,14 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         }
         
         for view in viewArray{
-            let sheight = self.frame.height - (15 + 10)
-            let hdata = dataArray[view.tag]
-            view.backgroundColor = UIColor.helathColorByValue(hdata.value)
-            let height = sheight * CGFloat(hdata.value)/100
-            view.frame = CGRect(x: fwidth + (cwidth - rightMargin - fwidth) * hdata.position - (chartWidth - space) , y: sheight-height, width: chartWidth-space, height: height)
-            view.layer.cornerRadius = (chartWidth-space)/2;
+            if dataArray.count > view.tag{
+                let sheight = self.frame.height - (15 + 10)
+                let hdata = dataArray[view.tag]
+                view.backgroundColor = UIColor.helathColorByValue(hdata.value)
+                let height = sheight * CGFloat(hdata.value)/100
+                view.frame = CGRect(x: fwidth + (cwidth - rightMargin - fwidth) * hdata.position - (chartWidth - space) , y: sheight-height, width: chartWidth-space, height: height)
+                view.layer.cornerRadius = (chartWidth-space)/2;
+            }
         }
     }
     
@@ -195,13 +197,6 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
     
     func appendData(data : HealthData){
         
-        var doSroll = false
-        if dataArray.isEmpty{
-            doSroll = true
-        }
-        else if (self.contentOffset.x / (cwidth - rightMargin - fwidth)) >= dataArray.last?.position{
-            doSroll = true
-        }
         var pos = CGFloat((data.time?.timeIntervalSinceDate(date))!)
         if pos < -24*60*60{
             return
@@ -213,6 +208,22 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
         let v = Int(data.healthValue!)
         let pos2 = (pos) / CGFloat(24*60*60) + 1
         let lineData = HealthFigureChartViewModel(position:  pos2, value: v, healthData: data)
+        
+        var doSroll = false
+        if dataArray.isEmpty{
+            let cpos = self.contentOffset.x / (cwidth - rightMargin - fwidth)
+            if (cpos <= pos2)
+            {
+                doSroll = true
+            }
+        }
+        else {
+            let cpos = self.contentOffset.x / (cwidth - rightMargin - fwidth)
+            if ( cpos >= dataArray.last?.position && cpos <= pos2)
+            {
+                doSroll = true
+            }
+        }
         
         dataArray.append(lineData)
         self.layoutAllViews()
@@ -241,6 +252,9 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
             view.removeFromSuperview()
         }
         viewArray.removeAll()
+        let point = CGPoint(x: (cwidth - rightMargin - fwidth), y: 0)
+        self.setContentOffset(point, animated: true)
+        positionDate = date;
     }
     
     

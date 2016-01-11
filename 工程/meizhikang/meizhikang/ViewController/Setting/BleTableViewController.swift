@@ -41,6 +41,8 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
         {
             self.navigationItem.setRightBarButtonItems([rightBar], animated: false)
         }
+        tableViewArray = BLEConnect.Instance().peripherals()
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -75,7 +77,7 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
     }
     
     func setDisconnect() {
-        self.navigationItem.setRightBarButtonItems([rightDisconnectBar], animated: false)
+        self.navigationItem.setRightBarButtonItems([rightBar], animated: false)
         self.tableView.reloadData()
     }
     

@@ -451,6 +451,8 @@
 		D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */; };
 		D33984731C26EA9D00A78D33 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984711C26EA9D00A78D33 /* Email.swift */; };
 		D33C1E121C2D170100BF7AFA /* DottedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33C1E111C2D170100BF7AFA /* DottedLineView.m */; };
+		D33EF1031C4390E80074E9FC /* GroupMoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */; };
+		D33EF1051C43A5980074E9FC /* GroupMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */; };
 		D361575C1C09760B009ED19D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D36157541C09760B009ED19D /* README.md */; };
 		D36157671C09790C009ED19D /* BaseHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */; };
 		D361576A1C097937009ED19D /* NSString+scisky.m in Sources */ = {isa = PBXBuildFile; fileRef = D36157691C097937009ED19D /* NSString+scisky.m */; };
@@ -1004,6 +1006,8 @@
 		D33984711C26EA9D00A78D33 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		D33C1E101C2D170100BF7AFA /* DottedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DottedLineView.h; sourceTree = "<group>"; };
 		D33C1E111C2D170100BF7AFA /* DottedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DottedLineView.m; sourceTree = "<group>"; };
+		D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMoreTableViewController.swift; sourceTree = "<group>"; };
+		D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMoreTableViewCell.swift; sourceTree = "<group>"; };
 		D36157541C09760B009ED19D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHTTPRequestOperationManager.m; sourceTree = "<group>"; };
@@ -1805,6 +1809,7 @@
 				D33C1E101C2D170100BF7AFA /* DottedLineView.h */,
 				D33C1E111C2D170100BF7AFA /* DottedLineView.m */,
 				D334CB011C414FFE00814DE9 /* RectView.swift */,
+				D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1969,6 +1974,7 @@
 			children = (
 				D3F8E2D31C0C385200263B4E /* FriendListTableViewController.swift */,
 				B96DE00B1C1EEF4000B9BF85 /* ChatViewController.swift */,
+				D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2008,7 +2014,7 @@
 				TargetAttributes = {
 					D39B898C1C087AC1009086B2 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = G65933C85Y;
+						DevelopmentTeam = F44XSCNJGN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2589,6 +2595,7 @@
 				B95CA5141C239EED002CF05B /* SwiftyJSON.swift in Sources */,
 				B930DEE81C1457E1003576F6 /* EasyOptionalUnwrapping.swift in Sources */,
 				D378AD5A1C20716C004C161A /* ResetPWViewController.swift in Sources */,
+				D33EF1031C4390E80074E9FC /* GroupMoreTableViewController.swift in Sources */,
 				D3F8E2C91C0C384300263B4E /* UserInformationTableViewController.swift in Sources */,
 				D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */,
 				D361576A1C097937009ED19D /* NSString+scisky.m in Sources */,
@@ -2602,6 +2609,7 @@
 				D3F8E2C61C0C384300263B4E /* SettingTableViewController.swift in Sources */,
 				D361575C1C09760B009ED19D /* README.md in Sources */,
 				D3F8E2C51C0C384300263B4E /* ResetPhoneTableViewController.swift in Sources */,
+				D33EF1051C43A5980074E9FC /* GroupMoreTableViewCell.swift in Sources */,
 				B975157F1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m in Sources */,
 				D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */,
 				B9709B261C298678004DCD50 /* amrFileCodec.m in Sources */,

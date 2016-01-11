@@ -13,7 +13,7 @@ class RectView: UIView {
     //var color : UIColor = UIColor.redColor()
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+//    override func drawRect(rect: CGRect) {
         // Drawing code
 //        let context = UIGraphicsGetCurrentContext()
 //        let width = rect.size.width;
@@ -25,7 +25,7 @@ class RectView: UIView {
 //        CGContextDrawPath(context, .Fill);//绘制填充
 //        CGContextAddRect(context, CGRectMake(0, width/2, width, height - width));
 //        CGContextDrawPath(context, .Fill);//绘制填充
-    }
+//    }
 
 
 }
