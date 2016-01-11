@@ -20,7 +20,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
     @IBOutlet weak var calendarView: FSCalendar!
     var cache: NSCache!
     var loadingData = false
-    let todayDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: NSCalendar.currentCalendar().startOfDayForDate(NSDate()), options: NSCalendarOptions(rawValue: 0))
+    let todayDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: 20, toDate: NSCalendar.currentCalendar().startOfDayForDate(NSDate()), options: NSCalendarOptions(rawValue: 0))
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,9 +73,14 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
     }
     
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
-        self.performSegueWithIdentifier(HealthAnalysisConstant.HealthAnalysisSegueIdentifier, sender: self.toSystemDate(date))
         calendar.deselectDate(date)
-        print(NSTimeZone.systemTimeZone().secondsFromGMT)
+        guard let dataDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: self.toSystemDate(date), options: NSCalendarOptions(rawValue: 0)),
+            let user = UserInfo.CurrentUser() else{
+            return
+        }
+        if user.healthDataHaveDataOn(dataDate) {
+            self.performSegueWithIdentifier(HealthAnalysisConstant.HealthAnalysisSegueIdentifier, sender: self.toSystemDate(date))
+        }
     }
     
     func calendar(calendar: FSCalendar!, hasEventForDate date: NSDate!) -> Bool{
