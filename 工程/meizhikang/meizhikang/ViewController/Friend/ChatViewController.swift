@@ -163,6 +163,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             }
         }
         
+        if group == nil{
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        
         self.title = group.gname
         let messages = Message.MR_findByAttribute("group", withValue: group, andOrderBy: "sendtime", ascending: true)
         for message in messages {
@@ -656,6 +660,105 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     // MARK: - GroupMore
     func didClickGroupMoreType(type : GroupMoreType){
+        switch type{
+        case .GroupMembers:break
+        case .GroupMessage:break
+        case .GroupOnShare:break
+        case .GroupUpdateName:
+            groupUpdateName()
+        case .GroupDelete:
+            deleteGroup()
+        case .GroupAddMenber:break
+        case .GroupQuite:break
+        default: break
+        }
+    }
+    
+    func deleteGroup(){
+        
+        let actionGroup = UIAlertController(title: "", message: "是否要删除组", preferredStyle: .Alert)
+        let actionA = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+            IMRequst.DeleteGroupByGid(self.group.gid, completion: { (object) -> Void in
+                print(object)
+                let joson = JSON(object)
+                let flag = joson["flag"].intValue
+                if flag == 1{
+                    hud.detailsLabelText = "删除组成功";
+                    let users = self.group.mutableSetValueForKey("user")
+                    users.removeObject(UserInfo.CurrentUser()!)
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+                else
+                {
+                    hud.detailsLabelText = "删除组失败";
+                }
+                hud.mode = .Text
+                
+                hud.hide(true, afterDelay: 1.5)
+                
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+        })
+        
+        let actionC = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            
+        })
+        actionGroup.addAction(actionA)
+        actionGroup.addAction(actionC)
+        self.presentViewController(actionGroup, animated: true, completion: { () -> Void in
+            
+        })
+        
+    }
+    
+    func groupUpdateName(){
+        let actionGroup = UIAlertController(title: "", message: "更新组名", preferredStyle: .Alert)
+        let actionA = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let tf = actionGroup.textFields![0]
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            IMRequst.UpdateGroupNameByGid(self.group.gid,name:tf.text, completion: { (object) -> Void in
+                print(object)
+                let joson = JSON(object)
+                let flag = joson["flag"].intValue
+                if flag == 1{
+                    hud.detailsLabelText = "更新组名成功";
+                    self.group.gname = joson["gname"].stringValue
+                    self.title = self.group.gname
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                }
+                else
+                {
+                    hud.detailsLabelText = "更新组名失败";
+                }
+                hud.mode = .Text
+                
+                hud.hide(true, afterDelay: 1.5)
+                
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+        })
+        
+        let actionC = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            
+        })
+        actionGroup.addTextFieldWithConfigurationHandler({ (textField : UITextField) -> Void in
+            textField.placeholder = "请输入新组名"
+        })
+        actionGroup.addAction(actionA)
+        actionGroup.addAction(actionC)
+        self.presentViewController(actionGroup, animated: true, completion: { () -> Void in
+            
+        })
     }
     
     // MARK: - Navigation
@@ -667,7 +770,18 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         
         if segue.identifier == "groupMoreInderfier"{
             let vc = segue.destinationViewController as! GroupMoreTableViewController
-            vc.preferredContentSize = CGSizeMake(120.0, 150)
+            vc.tableViewArray.append(.GroupMembers)
+            vc.tableViewArray.append(.GroupMessage)
+            vc.tableViewArray.append(.GroupOnShare)
+            if group.owner == UserInfo.CurrentUser()?.uid{
+                vc.tableViewArray.append(.GroupUpdateName)
+                vc.tableViewArray.append(.GroupDelete)
+                vc.tableViewArray.append(.GroupAddMenber)
+            }
+            else{
+                vc.tableViewArray.append(.GroupQuite)
+            }
+            vc.preferredContentSize = CGSizeMake(120.0, CGFloat(vc.tableViewArray.count * 46))
             vc.delegate = self
             let popoverSegue = segue as! WYStoryboardPopoverSegue;
             popoverController = popoverSegue.popoverControllerWithSender(sender, permittedArrowDirections: .Any, animated: true)

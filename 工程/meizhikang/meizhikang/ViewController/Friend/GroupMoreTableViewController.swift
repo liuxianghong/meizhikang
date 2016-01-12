@@ -15,6 +15,7 @@ enum GroupMoreType : String {
     case GroupUpdateName = "更新组名"
     case GroupDelete = "删除组"
     case GroupAddMenber = "邀请联系人"
+    case GroupQuite = "退出组"
 }
 
 protocol GroupMoreViewControllerDelegate : NSObjectProtocol{
@@ -23,7 +24,7 @@ protocol GroupMoreViewControllerDelegate : NSObjectProtocol{
 
 class GroupMoreTableViewController: UITableViewController {
 
-    var tableViewArray : [GroupMoreType]!
+    var tableViewArray = [GroupMoreType]()
     weak var delegate : GroupMoreViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()

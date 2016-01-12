@@ -307,7 +307,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    
+    NSLog(@"%@ , %@",[self CBUUIDToString:characteristic.UUID],error);
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
@@ -416,6 +416,9 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 
 #pragma mark -
+-(BOOL)isBleConnected{
+    return self.isConnected;
+}
 
 -(void)ternOnRing:(UInt32)time{
     [self setAlarms:0x03 on:NO flag:2 time:time];
