@@ -10,6 +10,7 @@ import UIKit
 
 class HealthWeeklyChartView: UIView {
 
+    @IBOutlet weak var date1: UILabel!
     var chartData: [WeeklyViewLineData]?
     var minValue: CGFloat = 100
     var maxValue: CGFloat = 0
@@ -50,11 +51,36 @@ class HealthWeeklyChartView: UIView {
         CGContextBeginPath(context)
         let color = UIColor.mainGreenColor()
         CGContextSetStrokeColorWithColor(context, color.CGColor)
-        CGContextMoveToPoint(context, 40 ,rect.size.height - rect.size.height * (data[0].value - minValue) / (maxValue - minValue))
+        var i = data.count
+        for k in 0..<data.count{
+            if data[k].value != nil{
+                i = k
+                break
+            }
+        }
+        if i == data.count{
+            return
+        }
+        let leftmargin : CGFloat = 50
+        CGContextMoveToPoint(context, leftmargin ,rect.size.height - rect.size.height * (data[i].value! - minValue) / (maxValue - minValue))
         var imagePoint = [CGPoint]()
         for (index,item) in data.enumerate(){
-            let pos = 40 + (rect.size.width - 60) * CGFloat(index)/CGFloat(data.count - 1)
-            let height = rect.size.height - rect.size.height * (item.value - minValue) / (maxValue - minValue)
+            let formater = NSDateFormatter()
+            formater.dateFormat = "MM.dd"
+            let str = formater.stringFromDate(item.date)
+            let attr = [NSFontAttributeName : UIFont.systemFontOfSize(10),
+                NSForegroundColorAttributeName : UIColor.whiteColor()]
+            let attStr = NSAttributedString(string: str, attributes: attr)
+            let size = attStr.size()
+            let strx = leftmargin + (rect.size.width - leftmargin - 20) * CGFloat(index)/CGFloat(data.count - 1) - size.width / 2
+            let stry : CGFloat = rect.size.height - 10
+            attStr.drawAtPoint(CGPoint(x: strx, y: stry))
+            CGContextSetStrokeColorWithColor(context, color.CGColor)
+            guard let _ = item.value else{
+                continue
+            }
+            let pos = strx
+            let height = rect.size.height - rect.size.height * (item.value! - minValue) / (maxValue - minValue)
             let imageX = pos - (image?.size.width)! / 2
             let imageY = height - (image?.size.height)! / 2
             CGContextAddLineToPoint(context, pos, height)
@@ -70,11 +96,14 @@ class HealthWeeklyChartView: UIView {
         // Drawing code
         super.drawRect(rect)
         chartData?.forEach({ (item) -> () in
-            if item.value > maxValue{
-                maxValue = item.value
+            guard let value = item.value else{
+                return
             }
-            if item.value < minValue{
-                minValue = item.value
+            if value > maxValue{
+                maxValue = value
+            }
+            if value < minValue{
+                minValue = value
             }
         })
         minValue = CGFloat(Int(minValue) / 10 * 10)

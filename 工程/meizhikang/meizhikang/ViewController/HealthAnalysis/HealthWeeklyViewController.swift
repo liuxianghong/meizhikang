@@ -13,7 +13,7 @@ enum HealthWeeklyType{
 }
 struct WeeklyViewLineData{
     var date: NSDate
-    var value: CGFloat
+    var value: CGFloat?
 }
 class HealthWeeklyViewController: UIViewController {
 
@@ -43,14 +43,14 @@ class HealthWeeklyViewController: UIViewController {
             let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
             let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i + 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
             let datas = UserInfo.CurrentUser()?.healthDatas(minDate!, maxTime: maxDate!)
-            if datas?.count > 0 {
+            if datas?.count > 143 {
                 let value = (datas?.reduce(0, combine: { (item, data) -> CGFloat in
                     return item + CGFloat(data.healthValue!)
                 }))! / CGFloat((datas?.count)!)
                 let data = WeeklyViewLineData(date: minDate!, value: value)
                 chartData.append(data)
             }else{
-                chartData.append(WeeklyViewLineData(date: minDate!, value: 0))
+                chartData.append(WeeklyViewLineData(date: minDate!, value: nil))
             }
         }
         chartData = chartData.reverse()
