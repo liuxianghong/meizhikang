@@ -33,8 +33,7 @@ class HealthWeeklyViewController: UIViewController {
             generateData(7)
             self.typeTitle.setTitle("前七天", forState: .Normal)
         }else{
-            let day = NSCalendar.currentCalendar().component(.Day, fromDate: currentDay!)
-            generateData(day)
+            generateData(30)
             self.typeTitle.setTitle("当月", forState: .Normal)
         }
     }
