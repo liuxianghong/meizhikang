@@ -3579,6 +3579,45 @@
             </objects>
             <point key="canvasLocation" x="5884.5" y="2886"/>
         </scene>
+        <!--Group Menbers Table View Controller-->
+        <scene sceneID="F8n-Ne-IUB">
+            <objects>
+                <tableViewController id="WtE-QJ-KLC" customClass="GroupMenbersTableViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iqD-x2-B6E">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="1ut-VX-che" style="IBUITableViewCellStyleDefault" id="59Z-0a-bki">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="59Z-0a-bki" id="XAW-ws-9mG">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ut-VX-che">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="WtE-QJ-KLC" id="BmI-BR-5Uy"/>
+                            <outlet property="delegate" destination="WtE-QJ-KLC" id="Ih0-uB-pdq"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="4d6-T0-esL" kind="show" identifier="GroupInformation" id="a4Q-ar-suf"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YSw-1r-Fig" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6798" y="2651.25"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="y8C-21-OpQ">
             <objects>
@@ -3923,6 +3962,7 @@
                     <connections>
                         <segue destination="Tq1-M8-yGh" kind="custom" identifier="groupMoreInderfier" customClass="WYStoryboardPopoverSegue" id="com-Ys-zUf"/>
                         <segue destination="4d6-T0-esL" kind="show" identifier="GroupInformation" id="F1N-ju-2GO"/>
+                        <segue destination="WtE-QJ-KLC" kind="show" identifier="groupMenbersIndentifier" id="CQQ-Op-d09"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jb1-N9-weM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4066,6 +4106,16 @@
                             <outlet property="delegate" destination="4d6-T0-esL" id="lIM-rb-g98"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="csx-5A-Ec5">
+                        <barButtonItem key="rightBarButtonItem" title="发消息" id="bey-qb-tPW">
+                            <connections>
+                                <action selector="sendClick:" destination="4d6-T0-esL" id="2KM-0X-q0U"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="vm0-wy-5cS" id="QAh-Ab-Rni"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdw-QZ-IA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -8232,4 +8282,7 @@
         <image name="黑-圆小.png" width="7" height="7"/>
         <image name="黑.png" width="119" height="31"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="a4Q-ar-suf"/>
+    </inferredMetricsTieBreakers>
 </document>

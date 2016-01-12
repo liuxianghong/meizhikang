@@ -12,6 +12,8 @@ class GroupInformationTableViewController: UITableViewController {
 
     var tableViewDic = [[String]]()
     var group : Group?
+    var menber : GroupMember?
+    @IBOutlet weak var imageView : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,17 +22,30 @@ class GroupInformationTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        if let gname = group!.gname , let gcount = group!.members?.count , let time = group?.createtime{
+        if let gname = group?.gname , let gcount = group?.members?.count , let time = group?.createtime{
             tableViewDic.append(["群组名称：",gname])
             tableViewDic.append(["成员人数：",String(gcount)])
             let cdate = NSDate(timeIntervalSince1970: NSTimeInterval(time))
             let formatter = NSDateFormatter()
             formatter.dateFormat = "yyyy年MM月dd日 hh时mm分"
             tableViewDic.append(["创建时间：",formatter.stringFromDate(cdate)])
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        else if let nickName = menber?.nickname , let time = menber?.createtime{
+            self.title = "个人资料"
+            tableViewDic.append(["昵称：",nickName])
+            let cdate = NSDate(timeIntervalSince1970: NSTimeInterval(time))
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy年MM月dd日 hh时mm分"
+            tableViewDic.append(["创建时间：",formatter.stringFromDate(cdate)])
+            self.imageView.image = UIImage(named: "联系人-蓝.png")
         }
        
     }
 
+    @IBAction func sendClick(sender : AnyObject?){
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

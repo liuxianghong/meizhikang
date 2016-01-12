@@ -661,7 +661,8 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     // MARK: - GroupMore
     func didClickGroupMoreType(type : GroupMoreType){
         switch type{
-        case .GroupMembers:break
+        case .GroupMembers:
+            self.performSegueWithIdentifier("groupMenbersIndentifier", sender: nil)
         case .GroupMessage:
             self.performSegueWithIdentifier("GroupInformation", sender: nil)
         case .GroupOnShare:
@@ -860,6 +861,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         }
         else if segue.identifier == "GroupInformation"{
             let vc = segue.destinationViewController as! GroupInformationTableViewController
+            vc.group = group
+        }
+        else if segue.identifier == "groupMenbersIndentifier"{
+            let vc = segue.destinationViewController as! GroupMenbersTableViewController
             vc.group = group
         }
         
