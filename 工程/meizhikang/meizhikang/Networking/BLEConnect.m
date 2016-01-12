@@ -480,6 +480,10 @@ uint64_t reversebytes_uint64t(uint64_t value){
     [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_Warnsync_UUID p:activePeripheral data:data];
 }
 
+-(void)doHeartCommand{
+    [self setHeartCommand:self.heartCommandOn?3600:0];
+}
+
 -(void)setHeartCommand:(UInt16)time{
     if (!self.isConnected) {
         return;

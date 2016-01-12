@@ -96,6 +96,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
 //        for _ in 1...30{
 //            self.cutDown()
 //        }
+        BLEConnect.Instance().startScan()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -194,7 +195,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         #if DEBUG
         //self.didUpdateHealthValue(60, date: NSDate())
         #endif
-        self.didHearCommandClick()
+        BLEConnect.Instance().doHeartCommand()
     }
     
     func showCurrentHealthData(health : HealthData?){

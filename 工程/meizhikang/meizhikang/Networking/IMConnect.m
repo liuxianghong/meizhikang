@@ -12,8 +12,6 @@
 #import "GCDAsyncSocket.h"
 #import "IMObject.h"
 #import "JSONKit.h"
-#import "meizhikang-Swift.h"
-#import <MagicalRecord/MagicalRecord.h>
 
 //IM系统地址182.150.44.21，端口9527
 //数据上传系统鉴权地址182.150.44.21，端口9529
@@ -260,6 +258,7 @@
         isLogin = YES;
         loginPassWord = pw;
         completion(ip,port);
+        NSLog(@"登录成功！！！！！！！！！");
     } failure:failure];
     free(CommandStructure);
 }
@@ -284,7 +283,7 @@
         else
         {
             UInt32 ll = ((lenth_-8)/16+1)*16+8;
-            NSLog(@"长度 ：%d,我的长度: %d",lenth_,ll);
+            //NSLog(@"长度 ：%d,我的长度: %d",lenth_,ll);
             return ll;
         }
     } completion:^(NSData *data) {
@@ -582,7 +581,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    //NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
+    NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
     if (!isListen && tag != -1) {
         [self listenHeadDataWithIMObject:currentIM];
     }
@@ -591,7 +590,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    //NSLog(@"didReadData%@",data);
+    NSLog(@"didReadData%@",data);
     
     if (tag == 0) {
         isListen = false;
@@ -704,8 +703,14 @@
     }
     
     if (isLogin) {
+        IMObject *tempCurrentIM = currentIM;
+        currentIM = nil;
+        NSMutableArray *tempIMQueue = [[NSMutableArray alloc]initWithArray:IMQueue];
+        [IMQueue removeAllObjects];
         [[IMConnect Instance] getToken:loginName completion:^(NSData *token, NSData *data) {
             [[IMConnect Instance] login:loginPassWord withToken:token completion:^(UInt32 ip, UInt16 port) {
+                currentIM = tempCurrentIM;
+                [IMQueue addObjectsFromArray:tempIMQueue];
                 if (currentIM && currentIM.sendingType != IMObjectSendFinished) {
                     [self writeData:currentIM.sendData tag:currentIM.tag readHead:currentIM.readHead completion:currentIM.completion failure:currentIM.failure];
                 }
@@ -776,29 +781,8 @@
             id object = [dddd2 objectFromJSONData];
             NSLog(@"%@",object);
             if (object){
-                if ([object[@"pushtype"] isEqualToString:@"meet"] ) {
-                    Message *message = [Message MR_createEntity];
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        [message upDateMessageInfo:object];
-                        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-                        [[NSNotificationCenter defaultCenter]
-                         postNotificationName:@"reciveMessageNotification" object:message];
-                    });
-                    
-                }
-                else if ([object[@"pushtype"] isEqualToString:@"email"] ) {
-                    Email *email = [Email EmailByUuid:object[@"uuid"]];
-                    [email upDateEmailInfo:object];
-                    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-                    [[NSNotificationCenter defaultCenter]
-                     postNotificationName:@"reciveEmailNotification" object:nil];
-                }
-                else if ([object[@"pushtype"] isEqualToString:@"group_change"]){
-                    [[UserInfo CurrentUser] loadGrous];
-                }
-                else{
-                    NSLog(@"unknow pushtype");
-                }
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"reciveIMPushNotification" object:object];
             }
             
             NSUInteger size = 14;

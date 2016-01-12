@@ -32,7 +32,34 @@ class MainViewController: UINavigationController {
             self.performSegueWithIdentifier("RingIdenfier", sender: nil)
         }
         
-        BLEConnect.Instance().startScan()
+        NSNotificationCenter.defaultCenter().addObserverForName("reciveIMPushNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
+            let joson = JSON(notification.object!)
+            if joson != nil{
+                let pushtype = joson["pushtype"].stringValue
+                if pushtype == "meet"{
+                    let message = Message.MessageByUuid(joson["uuid"].numberValue)
+                    if message?.messageType() == .UnKnow{
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                            message?.upDateMessageInfo(joson.dictionaryObject!)
+                        });
+                    }
+                }
+                else if pushtype == "email"{
+                    let email = Email.EmailByUuid(joson["uuid"].numberValue)
+                    email?.upDateEmailInfo(joson.dictionaryObject!)
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                    NSNotificationCenter.defaultCenter().postNotificationName("reciveEmailNotification", object: nil)
+                }
+                else if pushtype == "group_change"{
+                    UserInfo.CurrentUser()?.loadGrous()
+                }
+                else{
+                    NSLog("unknow pushtype");
+                }
+            }
+            
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -1,5 +1,5 @@
 //
-//  Group+CoreDataProperties.swift
+//  Chat+CoreDataProperties.swift
 //  meizhikang
 //
 //  Created by 刘向宏 on 16/1/12.
@@ -12,16 +12,11 @@
 import Foundation
 import CoreData
 
-extension Group {
+extension Chat {
 
-    @NSManaged var createtime: NSNumber?
-    @NSManaged var etag: NSNumber?
-    @NSManaged var gid: NSNumber?
-    @NSManaged var gname: String?
-    @NSManaged var owner: NSNumber?
-    @NSManaged var unRead: NSNumber?
-    @NSManaged var members: NSSet?
+    @NSManaged var unReadMessage: NSNumber?
+    @NSManaged var user: User?
     @NSManaged var messages: NSSet?
-    @NSManaged var user: NSSet?
+    @NSManaged var member: GroupMember?
 
 }

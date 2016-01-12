@@ -452,6 +452,8 @@
 		D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */; };
 		D33984731C26EA9D00A78D33 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984711C26EA9D00A78D33 /* Email.swift */; };
 		D33BF9331C44C5210094E157 /* GroupInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF9321C44C5210094E157 /* GroupInformationTableViewController.swift */; };
+		D33BF9361C44EC7C0094E157 /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF9341C44EC7C0094E157 /* Chat+CoreDataProperties.swift */; };
+		D33BF9371C44EC7C0094E157 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF9351C44EC7C0094E157 /* Chat.swift */; };
 		D33C1E121C2D170100BF7AFA /* DottedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33C1E111C2D170100BF7AFA /* DottedLineView.m */; };
 		D33EF1031C4390E80074E9FC /* GroupMoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */; };
 		D33EF1051C43A5980074E9FC /* GroupMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */; };
@@ -1010,6 +1012,8 @@
 		D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Email+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D33984711C26EA9D00A78D33 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		D33BF9321C44C5210094E157 /* GroupInformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInformationTableViewController.swift; sourceTree = "<group>"; };
+		D33BF9341C44EC7C0094E157 /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D33BF9351C44EC7C0094E157 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		D33C1E101C2D170100BF7AFA /* DottedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DottedLineView.h; sourceTree = "<group>"; };
 		D33C1E111C2D170100BF7AFA /* DottedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DottedLineView.m; sourceTree = "<group>"; };
 		D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMoreTableViewController.swift; sourceTree = "<group>"; };
@@ -1171,6 +1175,8 @@
 		B92C903F1C2040E7005F551F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D33BF9341C44EC7C0094E157 /* Chat+CoreDataProperties.swift */,
+				D33BF9351C44EC7C0094E157 /* Chat.swift */,
 				D30902571C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift */,
 				D30902581C2A78AA001FDF7B /* HealthData.swift */,
 				D3C263CE1C2806290098BEAE /* GroupMember+CoreDataProperties.swift */,
@@ -2601,6 +2607,7 @@
 				D3F8E2C41C0C384300263B4E /* BleTableViewController.swift in Sources */,
 				D336C92D1C25868B00E967EB /* User+CoreDataProperties.swift in Sources */,
 				D33527031C2EEA760038015D /* BLEConnect.m in Sources */,
+				D33BF9361C44EC7C0094E157 /* Chat+CoreDataProperties.swift in Sources */,
 				B987B9401C2C22C0002FF394 /* HealthDailyChartView.swift in Sources */,
 				B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */,
 				D309025C1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift in Sources */,
@@ -2608,6 +2615,7 @@
 				B95CA5141C239EED002CF05B /* SwiftyJSON.swift in Sources */,
 				B930DEE81C1457E1003576F6 /* EasyOptionalUnwrapping.swift in Sources */,
 				D378AD5A1C20716C004C161A /* ResetPWViewController.swift in Sources */,
+				D33BF9371C44EC7C0094E157 /* Chat.swift in Sources */,
 				D33EF1031C4390E80074E9FC /* GroupMoreTableViewController.swift in Sources */,
 				D3F8E2C91C0C384300263B4E /* UserInformationTableViewController.swift in Sources */,
 				D311C5711C0A075A00C80C05 /* SettingTableViewCell.swift in Sources */,

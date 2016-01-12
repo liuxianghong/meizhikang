@@ -22,6 +22,7 @@ class FriendListTableViewController: UITableViewController {
     var emptyLabel = UILabel()
     var groupArray :Array<Group> = []
     var emailArray = [Email]()
+    var chatArray = [Chat]()
     var type = 1
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,19 @@ class FriendListTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         
+        NSNotificationCenter.defaultCenter().addObserverForName("reciveMessageNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
+            if let mesage = notification.object as? Message{
+                if mesage.chat != nil{
+                    self.loadChat()
+                    self.tableView.reloadData()
+                }
+                else
+                {
+                    self.loadGrous()
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -73,6 +87,15 @@ class FriendListTableViewController: UITableViewController {
             emailArray.removeAll()
             for e in user.emails!{
                 emailArray.append(e as! Email)
+            }
+        }
+    }
+    
+    func loadChat(){
+        if let user = UserInfo.CurrentUser(){
+            chatArray.removeAll()
+            for e in user.chats!{
+                chatArray.append(e as! Chat)
             }
         }
     }
@@ -117,9 +140,9 @@ class FriendListTableViewController: UITableViewController {
             emptyLabel.text = "无系统消息"
             return emailArray.count
         }
-        emptyLabel.hidden = false//!emailArray.isEmpty
+        emptyLabel.hidden = !chatArray.isEmpty
         emptyLabel.text = "无会话"
-        return 0
+        return chatArray.count
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -149,6 +172,8 @@ class FriendListTableViewController: UITableViewController {
         }
         else if type == 2{
             cell.typeImageView.image = UIImage(named: "联系人-蓝")
+            let chat = chatArray[indexPath.row]
+            cell.nameLabel.text = chat.member?.nickname
         }
         else if type == 3{
             let email = emailArray[indexPath.row]

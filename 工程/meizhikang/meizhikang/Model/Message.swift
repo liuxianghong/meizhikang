@@ -21,6 +21,18 @@ class Message: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
+    static func MessageByUuid(uuid : AnyObject) -> Message?{
+        
+        if let message = Message.MR_findByAttribute("uuid", withValue: uuid).first as? Message{
+            return message;
+        }
+        else{
+            let message = Message.MR_createEntity()
+            message.uuid = uuid as? NSNumber
+            return message
+        }
+    }
+    
     func upDateMessageInfo(dic : [String : AnyObject]){
         fromid = dic["fromid"] as? NSNumber
         sendtime = dic["sendtime"] as? NSNumber
@@ -83,7 +95,21 @@ class Message: NSManagedObject {
             if self.gid?.integerValue != 0 {
                 let g = UserInfo.CurrentUser()!.groupByID(self.gid!)! as Group
                 g.mutableSetValueForKey("messages").addObject(self)
+                g.unRead = true
             }
+            else{
+                let m = GroupMember.GroupMemberByUid(self.fromid!)
+                let chat = Chat.ChatByGroupMember(m!, user: UserInfo.CurrentUser()!)
+                if chat?.unReadMessage == nil{
+                    chat?.unReadMessage = 0
+                }
+                else{
+                    chat?.unReadMessage = (chat!.unReadMessage?.integerValue)! + 1
+                }
+                self.chat = chat
+            }
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            NSNotificationCenter.defaultCenter().postNotificationName("reciveMessageNotification", object: self)
         }
     }
     
@@ -112,6 +138,9 @@ class Message: NSManagedObject {
     
     
     func messageType() ->MessageType{
+        if content == nil{
+            return .UnKnow
+        }
         if content!.hasPrefix("[text]"){
             return .Text
         }

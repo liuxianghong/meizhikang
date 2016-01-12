@@ -12,6 +12,7 @@ enum GroupMoreType : String {
     case GroupMembers = "群成员"
     case GroupMessage = "群组信息"
     case GroupOnShare = "启用分享报告"
+    case GroupOffShare = "取消分享报告"
     case GroupUpdateName = "更新组名"
     case GroupDelete = "删除组"
     case GroupAddMenber = "邀请联系人"

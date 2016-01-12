@@ -114,6 +114,11 @@ class User: NSManagedObject {
                     }
                 }
             }
+            if self.shareGroup != nil && self.groups != nil{
+                if !self.groups!.containsObject(self.shareGroup!){
+                    self.shareGroup = nil
+                }
+            }
             NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
             NSNotificationCenter.defaultCenter().postNotificationName("groupChangeNotification", object: nil)
             
@@ -125,6 +130,9 @@ class User: NSManagedObject {
         if group != nil {
             let users = group!.mutableSetValueForKey("user")
             users.removeObject(self)
+            if self.shareGroup == group{
+                self.shareGroup = nil
+            }
             NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         }
     }

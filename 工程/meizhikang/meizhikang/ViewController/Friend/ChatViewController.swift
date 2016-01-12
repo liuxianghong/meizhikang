@@ -664,7 +664,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         case .GroupMembers:break
         case .GroupMessage:
             self.performSegueWithIdentifier("GroupInformation", sender: nil)
-        case .GroupOnShare:break
+        case .GroupOnShare:
+            shareGroup(group)
+        case .GroupOffShare:
+            shareGroup(nil)
         case .GroupUpdateName:
             groupUpdateName()
         case .GroupDelete:
@@ -674,6 +677,20 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             quiteGroup()
         default: break
         }
+    }
+    
+    func shareGroup(g : Group?){
+        UserInfo.CurrentUser()?.shareGroup = g
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.mode = .Text
+        if g == nil{
+            hud.detailsLabelText = "取消分享报告成功"
+        }
+        else{
+            hud.detailsLabelText = "启用分享报告成功"
+        }
+        hud.hide(true, afterDelay: 1)
     }
     
     func quiteGroup(){
@@ -813,7 +830,12 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             let vc = segue.destinationViewController as! GroupMoreTableViewController
             vc.tableViewArray.append(.GroupMembers)
             vc.tableViewArray.append(.GroupMessage)
-            vc.tableViewArray.append(.GroupOnShare)
+            if UserInfo.CurrentUser()?.shareGroup == nil{
+                vc.tableViewArray.append(.GroupOnShare)
+            }
+            else if group == UserInfo.CurrentUser()?.shareGroup{
+                vc.tableViewArray.append(.GroupOffShare)
+            }
             if group.owner == UserInfo.CurrentUser()?.uid{
                 vc.tableViewArray.append(.GroupUpdateName)
                 vc.tableViewArray.append(.GroupDelete)
