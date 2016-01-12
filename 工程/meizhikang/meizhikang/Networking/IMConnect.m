@@ -501,6 +501,7 @@
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
     [self setudpSocket];
+    NSLog(@"nendwriteData :%@ tag:%ld",data,tag);
     if (tag==-1) {
         [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
     }
@@ -515,10 +516,18 @@
             im.sendData = data;
             [IMQueue addObject:im];
         }
-        else
-        {
+        else if (IMQueue.count != 0){
+            im.sendData = data;
+            [IMQueue addObject:im];
+            currentIM = IMQueue.firstObject;
+            currentIM.sendingType = IMObjectSending;
+            [IMQueue removeObject:currentIM];
+            [asyncSocket writeData:currentIM.sendData withTimeout:IMTIMEOUT tag:currentIM.tag];
+        }
+        else{
             currentIM = im;
             currentIM.sendingType = IMObjectSending;
+            currentIM.sendData = data;
             [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
         }
     }
@@ -542,20 +551,28 @@
 -(void)listenRecive{
     if (currentIM && currentIM.sendingType != IMObjectSendFinished)
     {
+        if (reciveIM) {
+            reciveIM.sendingType = IMObjectSendFinished;
+            reciveIM = nil;
+            [self listenHeadDataWithIMObject:currentIM];
+        }
         return;
     }
     if (reciveIM) {
-        currentIM.sendingType = IMObjectSendFinished;
+        reciveIM.sendingType = IMObjectSendFinished;
         reciveIM = nil;
     }
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for (int i=0; i<IMQueue.count; i++) {
-        IMObject *im = IMQueue.firstObject;
+        IMObject *im = IMQueue[i];
         if (im.sendingType == IMObjectSendFinished){
             [array addObject:im];
         }
     }
     [IMQueue removeObjectsInArray:array];
+    for (IMObject *ii in IMQueue) {
+        NSLog(@"IMQueue : %ld" ,ii.tag);
+    }
     if (IMQueue.count==0) {
         isListen = YES;
         [asyncSocket readDataToLength:10 withTimeout:-1 tag:0];
@@ -581,8 +598,9 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    NSLog(@"socket:%p didWriteDataWithTag:%ld", sock, tag);
+    NSLog(@"didWriteDataWithTag:%ld", tag);
     if (!isListen && tag != -1) {
+        NSLog(@"%@",currentIM.sendData);
         [self listenHeadDataWithIMObject:currentIM];
     }
     //[self listenData];
@@ -785,12 +803,12 @@
                  postNotificationName:@"reciveIMPushNotification" object:object];
             }
             
-            NSUInteger size = 14;
+            long size = 14;
             Byte *CommandStructure = malloc(size);
             [self setsenderHead:CommandStructure cmd:0x98 type:reciveIM.subCmd length:0 tag:reciveIM.tag];
-            NSData *data = [NSData dataWithBytes:CommandStructure length:size];
-            
-            [self writeData:data tag:-1 readHead:nil completion:nil failure:nil];
+            NSData *dataS = [NSData dataWithBytes:CommandStructure length:size];
+            NSLog(@"%@",dataS);
+            [self writeData:dataS tag:-1 readHead:nil completion:nil failure:nil];
             free(CommandStructure);
             
         }
