@@ -4115,11 +4115,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="vm0-wy-5cS" id="QAh-Ab-Rni"/>
+                        <segue destination="X2g-fz-UnX" kind="show" identifier="ChatSegueIdentifier" id="8il-Mq-c6M"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdw-QZ-IA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6448.5" y="1845.75"/>
+            <point key="canvasLocation" x="6880.5" y="1821.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aAx-Yn-mQv">
@@ -8283,6 +8284,7 @@
         <image name="黑.png" width="119" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a4Q-ar-suf"/>
+        <segue reference="8il-Mq-c6M"/>
+        <segue reference="F1N-ju-2GO"/>
     </inferredMetricsTieBreakers>
 </document>

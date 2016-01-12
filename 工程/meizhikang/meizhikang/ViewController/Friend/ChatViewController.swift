@@ -143,6 +143,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     var receiverName: String!
     var viewModel: ChatViewModel!
     var group : Group!
+    var menber : GroupMember!
     var sendVoice: UIButton!
     var observer : NSObjectProtocol!
     var voiceTimeInterval : NSTimeInterval = 0

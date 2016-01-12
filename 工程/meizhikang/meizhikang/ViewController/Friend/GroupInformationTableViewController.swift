@@ -44,6 +44,7 @@ class GroupInformationTableViewController: UITableViewController {
     }
 
     @IBAction func sendClick(sender : AnyObject?){
+        self.performSegueWithIdentifier("ChatSegueIdentifier", sender: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -152,14 +153,32 @@ class GroupInformationTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == FriendListTableViewControllerConstant.chatSegueIdentifier{
+            guard let vc = segue.destinationViewController as? ChatViewController,
+                let sendId = UserInfo.CurrentUser()?.uid,
+                let nickname = UserInfo.CurrentUser()?.nickname,
+                let gid = menber?.uid,
+                let gname = menber?.nickname
+                else{
+                    return
+            }
+            
+            vc.menber = self.menber
+            vc.senderId = sendId.stringValue
+            vc.senderDisplayName = nickname
+            vc.currentAvatar = UIImage(named: "联系人-蓝.png")
+            // TODO: pass the friend or group to me
+            vc.receiverId = String(gid)
+            vc.receiverName = gname
+        }
     }
-    */
+
 
 }
