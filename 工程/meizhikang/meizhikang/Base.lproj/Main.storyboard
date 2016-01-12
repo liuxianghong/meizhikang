@@ -1218,12 +1218,18 @@
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4r-9f-p8f">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="20" y="202" width="360" height="367"/>
+                                </variation>
                             </webView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOX-cG-nt3">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="高血压－绿" translatesAutoresizingMaskIntoConstraints="NO" id="oCO-oY-lai">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oCO-oY-lai">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="20" y="0.0" width="473" height="215"/>
+                                        </variation>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -1245,7 +1251,8 @@
                                         <exclude reference="Uyy-44-3zW"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="577" width="400" height="215"/>
                                     <mask key="subviews">
                                         <include reference="oCO-oY-lai"/>
                                     </mask>
@@ -3932,6 +3939,7 @@
                         <outlet property="typeImageView2" destination="V9t-06-jKn" id="kEi-qt-vbC"/>
                         <outlet property="typeImageView3" destination="vMS-ow-VRu" id="TxZ-xs-gkR"/>
                         <segue destination="X2g-fz-UnX" kind="show" identifier="ChatSegueIdentifier" id="rry-aH-0KC"/>
+                        <segue destination="azR-0z-drI" kind="show" identifier="addMenberIdentifier" id="U5K-zA-CQa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4RL-we-UUf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3963,11 +3971,12 @@
                         <segue destination="Tq1-M8-yGh" kind="custom" identifier="groupMoreInderfier" customClass="WYStoryboardPopoverSegue" id="com-Ys-zUf"/>
                         <segue destination="4d6-T0-esL" kind="show" identifier="GroupInformation" id="F1N-ju-2GO"/>
                         <segue destination="WtE-QJ-KLC" kind="show" identifier="groupMenbersIndentifier" id="CQQ-Op-d09"/>
+                        <segue destination="azR-0z-drI" kind="show" identifier="addMenberIdentifier" id="Oly-tF-HDc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jb1-N9-weM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5619" y="2067.75"/>
+            <point key="canvasLocation" x="5679" y="2067.75"/>
         </scene>
         <!--Group More Table View Controller-->
         <scene sceneID="VRp-hY-oOV">
@@ -4121,6 +4130,176 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdw-QZ-IA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6880.5" y="1821.75"/>
+        </scene>
+        <!--查找联系人-->
+        <scene sceneID="uQV-85-MpN">
+            <objects>
+                <viewController title="查找联系人" id="azR-0z-drI" customClass="GroupAddMenbersViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2V9-Dy-Txh"/>
+                        <viewControllerLayoutGuide type="bottom" id="K9p-ha-dO0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TAF-Pr-NB6">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="白框.png" highlightedImage="矩形-4.png" translatesAutoresizingMaskIntoConstraints="NO" id="hao-y7-leD">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="aCe-Rx-m6e"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aCe-Rx-m6e"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="aCe-Rx-m6e"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入待查找用户的手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfp-Dy-47h">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="azR-0z-drI" id="niA-BL-GIR"/>
+                                </connections>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="白框.png" highlightedImage="矩形-4.png" translatesAutoresizingMaskIntoConstraints="NO" id="chp-pj-mum">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="lqv-cN-e60"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="lqv-cN-e60"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="lqv-cN-e60"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入待查找用户的昵称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hcQ-U5-RUN">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="azR-0z-drI" id="4a7-uh-Mun"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msz-5B-4yP">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="EMs-UE-ZWC"/>
+                                </constraints>
+                                <state key="normal" title="确定">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EMs-UE-ZWC"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="EMs-UE-ZWC"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="okClick:" destination="azR-0z-drI" eventType="touchUpInside" id="QoL-eX-8Wu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Yfp-Dy-47h" firstAttribute="leading" secondItem="TAF-Pr-NB6" secondAttribute="leadingMargin" constant="5" id="2qf-DB-2ke"/>
+                            <constraint firstItem="Yfp-Dy-47h" firstAttribute="top" secondItem="2V9-Dy-Txh" secondAttribute="bottom" constant="20" id="53q-2X-bnH"/>
+                            <constraint firstItem="Msz-5B-4yP" firstAttribute="top" secondItem="chp-pj-mum" secondAttribute="bottom" constant="40" id="5ll-8g-AxB"/>
+                            <constraint firstItem="Yfp-Dy-47h" firstAttribute="centerX" secondItem="hao-y7-leD" secondAttribute="centerX" id="EHE-zE-rcn"/>
+                            <constraint firstItem="Yfp-Dy-47h" firstAttribute="centerY" secondItem="hao-y7-leD" secondAttribute="centerY" id="Fyc-PA-YU5"/>
+                            <constraint firstItem="hcQ-U5-RUN" firstAttribute="leading" secondItem="TAF-Pr-NB6" secondAttribute="leading" constant="25" id="JnC-OB-4vw"/>
+                            <constraint firstItem="Msz-5B-4yP" firstAttribute="leading" secondItem="TAF-Pr-NB6" secondAttribute="leading" constant="15" id="OhZ-jZ-xZ7"/>
+                            <constraint firstItem="hcQ-U5-RUN" firstAttribute="top" secondItem="hao-y7-leD" secondAttribute="bottom" constant="20" id="TFD-2L-2yi"/>
+                            <constraint firstItem="hcQ-U5-RUN" firstAttribute="centerX" secondItem="chp-pj-mum" secondAttribute="centerX" id="UQ5-kJ-XmC"/>
+                            <constraint firstItem="hao-y7-leD" firstAttribute="top" secondItem="2V9-Dy-Txh" secondAttribute="bottom" constant="18" id="W6O-iu-Yzc"/>
+                            <constraint firstAttribute="trailing" secondItem="chp-pj-mum" secondAttribute="trailing" constant="15" id="XTy-4r-gqj"/>
+                            <constraint firstAttribute="trailing" secondItem="hao-y7-leD" secondAttribute="trailing" constant="15" id="g9b-E2-DCP"/>
+                            <constraint firstItem="hcQ-U5-RUN" firstAttribute="centerY" secondItem="chp-pj-mum" secondAttribute="centerY" id="jsj-hT-npF"/>
+                            <constraint firstItem="chp-pj-mum" firstAttribute="top" secondItem="hao-y7-leD" secondAttribute="bottom" constant="15" id="lW5-mK-rAU"/>
+                            <constraint firstItem="chp-pj-mum" firstAttribute="leading" secondItem="TAF-Pr-NB6" secondAttribute="leading" constant="15" id="leH-zs-plN"/>
+                            <constraint firstItem="hao-y7-leD" firstAttribute="leading" secondItem="TAF-Pr-NB6" secondAttribute="leading" constant="15" id="ufH-Qm-eJV"/>
+                            <constraint firstAttribute="trailing" secondItem="Msz-5B-4yP" secondAttribute="trailing" constant="15" id="vOE-5P-fTO"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="hao-y7-leD"/>
+                                <exclude reference="Yfp-Dy-47h"/>
+                                <exclude reference="chp-pj-mum"/>
+                                <exclude reference="hcQ-U5-RUN"/>
+                                <exclude reference="Msz-5B-4yP"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="W6O-iu-Yzc"/>
+                                <exclude reference="g9b-E2-DCP"/>
+                                <exclude reference="ufH-Qm-eJV"/>
+                                <exclude reference="2qf-DB-2ke"/>
+                                <exclude reference="53q-2X-bnH"/>
+                                <exclude reference="EHE-zE-rcn"/>
+                                <exclude reference="Fyc-PA-YU5"/>
+                                <exclude reference="XTy-4r-gqj"/>
+                                <exclude reference="lW5-mK-rAU"/>
+                                <exclude reference="leH-zs-plN"/>
+                                <exclude reference="JnC-OB-4vw"/>
+                                <exclude reference="TFD-2L-2yi"/>
+                                <exclude reference="UQ5-kJ-XmC"/>
+                                <exclude reference="jsj-hT-npF"/>
+                                <exclude reference="5ll-8g-AxB"/>
+                                <exclude reference="OhZ-jZ-xZ7"/>
+                                <exclude reference="vOE-5P-fTO"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="hao-y7-leD"/>
+                                <include reference="Yfp-Dy-47h"/>
+                                <include reference="chp-pj-mum"/>
+                                <include reference="hcQ-U5-RUN"/>
+                                <include reference="Msz-5B-4yP"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="W6O-iu-Yzc"/>
+                                <include reference="g9b-E2-DCP"/>
+                                <include reference="ufH-Qm-eJV"/>
+                                <include reference="2qf-DB-2ke"/>
+                                <include reference="53q-2X-bnH"/>
+                                <include reference="EHE-zE-rcn"/>
+                                <include reference="Fyc-PA-YU5"/>
+                                <include reference="XTy-4r-gqj"/>
+                                <include reference="lW5-mK-rAU"/>
+                                <include reference="leH-zs-plN"/>
+                                <include reference="JnC-OB-4vw"/>
+                                <include reference="TFD-2L-2yi"/>
+                                <include reference="UQ5-kJ-XmC"/>
+                                <include reference="jsj-hT-npF"/>
+                                <include reference="5ll-8g-AxB"/>
+                                <include reference="OhZ-jZ-xZ7"/>
+                                <include reference="vOE-5P-fTO"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="field1" destination="Yfp-Dy-47h" id="o8h-uo-kt5"/>
+                        <outlet property="field2" destination="hcQ-U5-RUN" id="iwk-lM-aZV"/>
+                        <outlet property="view2" destination="chp-pj-mum" id="5uD-y3-fWq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cfI-v5-Cu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8283" y="2052.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aAx-Yn-mQv">
@@ -8279,12 +8458,12 @@
         <image name="选择-.png" width="10" height="17"/>
         <image name="通讯.png" width="21" height="19"/>
         <image name="长边-绿.png" width="99" height="4"/>
-        <image name="高血压－绿" width="473" height="215"/>
         <image name="黑-圆小.png" width="7" height="7"/>
         <image name="黑.png" width="119" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8il-Mq-c6M"/>
+        <segue reference="U5K-zA-CQa"/>
+        <segue reference="rry-aH-0KC"/>
         <segue reference="F1N-ju-2GO"/>
     </inferredMetricsTieBreakers>
 </document>

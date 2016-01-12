@@ -48,7 +48,6 @@ class Message: NSManagedObject {
             var keyString = array[1]
             imageUrl = imageUrl.stringByReplacingOccurrencesOfString("[image]", withString: "")
             keyString = keyString.stringByReplacingOccurrencesOfString("[/key]", withString: "")
-            //let urlMD5 = imageUrl.dataFromMD5().description.formatData()
             
             let imagedata = NSData(contentsOfURL: NSURL(string: imageUrl)!)
             let dataKey = keyString.dataFromHexString()
@@ -56,22 +55,7 @@ class Message: NSManagedObject {
             let ddata = NSString.decryptWithAES(imagedata, withKey: dataKey.bytes)
             if ddata.length > 16{
                 data = NSData(bytes: ddata.bytes+16, length: ddata.length-16)
-//                if filedata.writeToFile(path!, atomically: false){
-//                    filepath = path
-//                }
-//                else
-//                {
-//                    data = filedata
-//                }
             }
-            
-//            let path = getImageFilePath(urlMD5)
-//            if !NSFileManager.defaultManager().fileExistsAtPath(path!){
-//                
-//            }
-//            else{
-//                filepath = path
-//            }
         }
         else if messageType() == .Voice{
             

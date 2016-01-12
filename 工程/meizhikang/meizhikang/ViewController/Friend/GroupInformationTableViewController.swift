@@ -30,6 +30,7 @@ class GroupInformationTableViewController: UITableViewController {
             formatter.dateFormat = "yyyy年MM月dd日 hh时mm分"
             tableViewDic.append(["创建时间：",formatter.stringFromDate(cdate)])
             self.navigationItem.rightBarButtonItem = nil
+            self.title = "群组信息"
         }
         else if let nickName = menber?.nickname , let time = menber?.createtime{
             self.title = "个人资料"
@@ -39,6 +40,9 @@ class GroupInformationTableViewController: UITableViewController {
             formatter.dateFormat = "yyyy年MM月dd日 hh时mm分"
             tableViewDic.append(["创建时间：",formatter.stringFromDate(cdate)])
             self.imageView.image = UIImage(named: "联系人-蓝.png")
+            if menber?.uid == UserInfo.CurrentUser()?.uid{
+                self.navigationItem.rightBarButtonItem = nil
+            }
         }
        
     }
@@ -170,7 +174,7 @@ class GroupInformationTableViewController: UITableViewController {
                     return
             }
             
-            vc.menber = self.menber
+            vc.chat = Chat.ChatByGroupMember(self.menber!, user: UserInfo.CurrentUser()!)
             vc.senderId = sendId.stringValue
             vc.senderDisplayName = nickname
             vc.currentAvatar = UIImage(named: "联系人-蓝.png")

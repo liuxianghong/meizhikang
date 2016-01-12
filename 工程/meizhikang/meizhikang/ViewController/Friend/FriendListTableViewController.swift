@@ -72,8 +72,9 @@ class FriendListTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.loadEmail()
-        self.loadGrous()
+        loadEmail()
+        loadGrous()
+        loadChat()
         self.tableView.reloadData()
     }
     
@@ -237,7 +238,7 @@ class FriendListTableViewController: UITableViewController {
             })
             
             let actionAdd = UIAlertAction(title: "加入群", style: .Default, handler: { (UIAlertAction) -> Void in
-                
+                self.performSegueWithIdentifier("addMenberIdentifier", sender: nil)
             })
             
             let actionCancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
@@ -251,6 +252,8 @@ class FriendListTableViewController: UITableViewController {
             self.presentViewController(actionVC, animated: true, completion: { () -> Void in
                 
             })
+        }else if type == 3{
+            
         }else{
             self.performSegueWithIdentifier(FriendListTableViewControllerConstant.chatSegueIdentifier, sender: indexPath)
         }
@@ -302,27 +305,50 @@ class FriendListTableViewController: UITableViewController {
         }
         
         if segue.identifier == FriendListTableViewControllerConstant.chatSegueIdentifier{
-            guard let vc = segue.destinationViewController as? ChatViewController,
-                let sendId = UserInfo.CurrentUser()?.uid,
-                let nickname = UserInfo.CurrentUser()?.nickname,
-                let indexPath = sender as? NSIndexPath where indexPath.row > 0,
-                let gid = groupArray[indexPath.row - 1].gid,
-                let gname = groupArray[indexPath.row - 1].gname
-            else{
-                return
-            }
+            
             if type==1{
-                let indexPath = sender as! NSIndexPath
+                guard let vc = segue.destinationViewController as? ChatViewController,
+                    let sendId = UserInfo.CurrentUser()?.uid,
+                    let nickname = UserInfo.CurrentUser()?.nickname,
+                    let indexPath = sender as? NSIndexPath where indexPath.row > 0,
+                    let gid = groupArray[indexPath.row - 1].gid,
+                    let gname = groupArray[indexPath.row - 1].gname
+                    else{
+                        return
+                }
                 let group = self.groupArray[indexPath.row-1]
                 vc.group = group
+                vc.senderId = sendId.stringValue
+                vc.senderDisplayName = nickname
+                vc.currentAvatar = UIImage(named: "联系人-蓝.png")
+                // TODO: pass the friend or group to me
+                vc.receiverId = String(gid)
+                vc.receiverName = gname
+            }
+            else if type == 2{
+                guard let vc = segue.destinationViewController as? ChatViewController,
+                    let sendId = UserInfo.CurrentUser()?.uid,
+                    let nickname = UserInfo.CurrentUser()?.nickname,
+                    let indexPath = sender as? NSIndexPath,
+                    let gid = chatArray[indexPath.row].member!.uid,
+                    let gname = chatArray[indexPath.row].member!.nickname
+                    else{
+                        return
+                }
+                let chat = self.chatArray[indexPath.row]
+                vc.chat = chat
+                vc.senderId = sendId.stringValue
+                vc.senderDisplayName = nickname
+                vc.currentAvatar = UIImage(named: "联系人-蓝.png")
+                // TODO: pass the friend or group to me
+                vc.receiverId = String(gid)
+                vc.receiverName = gname
             }
             
-            vc.senderId = sendId.stringValue
-            vc.senderDisplayName = nickname
-            vc.currentAvatar = UIImage(named: "联系人-蓝.png")
-            // TODO: pass the friend or group to me
-            vc.receiverId = String(gid)
-            vc.receiverName = gname
+        }
+        else if segue.identifier == "addMenberIdentifier"{
+            let vc = segue.destinationViewController as! GroupAddMenbersViewController
+            vc.type = 2
         }
     }
 
