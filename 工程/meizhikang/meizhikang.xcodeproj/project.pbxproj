@@ -451,6 +451,7 @@
 		D3395AF11C3E54B7004F4B2F /* ISEmojiList.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3395AF01C3E54B7004F4B2F /* ISEmojiList.plist */; };
 		D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */; };
 		D33984731C26EA9D00A78D33 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33984711C26EA9D00A78D33 /* Email.swift */; };
+		D33BF9331C44C5210094E157 /* GroupInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF9321C44C5210094E157 /* GroupInformationTableViewController.swift */; };
 		D33C1E121C2D170100BF7AFA /* DottedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33C1E111C2D170100BF7AFA /* DottedLineView.m */; };
 		D33EF1031C4390E80074E9FC /* GroupMoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */; };
 		D33EF1051C43A5980074E9FC /* GroupMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */; };
@@ -1008,6 +1009,7 @@
 		D3395AF01C3E54B7004F4B2F /* ISEmojiList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ISEmojiList.plist; sourceTree = "<group>"; };
 		D33984701C26EA9D00A78D33 /* Email+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Email+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D33984711C26EA9D00A78D33 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		D33BF9321C44C5210094E157 /* GroupInformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInformationTableViewController.swift; sourceTree = "<group>"; };
 		D33C1E101C2D170100BF7AFA /* DottedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DottedLineView.h; sourceTree = "<group>"; };
 		D33C1E111C2D170100BF7AFA /* DottedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DottedLineView.m; sourceTree = "<group>"; };
 		D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMoreTableViewController.swift; sourceTree = "<group>"; };
@@ -1984,6 +1986,7 @@
 				D3F8E2D31C0C385200263B4E /* FriendListTableViewController.swift */,
 				B96DE00B1C1EEF4000B9BF85 /* ChatViewController.swift */,
 				D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */,
+				D33BF9321C44C5210094E157 /* GroupInformationTableViewController.swift */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2619,6 +2622,7 @@
 				D3F8E2C61C0C384300263B4E /* SettingTableViewController.swift in Sources */,
 				D361575C1C09760B009ED19D /* README.md in Sources */,
 				D3F8E2C51C0C384300263B4E /* ResetPhoneTableViewController.swift in Sources */,
+				D33BF9331C44C5210094E157 /* GroupInformationTableViewController.swift in Sources */,
 				D33EF1051C43A5980074E9FC /* GroupMoreTableViewCell.swift in Sources */,
 				B975157F1C3D554E00A7DC16 /* EmotionsKeyboardBuilder.m in Sources */,
 				D33984721C26EA9D00A78D33 /* Email+CoreDataProperties.swift in Sources */,

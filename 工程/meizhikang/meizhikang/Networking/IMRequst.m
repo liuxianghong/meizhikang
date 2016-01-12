@@ -69,6 +69,14 @@
     [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
 }
 
++(void)QuitGroupByGid:(NSNumber *)gid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    NSDictionary *dic = @{
+                          @"type" : @"quit_group",
+                          @"gid": gid
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
 +(void)UpdateGroupNameByGid:(NSNumber *)gid name:(NSString *)groupName completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
     NSDictionary *dic = @{
                           @"type" : @"modify_group",

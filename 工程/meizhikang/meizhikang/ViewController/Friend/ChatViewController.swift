@@ -662,16 +662,59 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     func didClickGroupMoreType(type : GroupMoreType){
         switch type{
         case .GroupMembers:break
-        case .GroupMessage:break
+        case .GroupMessage:
+            self.performSegueWithIdentifier("GroupInformation", sender: nil)
         case .GroupOnShare:break
         case .GroupUpdateName:
             groupUpdateName()
         case .GroupDelete:
             deleteGroup()
         case .GroupAddMenber:break
-        case .GroupQuite:break
+        case .GroupQuite:
+            quiteGroup()
         default: break
         }
+    }
+    
+    func quiteGroup(){
+        let actionGroup = UIAlertController(title: "", message: "是否要退出组", preferredStyle: .Alert)
+        let actionA = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) -> Void in
+            let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+            IMRequst.QuitGroupByGid(self.group.gid, completion: { (object) -> Void in
+                print(object)
+                let joson = JSON(object)
+                let flag = joson["flag"].intValue
+                if flag == 1{
+                    hud.detailsLabelText = "退出组成功";
+                    UserInfo.CurrentUser()?.quiteGroup(self.group)
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+                else if flag == -1{
+                    hud.detailsLabelText = "组不存在";
+                }
+                else{
+                    hud.detailsLabelText = "退出组失败";
+                }
+                hud.mode = .Text
+                
+                hud.hide(true, afterDelay: 1.5)
+                
+                }, failure: { (error : NSError!) -> Void in
+                    hud.mode = .Text
+                    hud.detailsLabelText = error.domain;
+                    hud.hide(true, afterDelay: 1.5)
+                    print(error)
+            })
+        })
+        
+        let actionC = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            
+        })
+        actionGroup.addAction(actionA)
+        actionGroup.addAction(actionC)
+        self.presentViewController(actionGroup, animated: true, completion: { () -> Void in
+            
+        })
     }
     
     func deleteGroup(){
@@ -685,9 +728,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 let flag = joson["flag"].intValue
                 if flag == 1{
                     hud.detailsLabelText = "删除组成功";
-                    let users = self.group.mutableSetValueForKey("user")
-                    users.removeObject(UserInfo.CurrentUser()!)
-                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                    UserInfo.CurrentUser()?.quiteGroup(self.group)
                     self.navigationController?.popViewControllerAnimated(true)
                 }
                 else
@@ -794,6 +835,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             popoverController.theme.fillBottomColor = UIColor.clearColor()
             popoverController.theme.arrowHeight = 10
             popoverController.popoverLayoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        }
+        else if segue.identifier == "GroupInformation"{
+            let vc = segue.destinationViewController as! GroupInformationTableViewController
+            vc.group = group
         }
         
     }

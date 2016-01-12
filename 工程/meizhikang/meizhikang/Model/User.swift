@@ -121,4 +121,11 @@ class User: NSManagedObject {
         })
     }
     
+    func quiteGroup(group : Group?){
+        if group != nil {
+            let users = group!.mutableSetValueForKey("user")
+            users.removeObject(self)
+            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        }
+    }
 }
