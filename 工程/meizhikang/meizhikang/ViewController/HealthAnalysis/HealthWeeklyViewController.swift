@@ -24,15 +24,30 @@ class HealthWeeklyViewController: UIViewController {
     var type: HealthWeeklyType?
     var currentDay: NSDate?
     var chartData: [WeeklyViewLineData] = [WeeklyViewLineData]()
+    let calendar = NSCalendar.currentCalendar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         if self.type! == .Week{
+            let weekdiff = calendar.components(.WeekOfYear, fromDate: currentDay!, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))
+            if weekdiff.weekOfYear != 0{
+                let weekcomp = calendar.components(.Weekday, fromDate: currentDay!).weekday
+                if weekcomp != 1{
+                    let offset = 8 - weekcomp
+                    currentDay = calendar.dateByAddingUnit(.Day, value: offset, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
+                }
+            }
             generateData(7)
             self.typeTitle.setTitle("前七天", forState: .Normal)
         }else{
+            let monthdiff = calendar.components(.Month, fromDate: currentDay!, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))
+            if monthdiff.month != 0{
+                let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: currentDay!)
+                let day = calendar.component(.Day, fromDate: currentDay!)
+                currentDay = calendar.dateByAddingUnit(.Day, value: range.length - day, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
+            }
             generateData(30)
             self.typeTitle.setTitle("当月", forState: .Normal)
         }
