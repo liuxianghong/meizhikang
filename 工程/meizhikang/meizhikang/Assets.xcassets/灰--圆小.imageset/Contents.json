@@ -2,17 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "启动图logo.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "启动图logo@2x.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "灰--圆小@2x.png"
     },
     {
       "idiom" : "universal",
-      "filename" : "启动图logo@3x.png",
+      "filename" : "灰--圆小@3x.png",
       "scale" : "3x"
     }
   ],
