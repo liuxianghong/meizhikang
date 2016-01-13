@@ -90,6 +90,9 @@ class HealthWeeklyChartView: UIView {
     override func drawRect(rect: CGRect) {
         // Drawing code
         super.drawRect(rect)
+        if chartData == nil{
+            return
+        }
         chartData?.forEach({ (item) -> () in
             guard let value = item.value else{
                 return
