@@ -143,6 +143,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     var receiverName: String!
     var viewModel: ChatViewModel!
     var group : Group!
+    var chat : Chat!
     var sendVoice: UIButton!
     var observer : NSObjectProtocol!
     var voiceTimeInterval : NSTimeInterval = 0
@@ -161,16 +162,27 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             if message.group == self.group{
                 self.addMessage(message)
             }
+            else if message.chat == self.chat{
+                self.addMessage(message)
+            }
         }
         
         if group == nil{
             self.navigationItem.rightBarButtonItem = nil
+            if chat != nil{
+                self.title = chat.member?.nickname
+                let messages = Message.MR_findByAttribute("chat", withValue: chat, andOrderBy: "sendtime", ascending: true)
+                for message in messages {
+                    self.addMessage(message as! Message)
+                }
+            }
         }
-        
-        self.title = group.gname
-        let messages = Message.MR_findByAttribute("group", withValue: group, andOrderBy: "sendtime", ascending: true)
-        for message in messages {
-            self.addMessage(message as! Message)
+        else{
+            self.title = group.gname
+            let messages = Message.MR_findByAttribute("group", withValue: group, andOrderBy: "sendtime", ascending: true)
+            for message in messages {
+                self.addMessage(message as! Message)
+            }
         }
     }
     
@@ -383,6 +395,35 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         }
     }
     
+    func sendType() -> IMMsgSendFromType{
+        if group != nil{
+            return IMMsgSendFromTypeGroup
+        }
+        else{
+            return IMMsgSendFromTypePepole
+        }
+    }
+    
+    func sendID() -> NSNumber{
+        if group != nil{
+            return self.group.gid!
+        }
+        else{
+            return (chat.member?.uid)!
+        }
+    }
+    
+    func saveMessage(mesage : Message){
+        if group != nil{
+            mesage.gid = self.group.gid
+            mesage.group = self.group
+        }
+        else{
+            mesage.gid = 0
+            mesage.chat = chat
+        }
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+    }
     
     // MARK: - UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -395,18 +436,17 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 self.viewModel.messages?.append(message2!)
                 self.finishSendingMessageAnimated(true)
                 let data = UIImageJPEGRepresentation(image, 0.1)
-                IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: IMMsgSendFromTypeGroup, toid: self.group.gid!, completion: { object in
+                IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: self.sendType(), toid: self.sendID(), completion: { object in
                     print(object)
                     message2.sendStauts = .Successful
                     let json = JSON(object)
                     let mesage = Message.MR_createEntity()
-                    mesage.gid = self.group.gid
-                    mesage.group = self.group
                     mesage.fromid = UserInfo.CurrentUser()?.uid
                     mesage.sendtime = json["sendtime"].number
                     mesage.content = "[image][/image]"
                     mesage.saveData(data!)
-                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                    mesage.uuid = json["uuid"].number
+                    self.saveMessage(mesage)
                     self.finishSendingMessageAnimated(true)
                     }) { error in
                     message2.sendStauts = .Failed
@@ -459,18 +499,16 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         }
         
         let data = EncodeWAVEToAMR(NSData(contentsOfURL: url), 1, 16)
-        IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { object in
+        IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeVoice, fromType: sendType(), toid: sendID(), completion: { object in
             print(object)
             
             let json = JSON(object)
             let mesage = Message.MR_createEntity()
-            mesage.gid = self.group.gid
-            mesage.group = self.group
             mesage.fromid = UserInfo.CurrentUser()?.uid
             mesage.sendtime = json["sendtime"].number
             mesage.content = "[url][/url]"
             mesage.data = data
-            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            self.saveMessage(mesage)
             
             }) { error in
                 print(error)
@@ -484,32 +522,27 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         let jsqmessage = JSQMessage(senderId: sendId, displayName: senderDisplayName, text: text)
         jsqmessage.sendStauts = .Sending
         viewModel.messages?.append(jsqmessage)
-        if group != nil{
-            IMRequst.SendMessage(text, fromType: IMMsgSendFromTypeGroup, toid: group.gid!, completion: { (object) -> Void in
-                print(object)
-                let json = JSON(object)
-                let flag = json["flag"].intValue
-                if flag == 1{
-                    print("发送成功")
-                    jsqmessage.sendStauts = .Successful
-                    let mesage = Message.MR_createEntity()
-                    mesage.gid = self.group.gid
-                    mesage.group = self.group
-                    mesage.fromid = UserInfo.CurrentUser()?.uid
-                    mesage.sendtime = json["sendtime"].number
-                    mesage.content = "[text]\(text)[/text]"
-                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-                }
-                else
-                {
-                    jsqmessage.sendStauts = .Failed
-                    print("发送失败")
-                }
-                }, failure: { (error : NSError!) -> Void in
-                    jsqmessage.sendStauts = .Failed
-            })
-            self.finishSendingMessageAnimated(true)
-        }
+        IMRequst.SendMessage(text, fromType: sendType(), toid: sendID(), completion: { (object) -> Void in
+            print(object)
+            let json = JSON(object)
+            let flag = json["flag"].intValue
+            if flag == 1{
+                print("发送成功")
+                jsqmessage.sendStauts = .Successful
+                let mesage = Message.MR_createEntity()
+                mesage.fromid = UserInfo.CurrentUser()?.uid
+                mesage.sendtime = json["sendtime"].number
+                mesage.content = "[text]\(text)[/text]"
+                self.saveMessage(mesage)
+            }
+            else
+            {
+                jsqmessage.sendStauts = .Failed
+                print("发送失败")
+            }
+            }, failure: { (error : NSError!) -> Void in
+                jsqmessage.sendStauts = .Failed
+        })
         self.finishSendingMessageAnimated(true)
     }
 
@@ -673,10 +706,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             groupUpdateName()
         case .GroupDelete:
             deleteGroup()
-        case .GroupAddMenber:break
+        case .GroupAddMenber:
+            self.performSegueWithIdentifier("addMenberIdentifier", sender: nil)
         case .GroupQuite:
             quiteGroup()
-        default: break
         }
     }
     
@@ -865,6 +898,10 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         }
         else if segue.identifier == "groupMenbersIndentifier"{
             let vc = segue.destinationViewController as! GroupMenbersTableViewController
+            vc.group = group
+        }
+        else if segue.identifier == "addMenberIdentifier"{
+            let vc = segue.destinationViewController as! GroupAddMenbersViewController
             vc.group = group
         }
         

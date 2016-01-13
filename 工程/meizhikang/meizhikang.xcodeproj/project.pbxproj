@@ -455,6 +455,7 @@
 		D33BF9361C44EC7C0094E157 /* Chat+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF9341C44EC7C0094E157 /* Chat+CoreDataProperties.swift */; };
 		D33BF9371C44EC7C0094E157 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF9351C44EC7C0094E157 /* Chat.swift */; };
 		D33BF9391C452E100094E157 /* GroupMenbersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF9381C452E100094E157 /* GroupMenbersTableViewController.swift */; };
+		D33BF9401C456D480094E157 /* GroupAddMenbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33BF93F1C456D480094E157 /* GroupAddMenbersViewController.swift */; };
 		D33C1E121C2D170100BF7AFA /* DottedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33C1E111C2D170100BF7AFA /* DottedLineView.m */; };
 		D33EF1031C4390E80074E9FC /* GroupMoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */; };
 		D33EF1051C43A5980074E9FC /* GroupMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EF1041C43A5980074E9FC /* GroupMoreTableViewCell.swift */; };
@@ -1016,6 +1017,7 @@
 		D33BF9341C44EC7C0094E157 /* Chat+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chat+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D33BF9351C44EC7C0094E157 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		D33BF9381C452E100094E157 /* GroupMenbersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMenbersTableViewController.swift; sourceTree = "<group>"; };
+		D33BF93F1C456D480094E157 /* GroupAddMenbersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupAddMenbersViewController.swift; sourceTree = "<group>"; };
 		D33C1E101C2D170100BF7AFA /* DottedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DottedLineView.h; sourceTree = "<group>"; };
 		D33C1E111C2D170100BF7AFA /* DottedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DottedLineView.m; sourceTree = "<group>"; };
 		D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMoreTableViewController.swift; sourceTree = "<group>"; };
@@ -1996,6 +1998,7 @@
 				D33EF1021C4390E80074E9FC /* GroupMoreTableViewController.swift */,
 				D33BF9321C44C5210094E157 /* GroupInformationTableViewController.swift */,
 				D33BF9381C452E100094E157 /* GroupMenbersTableViewController.swift */,
+				D33BF93F1C456D480094E157 /* GroupAddMenbersViewController.swift */,
 			);
 			path = Friend;
 			sourceTree = "<group>";
@@ -2612,6 +2615,7 @@
 				D33527031C2EEA760038015D /* BLEConnect.m in Sources */,
 				D33BF9361C44EC7C0094E157 /* Chat+CoreDataProperties.swift in Sources */,
 				B987B9401C2C22C0002FF394 /* HealthDailyChartView.swift in Sources */,
+				D33BF9401C456D480094E157 /* GroupAddMenbersViewController.swift in Sources */,
 				B9C080C91C170C3D00CC0185 /* HealthPercentView.swift in Sources */,
 				D309025C1C2A7E44001FDF7B /* HealthComDiseasesViewController.swift in Sources */,
 				B9709B2E1C29962C004DCD50 /* JSQAudioMediaItem.m in Sources */,
