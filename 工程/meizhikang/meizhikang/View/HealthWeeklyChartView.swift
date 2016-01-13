@@ -51,18 +51,8 @@ class HealthWeeklyChartView: UIView {
         CGContextBeginPath(context)
         let color = UIColor.mainGreenColor()
         CGContextSetStrokeColorWithColor(context, color.CGColor)
-        var i = data.count
-        for k in 0..<data.count{
-            if data[k].value != nil{
-                i = k
-                break
-            }
-        }
-        if i == data.count{
-            return
-        }
         let leftmargin : CGFloat = 50
-        CGContextMoveToPoint(context, leftmargin ,rect.size.height - rect.size.height * (data[i].value! - minValue) / (maxValue - minValue))
+        CGContextMoveToPoint(context, leftmargin ,rect.size.height - rect.size.height * (data[0].value! - minValue) / (maxValue - minValue))
         var imagePoint = [CGPoint]()
         for (index,item) in data.enumerate(){
             let formater = NSDateFormatter()
@@ -72,14 +62,19 @@ class HealthWeeklyChartView: UIView {
                 NSForegroundColorAttributeName : UIColor.whiteColor()]
             let attStr = NSAttributedString(string: str, attributes: attr)
             let size = attStr.size()
-            let strx = leftmargin + (rect.size.width - leftmargin - 20) * CGFloat(index)/CGFloat(data.count - 1) - size.width / 2
+            let strx : CGFloat
+            if data.count == 1 {
+                strx = leftmargin + size.width / 2
+            }else {
+                strx = leftmargin + (rect.size.width - leftmargin - 20) * CGFloat(index)/CGFloat(data.count - 1) - size.width / 2
+            }
             let stry : CGFloat = rect.size.height - 10
             attStr.drawAtPoint(CGPoint(x: strx, y: stry))
             CGContextSetStrokeColorWithColor(context, color.CGColor)
             guard let _ = item.value else{
                 continue
             }
-            let pos = strx
+            let pos = strx + size.width / 2
             let height = rect.size.height - rect.size.height * (item.value! - minValue) / (maxValue - minValue)
             let imageX = pos - (image?.size.width)! / 2
             let imageY = height - (image?.size.height)! / 2
