@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 enum HealthWeeklyType{
     case Week
     case Month
@@ -131,5 +132,26 @@ class HealthWeeklyViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func share(sender: UIButton) {
+        guard let vc = self.parentViewController as? HealthReportContainerViewController,
+        let image = UIImage.imageWith(self.view),
+        let _ = UserInfo.CurrentUser()?.shareGroup
+        else{
+            showHUD("未开启群组分享,请开启")
+            return
+        }
+        vc.performSegueWithIdentifier(HealthReportContainerConstant.ShareImageSegueIdentifier, sender: image)
+    }
 
+    @IBAction func askExpert(sender: UIButton) {
+        showHUD("此项属于收费服务,在后续版本中提供")
+    }
+    
+    func showHUD(str: String){
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.mode = .Text
+        hud.detailsLabelText = str//
+        hud.hide(true, afterDelay: 3.0)
+        
+    }
 }

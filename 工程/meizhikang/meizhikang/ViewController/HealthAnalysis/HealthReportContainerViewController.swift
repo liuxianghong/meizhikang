@@ -10,6 +10,7 @@ import UIKit
 struct HealthReportContainerConstant{
     static let WeeklySegueIdentifier = "HealthWeeklySegueIdentifier"
     static let DailySegueIdentifier = "HealthDailySegueIdentifier"
+    static let ShareImageSegueIdentifier = "ShareImageSegueIdentifier"
 }
 
 class HealthReportContainerViewController: UIViewController {
@@ -73,6 +74,47 @@ class HealthReportContainerViewController: UIViewController {
             }
             swapViewContoller(self.childViewControllers[0], toViewController: weeklyViewController)
         }
+        
+        if segue.identifier == HealthReportContainerConstant.ShareImageSegueIdentifier{
+            guard let image = sender as? UIImage else{
+                return
+            }
+            guard let vc = segue.destinationViewController as? ChatViewController,
+                let sendId = UserInfo.CurrentUser()?.uid,
+                let nickname = UserInfo.CurrentUser()?.nickname,
+                let group = UserInfo.CurrentUser()?.shareGroup,
+                let gid = group.gid,
+                let gname = group.gname
+                else{
+                    return
+            }
+//                let group = //self.groupArray[indexPath.row-1]
+            vc.group = group
+            vc.senderId = sendId.stringValue
+            vc.senderDisplayName = nickname
+            vc.currentAvatar = UIImage(named: "联系人-蓝.png")
+            vc.receiverId = String(gid)
+            vc.receiverName = gname
+            vc.autoSendImage = image
+            
+        }
+    }
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier == HealthReportContainerConstant.ShareImageSegueIdentifier{
+            guard let _ = sender as? UIImage else{
+                return false
+            }
+            guard
+                let _ = UserInfo.CurrentUser()?.uid,
+                let _ = UserInfo.CurrentUser()?.nickname,
+                let group = UserInfo.CurrentUser()?.shareGroup,
+                let _ = group.gid,
+                let _ = group.gname
+                else{
+                    return false
+            }
+        }
+        return true
     }
     
     func swapViewContoller(fromViewController: UIViewController,toViewController: UIViewController){

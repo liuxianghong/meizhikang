@@ -119,6 +119,7 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
             }
             if let media = message.media as? JSQMyPhotoMediaItem{
                 print(media)
+                return ("ShowImageSegueIdentifier",media.image)
             }
         }
         return nil
@@ -149,6 +150,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     var voiceTimeInterval : NSTimeInterval = 0
     var emojiView : ISEmojiView!
     var popoverController : WYPopoverController!
+    var autoSendImage: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView?.backgroundColor = UIColor(white: 0.5, alpha: 1.0)
@@ -193,6 +195,8 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        sendImage(self.autoSendImage)
+        self.autoSendImage = nil
     }
     
     @IBAction func moreClick(sneder : AnyObject?){
@@ -430,28 +434,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         picker.dismissViewControllerAnimated(true) { () -> Void in
             
             if let image : UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                let jsq = JSQMyPhotoMediaItem(image: image)
-                let message2 = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: jsq)
-                message2.sendStauts = .Sending
-                self.viewModel.messages?.append(message2!)
-                self.finishSendingMessageAnimated(true)
-                let data = UIImageJPEGRepresentation(image, 0.1)
-                IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: self.sendType(), toid: self.sendID(), completion: { object in
-                    print(object)
-                    message2.sendStauts = .Successful
-                    let json = JSON(object)
-                    let mesage = Message.MR_createEntity()
-                    mesage.fromid = UserInfo.CurrentUser()?.uid
-                    mesage.sendtime = json["sendtime"].number
-                    mesage.content = "[image][/image]"
-                    mesage.saveData(data!)
-                    mesage.uuid = json["uuid"].number
-                    self.saveMessage(mesage)
-                    self.finishSendingMessageAnimated(true)
-                    }) { error in
-                    message2.sendStauts = .Failed
-                        print(error)
-                }
+                self.sendImage(image)
             }
         }
     }
@@ -544,6 +527,34 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
                 jsqmessage.sendStauts = .Failed
         })
         self.finishSendingMessageAnimated(true)
+    }
+    
+    func sendImage(oImage: UIImage?){
+        guard let image = oImage else{
+            return
+        }
+        let jsq = JSQMyPhotoMediaItem(image: image)
+        let message2 = JSQMessage(senderId: self.senderId, displayName: self.senderDisplayName, media: jsq)
+        message2.sendStauts = .Sending
+        self.viewModel.messages?.append(message2!)
+        self.finishSendingMessageAnimated(true)
+        let data = UIImageJPEGRepresentation(image, 0.1)
+        IMRequst.UploadFileRequst(data, fileType: IMMsgSendFileTypeImage, fromType: self.sendType(), toid: self.sendID(), completion: { object in
+            print(object)
+            message2.sendStauts = .Successful
+            let json = JSON(object)
+            let mesage = Message.MR_createEntity()
+            mesage.fromid = UserInfo.CurrentUser()?.uid
+            mesage.sendtime = json["sendtime"].number
+            mesage.content = "[image][/image]"
+            mesage.saveData(data!)
+            mesage.uuid = json["uuid"].number
+            self.saveMessage(mesage)
+            self.finishSendingMessageAnimated(true)
+            }) { error in
+            message2.sendStauts = .Failed
+                print(error)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -678,7 +689,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     // MARK: - JSQMessages Delegate
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
-        self.viewModel.playItemAt(indexPath.row)
+        if let (segueIdentifer,image) = self.viewModel.playItemAt(indexPath.row){
+            self.performSegueWithIdentifier(segueIdentifer, sender: image)
+        }
     }
     
     // MARK: - WY
@@ -903,6 +916,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         else if segue.identifier == "addMenberIdentifier"{
             let vc = segue.destinationViewController as! GroupAddMenbersViewController
             vc.group = group
+        }else if segue.identifier == "ShowImageSegueIdentifier" {
+            let vc = segue.destinationViewController as! ChatImageViewController
+            vc.image = sender as? UIImage
         }
         
     }
