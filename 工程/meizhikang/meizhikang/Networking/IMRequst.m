@@ -134,7 +134,7 @@
                           @"type" : @"email_apply",
                           @"uid" : uid,
                           @"gid": gid,
-                          @"type" : type
+                          @"flag" : type
                           };
     [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
 }
@@ -143,7 +143,15 @@
     NSDictionary *dic = @{
                           @"type" : @"email_invite",
                           @"gid": gid,
-                          @"type" : type
+                          @"flag" : type
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
++(void)ApplyGroupByGid:(NSNumber *)gid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    NSDictionary *dic = @{
+                          @"type" : @"apply_group",
+                          @"gid": gid
                           };
     [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
 }
@@ -154,6 +162,21 @@
                           @"gid": gid,
                           @"uuid" : uuid
                           };
-    [[IMConnect Instance] RequstUserInfo:dic completion:nil failure:nil];
+    [[IMConnect Instance] RequstUserInfo:dic completion:^(id info) {
+        NSLog(@"%@",info);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
+
++(void)AddMemberByGid:(NSNumber *)gid uid:(NSNumber *)uid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    NSDictionary *dic = @{
+                          @"type" : @"add_member",
+                          @"gid": gid,
+                          @"uid" : uid
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
+
 @end

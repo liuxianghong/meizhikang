@@ -270,7 +270,7 @@ class FriendListTableViewController: UITableViewController {
                 }
             })
             
-            let actionC = UIAlertAction(title: "拒绝", style: .Cancel, handler: { (UIAlertAction) -> Void in
+            let actionC = UIAlertAction(title: "拒绝", style: .Default, handler: { (UIAlertAction) -> Void in
                 if email.emailType() == .Apply{
                     self.applyEmail(email,type: 0)
                 }
@@ -290,16 +290,16 @@ class FriendListTableViewController: UITableViewController {
     }
     
     func deleteEmail(email :Email){
+        IMRequst.EmailReadByGid(email.gid, uuid: email.uid)
         email.MR_deleteEntity()
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         self.loadEmail()
         self.tableView.reloadData()
-        IMRequst.EmailReadByGid(email.gid, uuid: email.uid)
     }
     
     func inviteEmail(email :Email ,type : Int){
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        IMRequst.EmailInviteByGid(email.uid, tye: type, completion: { (object) -> Void in
+        IMRequst.EmailInviteByGid(email.gid, tye: type, completion: { (object) -> Void in
             print(object)
             let joson = JSON(object)
             let flag = joson["flag"].intValue

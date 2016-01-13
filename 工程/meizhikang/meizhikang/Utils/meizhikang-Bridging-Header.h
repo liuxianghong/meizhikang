@@ -8,6 +8,7 @@
 #import "NSString+scisky.h"
 #import "IMRequst.h"
 #import "BLEConnect.h"
+#import "MZKSearchRequst.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 #import "JSQAudioMediaItem.h"

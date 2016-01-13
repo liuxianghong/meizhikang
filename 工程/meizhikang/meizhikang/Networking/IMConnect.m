@@ -666,7 +666,7 @@
     }
     if (im.lenth != [data length]) {
         im.failure([NSError errorWithDomain:@"Read data error" code:0 userInfo:nil]);
-        currentIM.sendingType = IMObjectSendFinished;
+        im.sendingType = IMObjectSendFinished;
         [self listenRecive];
         return;
     }
@@ -683,7 +683,7 @@
         memcpy(&length, [data bytes]+6, sizeof(length));
         if ((long)seq != im.tag) {
             im.failure([NSError errorWithDomain:@"服务器出错" code:0 userInfo:nil]);
-            currentIM.sendingType = IMObjectSendFinished;
+            im.sendingType = IMObjectSendFinished;
             [self doSocketError];
             return;
         }
@@ -696,7 +696,7 @@
             else{
                 im.completion(im.data);
             }
-            currentIM.sendingType = IMObjectSendFinished;
+            im.sendingType = IMObjectSendFinished;
             [self listenRecive];
         }
         else
@@ -709,7 +709,7 @@
     {
         [im.data appendData:data];
         im.completion(im.data);
-        currentIM.sendingType = IMObjectSendFinished;
+        im.sendingType = IMObjectSendFinished;
         [self listenRecive];
     }
     
@@ -745,13 +745,13 @@
     else
     {
         if (currentIM && currentIM.sendingType != IMObjectSendFinished) {// err &&
-            currentIM.sendingType = IMObjectSendFinished;
             currentIM.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
+            currentIM.sendingType = IMObjectSendFinished;
         }
         for (IMObject *im in IMQueue) {
             if (im.sendingType != IMObjectSendFinished) {
-                im.sendingType = IMObjectSendFinished;
                 im.failure([NSError errorWithDomain:err.localizedDescription code:0 userInfo:nil]);
+                im.sendingType = IMObjectSendFinished;
             }
         }
         if (reciveIM) {
@@ -809,11 +809,20 @@
                 double delayInSeconds = 0.2;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    if ([object[@"pushtype"] isEqualToString:@"meet"]){
-                        NSDictionary *dic = @{@"uuid" : object[@"uuid"],
-                                              @"type" : @"push_meet",
-                                              @"result" : @200
-                                              };
+                    if ([object[@"pushtype"] isEqualToString:@"meet"] || [object[@"pushtype"] isEqualToString:@"email"]){
+                        NSDictionary *dic;
+                        if ([object[@"pushtype"] isEqualToString:@"meet"]) {
+                            dic= @{@"uuid" : object[@"uuid"],
+                                @"type" : @"push_meet",
+                                @"result" : @200
+                                };
+                        }
+                        else if ([object[@"pushtype"] isEqualToString:@"email"]) {
+                            dic= @{@"uuid" : object[@"uuid"],
+                                   @"type" : @"push_email",
+                                   @"result" : @200
+                                   };
+                        }
                         NSData *body = [self getTextBody:[dic JSONString]];
                         NSUInteger length = [body length];
                         oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);

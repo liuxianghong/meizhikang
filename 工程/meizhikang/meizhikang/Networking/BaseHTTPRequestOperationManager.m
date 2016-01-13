@@ -28,12 +28,12 @@ typedef NSURLSessionTask AFHTTPRequestOperation;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedManager = [[self manager]initWithBaseURL:nil];
-        _sharedManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        _sharedManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         //_sharedManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         [_sharedManager.requestSerializer setStringEncoding:NSUTF8StringEncoding];
-        _sharedManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        _sharedManager.responseSerializer = [AFJSONResponseSerializer serializer];
         [_sharedManager.responseSerializer setStringEncoding:NSUTF8StringEncoding];
-        [_sharedManager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",nil]];
+        [_sharedManager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",@"application/xml",nil]];
         _sharedManager->countDownTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:_sharedManager selector:@selector(defaultAuth) userInfo:nil repeats:YES];
     });
     return _sharedManager;
@@ -123,6 +123,25 @@ typedef NSURLSessionTask AFHTTPRequestOperation;
         NSLog(@"%@",error.description);
         NSError *error2 = [NSError errorWithDomain:kErrorConnect code:0 userInfo:nil];
         failure(error2);
+    }];
+}
+
+/*http://182.150.44.21:8666/axis2/services/MemberService/getMembers?accountName=n&nickName=n
+ 
+ http://182.150.44.21:8666/axis2/services/GroupService/getGroups?groupName=a&groupId=1&ownerAccountName=a&ownerNickName=a
+ */
+- (void)getWithUrl:(NSString *)urlString WithParameters:(id)parameters success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure{
+    [self GET:@"http://182.150.44.21:8666/axis2/services/GroupService/getGroups?groupName=xingxing" parameters:nil progress:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        id object = [responseObject objectFromJSONData];
+        if (responseObject && object) {
+            success(object);
+        }
+        else{
+            NSError *error = [NSError errorWithDomain:kErrorEmpty code:0 userInfo:nil];
+            failure(error);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error);
     }];
 }
 

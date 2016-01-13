@@ -51,5 +51,10 @@
 
 +(void)EmailInviteByGid:(NSNumber *)gid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
++(void)ApplyGroupByGid:(NSNumber *)gid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
+
 +(void)EmailReadByGid:(NSNumber *)gid uuid:(NSNumber *)uuid;
+
++(void)AddMemberByGid:(NSNumber *)gid uid:(NSNumber *)uid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 @end

@@ -545,6 +545,7 @@
 		D3F8E2E51C0D82DD00263B4E /* 圆-绿@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2E31C0D82DD00263B4E /* 圆-绿@3x.png */; };
 		D3F8E2E61C0D82DD00263B4E /* 圆-绿@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F8E2E41C0D82DD00263B4E /* 圆-绿@2x.png */; };
 		D3F8E2E81C0D86C900263B4E /* AlarmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F8E2E71C0D86C900263B4E /* AlarmsViewController.swift */; };
+		D3FBA4081C468715000ECF85 /* MZKSearchRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FBA4071C468715000ECF85 /* MZKSearchRequst.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1110,6 +1111,8 @@
 		D3F8E2E31C0D82DD00263B4E /* 圆-绿@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆-绿@3x.png"; sourceTree = "<group>"; };
 		D3F8E2E41C0D82DD00263B4E /* 圆-绿@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆-绿@2x.png"; sourceTree = "<group>"; };
 		D3F8E2E71C0D86C900263B4E /* AlarmsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmsViewController.swift; sourceTree = "<group>"; };
+		D3FBA4061C468715000ECF85 /* MZKSearchRequst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZKSearchRequst.h; sourceTree = "<group>"; };
+		D3FBA4071C468715000ECF85 /* MZKSearchRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZKSearchRequst.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1728,6 +1731,8 @@
 			children = (
 				D36157651C09790C009ED19D /* BaseHTTPRequestOperationManager.h */,
 				D36157661C09790C009ED19D /* BaseHTTPRequestOperationManager.m */,
+				D3FBA4061C468715000ECF85 /* MZKSearchRequst.h */,
+				D3FBA4071C468715000ECF85 /* MZKSearchRequst.m */,
 				D3C263CB1C27FBAB0098BEAE /* IMRequst.h */,
 				D3C263CC1C27FBAB0098BEAE /* IMRequst.m */,
 				D3EFFA351C186D7B0047E2B0 /* IMConnect.h */,
@@ -2011,7 +2016,7 @@
 				TargetAttributes = {
 					D39B898C1C087AC1009086B2 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = G65933C85Y;
+						DevelopmentTeam = F44XSCNJGN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2638,6 +2643,7 @@
 				D3F8E2C21C0C384300263B4E /* AboutViewController.swift in Sources */,
 				D36978BF1C1C407A0094921B /* NetWorkingContents.m in Sources */,
 				D334CB021C414FFE00814DE9 /* RectView.swift in Sources */,
+				D3FBA4081C468715000ECF85 /* MZKSearchRequst.m in Sources */,
 				D30902591C2A78AA001FDF7B /* HealthData+CoreDataProperties.swift in Sources */,
 				D3EFFA371C186D7B0047E2B0 /* IMConnect.m in Sources */,
 				B96C98BC1C11C33900228D21 /* HealthReportContainerViewController.swift in Sources */,

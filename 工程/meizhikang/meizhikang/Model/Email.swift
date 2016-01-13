@@ -41,14 +41,18 @@ class Email: NSManagedObject {
             str = str.stringByReplacingOccurrencesOfString("[apply]", withString: "")
             str = str.stringByReplacingOccurrencesOfString("[/apply]", withString: "")
             let array = str.componentsSeparatedByString(",")
-            gid = Int(array[0])
-            uid = Int(array[1])
+            if array.count == 2{
+                gid = Int(array[0])
+                uid = Int(array[1])
+            }
+            
         }
         else if emailType() == .Invite{
             var str = content! as NSString
             str = str.stringByReplacingOccurrencesOfString("[invite]", withString: "")
             str = str.stringByReplacingOccurrencesOfString("[/invite]", withString: "")
-            gid = Int(str as String)
+            gid = str.integerValue
+            print(gid)
         }
     }
 
