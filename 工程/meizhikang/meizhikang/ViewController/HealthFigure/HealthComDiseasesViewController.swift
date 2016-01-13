@@ -32,7 +32,7 @@ class HealthComDiseasesViewController: UIViewController {
             viewArray.append(view)
         }
         
-        imageView.image = UIImage(named: "疾病图绿1")
+        imageView.image = UIImage(named: "疾病图1")
         let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
         let path = NSBundle.mainBundle().pathForResource("web", ofType: "html")
         do{
@@ -60,17 +60,17 @@ class HealthComDiseasesViewController: UIViewController {
     
     func tapGestureClick(tapGesture : UITapGestureRecognizer){
         
-        let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
-        imageView.image = UIImage(named: "疾病图绿\(tapGesture.view!.tag)")
+        //let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
+        imageView.image = UIImage(named: "疾病图\(tapGesture.view!.tag)")
         scrollView2.setContentOffset(CGPointMake(0, 0), animated: false)
         print(tapGesture.view?.tag)
-        let path = NSBundle.mainBundle().pathForResource("html\(tapGesture.view!.tag)", ofType: "html")
-        do{
-            let html = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-            webView.loadHTMLString(html as String, baseURL: baseURL)
-        }catch let error as NSError {
-            print(error.localizedDescription)
-        }
+//        let path = NSBundle.mainBundle().pathForResource("html\(tapGesture.view!.tag)", ofType: "html")
+//        do{
+//            let html = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+//            webView.loadHTMLString(html as String, baseURL: baseURL)
+//        }catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
         
     }
 
