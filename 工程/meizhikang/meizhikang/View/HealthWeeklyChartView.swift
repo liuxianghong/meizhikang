@@ -69,7 +69,9 @@ class HealthWeeklyChartView: UIView {
                 strx = leftmargin + (rect.size.width - leftmargin - 20) * CGFloat(index)/CGFloat(data.count - 1) - size.width / 2
             }
             let stry : CGFloat = rect.size.height - 10
-            attStr.drawAtPoint(CGPoint(x: strx, y: stry))
+            if index == 0 || index == data.count || shouldDrawAt(index){
+                attStr.drawAtPoint(CGPoint(x: strx, y: stry))
+            }
             CGContextSetStrokeColorWithColor(context, color.CGColor)
             guard let _ = item.value else{
                 continue
@@ -85,6 +87,17 @@ class HealthWeeklyChartView: UIView {
         for point in imagePoint{
             image?.drawAtPoint(point)
         }
+    }
+    
+    func shouldDrawAt(index : Int) -> Bool{
+        guard let data = self.chartData else{
+            return false
+        }
+        if data.count < 5 {
+            return true
+        }
+        let step = (data.count - 2) / 5
+        return (index - 1) % step == 0
     }
     
     override func drawRect(rect: CGRect) {
