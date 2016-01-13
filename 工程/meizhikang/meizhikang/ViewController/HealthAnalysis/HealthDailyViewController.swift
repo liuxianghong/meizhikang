@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 struct DailyViewLineData{
     var position: CGFloat
     var value: NSInteger
@@ -141,11 +142,33 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
         return UIImage.imageWith(self.chartView)
     }
     
+    func showHUD(str: String){
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.mode = .Text
+        hud.detailsLabelText = str//
+        hud.hide(true, afterDelay: 3.0)
+        
+    }
     @IBAction func weeklyReportClicked(sender: UIButton) {
-        self.chartView.setNeedsDisplay()
+//        self.chartView.setNeedsDisplay()
+        share()
+    }
+    func share(){
+        guard let vc = self.parentViewController as? HealthReportContainerViewController,
+            let _ = UserInfo.CurrentUser()?.shareGroup,
+            let image = generateDailyImage()
+        else{
+            showHUD("未开启群组分享,请开启")
+            return
+        }
+        vc.performSegueWithIdentifier(HealthReportContainerConstant.ShareImageSegueIdentifier, sender: image)
     }
 
     @IBAction func monthlyReportClicked(sender: UIButton) {
+        askExpert()
+    }
+    func askExpert(){
+        showHUD("此项属于收费服务,在后续版本中提供")
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {

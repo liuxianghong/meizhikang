@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sYf-Bt-cUg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sYf-Bt-cUg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -2251,7 +2251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYC-bA-ehi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5121" y="464.25"/>
+            <point key="canvasLocation" x="5152.5" y="580.5"/>
         </scene>
         <!--Health Weekly View Controller-->
         <scene sceneID="RqR-lD-zRU">
@@ -2593,12 +2593,18 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="分享给我的好友" image="图标1-.png" backgroundImage="黑.png"/>
+                                        <connections>
+                                            <action selector="share:" destination="UFc-cj-v6v" eventType="touchUpInside" id="DTd-6s-KN0"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njS-zf-0R8">
                                         <rect key="frame" x="201" y="20" width="119" height="31"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="咨询后台专家" image="图标2.png" backgroundImage="灰框-.png"/>
+                                        <connections>
+                                            <action selector="askExpert:" destination="UFc-cj-v6v" eventType="touchUpInside" id="Ufb-ua-6yJ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2690,7 +2696,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvk-DO-CcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5797.5" y="445.5"/>
+            <point key="canvasLocation" x="5982" y="612"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0DK-dY-QBX">
@@ -3584,19 +3590,19 @@
             <objects>
                 <tableViewController id="WtE-QJ-KLC" customClass="GroupMenbersTableViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iqD-x2-B6E">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="1ut-VX-che" style="IBUITableViewCellStyleDefault" id="59Z-0a-bki">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="59Z-0a-bki" id="XAW-ws-9mG">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ut-VX-che">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="210" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -3881,16 +3887,16 @@
                                             <exclude reference="KHg-oV-dAL"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="CHt-yj-AbE"/>
-                                            <exclude reference="h8i-Tj-ypw"/>
-                                            <exclude reference="T4G-Js-mZJ"/>
-                                            <exclude reference="Uis-I9-f2M"/>
-                                            <exclude reference="PG5-HO-kfD"/>
-                                            <exclude reference="Tbq-Rz-CLk"/>
-                                            <exclude reference="qqw-fM-mwD"/>
                                             <exclude reference="4FH-Ef-nAg"/>
                                             <exclude reference="LxZ-d8-ya3"/>
                                             <exclude reference="bV4-sK-PRY"/>
+                                            <exclude reference="T4G-Js-mZJ"/>
+                                            <exclude reference="Uis-I9-f2M"/>
+                                            <exclude reference="CHt-yj-AbE"/>
+                                            <exclude reference="h8i-Tj-ypw"/>
+                                            <exclude reference="PG5-HO-kfD"/>
+                                            <exclude reference="Tbq-Rz-CLk"/>
+                                            <exclude reference="qqw-fM-mwD"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -3901,16 +3907,16 @@
                                             <include reference="KHg-oV-dAL"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="CHt-yj-AbE"/>
-                                            <include reference="h8i-Tj-ypw"/>
-                                            <include reference="T4G-Js-mZJ"/>
-                                            <include reference="Uis-I9-f2M"/>
-                                            <include reference="PG5-HO-kfD"/>
-                                            <include reference="Tbq-Rz-CLk"/>
-                                            <include reference="qqw-fM-mwD"/>
                                             <include reference="4FH-Ef-nAg"/>
                                             <include reference="LxZ-d8-ya3"/>
                                             <include reference="bV4-sK-PRY"/>
+                                            <include reference="T4G-Js-mZJ"/>
+                                            <include reference="Uis-I9-f2M"/>
+                                            <include reference="CHt-yj-AbE"/>
+                                            <include reference="h8i-Tj-ypw"/>
+                                            <include reference="PG5-HO-kfD"/>
+                                            <include reference="Tbq-Rz-CLk"/>
+                                            <include reference="qqw-fM-mwD"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -3955,7 +3961,7 @@
                         <viewControllerLayoutGuide type="bottom" id="7EH-eM-emc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dSy-ij-xCf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -4049,15 +4055,18 @@
             <objects>
                 <tableViewController title="群组信息" id="4d6-T0-esL" customClass="GroupInformationTableViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" id="EFB-2h-jn5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="aSI-EZ-s2r">
-                            <rect key="frame" x="0.0" y="64" width="600" height="128"/>
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="通讯.png" translatesAutoresizingMaskIntoConstraints="NO" id="vm0-wy-5cS">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="110" y="55" width="21" height="19"/>
+                                    </variation>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4086,10 +4095,10 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellIndentifier" textLabel="43Q-cc-Jbg" detailTextLabel="B92-gm-IJr" rowHeight="56" style="IBUITableViewCellStyleValue2" id="YwC-3J-6pY">
-                                <rect key="frame" x="0.0" y="220" width="600" height="56"/>
+                                <rect key="frame" x="0.0" y="156" width="240" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YwC-3J-6pY" id="Vcy-eE-fDs">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="56"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="43Q-cc-Jbg">
@@ -4145,7 +4154,7 @@
                         <viewControllerLayoutGuide type="bottom" id="K9p-ha-dO0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TAF-Pr-NB6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="白框.png" highlightedImage="矩形-4.png" translatesAutoresizingMaskIntoConstraints="NO" id="hao-y7-leD">
@@ -6098,11 +6107,12 @@
                     <connections>
                         <segue destination="UFc-cj-v6v" kind="custom" identifier="HealthWeeklySegueIdentifier" customClass="EmptySegue" customModule="meizhikang" customModuleProvider="target" id="X5u-n4-g82"/>
                         <segue destination="OsB-Nb-CPE" kind="custom" identifier="HealthDailySegueIdentifier" customClass="EmptySegue" customModule="meizhikang" customModuleProvider="target" id="2qg-9H-sl8"/>
+                        <segue destination="X2g-fz-UnX" kind="show" identifier="ShareImageSegueIdentifier" id="IED-5H-PdP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TSw-ae-Xmr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5145" y="-140.25"/>
+            <point key="canvasLocation" x="5211" y="-213.75"/>
         </scene>
         <!--Health Daily View Controller-->
         <scene sceneID="WnE-gP-XxJ">
@@ -7617,18 +7627,18 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPf-JZ-H9n">
                                         <rect key="frame" x="20" y="20" width="119" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="周报表视图" image="图标1-.png" backgroundImage="灰.png"/>
+                                        <state key="normal" title="分享给我的好友" image="图标1-.png" backgroundImage="灰.png"/>
                                         <connections>
                                             <action selector="weeklyReportClicked:" destination="OsB-Nb-CPE" eventType="touchUpInside" id="fO4-sI-CHG"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcU-yy-3oe">
                                         <rect key="frame" x="201" y="20" width="119" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="月报表视图" image="图标1-.png" backgroundImage="灰.png"/>
+                                        <state key="normal" title="咨询后台专家" image="图标2.png" backgroundImage="灰.png"/>
                                         <connections>
                                             <action selector="monthlyReportClicked:" destination="OsB-Nb-CPE" eventType="touchUpInside" id="MNk-7Y-YyL"/>
                                         </connections>
@@ -8469,8 +8479,8 @@
         <image name="黑.png" width="119" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U5K-zA-CQa"/>
-        <segue reference="rry-aH-0KC"/>
+        <segue reference="IED-5H-PdP"/>
         <segue reference="F1N-ju-2GO"/>
+        <segue reference="Oly-tF-HDc"/>
     </inferredMetricsTieBreakers>
 </document>
