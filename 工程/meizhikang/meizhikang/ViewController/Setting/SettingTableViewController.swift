@@ -10,7 +10,7 @@ import UIKit
 
 class SettingTableViewController: UITableViewController,AlartViewControllerDelegate {
 
-    var tableViewArray : NSArray = [["个人","个人资料","修改手机号","修改密码"],["告警","告警设置","告警演示"],["系统","蓝牙连接","关于","注销","退出"]]
+    var tableViewArray : NSArray = [["个人","个人资料","修改密码"],["告警","告警设置","告警演示"],["系统","蓝牙连接","关于","注销","退出"]]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,10 +44,10 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
             if indexPath.row == 0{
                 self.performSegueWithIdentifier("myinformationIdentifier", sender: nil)
             }
+//            else if indexPath.row == 1{
+//                self.performSegueWithIdentifier("resetPhone", sender: nil)
+//            }
             else if indexPath.row == 1{
-                self.performSegueWithIdentifier("resetPhone", sender: nil)
-            }
-            else if indexPath.row == 2{
                 self.performSegueWithIdentifier("modifPWIdentifier", sender: nil)
             }
         }

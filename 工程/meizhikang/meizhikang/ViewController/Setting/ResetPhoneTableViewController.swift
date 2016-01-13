@@ -65,7 +65,7 @@ class ResetPhoneTableViewController: UITableViewController {
                     hud.hide(true)
                 }
                 else{
-                    hud.detailsLabelText = "密码错误"
+                    hud.detailsLabelText = "失败"
                     hud.mode = .Text
                     hud.hide(true, afterDelay: 1.5)
                 }
