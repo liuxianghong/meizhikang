@@ -49,9 +49,10 @@ class HealthWeeklyViewController: UIViewController {
                 }))! / CGFloat((datas?.count)!)
                 let data = WeeklyViewLineData(date: minDate!, value: value)
                 chartData.append(data)
-            }else{
-                chartData.append(WeeklyViewLineData(date: minDate!, value: nil))
             }
+//            else{
+//                chartData.append(WeeklyViewLineData(date: minDate!, value: nil))
+//            }
         }
         chartData = chartData.reverse()
         chartView.chartData = chartData
