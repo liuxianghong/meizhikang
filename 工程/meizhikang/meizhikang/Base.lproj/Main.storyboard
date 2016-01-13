@@ -3978,11 +3978,12 @@
                         <segue destination="4d6-T0-esL" kind="show" identifier="GroupInformation" id="F1N-ju-2GO"/>
                         <segue destination="WtE-QJ-KLC" kind="show" identifier="groupMenbersIndentifier" id="CQQ-Op-d09"/>
                         <segue destination="azR-0z-drI" kind="show" identifier="addMenberIdentifier" id="Oly-tF-HDc"/>
+                        <segue destination="xBM-tg-6mZ" kind="presentation" identifier="ShowImageSegueIdentifier" animates="NO" modalPresentationStyle="overCurrentContext" id="oDs-JE-uBk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jb1-N9-weM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5679" y="2067.75"/>
+            <point key="canvasLocation" x="5581.5" y="1992"/>
         </scene>
         <!--Group More Table View Controller-->
         <scene sceneID="VRp-hY-oOV">
@@ -4049,6 +4050,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e4y-4a-Zas" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5769" y="1527.75"/>
+        </scene>
+        <!--Chat Image View Controller-->
+        <scene sceneID="ujh-6Z-WSz">
+            <objects>
+                <viewController id="xBM-tg-6mZ" customClass="ChatImageViewController" customModule="meizhikang" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="APl-v8-nwV"/>
+                        <viewControllerLayoutGuide type="bottom" id="kSJ-Pk-AzC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kGD-L5-XPg">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XYO-6o-rKc">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="EsD-Cw-FLm" appends="YES" id="aOT-Uo-UFe"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kSJ-Pk-AzC" firstAttribute="top" secondItem="XYO-6o-rKc" secondAttribute="bottom" id="0It-jp-coz"/>
+                            <constraint firstAttribute="trailing" secondItem="XYO-6o-rKc" secondAttribute="trailing" id="Ybu-bm-7nt"/>
+                            <constraint firstItem="XYO-6o-rKc" firstAttribute="leading" secondItem="kGD-L5-XPg" secondAttribute="leading" id="eYI-e6-lqg"/>
+                            <constraint firstItem="XYO-6o-rKc" firstAttribute="top" secondItem="kGD-L5-XPg" secondAttribute="top" id="u2n-gf-NLs"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="XYO-6o-rKc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Ybu-bm-7nt"/>
+                                <exclude reference="eYI-e6-lqg"/>
+                                <exclude reference="u2n-gf-NLs"/>
+                                <exclude reference="0It-jp-coz"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="XYO-6o-rKc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Ybu-bm-7nt"/>
+                                <include reference="eYI-e6-lqg"/>
+                                <include reference="u2n-gf-NLs"/>
+                                <include reference="0It-jp-coz"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="XYO-6o-rKc" id="UAu-gI-0Vb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5L1-30-u6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="EsD-Cw-FLm">
+                    <connections>
+                        <action selector="tapGesture:" destination="xBM-tg-6mZ" id="LPK-wJ-MAl"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="6265.5" y="1502.25"/>
         </scene>
         <!--群组信息-->
         <scene sceneID="KTG-de-5l0">

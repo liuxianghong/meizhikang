@@ -119,6 +119,7 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
             }
             if let media = message.media as? JSQMyPhotoMediaItem{
                 print(media)
+                return ("ShowImageSegueIdentifier",media.image)
             }
         }
         return nil
@@ -688,7 +689,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     // MARK: - JSQMessages Delegate
     override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
-        self.viewModel.playItemAt(indexPath.row)
+        if let (segueIdentifer,image) = self.viewModel.playItemAt(indexPath.row){
+            self.performSegueWithIdentifier(segueIdentifer, sender: image)
+        }
     }
     
     // MARK: - WY
@@ -913,6 +916,9 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         else if segue.identifier == "addMenberIdentifier"{
             let vc = segue.destinationViewController as! GroupAddMenbersViewController
             vc.group = group
+        }else if segue.identifier == "ShowImageSegueIdentifier" {
+            let vc = segue.destinationViewController as! ChatImageViewController
+            vc.image = sender as? UIImage
         }
         
     }
