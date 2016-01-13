@@ -3848,7 +3848,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="记录-蓝.png" translatesAutoresizingMaskIntoConstraints="NO" id="fgd-In-laz">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGl-xc-WjK">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="asdasd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGl-xc-WjK">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -3869,6 +3869,7 @@
                                         <constraint firstItem="LGl-xc-WjK" firstAttribute="leading" secondItem="fgd-In-laz" secondAttribute="trailing" constant="20" id="T4G-Js-mZJ"/>
                                         <constraint firstItem="prT-kw-paW" firstAttribute="leading" secondItem="Bjk-mB-tgz" secondAttribute="leading" id="Tbq-Rz-CLk"/>
                                         <constraint firstItem="LGl-xc-WjK" firstAttribute="centerY" secondItem="Bjk-mB-tgz" secondAttribute="centerY" id="Uis-I9-f2M"/>
+                                        <constraint firstItem="KHg-oV-dAL" firstAttribute="leading" secondItem="LGl-xc-WjK" secondAttribute="trailing" constant="10" id="bV4-sK-PRY"/>
                                         <constraint firstItem="fgd-In-laz" firstAttribute="leading" secondItem="Bjk-mB-tgz" secondAttribute="leading" constant="20" id="h8i-Tj-ypw"/>
                                         <constraint firstAttribute="trailing" secondItem="prT-kw-paW" secondAttribute="trailing" id="qqw-fM-mwD"/>
                                     </constraints>
@@ -3880,15 +3881,16 @@
                                             <exclude reference="KHg-oV-dAL"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="4FH-Ef-nAg"/>
-                                            <exclude reference="LxZ-d8-ya3"/>
-                                            <exclude reference="T4G-Js-mZJ"/>
-                                            <exclude reference="Uis-I9-f2M"/>
                                             <exclude reference="CHt-yj-AbE"/>
                                             <exclude reference="h8i-Tj-ypw"/>
+                                            <exclude reference="T4G-Js-mZJ"/>
+                                            <exclude reference="Uis-I9-f2M"/>
                                             <exclude reference="PG5-HO-kfD"/>
                                             <exclude reference="Tbq-Rz-CLk"/>
                                             <exclude reference="qqw-fM-mwD"/>
+                                            <exclude reference="4FH-Ef-nAg"/>
+                                            <exclude reference="LxZ-d8-ya3"/>
+                                            <exclude reference="bV4-sK-PRY"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -3899,15 +3901,16 @@
                                             <include reference="KHg-oV-dAL"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="4FH-Ef-nAg"/>
-                                            <include reference="LxZ-d8-ya3"/>
-                                            <include reference="T4G-Js-mZJ"/>
-                                            <include reference="Uis-I9-f2M"/>
                                             <include reference="CHt-yj-AbE"/>
                                             <include reference="h8i-Tj-ypw"/>
+                                            <include reference="T4G-Js-mZJ"/>
+                                            <include reference="Uis-I9-f2M"/>
                                             <include reference="PG5-HO-kfD"/>
                                             <include reference="Tbq-Rz-CLk"/>
                                             <include reference="qqw-fM-mwD"/>
+                                            <include reference="4FH-Ef-nAg"/>
+                                            <include reference="LxZ-d8-ya3"/>
+                                            <include reference="bV4-sK-PRY"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

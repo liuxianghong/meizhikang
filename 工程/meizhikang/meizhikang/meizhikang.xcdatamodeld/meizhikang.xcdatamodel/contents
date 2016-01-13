@@ -9,8 +9,10 @@
     <entity name="Email" representedClassName=".Email" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fromid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="gid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="sendtime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="emails" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -73,12 +75,12 @@
         <relationship name="shareGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Email" positionX="-83" positionY="-144" width="128" height="135"/>
+        <element name="Chat" positionX="-108" positionY="0" width="128" height="105"/>
+        <element name="Email" positionX="-83" positionY="-144" width="128" height="165"/>
         <element name="Group" positionX="160" positionY="-108" width="128" height="180"/>
         <element name="GroupMember" positionX="-108" positionY="0" width="128" height="120"/>
         <element name="HealthData" positionX="-108" positionY="0" width="128" height="105"/>
         <element name="Message" positionX="-117" positionY="198" width="126" height="195"/>
         <element name="User" positionX="-306" positionY="-81" width="128" height="345"/>
-        <element name="Chat" positionX="-108" positionY="0" width="128" height="105"/>
     </elements>
 </model>

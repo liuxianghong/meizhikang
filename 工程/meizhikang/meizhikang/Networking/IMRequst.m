@@ -128,4 +128,32 @@
 +(void)LoginOut:(BOOL)waite{
     [[IMConnect Instance] LoginOut:waite];
 }
+
++(void)EmailApplyByGid:(NSNumber *)gid uid:(NSNumber *)uid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    NSDictionary *dic = @{
+                          @"type" : @"email_apply",
+                          @"uid" : uid,
+                          @"gid": gid,
+                          @"type" : type
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
++(void)EmailInviteByGid:(NSNumber *)gid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
+    NSDictionary *dic = @{
+                          @"type" : @"email_invite",
+                          @"gid": gid,
+                          @"type" : type
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:completion failure:failure];
+}
+
++(void)EmailReadByGid:(NSNumber *)gid uuid:(NSNumber *)uuid{
+    NSDictionary *dic = @{
+                          @"type" : @"email_status",
+                          @"gid": gid,
+                          @"uuid" : uuid
+                          };
+    [[IMConnect Instance] RequstUserInfo:dic completion:nil failure:nil];
+}
 @end

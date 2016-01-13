@@ -57,7 +57,6 @@ class User: NSManagedObject {
             }) { (error : NSError!) -> Void in
                 
         }
-        
     }
     
     func healthDataHaveDataOn(date: NSDate) -> Bool{

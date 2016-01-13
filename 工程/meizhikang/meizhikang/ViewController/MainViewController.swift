@@ -97,38 +97,39 @@ class MainViewController: UINavigationController {
     func login(object : AnyObject?){
         print(object)
         if let notification = object as? NSNotification{
+            var messageStr = "您已离线"
             if let message = notification.object as? String{
-                
-                let actionVC = UIAlertController(title: "提示", message: message, preferredStyle: .Alert)
-                let actionlogin = UIAlertAction(title: "重新登录", style: .Default, handler: { (ac :UIAlertAction) -> Void in
-                    
-                    let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
-                    hud.detailsLabelText = "正在重新登录";
-                    IMRequst.LoginWithUserName(UserInfo.CurrentUser()?.userName, passWord: UserInfo.CurrentUser()?.passWord, completion: { (ip : UInt32,port : UInt16) -> Void in
-                        print(ip,port)
-                        hud.hide(true)
-                        }) { (error : NSError!) -> Void in
-                            IMRequst.LoginOut(false)
-                            hud.mode = .Text
-                            hud.detailsLabelText = error.domain;
-                            hud.hide(true, afterDelay: 1.5)
-                            print(error)
-                            self.performSegueWithIdentifier("loginIdentifier", sender: nil)
-                    }
-                    
-                
-                })
-                let actionCancel = UIAlertAction(title: "退出", style: .Cancel, handler: { (UIAlertAction) -> Void in
-                    self.performSegueWithIdentifier("loginIdentifier", sender: false)
-                })
-                
-                actionVC.addAction(actionlogin)
-                actionVC.addAction(actionCancel)
-                
-                self.presentViewController(actionVC, animated: true, completion: { () -> Void in
-                    
-                })
+                messageStr = message
             }
+            let actionVC = UIAlertController(title: "提示", message: messageStr, preferredStyle: .Alert)
+            let actionlogin = UIAlertAction(title: "重新登录", style: .Default, handler: { (ac :UIAlertAction) -> Void in
+                
+                let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
+                hud.detailsLabelText = "正在重新登录";
+                IMRequst.LoginWithUserName(UserInfo.CurrentUser()?.userName, passWord: UserInfo.CurrentUser()?.passWord, completion: { (ip : UInt32,port : UInt16) -> Void in
+                    print(ip,port)
+                    hud.hide(true)
+                    }) { (error : NSError!) -> Void in
+                        IMRequst.LoginOut(false)
+                        hud.mode = .Text
+                        hud.detailsLabelText = error.domain;
+                        hud.hide(true, afterDelay: 1.5)
+                        print(error)
+                        self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                }
+                
+                
+            })
+            let actionCancel = UIAlertAction(title: "退出", style: .Cancel, handler: { (UIAlertAction) -> Void in
+                self.performSegueWithIdentifier("loginIdentifier", sender: false)
+            })
+            
+            actionVC.addAction(actionlogin)
+            actionVC.addAction(actionCancel)
+            
+            self.presentViewController(actionVC, animated: true, completion: { () -> Void in
+                
+            })
         }
         
     }

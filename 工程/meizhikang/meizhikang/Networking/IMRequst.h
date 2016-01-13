@@ -46,4 +46,10 @@
 +(void)UploadFileRequst:(NSData *)file fileType:(IMMsgSendFileType)fieType fromType:(IMMsgSendFromType)fromtype toid:(NSNumber *)toid completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 +(void)LoginOut:(BOOL)waite;
+
++(void)EmailApplyByGid:(NSNumber *)gid uid:(NSNumber *)uid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
++(void)EmailInviteByGid:(NSNumber *)gid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
+
++(void)EmailReadByGid:(NSNumber *)gid uuid:(NSNumber *)uuid;
 @end

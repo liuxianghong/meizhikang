@@ -417,31 +417,36 @@
     
     NSData *data = [NSData dataWithBytes:CommandStructure length:size];
     
-    
-    [self writeData:data tag:tag readHead:^UInt32(UInt32 _lenth) {
-        if (_lenth == 0) {
-            return 0;
-        }
-        return (_lenth/16+1)*16;
-    } completion:^(NSData *data) {
-        if ([data length]<10) {
-            failure([NSError errorWithDomain:@"服务器返回失败" code:0 userInfo:nil]);
-        }
-        else{
-            NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
-            NSData *data2 = [NSString decryptWithAES:dddd withKey:key];
-            if (data2.length <12) {
+    if (completion) {
+        [self writeData:data tag:tag readHead:^UInt32(UInt32 _lenth) {
+            if (_lenth == 0) {
+                return 0;
+            }
+            return (_lenth/16+1)*16;
+        } completion:^(NSData *data) {
+            if ([data length]<10) {
                 failure([NSError errorWithDomain:@"服务器返回失败" code:0 userInfo:nil]);
             }
-            else
-            {
-                NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
-                id object = [dddd2 objectFromJSONData];
-                completion(object);
+            else{
+                NSData *dddd = [NSData dataWithBytes:[data bytes]+10 length:([data length]-10)];
+                NSData *data2 = [NSString decryptWithAES:dddd withKey:key];
+                if (data2.length <12) {
+                    failure([NSError errorWithDomain:@"服务器返回失败" code:0 userInfo:nil]);
+                }
+                else
+                {
+                    NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
+                    id object = [dddd2 objectFromJSONData];
+                    completion(object);
+                }
             }
-        }
-        
-    } failure:failure];
+            
+        } failure:failure];
+    }
+    else{
+        [self writeData:data tag:-1 readHead:nil completion:nil failure:nil];
+    }
+    
     free(CommandStructure);
 }
 
@@ -660,8 +665,8 @@
         return;
     }
     if (im.lenth != [data length]) {
-        currentIM.sendingType = IMObjectSendFinished;
         im.failure([NSError errorWithDomain:@"Read data error" code:0 userInfo:nil]);
+        currentIM.sendingType = IMObjectSendFinished;
         [self listenRecive];
         return;
     }
@@ -685,13 +690,13 @@
         [im.data appendData:data];
         length = currentIM.readHead(length);
         if (length == 0) {
-            currentIM.sendingType = IMObjectSendFinished;
             if (code != 200) {
                 im.failure([NSError errorWithDomain:[NetWorkingContents getReturnDescription:code] code:code userInfo:nil]);
             }
             else{
                 im.completion(im.data);
             }
+            currentIM.sendingType = IMObjectSendFinished;
             [self listenRecive];
         }
         else
@@ -702,9 +707,9 @@
     }
     else
     {
-        currentIM.sendingType = IMObjectSendFinished;
         [im.data appendData:data];
         im.completion(im.data);
+        currentIM.sendingType = IMObjectSendFinished;
         [self listenRecive];
     }
     
@@ -801,20 +806,41 @@
             if (object){
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"reciveIMPushNotification" object:object];
+                double delayInSeconds = 0.5;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    if ([object[@"pushtype"] isEqualToString:@"meet"]){
+                        NSDictionary *dic = @{@"uuid" : object[@"uuid"],
+                                              @"type" : @"push_meet",
+                                              @"result" : @200
+                                              };
+                        NSData *body = [self getTextBody:[dic JSONString]];
+                        NSUInteger length = [body length];
+                        oxrPWToken(key,[tokenIMConnect bytes]+4,[passWordIMConnect bytes]);
+                        NSData *eBady = [NSString encryptWithAESkey:key data:body];
+                        NSUInteger size = 14+[eBady length];
+                        Byte *CommandStructure = malloc(size);
+                        [self setsenderHead:CommandStructure cmd:0x98 type:reciveIM.subCmd length:length tag:reciveIM.tag];
+                        memcpy(CommandStructure+14, [eBady bytes], [eBady length]);
+                        NSData *dataS = [NSData dataWithBytes:CommandStructure length:size];
+                        [self writeData:dataS tag:-1 readHead:nil completion:nil failure:nil];
+                        free(CommandStructure);
+                        
+                        [self RequstUserInfo:dic completion:^(id info) {
+                            NSLog(@"%@",info);
+                        } failure:^(NSError *error) {
+                            
+                        }];
+                    }
+                });
             }
             
-            long size = 14;
-            Byte *CommandStructure = malloc(size);
-            [self setsenderHead:CommandStructure cmd:0x98 type:reciveIM.subCmd length:0 tag:reciveIM.tag];
-            NSData *dataS = [NSData dataWithBytes:CommandStructure length:size];
-            NSLog(@"%@",dataS);
-            [self writeData:dataS tag:-1 readHead:nil completion:nil failure:nil];
-            free(CommandStructure);
-            
+
         }
         [self listenRecive];
     }
 }
+
 
 -(void)doSocketError{
     [asyncSocket disconnect];

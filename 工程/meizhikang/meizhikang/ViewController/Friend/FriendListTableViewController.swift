@@ -253,11 +253,112 @@ class FriendListTableViewController: UITableViewController {
                 
             })
         }else if type == 3{
-            
+            resoleveEmail(emailArray[indexPath.row])
         }else{
             self.performSegueWithIdentifier(FriendListTableViewControllerConstant.chatSegueIdentifier, sender: indexPath)
         }
     }
+    
+    func resoleveEmail(email : Email){
+            let actionGroup = UIAlertController(title: "", message: email.title, preferredStyle: .Alert)
+            let actionA = UIAlertAction(title: "同意", style: .Default, handler: { (UIAlertAction) -> Void in
+                if email.emailType() == .Apply{
+                    self.applyEmail(email,type: 1)
+                }
+                else if email.emailType() == .Invite{
+                    self.inviteEmail(email,type: 1)
+                }
+            })
+            
+            let actionC = UIAlertAction(title: "拒绝", style: .Cancel, handler: { (UIAlertAction) -> Void in
+                if email.emailType() == .Apply{
+                    self.applyEmail(email,type: 0)
+                }
+                else if email.emailType() == .Invite{
+                    self.inviteEmail(email,type: 0)
+                }
+            })
+            let actiond = UIAlertAction(title: "忽略", style: .Cancel, handler: { (UIAlertAction) -> Void in
+                self.applyEmail(email,type: 2)
+            })
+            actionGroup.addAction(actionA)
+            actionGroup.addAction(actionC)
+            actionGroup.addAction(actiond)
+            self.presentViewController(actionGroup, animated: true, completion: { () -> Void in
+                
+            })
+    }
+    
+    func deleteEmail(email :Email){
+        email.MR_deleteEntity()
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        self.loadEmail()
+        self.tableView.reloadData()
+        IMRequst.EmailReadByGid(email.gid, uuid: email.uid)
+    }
+    
+    func inviteEmail(email :Email ,type : Int){
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        IMRequst.EmailInviteByGid(email.uid, tye: type, completion: { (object) -> Void in
+            print(object)
+            let joson = JSON(object)
+            let flag = joson["flag"].intValue
+            if flag == 1{
+                hud.detailsLabelText = "操作成功";
+                if type == 1{
+                    UserInfo.CurrentUser()?.loadGrous()
+                }
+                self.deleteEmail(email)
+            }
+            else
+            {
+                hud.detailsLabelText = "操作失败";
+            }
+            hud.mode = .Text
+            
+            hud.hide(true, afterDelay: 1.5)
+            
+            }, failure: { (error : NSError!) -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain;
+                hud.hide(true, afterDelay: 1.5)
+                print(error)
+        })
+    }
+    
+    func applyEmail(email :Email ,type : Int){
+        if type == 2{
+            self.deleteEmail(email)
+            return
+        }
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        IMRequst.EmailApplyByGid(email.gid, uid: email.uid, tye: type, completion: { (object) -> Void in
+            print(object)
+            let joson = JSON(object)
+            let flag = joson["flag"].intValue
+            if flag == 1{
+                hud.detailsLabelText = "操作成功";
+                if type == 1{
+                    Group.GroupByGid(email.gid!)?.updateMembersChanges()
+                }
+                self.deleteEmail(email)
+            }
+            else
+            {
+                hud.detailsLabelText = "操作失败";
+            }
+            hud.mode = .Text
+            
+            hud.hide(true, afterDelay: 1.5)
+            
+            }, failure: { (error : NSError!) -> Void in
+                hud.mode = .Text
+                hud.detailsLabelText = error.domain;
+                hud.hide(true, afterDelay: 1.5)
+                print(error)
+        })
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
