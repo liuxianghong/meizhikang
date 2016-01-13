@@ -42,7 +42,7 @@ class User: NSManagedObject {
         
         loadGrous()
         
-        let dic = ["type":"get_email","page":1 ,"number":20]
+        let dic = ["type":"get_email","page":1 ,"number":50]
         IMRequst.RequstUserInfo(dic, completion: { (object) -> Void in
             print(object)
             
@@ -50,7 +50,7 @@ class User: NSManagedObject {
                 
         }
         
-        let dic2 = ["type":"messages","page":1 ,"number":20]
+        let dic2 = ["type":"messages","page":1 ,"number":50]
         IMRequst.RequstUserInfo(dic2, completion: { (object) -> Void in
             print(object)
             

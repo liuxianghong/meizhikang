@@ -806,7 +806,7 @@
             if (object){
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"reciveIMPushNotification" object:object];
-                double delayInSeconds = 0.5;
+                double delayInSeconds = 0.2;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     if ([object[@"pushtype"] isEqualToString:@"meet"]){
@@ -820,17 +820,19 @@
                         NSData *eBady = [NSString encryptWithAESkey:key data:body];
                         NSUInteger size = 14+[eBady length];
                         Byte *CommandStructure = malloc(size);
-                        [self setsenderHead:CommandStructure cmd:0x98 type:reciveIM.subCmd length:length tag:reciveIM.tag];
+                        [self setsenderHead:CommandStructure cmd:0x98 type:200 length:length tag:reciveIM.tag];
                         memcpy(CommandStructure+14, [eBady bytes], [eBady length]);
                         NSData *dataS = [NSData dataWithBytes:CommandStructure length:size];
                         [self writeData:dataS tag:-1 readHead:nil completion:nil failure:nil];
                         free(CommandStructure);
-                        
-                        [self RequstUserInfo:dic completion:^(id info) {
-                            NSLog(@"%@",info);
-                        } failure:^(NSError *error) {
-                            
-                        }];
+                    }
+                    else{
+                        NSUInteger size = 14;
+                        Byte *CommandStructure = malloc(size);
+                        [self setsenderHead:CommandStructure cmd:0x98 type:200 length:0 tag:reciveIM.tag];
+                        NSData *dataS = [NSData dataWithBytes:CommandStructure length:size];
+                        [self writeData:dataS tag:-1 readHead:nil completion:nil failure:nil];
+                        free(CommandStructure);
                     }
                 });
             }
