@@ -366,7 +366,13 @@
                             <outletCollection property="gestureRecognizers" destination="Q6o-kK-r7U" appends="YES" id="Nwh-ox-Bwo"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="登录" id="jdZ-LP-LSi"/>
+                    <navigationItem key="navigationItem" title="登录" id="jdZ-LP-LSi">
+                        <barButtonItem key="leftBarButtonItem" image="返回.png" id="agl-bS-7ke">
+                            <connections>
+                                <action selector="backClick:" destination="e4d-9b-FuJ" id="Kzc-8D-gQM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="passWordTextField" destination="Qd6-hD-RTj" id="dcK-S0-1Zy"/>
                         <outlet property="userNameTextField" destination="uQi-Hz-qib" id="PDo-wO-vO4"/>
@@ -695,15 +701,9 @@
                                                 </textField>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="灰线.png" translatesAutoresizingMaskIntoConstraints="NO" id="HoE-Kf-40E">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="0.0" width="384" height="20"/>
-                                                    </variation>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="灰线.png" translatesAutoresizingMaskIntoConstraints="NO" id="xLY-dp-Q9d">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="40" width="384" height="20"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -2790,9 +2790,15 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="白框.png" highlightedImage="矩形-4.png" translatesAutoresizingMaskIntoConstraints="NO" id="4nE-d9-C4t">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="2" width="210" height="56"/>
+                                                    </variation>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="圆-.png" translatesAutoresizingMaskIntoConstraints="NO" id="jvT-Ff-HYF">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="182" y="16" width="28" height="28"/>
+                                                    </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4A-rh-eMg">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -2802,6 +2808,9 @@
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kNK-s3-CzR">
                                                     <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="186" y="20" width="20" height="20"/>
+                                                    </variation>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
@@ -2824,16 +2833,16 @@
                                                     <exclude reference="kNK-s3-CzR"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="udt-Sr-PTW"/>
+                                                    <exclude reference="uey-eD-hIw"/>
+                                                    <exclude reference="p1W-yN-ee4"/>
+                                                    <exclude reference="sEz-3e-xyP"/>
                                                     <exclude reference="1yk-th-GRu"/>
                                                     <exclude reference="II6-XQ-0oW"/>
                                                     <exclude reference="dwV-vO-OfR"/>
                                                     <exclude reference="hjU-8A-jCe"/>
-                                                    <exclude reference="p1W-yN-ee4"/>
-                                                    <exclude reference="sEz-3e-xyP"/>
                                                     <exclude reference="aPW-gh-Xoo"/>
                                                     <exclude reference="dWD-k1-ZLg"/>
-                                                    <exclude reference="udt-Sr-PTW"/>
-                                                    <exclude reference="uey-eD-hIw"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -2844,16 +2853,16 @@
                                                     <include reference="kNK-s3-CzR"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="udt-Sr-PTW"/>
+                                                    <include reference="uey-eD-hIw"/>
+                                                    <include reference="p1W-yN-ee4"/>
+                                                    <include reference="sEz-3e-xyP"/>
                                                     <include reference="1yk-th-GRu"/>
                                                     <include reference="II6-XQ-0oW"/>
                                                     <include reference="dwV-vO-OfR"/>
                                                     <include reference="hjU-8A-jCe"/>
-                                                    <include reference="p1W-yN-ee4"/>
-                                                    <include reference="sEz-3e-xyP"/>
                                                     <include reference="aPW-gh-Xoo"/>
                                                     <include reference="dWD-k1-ZLg"/>
-                                                    <include reference="udt-Sr-PTW"/>
-                                                    <include reference="uey-eD-hIw"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -6077,9 +6086,15 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="白框.png" highlightedImage="矩形-4.png" translatesAutoresizingMaskIntoConstraints="NO" id="jdA-Pt-wJs">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="2" width="210" height="56"/>
+                                                    </variation>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="圆-.png" translatesAutoresizingMaskIntoConstraints="NO" id="ryk-dc-IhV">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="182" y="16" width="28" height="28"/>
+                                                    </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1x-xL-KJA">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -6089,6 +6104,9 @@
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vez-ML-XbP">
                                                     <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="186" y="20" width="20" height="20"/>
+                                                    </variation>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
@@ -6111,16 +6129,16 @@
                                                     <exclude reference="vez-ML-XbP"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="7ET-jZ-u6E"/>
-                                                    <exclude reference="S0D-tZ-0Nv"/>
-                                                    <exclude reference="7HJ-ye-Y90"/>
-                                                    <exclude reference="Uwn-dE-Jmu"/>
-                                                    <exclude reference="u2P-Sf-CUe"/>
-                                                    <exclude reference="6Ta-ro-6VX"/>
-                                                    <exclude reference="nbG-39-KSq"/>
-                                                    <exclude reference="2LD-Wz-XlY"/>
-                                                    <exclude reference="eoH-y2-E0N"/>
                                                     <exclude reference="Sd7-sm-id0"/>
+                                                    <exclude reference="eoH-y2-E0N"/>
+                                                    <exclude reference="6Ta-ro-6VX"/>
+                                                    <exclude reference="u2P-Sf-CUe"/>
+                                                    <exclude reference="7ET-jZ-u6E"/>
+                                                    <exclude reference="7HJ-ye-Y90"/>
+                                                    <exclude reference="S0D-tZ-0Nv"/>
+                                                    <exclude reference="Uwn-dE-Jmu"/>
+                                                    <exclude reference="2LD-Wz-XlY"/>
+                                                    <exclude reference="nbG-39-KSq"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -6131,16 +6149,16 @@
                                                     <include reference="vez-ML-XbP"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="7ET-jZ-u6E"/>
-                                                    <include reference="S0D-tZ-0Nv"/>
-                                                    <include reference="7HJ-ye-Y90"/>
-                                                    <include reference="Uwn-dE-Jmu"/>
-                                                    <include reference="u2P-Sf-CUe"/>
-                                                    <include reference="6Ta-ro-6VX"/>
-                                                    <include reference="nbG-39-KSq"/>
-                                                    <include reference="2LD-Wz-XlY"/>
-                                                    <include reference="eoH-y2-E0N"/>
                                                     <include reference="Sd7-sm-id0"/>
+                                                    <include reference="eoH-y2-E0N"/>
+                                                    <include reference="6Ta-ro-6VX"/>
+                                                    <include reference="u2P-Sf-CUe"/>
+                                                    <include reference="7ET-jZ-u6E"/>
+                                                    <include reference="7HJ-ye-Y90"/>
+                                                    <include reference="S0D-tZ-0Nv"/>
+                                                    <include reference="Uwn-dE-Jmu"/>
+                                                    <include reference="2LD-Wz-XlY"/>
+                                                    <include reference="nbG-39-KSq"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -8607,6 +8625,7 @@
         <image name="轮换图1.png" width="226" height="162"/>
         <image name="轮换图2.png" width="226" height="162"/>
         <image name="边框.png" width="119" height="31"/>
+        <image name="返回.png" width="12" height="20"/>
         <image name="选择-.png" width="10" height="17"/>
         <image name="通讯.png" width="21" height="19"/>
         <image name="长边-绿.png" width="99" height="4"/>

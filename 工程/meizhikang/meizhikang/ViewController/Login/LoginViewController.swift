@@ -73,6 +73,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    @IBAction func backClick(sender : AnyObject) {
+        
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            
+        }
+    }
+    
     @IBAction func loginClick(sender : AnyObject) {
         
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)

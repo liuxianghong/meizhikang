@@ -206,6 +206,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
         [connectDelegate setDisconnect];
         [connectDelegate peripheralFound];
     }
+    [self startScan];
 }
 
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
