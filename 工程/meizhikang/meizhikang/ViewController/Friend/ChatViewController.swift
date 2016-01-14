@@ -206,19 +206,20 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         var message2: JSQMessage?
         var sender = receiverId
         var displayName = GroupMember.GroupMemberByUid(message.fromid!)?.nickname
+        let date = NSDate(timeIntervalSince1970: NSTimeInterval(message.sendtime!))
         if message.fromid!.isEqualToNumber(UserInfo.CurrentUser()!.uid!){
             sender = self.senderId
             displayName = senderDisplayName
         }
         if message.messageType() == .Text{
-            message2 = JSQMessage(senderId: sender, displayName: displayName, text: message.text())
+            message2 = JSQMessage(senderId: sender, senderDisplayName: displayName, date: date,text: message.text())
         }
         else if message.messageType() == .Image{
-            message2 = JSQMessage(senderId: sender, displayName: displayName, media: JSQMyPhotoMediaItem(image: message.image()))
+            message2 = JSQMessage(senderId: sender, senderDisplayName: displayName, date: date,media: JSQMyPhotoMediaItem(image: message.image()))
         }else if message.messageType() == .Voice{
             let item = JSQAudioMediaItem(data: message.Data()!)
             item.appliesMediaViewMaskAsOutgoing = false
-            message2 = JSQMessage(senderId: sender, displayName: displayName, media: item)
+            message2 = JSQMessage(senderId: sender, senderDisplayName: displayName, date: date,media: item)
         }else{
             return
         }
