@@ -118,7 +118,6 @@ class ChatViewModel: NSObject,RecordAudioDelegate{
                 self.recordAudio.play(d)
             }
             if let media = message.media as? JSQMyPhotoMediaItem{
-                print(media)
                 return ("ShowImageSegueIdentifier",media.image)
             }
         }
