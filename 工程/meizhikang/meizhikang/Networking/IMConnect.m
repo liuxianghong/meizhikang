@@ -57,7 +57,7 @@
     [self setudpSocket];
     isListen = NO;
     isLogin = NO;
-    countDownTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+    countDownTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
     return self;
 }
 
@@ -506,7 +506,7 @@
 
 -(void)writeData:(NSData *)data tag:(long)tag readHead:(IMObjectReadHeadHandler)readHead completion:(IMObjectCompletionHandler)completion failure:(IMObjectFailureHandler)failure{
     [self setudpSocket];
-    NSLog(@"nendwriteData :%@ tag:%ld",data,tag);
+    //NSLog(@"nendwriteData :%@ tag:%ld",data,tag);
     if (tag==-1) {
         [asyncSocket writeData:data withTimeout:IMTIMEOUT tag:tag];
     }
@@ -603,9 +603,9 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    NSLog(@"didWriteDataWithTag:%ld", tag);
+    //NSLog(@"didWriteDataWithTag:%ld", tag);
     if (!isListen && tag != -1) {
-        NSLog(@"%@",currentIM.sendData);
+        //NSLog(@"%@",currentIM.sendData);
         [self listenHeadDataWithIMObject:currentIM];
     }
     //[self listenData];
@@ -613,7 +613,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    NSLog(@"didReadData%@",data);
+    //NSLog(@"didReadData%@",data);
     
     if (tag == 0) {
         isListen = false;
@@ -802,7 +802,7 @@
             }
             NSData *dddd2 = [NSData dataWithBytes:[data2 bytes]+12 length:([data2 length]-12)];
             id object = [dddd2 objectFromJSONData];
-            NSLog(@"%@",object);
+            //NSLog(@"%@",object);
             if (object){
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"reciveIMPushNotification" object:object];

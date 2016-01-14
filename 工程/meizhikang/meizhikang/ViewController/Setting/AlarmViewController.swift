@@ -63,21 +63,37 @@ class AlarmViewController: UIViewController {
     }
     
     @IBAction func switchClick(sender : UISwitch?){
-        if BLEConnect.Instance().isBleConnected(){
-            BLEConnect.Instance().coloseRing(alarmSwitch.on)
-            chageTime()
+        let message = alarmSwitch.on ? "确认开启警报？开启后亲友将会受到您的警报消息" : "确认关闭警报？关闭后亲友将不会受到您的警报消息"
+        let actionVC = UIAlertController(title: "提示", message:message , preferredStyle: .Alert)
+        let actionlogin = UIAlertAction(title: "确定", style: .Default, handler: { (ac :UIAlertAction) -> Void in
+            BLEConnect.Instance().coloseRing(self.alarmSwitch.on)
+            self.chageTime()
             let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             hud.mode = .Text
             hud.detailsLabelText = "设置成功"
             hud.hide(true, afterDelay: 1.5)
-        }
-        else{
-            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            hud.mode = .Text
-            hud.detailsLabelText = "蓝牙尚未连接！"
-            hud.hide(true, afterDelay: 1.5)
+//            if BLEConnect.Instance().isBleConnected(){
+//                
+//            }
+//            else{
+//                let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+//                hud.mode = .Text
+//                hud.detailsLabelText = "蓝牙尚未连接！"
+//                hud.hide(true, afterDelay: 1.5)
+//                self.alarmSwitch.on = !self.alarmSwitch.on
+//            }
+            
+        })
+        let actionCancel = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) -> Void in
             self.alarmSwitch.on = !self.alarmSwitch.on
-        }
+        })
+        
+        actionVC.addAction(actionlogin)
+        actionVC.addAction(actionCancel)
+        
+        self.presentViewController(actionVC, animated: true, completion: { () -> Void in
+            
+        })
     }
 
     func chageTime(){

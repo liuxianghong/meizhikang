@@ -169,11 +169,11 @@ class GroupAddMenbersViewController: UIViewController , UITextFieldDelegate ,UIT
                         hud.detailsLabelText = "添加邀请成功";
                     }
                     else if flag == -1{
-                        hud.detailsLabelText = "添加失败，成员已经在组中"
+                        hud.detailsLabelText = "邀请失败，成员已经在组中"
                     }
                     else
                     {
-                        hud.detailsLabelText = "申请失败";
+                        hud.detailsLabelText = "邀请失败";
                     }
                     hud.mode = .Text
                     

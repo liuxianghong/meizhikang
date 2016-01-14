@@ -13,6 +13,7 @@ class SettingTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var backImageView : UIImageView!
     @IBOutlet weak var stateImageView : UIImageView!
+    @IBOutlet weak var animatView : UIActivityIndicatorView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

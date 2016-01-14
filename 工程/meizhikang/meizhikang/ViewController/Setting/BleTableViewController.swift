@@ -102,7 +102,9 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
                return
             }
         }
-         BLEConnect.Instance().connect(peripheral)
+        BLEConnect.Instance().connect(peripheral)
+        tableView.reloadData()
+    
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -125,7 +127,15 @@ class BleTableViewController: UIViewController ,BLEConnectDelegate {
                 cell.stateImageView.hidden = false
             }
         }
-        
+        if peripheral.state == .Connecting{
+            cell.animatView.startAnimating()
+        }
+        else if peripheral.state == .Connected && peripheral != BLEConnect.Instance().connectedPeripheral(){
+            cell.animatView.startAnimating()
+        }
+        else{
+            cell.animatView.stopAnimating()
+        }
         return cell
     }
 

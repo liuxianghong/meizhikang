@@ -187,6 +187,9 @@ class HealthFigureChartView: UIScrollView , UIScrollViewDelegate {
                 view.frame = CGRect(x: fwidth + (cwidth - rightMargin - fwidth) * hdata.position - (chartWidth - space) , y: sheight-height, width: chartWidth-space, height: height)
                 view.layer.cornerRadius = (chartWidth-space)/2;
             }
+            else{
+                view.removeFromSuperview()
+            }
         }
     }
     

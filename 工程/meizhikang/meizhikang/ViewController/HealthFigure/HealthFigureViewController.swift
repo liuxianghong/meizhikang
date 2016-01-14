@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class HealthFigureViewModel: NSObject{
     var headerTitles : [String]
@@ -96,7 +97,6 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
 //        for _ in 1...30{
 //            self.cutDown()
 //        }
-        BLEConnect.Instance().startScan()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -147,6 +147,10 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
             }
             beforUser = nil
         }
+        
+        if !BLEConnect.Instance().isBleConnected(){
+            BLEConnect.Instance().startScan()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -163,6 +167,18 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         heartRateSwithLabel.hidden = !heartRateSwith.on
         heartRateLabel.hidden = !heartRateSwith.on
         self.headrCommand(heartRateSwith.on)
+    }
+    
+    @IBAction func didBackClick(){
+        showHUD("此项属于收费服务,在后续版本中提供")
+    }
+    
+    func showHUD(str: String){
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.mode = .Text
+        hud.detailsLabelText = str//
+        hud.hide(true, afterDelay: 3.0)
+        
     }
     
     func headrCommand(bo : Bool){

@@ -93,6 +93,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     for (CBPeripheral *p in peris){
         NSLog(@"%@",p);
         if (p.state != CBPeripheralStateConnected) {
+            [peripherals addObject:p];
             continue;
         }
         if (![peripherals containsObject:p]){
@@ -229,13 +230,13 @@ uint64_t reversebytes_uint64t(uint64_t value){
     Byte *byte = [data bytes];
     if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:STATUS_Warnsync_UUID]]) {
         if (byte[0] == 3) {
-            UInt8 rote = byte[1];
-            UInt32 time = 0;
-            memcpy(&time, byte + 2, 4);
-            NSDateFormatter *f = [[NSDateFormatter alloc]init];
-            f.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-            NSLog(@" %d %@",rote, [f stringFromDate:date]);
+//            UInt8 rote = byte[1];
+//            UInt32 time = 0;
+//            memcpy(&time, byte + 2, 4);
+//            NSDateFormatter *f = [[NSDateFormatter alloc]init];
+//            f.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+//            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+            //NSLog(@" %d %@",rote, [f stringFromDate:date]);
             if (dataDelegate) {
                 //[dataDelegate didUpdateHartValue:rote];
             }
@@ -256,6 +257,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
             UInt32 time = 0;
             memcpy(&time, byte + 14, 4);
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+            NSLog(@"%@ %d",date,rote);
             if (dataDelegate) {
                 [dataDelegate didUpdateHealthValue:rote date:date];
             }
