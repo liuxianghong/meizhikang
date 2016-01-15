@@ -21,6 +21,7 @@ class Group: NSManagedObject {
         else{
             let user = Group.MR_createEntity()
             user.gid = gid as? NSNumber
+            user.unReadMessage = 0
             return user
         }
     }

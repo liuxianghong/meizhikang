@@ -170,16 +170,19 @@ class FriendListTableViewController: UITableViewController {
             let group = self.groupArray[indexPath.row-1]
             cell.nameLabel.text = group.gname
             cell.numberLabel.text = "\((group.members?.count)! as Int)"
+            cell.uiReadView.hidden = group.unReadMessage == 0
         }
         else if type == 2{
             cell.typeImageView.image = UIImage(named: "联系人-蓝")
             let chat = chatArray[indexPath.row]
             cell.nameLabel.text = chat.member?.nickname
+            cell.uiReadView.hidden = chat.unReadMessage == 0
         }
         else if type == 3{
             let email = emailArray[indexPath.row]
             cell.typeImageView.image = UIImage(named: "记录-蓝")
             cell.nameLabel.text = email.title
+            cell.uiReadView.hidden = true
         }
         cell.numberLabel.hidden = type != 1
 

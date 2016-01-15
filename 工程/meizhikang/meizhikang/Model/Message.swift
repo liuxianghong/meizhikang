@@ -78,8 +78,13 @@ class Message: NSManagedObject {
         dispatch_async(dispatch_get_main_queue()){
             if self.gid?.integerValue != 0 {
                 let g = UserInfo.CurrentUser()!.groupByID(self.gid!)! as Group
+                if g.unReadMessage == nil{
+                    g.unReadMessage = 0
+                }
+                else{
+                    g.unReadMessage = (g.unReadMessage?.integerValue)! + 1
+                }
                 g.mutableSetValueForKey("messages").addObject(self)
-                g.unRead = true
             }
             else{
                 let m = GroupMember.GroupMemberByUid(self.fromid!)

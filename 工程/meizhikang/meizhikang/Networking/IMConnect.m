@@ -788,11 +788,10 @@
         NSData *dddd = [NSData dataWithBytes:[reciveIM.data bytes]+22 length:([reciveIM.data length]-22)];
         NSData *data2 = [NSString decryptWithAES:dddd withKey:newKey];
         if (reciveIM.subCmd == 0xfe) {
-            
+            [self LoginOut:NO];
             NSString *str = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"loginOutNotification" object:str];
-            [self LoginOut:NO];
         }
         else if (reciveIM.subCmd == 0x1){
             

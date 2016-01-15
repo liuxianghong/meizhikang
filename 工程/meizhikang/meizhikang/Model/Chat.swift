@@ -24,6 +24,7 @@ class Chat: NSManagedObject {
             let chat = Chat.MR_createEntity()
             chat.member = member
             chat.user = user
+            chat.unReadMessage = 0
             return chat
         }
     }

@@ -23,7 +23,7 @@
         }
         else{
             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-            str = [str stringByReplacingOccurrencesOfString:@"<ns:getGroupsResponse xmlns:ns=\"http://service.webservice.mzk.com\"><ns:return>" withString:@""];
+            str = [str stringByReplacingOccurrencesOfString:@"<ns:getGroupsResponse xmlns:ns=\"http://service.webservice.gmk.com\"><ns:return>" withString:@""];
             str = [str stringByReplacingOccurrencesOfString:@"</ns:return></ns:getGroupsResponse>" withString:@""];
             id object = [str objectFromJSONString];
             if (object) {
@@ -47,7 +47,7 @@
         }
         else{
             NSString *str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-            str = [str stringByReplacingOccurrencesOfString:@"<ns:getMembersResponse xmlns:ns=\"http://service.webservice.mzk.com\"><ns:return>" withString:@""];
+            str = [str stringByReplacingOccurrencesOfString:@"<ns:getMembersResponse xmlns:ns=\"http://service.webservice.gmk.com\"><ns:return>" withString:@""];
             str = [str stringByReplacingOccurrencesOfString:@"</ns:return></ns:getMembersResponse>" withString:@""];
             id object = [str objectFromJSONString];
             if (object) {

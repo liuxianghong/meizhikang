@@ -13,9 +13,12 @@ class FriendTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var typeImageView : UIImageView!
     @IBOutlet weak var numberLabel : UILabel!
+    @IBOutlet weak var uiReadView : UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        uiReadView.layer.cornerRadius = 4
+        uiReadView.layer.masksToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

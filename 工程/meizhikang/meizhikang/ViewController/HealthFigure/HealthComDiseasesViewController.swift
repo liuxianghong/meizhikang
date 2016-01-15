@@ -21,7 +21,7 @@ class HealthComDiseasesViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.webView.loadHTMLString("", baseURL: nil)
         
-        for index in 1...8 {
+        for index in 1...10 {
             print("\(index) times 5 is \(index * 5)")
             let view = UIImageView(image: UIImage(named: "矢量智能对象\(index)"))
             view.tag = index

@@ -160,10 +160,12 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         
         observer = NSNotificationCenter.defaultCenter().addObserverForName("reciveMessageNotification", object: nil, queue: NSOperationQueue.mainQueue()) { (notification : NSNotification) -> Void in
             let message = notification.object as! Message
-            if message.group == self.group{
+            if message.group != nil && message.group == self.group{
+                self.group.unReadMessage = 0
                 self.addMessage(message)
             }
-            else if message.chat == self.chat{
+            else if message.chat != nil && message.chat == self.chat{
+                self.chat.unReadMessage = 0
                 self.addMessage(message)
             }
         }
@@ -171,6 +173,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
         if group == nil{
             self.navigationItem.rightBarButtonItem = nil
             if chat != nil{
+                chat.unReadMessage = 0
                 self.title = chat.member?.nickname
                 let messages = Message.MR_findByAttribute("chat", withValue: chat, andOrderBy: "sendtime", ascending: true)
                 for message in messages {
@@ -179,6 +182,7 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
             }
         }
         else{
+            group.unReadMessage = 0
             self.title = group.gname
             let messages = Message.MR_findByAttribute("group", withValue: group, andOrderBy: "sendtime", ascending: true)
             for message in messages {
@@ -189,6 +193,13 @@ class ChatViewController: JSQMessagesViewController,UIImagePickerControllerDeleg
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
+        if !IMRequst.isLogin(){
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+        }
+    }
+    
+    @IBAction func backClick(sneder : AnyObject?){
+        self.navigationController?.popViewControllerAnimated(true)
         NSNotificationCenter.defaultCenter().removeObserver(observer)
     }
     

@@ -129,6 +129,10 @@
     [[IMConnect Instance] LoginOut:waite];
 }
 
++(BOOL)isLogin{
+    return [[IMConnect Instance] isLogin];
+}
+
 +(void)EmailApplyByGid:(NSNumber *)gid uid:(NSNumber *)uid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure{
     NSDictionary *dic = @{
                           @"type" : @"email_apply",

@@ -47,6 +47,8 @@
 
 +(void)LoginOut:(BOOL)waite;
 
++(BOOL)isLogin;
+
 +(void)EmailApplyByGid:(NSNumber *)gid uid:(NSNumber *)uid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
 
 +(void)EmailInviteByGid:(NSNumber *)gid tye:(NSNumber *)type completion:(void (^)(id info))completion failure:(IMObjectFailureHandler)failure;
