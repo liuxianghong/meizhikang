@@ -1228,8 +1228,24 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOX-cG-nt3">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="疾病图1" translatesAutoresizingMaskIntoConstraints="NO" id="oCO-oY-lai">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oCO-oY-lai">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="427" id="Otr-76-BJP"/>
+                                            <constraint firstAttribute="height" constant="1" id="qAw-wY-z2I"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Otr-76-BJP"/>
+                                                <exclude reference="qAw-wY-z2I"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Otr-76-BJP"/>
+                                                <include reference="qAw-wY-z2I"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -1238,12 +1254,14 @@
                                     <constraint firstItem="oCO-oY-lai" firstAttribute="height" secondItem="SOX-cG-nt3" secondAttribute="height" id="LHK-4E-KWr"/>
                                     <constraint firstAttribute="bottom" secondItem="oCO-oY-lai" secondAttribute="bottom" id="OB2-ah-pgp"/>
                                     <constraint firstAttribute="trailing" secondItem="oCO-oY-lai" secondAttribute="trailing" constant="20" id="Uyy-44-3zW"/>
+                                    <constraint firstAttribute="height" constant="1" id="cqz-RG-H97"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="oCO-oY-lai"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="cqz-RG-H97"/>
                                         <exclude reference="4hg-JN-9eB"/>
                                         <exclude reference="FkW-BH-TjW"/>
                                         <exclude reference="LHK-4E-KWr"/>
@@ -1256,6 +1274,7 @@
                                         <include reference="oCO-oY-lai"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="cqz-RG-H97"/>
                                         <include reference="4hg-JN-9eB"/>
                                         <include reference="FkW-BH-TjW"/>
                                         <include reference="LHK-4E-KWr"/>
@@ -8645,7 +8664,6 @@
         <image name="灰线-长.png" width="66" height="1"/>
         <image name="灰线.png" width="1" height="1"/>
         <image name="灰边.png" width="213" height="1"/>
-        <image name="疾病图1" width="427" height="205"/>
         <image name="白框.png" width="320" height="82"/>
         <image name="矩形-4.png" width="165" height="42"/>
         <image name="绿-圆小.png" width="7" height="7"/>

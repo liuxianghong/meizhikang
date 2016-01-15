@@ -20,7 +20,7 @@ class HealthComDiseasesViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.webView.loadHTMLString("", baseURL: nil)
-        
+        self.webView.scrollView.showsHorizontalScrollIndicator = false
         for index in 1...10 {
             print("\(index) times 5 is \(index * 5)")
             let view = UIImageView(image: UIImage(named: "矢量智能对象\(index)"))
@@ -34,7 +34,7 @@ class HealthComDiseasesViewController: UIViewController {
         
         imageView.image = UIImage(named: "疾病图1")
         let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
-        let path = NSBundle.mainBundle().pathForResource("web", ofType: "html")
+        let path = NSBundle.mainBundle().pathForResource("html1", ofType: "html")
         do{
             let html = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
             webView.loadHTMLString(html as String, baseURL: baseURL)
@@ -60,17 +60,17 @@ class HealthComDiseasesViewController: UIViewController {
     
     func tapGestureClick(tapGesture : UITapGestureRecognizer){
         
-        //let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
+        let baseURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
         imageView.image = UIImage(named: "疾病图\(tapGesture.view!.tag)")
         scrollView2.setContentOffset(CGPointMake(0, 0), animated: false)
         print(tapGesture.view?.tag)
-//        let path = NSBundle.mainBundle().pathForResource("html\(tapGesture.view!.tag)", ofType: "html")
-//        do{
-//            let html = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
-//            webView.loadHTMLString(html as String, baseURL: baseURL)
-//        }catch let error as NSError {
-//            print(error.localizedDescription)
-//        }
+        let path = NSBundle.mainBundle().pathForResource("html\(tapGesture.view!.tag)", ofType: "html")
+        do{
+            let html = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
+            webView.loadHTMLString(html as String, baseURL: baseURL)
+        }catch let error as NSError {
+            print(error.localizedDescription)
+        }
         
     }
 
