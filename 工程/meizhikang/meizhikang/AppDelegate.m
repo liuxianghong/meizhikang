@@ -27,6 +27,7 @@
     [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:87/255.0 green:219/255.0 blue:177/255.0 alpha:1.0f];
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"meizhikang.sqlite"];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
     
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil]];
