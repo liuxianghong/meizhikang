@@ -46,6 +46,9 @@ uint64_t reversebytes_uint64t(uint64_t value){
 @end
 
 @implementation BLEConnect
+{
+    NSTimer *heartCommandTimer;
+}
 
 @synthesize manager;
 @synthesize connectDelegate;
@@ -403,6 +406,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
                 if (connectDelegate) {
                     [connectDelegate setConnect];
                 }
+                [self setHeartCommand:self.heartCommandOn];
                 NSString *str = peripheral.name;
                 [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"BLEConnected"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -483,15 +487,11 @@ uint64_t reversebytes_uint64t(uint64_t value){
     [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_Warnsync_UUID p:activePeripheral data:data];
 }
 
--(void)doHeartCommand{
-    [self setHeartCommand:self.heartCommandOn?3600:0];
-}
-
--(void)setHeartCommand:(UInt16)time{
+-(void)doHeartCommand:(BOOL)bo{
     if (!self.isConnected) {
         return;
     }
-    self.heartCommandOn = time != 0;
+    UInt16 time = bo ? 40 : 0;
     Byte value[13];
     bzero(value, 13);
     value[0] = 0b01000000;
@@ -501,6 +501,42 @@ uint64_t reversebytes_uint64t(uint64_t value){
     NSData *data = [NSData dataWithBytes:value length:13];
     NSLog(@"%@",data);
     [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:activePeripheral data:data];
+}
+
+-(void)cutDown{
+    [self doHeartCommand:self.heartCommandOn];
+}
+
+-(void)setHeartCommandPuse:(BOOL)bo{
+    if (self.heartCommandOn) {
+        if (self.heartCommandOn == bo) {
+            if (!heartCommandTimer) {
+                [self setHeartCommand:YES];
+            }
+        }
+        else{
+            if (heartCommandTimer) {
+                [heartCommandTimer invalidate];
+                heartCommandTimer = nil;
+            }
+            [self doHeartCommand:bo];
+        }
+    }
+}
+
+-(void)setHeartCommand:(BOOL)bo{
+    self.heartCommandOn = bo;
+    if (!self.isConnected) {
+        return;
+    }
+    if (heartCommandTimer) {
+        [heartCommandTimer invalidate];
+        heartCommandTimer = nil;
+    }
+    if (bo) {
+        heartCommandTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(cutDown) userInfo:nil repeats:YES];
+    }
+    [self doHeartCommand:self.heartCommandOn];
 }
 
 -(void)getAllCharacteristicsFromKeyfob:(CBPeripheral *)p{
@@ -561,6 +597,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
         NSLog(@"Could not find characteristic with UUID %@ on service with UUID %@ on peripheral with UUID %@\r\n",[self CBUUIDToString:cu],[self CBUUIDToString:su],p.identifier);
         return;
     }
+    
     
     if(characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)
     {
