@@ -11,6 +11,7 @@ import UIKit
 class HealthDailyChartView: UIView {
 
     var data: [DailyViewLineData]?
+    var scale: CGFloat = 1.0
     override var transform: CGAffineTransform{
         set{
             var constrainedTransform = newValue
@@ -47,7 +48,7 @@ class HealthDailyChartView: UIView {
 //        CGContextClearRect(context, rect)
 //        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
 //        CGContextFillRect(context, rect)
-        CGContextSetLineWidth(context, 1.0)
+        CGContextSetLineWidth(context, self.scale)
         for item in data{
             let pos = CGFloat(item.position) * rect.size.width
             let color = UIColor.helathColorByValue(item.value)

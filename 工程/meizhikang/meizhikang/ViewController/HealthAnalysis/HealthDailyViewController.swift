@@ -41,7 +41,7 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         self.scrollViewContainer.delegate = self
         self.scrollViewContainer.maximumZoomScale = 4.0
-        self.scrollViewContainer.minimumZoomScale = 1.0
+        self.scrollViewContainer.minimumZoomScale = 0.5
         self.scrollViewContainer.showsHorizontalScrollIndicator = false
         self.imageView1.backgroundColor = UIColor.helathColor(.Health)
         self.imageView2.backgroundColor = UIColor.helathColor(.Subhealth)
@@ -175,24 +175,25 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
         return self.chartView
     }
     
-    func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
-        self.currentScale = scrollView.zoomScale
-    }
-    
-    func scrollViewDidZoom(scrollView: UIScrollView) {
-        self.coodinateWidth.constant = scrollView.contentSize.width
-    }
-    
     func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
         if fabs(scale - self.currentScale) < 1e-6 {
             return
         }
         print(self.chartView)
-        if scale > self.currentScale {
-            scrollView.zoomScale = self.currentScale * 2
+        if scale > 1.0 {
+            if self.chartView.scale < 3.9{
+                self.chartView.scale *= 2
+            }
         }else{
-            scrollView.zoomScale = self.currentScale / 2
+            if self.chartView.scale > 1.1{
+                self.chartView.scale /= 2
+            }
         }
+        scrollView.zoomScale = self.chartView.scale
+        self.chartView.transform = CGAffineTransformIdentity
+        self.coodinateWidth.constant = (self.view.bounds.size.width - 30) * self.chartView.scale
+        scrollView.contentSize = CGSize(width: self.coodinateWidth.constant, height: 72.0)
+        self.chartView.setNeedsDisplay()
     }
     
     /*
