@@ -135,8 +135,16 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
             #if DEBUG
             if UserInfo.CurrentUser()?.healthDatas?.count <= 100{
                 let timeInterval = NSDate().timeIntervalSince1970
-                for index in 1...1000{
-                    let date = NSDate(timeIntervalSince1970: timeInterval - Double(index*60*5))
+                for index in 1...2000{
+                    var tt : NSTimeInterval = 0
+                    if index < 400{
+                        tt = NSTimeInterval(index*60*5)
+                    }
+                    else
+                    {
+                        tt = NSTimeInterval(60*60*24*2 + index*60*5)
+                    }
+                    let date = NSDate(timeIntervalSince1970: timeInterval - tt)
                     let healthData = HealthData.MR_createEntity()
                     healthData.time = date
                     healthData.heartRate = 60 + Int((healthData.time?.timeIntervalSince1970)!) % 70
