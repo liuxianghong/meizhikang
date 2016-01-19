@@ -93,7 +93,7 @@ class HealthWeeklyChartView: UIView {
         guard let data = self.chartData else{
             return false
         }
-        if data.count < 5 {
+        if data.count < 5 + 2 {
             return true
         }
         let step = (data.count - 2) / 5
