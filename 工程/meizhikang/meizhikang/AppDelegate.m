@@ -27,6 +27,7 @@
     [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:87/255.0 green:219/255.0 blue:177/255.0 alpha:1.0f];
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"meizhikang.sqlite"];
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
     
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil]];
@@ -62,7 +63,7 @@
 //            NSLog(@"%@",error);
 //        }];
     }
-    [[BLEConnect Instance] doHeartCommand];
+    [[BLEConnect Instance] setHeartCommandPuse:NO];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -76,7 +77,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [[BLEConnect Instance] doHeartCommand];
+    [[BLEConnect Instance] setHeartCommandPuse:YES];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

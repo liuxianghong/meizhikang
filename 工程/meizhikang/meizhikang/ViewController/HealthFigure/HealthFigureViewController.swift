@@ -61,6 +61,14 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
             self.revealViewController().rearViewRevealWidth = 215
         }
         
+        if let bleOn = NSUserDefaults.standardUserDefaults().objectForKey("heartRateSwith") as? Bool{
+            self.heartRateSwith.on = bleOn
+        }
+        else{
+            self.heartRateSwith.on = false
+        }
+        didHearCommandClick()
+        
         self.imageView1.backgroundColor = UIColor.helathColor(.Health)
         self.imageView2.backgroundColor = UIColor.helathColor(.Subhealth)
         self.imageView3.backgroundColor = UIColor.helathColor(.Infirm)
@@ -100,12 +108,13 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     }
 
     override func viewWillDisappear(animated: Bool) {
-        self.headrCommand(false)
+        super.viewWillDisappear(true)
+        BLEConnect.Instance().setHeartCommandPuse(false)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.headrCommand(heartRateSwith.on)
+        BLEConnect.Instance().setHeartCommandPuse(true)
         if UserInfo.CurrentUser() != nil{
             if beforUser == nil{
                 for hd in healthDataArray{
@@ -167,6 +176,8 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         heartRateSwithLabel.hidden = !heartRateSwith.on
         heartRateLabel.hidden = !heartRateSwith.on
         self.headrCommand(heartRateSwith.on)
+        NSUserDefaults.standardUserDefaults().setObject(heartRateSwith.on, forKey: "heartRateSwith")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     @IBAction func didBackClick(){
@@ -182,7 +193,7 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
     }
     
     func headrCommand(bo : Bool){
-        BLEConnect.Instance().setHeartCommand(bo ? 3600 : 0)
+        BLEConnect.Instance().setHeartCommand(bo)
     }
     
     func didUpdateHartValue(value: Int) {
@@ -211,7 +222,6 @@ class HealthFigureViewController: UIViewController ,UITableViewDataSource ,UITab
         #if DEBUG
         //self.didUpdateHealthValue(60, date: NSDate())
         #endif
-        BLEConnect.Instance().doHeartCommand()
     }
     
     func showCurrentHealthData(health : HealthData?){

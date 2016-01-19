@@ -35,8 +35,8 @@
 -(void)disconnect:(CBPeripheral *)peripheral;
 -(CBPeripheral *)connectedPeripheral;
 -(NSArray *)peripherals;
--(void)doHeartCommand;
--(void)setHeartCommand:(UInt16)time;
+-(void)setHeartCommandPuse:(BOOL)bo;
+-(void)setHeartCommand:(BOOL)bo;
 -(void)ternOnRing:(UInt32)time;
 -(void)coloseRing:(BOOL)on;
 -(void)ternOffRing;
