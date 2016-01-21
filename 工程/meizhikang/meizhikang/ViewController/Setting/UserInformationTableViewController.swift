@@ -27,18 +27,22 @@ class UserInformationTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         let userInfo = NSUserDefaults.standardUserDefaults().objectForKey("userInfo") as! NSDictionary
-        if userInfo.count>0{
-            nickNameTextField.text = userInfo["nickname"] as? String
-            wightTextField.text = "\(userInfo["weight"] as! Int)"
-            heightTextField.text = "\(userInfo["height"] as! Int)"
-            ageTextField.text = "\(userInfo["old"] as! Int)"
-            let sex = userInfo["sex"] as? Int
+        if let nickname = userInfo["nickname"] as? String , let weight = userInfo["weight"] as? Int, let height = userInfo["height"] as? Int,let old = userInfo["old"] as? Int,let sex = userInfo["sex"] as? Int{
+            nickNameTextField.text = nickname
+            wightTextField.text = "\(weight)"
+            heightTextField.text = "\(height)"
+            ageTextField.text = "\(old)"
             self.sexManButton.selected = sex == 0
             self.sexWomanButton.selected = sex != 0
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
