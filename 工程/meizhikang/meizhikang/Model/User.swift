@@ -60,7 +60,7 @@ class User: NSManagedObject {
     }
     
     func healthDataHaveDataOn(date: NSDate) -> Bool{
-        let minTime = NSCalendar.currentCalendar().startOfDayForDate(date)
+        let minTime = date//NSCalendar.currentCalendar().startOfDayForDate(date)
         guard let maxTime = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: minTime, options: NSCalendarOptions(rawValue: 0)) else{
             return false
         }
