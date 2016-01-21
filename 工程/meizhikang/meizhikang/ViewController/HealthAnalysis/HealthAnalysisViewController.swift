@@ -31,7 +31,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
         self.loadingData = true
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)){
             for i in -120...0{
-                let currentDate = self.toSystemDate(self.calendarView!.currentPage)
+                let currentDate = self.calendarView!.currentPage
                 guard
                     let user = UserInfo.CurrentUser(),
                     let date = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: currentDate, options: NSCalendarOptions(rawValue: 0)),
@@ -74,7 +74,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
     
     func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
         calendar.deselectDate(date)
-        guard let dataDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: self.toSystemDate(date), options: NSCalendarOptions(rawValue: 0)),
+        guard let dataDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: date, options: NSCalendarOptions(rawValue: 0)),
             let user = UserInfo.CurrentUser() else{
             return
         }
@@ -82,7 +82,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
             return
         }
         if user.healthDataHaveDataOn(dataDate) {
-            self.performSegueWithIdentifier(HealthAnalysisConstant.HealthAnalysisSegueIdentifier, sender: self.toSystemDate(date))
+            self.performSegueWithIdentifier(HealthAnalysisConstant.HealthAnalysisSegueIdentifier, sender: date)
         }
     }
     
@@ -90,7 +90,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
         if self.loadingData {
             return false
         }
-        let systemDate = self.toSystemDate(date)
+        let systemDate = date
         guard let cDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: systemDate, options: NSCalendarOptions(rawValue: 0)) else{
             return false
         }
@@ -106,7 +106,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
     }
     
     func calendarCurrentPageDidChange(calendar: FSCalendar!) {
-        let currentDate = self.toSystemDate(self.calendarView!.currentPage)
+        let currentDate = self.calendarView!.currentPage
         guard let date = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: currentDate, options: NSCalendarOptions(rawValue: 0)) else{
             return
         }

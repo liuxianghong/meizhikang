@@ -152,7 +152,7 @@
     _calendar = [NSCalendar currentCalendar];
     _components = [[NSDateComponents alloc] init];
     _formatter = [[NSDateFormatter alloc] init];
-    _timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    _timeZone = [NSTimeZone systemTimeZone];//[NSTimeZone timeZoneForSecondsFromGMT:0];
     _locale = [NSLocale currentLocale];
     _firstWeekday = 1;
     [self invalidateDateTools];
