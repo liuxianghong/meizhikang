@@ -52,7 +52,8 @@ class HealthWeeklyChartView: UIView {
         let color = UIColor.mainGreenColor()
         CGContextSetStrokeColorWithColor(context, color.CGColor)
         let leftmargin : CGFloat = 50
-        CGContextMoveToPoint(context, leftmargin ,rect.size.height - rect.size.height * (data[0].value! - minValue) / (maxValue - minValue))
+//        CGContextMoveToPoint(context, leftmargin ,rect.size.height - rect.size.height * (data[firstIndex].value! - minValue) / (maxValue - minValue))
+        var firstPoint = false
         var imagePoint = [CGPoint]()
         for (index,item) in data.enumerate(){
             let formater = NSDateFormatter()
@@ -69,7 +70,7 @@ class HealthWeeklyChartView: UIView {
                 strx = leftmargin + (rect.size.width - leftmargin - 20) * CGFloat(index)/CGFloat(data.count - 1) - size.width / 2
             }
             let stry : CGFloat = rect.size.height - 10
-            if index == 0 || index == data.count || shouldDrawAt(index){
+            if index == 0 || index == data.count - 1 || shouldDrawAt(index){
                 attStr.drawAtPoint(CGPoint(x: strx, y: stry))
             }
             CGContextSetStrokeColorWithColor(context, color.CGColor)
@@ -80,6 +81,10 @@ class HealthWeeklyChartView: UIView {
             let height = rect.size.height - rect.size.height * (item.value! - minValue) / (maxValue - minValue)
             let imageX = pos - (image?.size.width)! / 2
             let imageY = height - (image?.size.height)! / 2
+            if !firstPoint{
+                firstPoint = true
+                CGContextMoveToPoint(context, pos ,height)
+            }
             CGContextAddLineToPoint(context, pos, height)
             imagePoint.append(CGPoint(x: imageX, y: imageY))
         }
@@ -97,7 +102,7 @@ class HealthWeeklyChartView: UIView {
             return true
         }
         let step = (data.count - 2) / 5
-        return (index - 1) % step == 0
+        return (index) % step == 0
     }
     
     override func drawRect(rect: CGRect) {
