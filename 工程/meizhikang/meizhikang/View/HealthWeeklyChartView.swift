@@ -59,7 +59,7 @@ class HealthWeeklyChartView: UIView {
             let formater = NSDateFormatter()
             formater.dateFormat = "MM.dd"
             let str = formater.stringFromDate(item.date)
-            let attr = [NSFontAttributeName : UIFont.systemFontOfSize(10),
+            let attr = [NSFontAttributeName : UIFont.systemFontOfSize(8),
                 NSForegroundColorAttributeName : UIColor.whiteColor()]
             let attStr = NSAttributedString(string: str, attributes: attr)
             let size = attStr.size()
