@@ -72,7 +72,7 @@ class MainViewController: UINavigationController {
         if first{
             first = false
             if UserInfo.LastLoginUser() != nil{
-                self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                //self.performSegueWithIdentifier("loginIdentifier", sender: nil)
             }
             
         }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MagicalRecord
+import MBProgressHUD
 
 class SettingTableViewController: UITableViewController,AlartViewControllerDelegate {
 
@@ -41,6 +43,12 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 {
+            if UserInfo.CurrentUser() == nil{
+                if self.revealViewController() != nil{
+                    self.revealViewController().navigationController!.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                    return;
+                }
+            }
             if indexPath.row == 0{
                 self.performSegueWithIdentifier("myinformationIdentifier", sender: nil)
             }
@@ -73,6 +81,13 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
                 self.performSegueWithIdentifier("aboutIndentifier", sender: nil)
             }
             else if indexPath.row == 2{
+                if UserInfo.CurrentUser() == nil{
+                    let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                    hud.mode = .Text
+                    hud.detailsLabelText = "您还没有登录"
+                    hud.hide(true, afterDelay: 1)
+                    return
+                }
                 self.performSegueWithIdentifier("alertIndentifier", sender: 0)
             }
             else if indexPath.row == 3{
@@ -104,15 +119,21 @@ class SettingTableViewController: UITableViewController,AlartViewControllerDeleg
     func didClickButton(index: Int, tag: Int) {
         if index == 1{
             if tag == 1{
+                MagicalRecord.cleanUp()
                 exit(0)
             }
             else
             {
                 if self.revealViewController() != nil{
-                    IMRequst.LoginOut(false)
+                    let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                    IMRequst.LoginOut(true)
                     UserInfo.CurrentUser()?.passWord = nil
+                    NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
                     NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-                    self.revealViewController().navigationController!.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                    hud.mode = .Text
+                    hud.detailsLabelText = "注销成功"
+                    hud.hide(true, afterDelay: 1.5)
+                    //self.revealViewController().navigationController!.performSegueWithIdentifier("loginIdentifier", sender: nil)
                 }
             }
         }
