@@ -93,7 +93,7 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
             return dateIn(fromDayOffset, offset2: toDayOffset, date: item.time!)
         }
         guard filterData.count>0 else{
-            return ("N/A","N/A","N/A","N/A","00")
+            return ("---","---","---","---","--")
         }
         let s1 = percentOf(filterData, lowValue: 79, hightValue: 1000)
         let s2 = percentOf(filterData, lowValue: 69, hightValue: 79)
