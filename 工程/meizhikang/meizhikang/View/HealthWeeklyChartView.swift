@@ -71,7 +71,7 @@ class HealthWeeklyChartView: UIView {
             }
             let stry : CGFloat = rect.size.height - 10
             if index == 0 || index == data.count - 1 || shouldDrawAt(index){
-                attStr.drawAtPoint(CGPoint(x: strx, y: stry))
+                attStr.drawAtPoint(CGPoint(x: strx, y: stry+10))
             }
             CGContextSetStrokeColorWithColor(context, color.CGColor)
             guard let _ = item.value else{
@@ -127,8 +127,8 @@ class HealthWeeklyChartView: UIView {
         if minValue >= maxValue {
             return
         }
-        drawCoordinate(rect)
-        drawChart(rect)
+        drawCoordinate(CGRectMake(0, 0, rect.width, rect.height - 10))
+        drawChart(CGRectMake(0, 0, rect.width, rect.height - 10))
     }
 
 }
