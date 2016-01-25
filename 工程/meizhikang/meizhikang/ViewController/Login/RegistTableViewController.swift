@@ -43,9 +43,9 @@ class RegistTableViewController: UITableViewController {
             hud.hide(true, afterDelay: 1.5)
             return;
         }
-        if self.passWordTextField.text!.isEmpty{
+        if self.passWordTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) < 6{
             hud.mode = .Text
-            hud.detailsLabelText = "请输入密码"
+            hud.detailsLabelText = "密码不能少于6位"
             hud.hide(true, afterDelay: 1.5)
             return;
         }

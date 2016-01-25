@@ -142,7 +142,7 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.revealViewController() != nil{
             
-            if indexPath.row != 1 && indexPath.row != 3{
+            if indexPath.row != 1 && indexPath.row != 3 && indexPath.row != 5{
                 if UserInfo.CurrentUser() == nil{
                     self.revealViewController().navigationController?.performSegueWithIdentifier("loginIdentifier", sender: nil)
                     self.tableView.reloadData()

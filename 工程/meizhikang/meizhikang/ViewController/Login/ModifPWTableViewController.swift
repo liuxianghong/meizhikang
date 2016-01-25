@@ -31,7 +31,7 @@ class ModifPWTableViewController: UITableViewController {
 
     @IBAction func okClick(sender : AnyObject) {
         
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        let hud = MBProgressHUD.showHUDAddedTo(self.view.window, animated: true)
         if self.odlpwTextField.text!.isEmpty{
             hud.mode = .Text
             hud.detailsLabelText = "请输入旧密码"
@@ -41,6 +41,13 @@ class ModifPWTableViewController: UITableViewController {
         if self.newpwTextField.text!.isEmpty{
             hud.mode = .Text
             hud.detailsLabelText = "请输入新密码"
+            hud.hide(true, afterDelay: 1.5)
+            return;
+        }
+        
+        if self.newpwTextField.text!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) < 6{
+            hud.mode = .Text
+            hud.detailsLabelText = "密码不能少于6位"
             hud.hide(true, afterDelay: 1.5)
             return;
         }
@@ -64,8 +71,14 @@ class ModifPWTableViewController: UITableViewController {
             print(object)
             let flag = object["flag"] as! Int
             if flag == 1{
-                hud.detailsLabelText = "修改成功"
-                self.navigationController?.popViewControllerAnimated(true)
+                hud.detailsLabelText = "修改成功,请重新登录"
+                
+                //IMRequst.LoginOut(true)
+                UserInfo.CurrentUser()?.passWord = nil
+                NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
+                NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                self.revealViewController().navigationController!.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                //self.navigationController?.popViewControllerAnimated(true)
             }
             else if flag == -1{
                 hud.detailsLabelText = "原密码不正确"
