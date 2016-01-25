@@ -124,6 +124,9 @@ class HealthWeeklyChartView: UIView {
         })
         minValue = CGFloat(Int(minValue) / 10 * 10)
         maxValue = CGFloat((Int(maxValue) / 10 + 1) * 10)
+        if minValue >= maxValue {
+            return
+        }
         drawCoordinate(rect)
         drawChart(rect)
     }
