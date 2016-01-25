@@ -73,13 +73,24 @@ class HealthWeeklyViewController: UIViewController {
         chartData = chartData.reverse()
         chartView.chartData = chartData
         chartView.setNeedsDisplay()
-        guard let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -days, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0)),
-            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))else{
-                return
+        var standDatas = [HealthData]()
+        for i in 0..<days{
+            let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
+            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -i + 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))
+            guard let datas = UserInfo.CurrentUser()?.healthDatas(minDate!, maxTime: maxDate!) else{
+                continue
+            }
+            if datas.count > 143 {
+                standDatas.appendContentsOf(datas)
+            }
         }
-        if let data = UserInfo.CurrentUser()?.healthDatas(minDate, maxTime: maxDate) where data.count > 0{
-        (self.lastPercent.healthPercent.text,self.lastPercent.semiHealthPercent.text,self.lastPercent.weakPercent.text,self.lastPercent.unHealthPercent.text,self.avgLabel.text) = dayStrings(data, fromDayOffset: -days, toDayOffset: 0)
-        }
+//        guard let minDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -days, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0)),
+//            let maxDate = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDay!, options: NSCalendarOptions(rawValue: 0))else{
+//                return
+//        }
+//        if let data = UserInfo.CurrentUser()?.healthDatas(minDate, maxTime: maxDate) where data.count > 0{
+        (self.lastPercent.healthPercent.text,self.lastPercent.semiHealthPercent.text,self.lastPercent.weakPercent.text,self.lastPercent.unHealthPercent.text,self.avgLabel.text) = dayStrings(standDatas, fromDayOffset: -days, toDayOffset: 1)
+//        }
     }
 
     override func didReceiveMemoryWarning() {
