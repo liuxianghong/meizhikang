@@ -100,7 +100,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
         let todayComponents = NSCalendar.currentCalendar().componentsInTimeZone(NSTimeZone.systemTimeZone(), fromDate: NSDate())
         let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: date)
         if todayComponents.year == dateComponents.year && todayComponents.month == dateComponents.month && todayComponents.day == dateComponents.day{
-            return NSDate().compare(self.todayDate!) == .OrderedDescending
+            return NSDate().compare(self.todayDate!) == .OrderedDescending && self.cacheDay(cDate)
         }
         return self.cacheDay(cDate)
     }

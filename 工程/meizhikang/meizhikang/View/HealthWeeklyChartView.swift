@@ -17,13 +17,13 @@ class HealthWeeklyChartView: UIView {
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     func drawCoordinate(rect: CGRect){
-        let step = Int((maxValue - minValue) / 10)
+        let step = Int((maxValue - minValue) / 5)
         let context = UIGraphicsGetCurrentContext()
         CGContextSetLineWidth(context, 1.0)
         for i in 0...step{
             let attr = [NSFontAttributeName : UIFont.systemFontOfSize(10),
                 NSForegroundColorAttributeName : UIColor.whiteColor()]
-            let str = NSAttributedString(string: "\(i * 10 + Int(minValue))", attributes: attr)
+            let str = NSAttributedString(string: "\(i * 5 + Int(minValue))", attributes: attr)
             let strPoint = CGPointMake(8,(rect.size.height - 10) - (rect.size.height - 10) * CGFloat(i) / CGFloat(step))
             str.drawAtPoint(strPoint)
             CGContextBeginPath(context)
@@ -122,8 +122,8 @@ class HealthWeeklyChartView: UIView {
                 minValue = value
             }
         })
-        minValue = CGFloat(Int(minValue) / 10 * 10)
-        maxValue = CGFloat((Int(maxValue) / 10 + 1) * 10)
+        minValue = CGFloat(Int(minValue) / 5 * 5)
+        maxValue = CGFloat((Int(maxValue) / 5 + 1) * 5)
         if minValue >= maxValue {
             return
         }
