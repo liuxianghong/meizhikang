@@ -16,7 +16,7 @@ class AboutViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        self.versionLabel.text = "版本：V\(NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String)"
+        self.versionLabel.text = "版本：\(NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String)"
     }
 
     override func didReceiveMemoryWarning() {

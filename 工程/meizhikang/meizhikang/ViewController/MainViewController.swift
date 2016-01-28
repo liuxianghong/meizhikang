@@ -71,8 +71,13 @@ class MainViewController: UINavigationController {
         super.viewDidAppear(animated)
         if first{
             first = false
+            NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
+            NSUserDefaults.standardUserDefaults().synchronize()
             if UserInfo.LastLoginUser() != nil{
-                //self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                if !UserInfo.LastLoginUser()!.passWord!.isEmpty{
+                    self.performSegueWithIdentifier("loginIdentifier", sender: nil)
+                }
+                
             }
             
         }
