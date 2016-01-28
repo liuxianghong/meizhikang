@@ -50,7 +50,7 @@ class HealthDailyChartView: UIView {
 //        CGContextFillRect(context, rect)
         CGContextSetLineWidth(context, self.scale)
         for item in data{
-            let pos = CGFloat(item.position) * rect.size.width
+            let pos = CGFloat(item.position) * rect.size.width + self.scale * 0.5
             let color = UIColor.helathColorByValue(item.value)
             CGContextBeginPath(context)
             CGContextSetStrokeColorWithColor(context, color.CGColor)
