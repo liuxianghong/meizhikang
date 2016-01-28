@@ -66,7 +66,8 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
         }
         if let data = UserInfo.CurrentUser()?.healthDatas(minDate, maxTime: maxDate) where data.count > 0{
             self.chartView.data = data.filter({ (data) -> Bool in
-                return dateIn(0, offset2: 1, date: currentDay!)
+                guard let time = data.time else {return false}
+                return dateIn(0, offset2: 1, date: time)
             }).map({ (data) -> DailyViewLineData in
                 let offsetDate = NSCalendar.currentCalendar().dateByAddingUnit(.Hour, value: -4, toDate: self.currentDay!, options: NSCalendarOptions(rawValue: 0))
                 let pos = CGFloat((data.time?.timeIntervalSinceDate(offsetDate!))!)
