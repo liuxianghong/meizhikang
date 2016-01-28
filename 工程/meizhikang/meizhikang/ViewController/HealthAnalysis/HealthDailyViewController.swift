@@ -139,7 +139,7 @@ class HealthDailyViewController: UIViewController,UIScrollViewDelegate {
             self.chartView.transform = trans
         }
         self.chartView.transform = CGAffineTransformIdentity
-        return UIImage.imageWith(self.chartView)
+        return UIImage.imageWith(self.view)
     }
     
     func showHUD(str: String){

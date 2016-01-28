@@ -73,8 +73,8 @@ class MainViewController: UINavigationController {
             first = false
             NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "userInfo")
             NSUserDefaults.standardUserDefaults().synchronize()
-            if UserInfo.LastLoginUser() != nil{
-                if !UserInfo.LastLoginUser()!.passWord!.isEmpty{
+            if let passWord = UserInfo.LastLoginUser()?.passWord{
+                if !passWord.isEmpty{
                     self.performSegueWithIdentifier("loginIdentifier", sender: nil)
                 }
                 
