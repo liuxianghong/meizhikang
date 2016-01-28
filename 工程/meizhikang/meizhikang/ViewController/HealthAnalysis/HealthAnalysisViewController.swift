@@ -131,6 +131,7 @@ class HealthAnalysisViewController: UIViewController,FSCalendarDelegate,FSCalend
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
         if self.revealViewController() != nil{
             self.revealViewController().setFrontViewPosition(.Left, animated: true)
         }
