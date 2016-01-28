@@ -36,18 +36,37 @@ uint64_t reversebytes_uint64t(uint64_t value){
     return res;
 }
 
+@interface BLEStateModel : NSObject
+@property (nonatomic,assign) BOOL STATUS_Warnsync;
+@property (nonatomic,assign) BOOL HRV_HRV;
+@property (nonatomic,assign) BOOL HART_NOTI;
+-(BOOL)isConnected;
+-(void)setConnected:(BOOL)bo;
+@end
+@implementation BLEStateModel
+-(void)setConnected:(BOOL)bo{
+    self.STATUS_Warnsync = bo;
+    self.HRV_HRV = bo;
+    self.HART_NOTI = bo;
+}
+-(BOOL)isConnected{
+    return self.STATUS_Warnsync && self.HRV_HRV && self.HART_NOTI;
+}
+@end
 
 @interface BLEConnect()<CBCentralManagerDelegate, CBPeripheralDelegate>
 @property (strong, nonatomic) NSMutableArray *peripherals;
 @property (strong, nonatomic) CBCentralManager *manager;
 @property (strong, nonatomic) CBPeripheral *activePeripheral;
-@property (assign, nonatomic) BOOL isConnected;
+@property (strong, nonatomic) BLEStateModel *connectedState;
 @property (assign, nonatomic) BOOL heartCommandOn;
 @end
 
 @implementation BLEConnect
 {
     NSTimer *heartCommandTimer;
+    
+    BOOL canWrite;
 }
 
 @synthesize manager;
@@ -70,7 +89,8 @@ uint64_t reversebytes_uint64t(uint64_t value){
     self = [super init];
     peripherals = [[NSMutableArray alloc]init];
     manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    self.isConnected = NO;
+    self.connectedState = [[BLEStateModel alloc] init];
+    [self.connectedState setConnected:NO];
     self.heartCommandOn = YES;
     self.warningState = NO;
     return self;
@@ -105,7 +125,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
         if (!activePeripheral) {
             activePeripheral = p;
             activePeripheral.delegate = self;
-            self.isConnected = YES;
+            [self.connectedState setConnected:YES];
             if (connectDelegate) {
                 [connectDelegate setConnect];
             }
@@ -201,7 +221,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     NSLog(@"disconnected to the active peripheral\n");
     NSLog(@"%@",error);
     [peripherals removeObject:peripheral];
-    self.isConnected = NO;
+    [self.connectedState setConnected:NO];
     if(activePeripheral != nil){
         activePeripheral = nil;
     }
@@ -232,30 +252,32 @@ uint64_t reversebytes_uint64t(uint64_t value){
         return;
     }
     Byte *byte = [data bytes];
-    if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:STATUS_Warnsync_UUID]]) {
-        if (byte[0] == 3) {
+//    if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:STATUS_Warnsync_UUID]]) {
+//        if (byte[0] == 3) {
+////            UInt8 rote = byte[1];
+////            UInt32 time = 0;
+////            memcpy(&time, byte + 2, 4);
+////            NSDateFormatter *f = [[NSDateFormatter alloc]init];
+////            f.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+////            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+//            //NSLog(@" %d %@",rote, [f stringFromDate:date]);
+//            if (dataDelegate) {
+//                //[dataDelegate didUpdateHartValue:rote];
+//            }
+//        }
+//        else if (byte[0] == 0 && [data length] == 18){
 //            UInt8 rote = byte[1];
 //            UInt32 time = 0;
-//            memcpy(&time, byte + 2, 4);
-//            NSDateFormatter *f = [[NSDateFormatter alloc]init];
-//            f.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+//            memcpy(&time, byte + 14, 4);
 //            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-            //NSLog(@" %d %@",rote, [f stringFromDate:date]);
-            if (dataDelegate) {
-                //[dataDelegate didUpdateHartValue:rote];
-            }
-        }
-        else if (byte[0] == 0 && [data length] == 18){
-            UInt8 rote = byte[1];
-            UInt32 time = 0;
-            memcpy(&time, byte + 14, 4);
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-            if (dataDelegate) {
-                [dataDelegate didUpdateHealthValue:rote date:date];
-            }
-        }
-    }
-    else if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:HRV_HRV_UUID]]) {
+//            if (dataDelegate) {
+//                [dataDelegate didUpdateHealthValue:rote date:date];
+//            }
+//        }
+//    }
+//    else
+    
+    if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:HRV_HRV_UUID]]) {
         if (byte[0] == 0 && [data length] == 18){
             UInt8 rote = byte[1];
             UInt32 time = 0;
@@ -313,12 +335,13 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
+    canWrite = YES;
     NSLog(@"%@ , %@",[self CBUUIDToString:characteristic.UUID],error);
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
 {
-    
+    canWrite = YES;
 }
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
@@ -373,11 +396,17 @@ uint64_t reversebytes_uint64t(uint64_t value){
     if (!error) {
         NSLog(@"Updated notification state for characteristic with UUID %@ on service with  UUID %@ on peripheral with UUID %@\r\n",[self CBUUIDToString:characteristic.UUID],[self CBUUIDToString:characteristic.service.UUID],peripheral.identifier);
        
-        CBUUID *uuidSTATUS = [self getUUID:STATUS_Warnsync_UUID];
-        if([self compareCBUUID:characteristic.UUID UUID2:uuidSTATUS]) {
-            
-            //UInt16 heart = self.heartCommandOn ? 3600 : 0;
-            //[self setHeartCommand:heart];
+        if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:STATUS_Warnsync_UUID]]) {
+            self.connectedState.STATUS_Warnsync = YES;
+        }
+        if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:HART_NOTI_UUID]]) {
+            self.connectedState.HART_NOTI = YES;
+        }
+        if([self compareCBUUID:characteristic.UUID UUID2:[self getUUID:HRV_HRV_UUID]]) {
+            self.connectedState.HRV_HRV = YES;
+        }
+        
+        if ([self isBleConnected]) {
             double delayInSeconds = 0.5;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -400,9 +429,8 @@ uint64_t reversebytes_uint64t(uint64_t value){
                 value[6] = ((timeZone >> 24) & 0xff);
                 
                 NSData *data = [NSData dataWithBytes:value length:10];
+                canWrite = YES;
                 [self writeValue:STATUS_SERVICE_UUID characteristicUUID:STATUS_COMMAN_UUID p:peripheral data:data];
-                
-                self.isConnected = YES;
                 if (connectDelegate) {
                     [connectDelegate setConnect];
                 }
@@ -411,8 +439,6 @@ uint64_t reversebytes_uint64t(uint64_t value){
                 [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"BLEConnected"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             });
-            
-            
         }
     }
     else {
@@ -424,7 +450,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 #pragma mark -
 -(BOOL)isBleConnected{
-    return self.isConnected;
+    return [self.connectedState isConnected];
 }
 
 -(void)ternOnRing:(UInt32)time{
@@ -453,7 +479,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
  */
 
 -(void)setAlarms:(UInt8)type on:(BOOL)on flag:(UInt8)flag time:(UInt32)time{
-    if (!self.isConnected) {
+    if (![self isBleConnected]) {
         return;
     }
     Byte value[13];
@@ -488,7 +514,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
 }
 
 -(void)doHeartCommand:(BOOL)bo{
-    if (!self.isConnected) {
+    if (![self isBleConnected]) {
         return;
     }
     UInt16 time = bo ? 40 : 0;
@@ -526,7 +552,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
 
 -(void)setHeartCommand:(BOOL)bo{
     self.heartCommandOn = bo;
-    if (!self.isConnected) {
+    if (![self isBleConnected]) {
         return;
     }
     if (heartCommandTimer) {
@@ -598,6 +624,10 @@ uint64_t reversebytes_uint64t(uint64_t value){
         return;
     }
     
+    NSTimeInterval time = [NSDate date].timeIntervalSince1970;
+    while([NSDate date].timeIntervalSince1970 - time < 0.5 && !canWrite){
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
     
     if(characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)
     {
@@ -606,6 +636,7 @@ uint64_t reversebytes_uint64t(uint64_t value){
     {
         [p writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
+    canWrite = NO;
 }
 
 -(CBCharacteristic *) findCharacteristicFromUUIDEx:(CBUUID *)UUID service:(CBService*)service {
