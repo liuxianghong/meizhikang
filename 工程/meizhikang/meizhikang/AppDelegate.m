@@ -109,7 +109,8 @@
      badge = 1;
      sound = default;
      }
-     */
+     */ 
+
     UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"remote notification" message:userInfo[@"aps"][@"alert"] delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles:nil];
     [alert show];
 }
